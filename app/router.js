@@ -12,9 +12,9 @@ Router.map(function() {
   this.route('license');
   this.route('mapping');
   this.route('contact');
-  this.route('preview');
   this.route('success');
   this.route('intro');
+  this.route('review');
 });
 
 export default Router;
