@@ -22,3 +22,15 @@ dependencies:
 # test:
 #   override:
 #     - npm test
+
+deployment:
+  staging:
+    branch: build-clean-app
+    commands:
+      - ember build --environment=staging
+      - aws s3 sync ./dist s3://trimet-mod-sandbox-dev/
+  production:
+    branch: production
+    commands:
+      - ember build --environment=production
+      - aws s3 sync ./dist s3://trimet-mod-sandbox/
