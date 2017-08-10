@@ -25,7 +25,7 @@ dependencies:
 
 deployment:
   staging:
-    branch: build-clean-app
+    branch: master
     commands:
       - ember build --environment=staging
       - aws s3 sync ./dist s3://trimet-mod-sandbox-dev/
