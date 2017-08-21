@@ -1,7 +1,22 @@
 <div class="ui text container">
 	<h3 class="first headroom">Add data</h3>
 	<p>
-		Here's where you can add data.
+		Here's where you can add data.<br>
+		Choose data format: <br>
+		<div class="ui basic buttons">
+		  <button class="ui button" {{action "selectDataFormat" "upload"}}>Direct upload</button>
+		  <button class="ui button" {{action "selectDataFormat" "arcServer"}}>ArcGIS server link</button>
+		  <button class="ui button" {{action "selectDataFormat" "download"}}>Download link (.zip, etc.)</button>
+		</div>
+		{{#if zipFile}}
+			<div class="input-form-wrapper">
+				<div class="input-form-label">
+						Paste the zip file URL
+				</div>
+				<div class="ui fluid input">{{input type="text" value=model.url placeholder="http://... .zip" autofocus=true}}
+				</div>
+			</div>
+		{{/if}}
 	</p>
 	{{nav-buttons sendChangeRoute="changeRoute" back="intro" next="source"}}
 </div>
