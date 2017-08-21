@@ -4,9 +4,9 @@
 		Here's where you can add data.<br>
 		Choose data format: <br>
 		<div class="ui basic buttons">
-		  <button class="ui button" {{action "selectDataFormat" "upload"}}>Direct upload</button>
-		  <button class="ui button" {{action "selectDataFormat" "arcServer"}}>ArcGIS server link</button>
-		  <button class="ui button" {{action "selectDataFormat" "download"}}>Download link (.zip, etc.)</button>
+		  <button class="ui button {{if (eq dataFormat "upload") "active"}}" {{action "selectDataFormat" "upload"}}>Direct upload</button>
+		  <button class="ui button {{if (eq dataFormat "arcServer") "active"}}" {{action "selectDataFormat" "arcServer"}}>ArcGIS server link</button>
+		  <button class="ui button {{if (eq dataFormat "download") "active"}}" {{action "selectDataFormat" "download"}}>Download link (.zip, etc.)</button>
 		</div>
 		{{#if zipFile}}
 			<div class="input-form-wrapper">
