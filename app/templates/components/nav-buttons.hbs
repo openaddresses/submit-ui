@@ -4,5 +4,5 @@
 	{{else}}
 		<div class="eight wide column left aligned"></div>
 	{{/if}}
-	<div class="eight wide column right aligned"><button class="ui button olive" id="next" onClick={{action "sendChangeRoute" next}}>Next</button></div>
+	<div class="eight wide column right aligned"><button class="ui button olive {{if (eq proceed false) "disabled"}}" id="next" onClick={{action "sendChangeRoute" next}}>Next</button></div>
 </div>

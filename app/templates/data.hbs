@@ -8,15 +8,22 @@
 		  <button class="ui button {{if (eq dataFormat "arcServer") "active"}}" {{action "selectDataFormat" "arcServer"}}>ArcGIS server link</button>
 		  <button class="ui button {{if (eq dataFormat "download") "active"}}" {{action "selectDataFormat" "download"}}>Download link (.zip, etc.)</button>
 		</div>
-		{{#if zipFile}}
-			<div class="input-form-wrapper">
-				<div class="input-form-label">
-						Paste the zip file URL
+		{{#if (eq dataFormat "download")}}
+			<form class="ui form segment">
+				<div class="field">
+	      	<label>Choose data format</label>
+		      <select class="ui dropdown" name="dataFormat">
+		        <option value="upload" {{action "selectDataFormat" "upload"}}>Direct upload</option>
+		        <option value="arcServer">ArcGIS server link</option>
+		        <option value="download">Download link (.zip, etc.)</option>
+		      </select>
+		    </div>
+				<div class="field">
+					<label type="text" placeholder="http://... .zip" autofocus=true>Paste the file URL</label>
+					<input>
 				</div>
-				<div class="ui fluid input">{{input type="text" value=model.url placeholder="http://... .zip" autofocus=true}}
-				</div>
-			</div>
+			</form>
 		{{/if}}
 	</p>
-	{{nav-buttons sendChangeRoute="changeRoute" back="intro" next="source"}}
+	{{nav-buttons sendChangeRoute="changeRoute" back="intro" next="source" proceed=proceed}}
 </div>
