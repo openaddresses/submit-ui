@@ -19,8 +19,20 @@
 			</div>
 	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
 				<div class="field">
-					<label type="text" autofocus=true>Paste the file URL</label>
-					<input placeholder="http://... .zip">
+					<label>Paste the file URL</label>
+					<input type="text"placeholder="http://... .zip">
+				</div>
+			{{/if}}
+			{{#if (eq selectedFormat "ArcGIS server link")}}
+				<div class="field">
+					<label>Paste the ArcGIS server URL</label>
+					<input type="text" placeholder="http://... .???">
+				</div>
+			{{/if}}
+			{{#if (eq selectedFormat "Direct upload")}}
+				<div class="field">
+					<label >Add file</label>
+					<input type="file" id="upload">
 				</div>
 			{{/if}}
 		</form>
