@@ -2,28 +2,28 @@
 	<h3 class="first headroom">Add data</h3>
 	<p>
 		Here's where you can add data.<br>
-		Choose data format: <br>
-		<div class="ui basic buttons">
-		  <button class="ui button {{if (eq dataFormat "upload") "active"}}" {{action "selectDataFormat" "upload"}}>Direct upload</button>
-		  <button class="ui button {{if (eq dataFormat "arcServer") "active"}}" {{action "selectDataFormat" "arcServer"}}>ArcGIS server link</button>
-		  <button class="ui button {{if (eq dataFormat "download") "active"}}" {{action "selectDataFormat" "download"}}>Download link (.zip, etc.)</button>
-		</div>
-		{{#if (eq dataFormat "download")}}
-			<form class="ui form segment">
-				<div class="field">
-	      	<label>Choose data format</label>
-		      <select class="ui dropdown" name="dataFormat">
-		        <option value="upload" {{action "selectDataFormat" "upload"}}>Direct upload</option>
-		        <option value="arcServer">ArcGIS server link</option>
-		        <option value="download">Download link (.zip, etc.)</option>
-		      </select>
-		    </div>
+		<form class="ui form segment">
+			<div class="field">
+      	<label>Choose data format</label>
+				{{#ui-dropdown class="search selection" allowAdditions=true selected=selectedFormat onChange=(action (mut selectedFormat)) as |execute mapper|}}
+					<div class="default text">Formats</div>
+				  <i class="dropdown icon"></i>
+				  <div class="menu">
+				    {{#each formats as |format|}}
+				      <div class="item" data-value="{{map-value mapper format}}">
+				        {{format}}
+				      </div>
+				    {{/each}}
+				  </div>
+				{{/ui-dropdown}}
+			</div>
+	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
 				<div class="field">
 					<label type="text" placeholder="http://... .zip" autofocus=true>Paste the file URL</label>
 					<input>
 				</div>
-			</form>
-		{{/if}}
+			{{/if}}
+		</form>
 	</p>
 	{{nav-buttons sendChangeRoute="changeRoute" back="intro" next="source" proceed=proceed}}
 </div>
