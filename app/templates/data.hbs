@@ -20,7 +20,7 @@
 	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
 				<div class="field">
 					<label>Paste the file URL</label>
-					<input type="text"placeholder="http://... .zip">
+					<input type="text" placeholder="http://... .zip" {{action "updateData"}}>
 				</div>
 			{{/if}}
 			{{#if (eq selectedFormat "ArcGIS server link")}}
