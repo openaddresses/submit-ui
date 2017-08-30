@@ -3,5 +3,25 @@
 	<p>
 		Here's where you can add source information.
 	</p>
+	<div class="ui form segment error">
+		<div class="required field">
+    	<label>Data Source</label>
+    	{{#if (eq sourcePresent false)}}
+				<div class="ui error message">
+			    <p>Please add source to proceed</p>
+			  </div>
+			{{/if}}
+    	{{input type="text" value=source placeholder="source name" autofocus=true}}
+    </div>
+    <div class="required field">
+    	<label>Update frequency</label>
+    	{{#if (eq frequencyPresent false)}}
+				<div class="ui error message">
+			    <p>Please add frequency to proceed</p>
+			  </div>
+			{{/if}}
+    	{{input type="text" value=frequency placeholder="source name" autofocus=true}}
+    </div>
+	</div>
 	{{nav-buttons sendChangeRoute="changeRoute" back="data" next="license"}}
 </div>

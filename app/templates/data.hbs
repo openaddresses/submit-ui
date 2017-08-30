@@ -1,41 +1,44 @@
 <div class="ui text container">
 	<h3 class="first headroom">Add data</h3>
 	<p>
-		Here's where you can add data.<br>
-		<form class="ui form segment">
-			<div class="field">
-      	<label>Choose data format</label>
-				{{#ui-dropdown class="search selection" allowAdditions=true selected=selectedFormat onChange=(action (mut selectedFormat)) as |execute mapper|}}
-					<div class="default text">Formats</div>
-				  <i class="dropdown icon"></i>
-				  <div class="menu">
-				    {{#each formats as |format|}}
-				      <div class="item" data-value="{{map-value mapper format}}">
-				        {{format}}
-				      </div>
-				    {{/each}}
-				  </div>
-				{{/ui-dropdown}}
-			</div>
-	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
-				<div class="field">
-					<label>Paste the file URL</label>
-					<input type="text" placeholder="http://... .zip" {{action "updateData"}}>
-				</div>
-			{{/if}}
-			{{#if (eq selectedFormat "ArcGIS server link")}}
-				<div class="field">
-					<label>Paste the ArcGIS server URL</label>
-					<input type="text" placeholder="http://... .???">
-				</div>
-			{{/if}}
-			{{#if (eq selectedFormat "Direct upload")}}
-				<div class="field">
-					<label >Add file</label>
-					<input type="file" id="upload">
-				</div>
-			{{/if}}
-		</form>
+		Here's where you can add data.
 	</p>
+
+	<form class="ui form segment">
+		<div class="field">
+    	<label>Choose data format</label>
+    	<div class="ui error message">
+		    <p>Please add data to proceed</p>
+		  </div>
+			{{#ui-dropdown class="selection" selected=selectedFormat onChange=(action (mut selectedFormat)) as |execute mapper|}}
+				<div class="default text">Formats</div>
+			  <i class="dropdown icon"></i>
+			  <div class="menu">
+			    {{#each formats as |format|}}
+			      <div class="item" data-value="{{map-value mapper format}}">
+			        {{format}}
+			      </div>
+			    {{/each}}
+			  </div>
+			{{/ui-dropdown}}
+		</div>
+
+    
+    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
+			<div class="field">{{input type="text" value=data placeholder="http://... .zip" autofocus=true}}</div>
+		{{/if}}
+		{{#if (eq selectedFormat "ArcGIS server link")}}
+			<div class="field">
+				<label>Paste the ArcGIS server URL</label>
+				{{input type="text" placeholder="http://... .???" key-up="updateData"}}
+			</div>
+		{{/if}}
+		{{#if (eq selectedFormat "Direct upload")}}
+			<div class="field">
+				<label >Add file</label>
+				<input type="file" id="upload" onChange={{action "uploadData"}}>
+			</div>
+		{{/if}}
+	</form>
 	{{nav-buttons sendChangeRoute="changeRoute" back="intro" next="source" proceed=proceed}}
 </div>
