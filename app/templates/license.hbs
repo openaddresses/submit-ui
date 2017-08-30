@@ -3,5 +3,35 @@
 	<p>
 		Here's where you can add license information.
 	</p>
+	<div class="ui form segment {{if (eq licensePrensent false) "error"}}">
+		<div class="ui error message">
+		    <p>Please add license information to proceed</p>
+		  </div>
+		<div class="field">
+			<label>Select a pre-formatted License</label>
+      {{#ui-dropdown class="selection" selected=selectedLicense onChange=(action "selectLicense") as | execture mapper|}}
+				<div class="default text">Licenses</div>
+				<i class="dropdown icon"></i>
+				<div class="menu">
+					{{#each licenses as | license |}}
+				    <div class="item" data-value={{map-value mapper license}}>
+				      {{license.name}}
+				    </div>
+				  {{/each}}
+				</div>
+			{{/ui-dropdown}}
+			{{#if selectedLicense}}
+				<div class="ui message">
+					<div class="header">{{selectedLicense.name}}</div>
+					<p>{{selectedLicense.text}}</p>
+				</div>
+			{{/if}}
+		</div>
+    <div class="field">
+    	<label>Copy/paste your own</label>
+    	{{input type="text" value=frequency placeholder="source name" autofocus=true}}
+    </div>
+    
+	</div>
 	{{nav-buttons sendChangeRoute="changeRoute" back="source" next="mapping"}}
 </div>
