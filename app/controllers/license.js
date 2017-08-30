@@ -3,11 +3,11 @@ import sharedActions from '../mixins/shared-actions';
 
 
 export default Ember.Controller.extend(sharedActions, {
-	selected_license: null,
+	selectedLicense: null,
 	licenses: [
 		{
-			"name": "license 1",
-			"text": "all the rules"
+			"name": "MIT",
+			"text": "Permission is hereby granted, free of charge, to any person obtaining a copy of this software and..."
 		},
 		{
 			"name": "license 2",
@@ -18,12 +18,12 @@ export default Ember.Controller.extend(sharedActions, {
 	actions: {
 		selectLicense: function(license){
 			this.set('selectedLicense', license);
+			this.set('licensePresent', true)
 		},
 		changeRoute: function(route){
-			if (this.get('license')){
+			if (this.get('selectedLicense')){
 				this.set('licensePresent', true)
 			} else {
-				console.log("test")
 				this.set('licensePresent', false)
 			}
 			if (this.get('licensePresent') == true) {

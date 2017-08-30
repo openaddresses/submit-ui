@@ -3,7 +3,7 @@
 	<p>
 		Here's where you can add license information.
 	</p>
-	<div class="ui form segment {{if (eq licensePrensent false) "error"}}">
+	<div class="ui form segment {{if (eq licensePresent false) "error"}}">
 		<div class="ui error message">
 		    <p>Please add license information to proceed</p>
 		  </div>
@@ -20,18 +20,19 @@
 				  {{/each}}
 				</div>
 			{{/ui-dropdown}}
-			{{#if selectedLicense}}
-				<div class="ui message">
-					<div class="header">{{selectedLicense.name}}</div>
-					<p>{{selectedLicense.text}}</p>
-				</div>
-			{{/if}}
 		</div>
     <div class="field">
     	<label>Copy/paste your own</label>
     	{{input type="text" value=frequency placeholder="source name" autofocus=true}}
     </div>
-    
+    {{#if selectedLicense}}
+    	<div class="field">
+				<div class="ui message">
+					<div class="header">License: {{selectedLicense.name}}</div>
+					<p>{{selectedLicense.text}}</p>
+				</div>
+			</div>
+		{{/if}}
 	</div>
 	{{nav-buttons sendChangeRoute="changeRoute" back="source" next="mapping"}}
 </div>
