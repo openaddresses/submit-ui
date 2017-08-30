@@ -1,3 +1,6 @@
+<!-- 	<div class="ui form segment error">
+		<div class="required field">
+ -->
 <div class="ui text container">
 	<h3 class="first headroom">Add data</h3>
 	<p>
@@ -5,7 +8,7 @@
 	</p>
 
 	<form class="ui form segment">
-		<div class="field">
+		<div class="required field">
     	<label>Choose data format</label>
     	<div class="ui error message">
 		    <p>Please add data to proceed</p>
@@ -25,16 +28,18 @@
 
     
     {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
-			<div class="field">{{input type="text" value=data placeholder="http://... .zip" autofocus=true}}</div>
+			<div class="required field">
+				{{input type="text" value=data placeholder="http://... .zip" autofocus=true}}
+			</div>
 		{{/if}}
 		{{#if (eq selectedFormat "ArcGIS server link")}}
-			<div class="field">
+			<div class="required field">
 				<label>Paste the ArcGIS server URL</label>
 				{{input type="text" placeholder="http://... .???" key-up="updateData"}}
 			</div>
 		{{/if}}
 		{{#if (eq selectedFormat "Direct upload")}}
-			<div class="field">
+			<div class="required field">
 				<label >Add file</label>
 				<input type="file" id="upload" onChange={{action "uploadData"}}>
 			</div>
