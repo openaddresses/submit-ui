@@ -4,7 +4,11 @@ import sharedActions from '../mixins/shared-actions';
 
 export default Ember.Controller.extend(sharedActions, {
 	selectedLicense: null,
-	providedLicense: null,
+	providedLicense:
+		{
+			"name": "User-provided license",
+			"text": null
+		},
 	providedAndSelectedLicense: Ember.computed('providedLicense', 'selectedLicense', function(){
 		if (this.get('selectedLicense') && this.get('providedLicense')){
 				return true;

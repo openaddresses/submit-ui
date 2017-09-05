@@ -33,7 +33,7 @@
 		</div>
     <div class="field">
     	<label>Copy/paste your own</label>
-    	{{input type="text" value=providedLicense placeholder="source name"}}
+    	{{input type="text" value=providedLicense.text placeholder="source name"}}
     </div>
    	{{#unless providedAndSelectedLicense}}
 	    {{#if selectedLicense}}
@@ -44,11 +44,11 @@
 					</div>
 				</div>
 			{{/if}}
-			{{#if providedLicense}}
+			{{#if providedLicense.text}}
 	    	<div class="field">
 					<div class="ui message">
-						<div class="header">License: user provided</div>
-						<p>{{providedLicense}}</p>
+						<div class="header">License: {{providedLicense.name}}</div>
+						<p>{{providedLicense.text}}</p>
 					</div>
 				</div>
 			{{/if}}
