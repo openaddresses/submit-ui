@@ -9,7 +9,7 @@ export default Ember.Controller.extend(sharedActions, {
 	}),
 	data: null,
 	proceed: Ember.computed('data', function(input){
-		// file validation here?
+		// Add file validation here?
 		if (this.get('data') !== null && this.get('data') !== "") {
 			return true;
 		} else {
@@ -20,9 +20,16 @@ export default Ember.Controller.extend(sharedActions, {
 		updateData(input){
 			this.set('data', input);
 		},
-		updateFormat(input){
-		},
-		uploadData(input){
+		changeRoute: function(route){
+			// Create new record in store for this submission. 
+			// this.store.createRecord('submission', {
+			// 	id: 1234,
+			// 	data_type: this.get('selectedFormat'),
+			// 	data_link: this.get('data')
+			// });
+			// submission.save().then(function(){
+				// this.transitionToRoute(route);
+			// })
 		}
 	}
 });

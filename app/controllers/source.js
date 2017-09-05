@@ -31,8 +31,6 @@ export default Ember.Controller.extend(sharedActions, {
 			} else if (this.get('frequencyError')){
 				this.set('frequencyMissing', true)
 			} 
-
-			
 		}
 	}
 });
