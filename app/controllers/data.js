@@ -22,14 +22,11 @@ export default Ember.Controller.extend(sharedActions, {
 		},
 		changeRoute: function(route){
 			// Create new record in store for this submission. 
-			// this.store.createRecord('submission', {
-			// 	id: 1234,
-			// 	data_type: this.get('selectedFormat'),
-			// 	data_link: this.get('data')
-			// });
-			// submission.save().then(function(){
-				// this.transitionToRoute(route);
-			// })
+			this.store.createRecord('submission', {
+				data_type: this.get('selectedFormat'),
+				data_link: this.get('data')
+			});
+			this.transitionToRoute(route);
 		}
 	}
 });
