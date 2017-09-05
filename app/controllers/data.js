@@ -8,7 +8,7 @@ export default Ember.Controller.extend(sharedActions, {
 		this.set('data', null);
 	}),
 	data: null,
-	proceed: Ember.computed('data', function(input){
+	proceed: Ember.computed('data', function(){
 		// Add file validation here?
 		if (this.get('data') !== null && this.get('data') !== "") {
 			return true;
