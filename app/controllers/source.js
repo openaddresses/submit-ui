@@ -25,6 +25,8 @@ export default Ember.Controller.extend(sharedActions, {
 	actions: {
 		changeRoute: function(route){
 			if (this.get('source') && this.get('frequency')){
+				this.store.peekAll('submission').get('firstObject').set('source_name', this.get('source'));
+				this.store.peekAll('submission').get('firstObject').set('update_frequency', this.get('frequency'));
 				this.transitionToRoute(route);
 			} else if (this.get('sourceError')){
 				this.set('sourceMissing', true)

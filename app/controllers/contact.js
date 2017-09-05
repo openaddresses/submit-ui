@@ -17,6 +17,10 @@ export default Ember.Controller.extend(sharedActions, {
 	actions: {
 		changeRoute: function(route){
 			if (this.get('email')) {
+				this.store.peekAll('submission').get('firstObject').set('maintainer_email', this.get('email'));
+				if (this.get('name')){
+					this.store.peekAll('submission').get('firstObject').set('maintainer_name', this.get('name'));
+				}
 				this.transitionToRoute(route);
 			} else {
 				(this.set('emailMissing', true));
