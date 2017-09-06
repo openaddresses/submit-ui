@@ -10,7 +10,7 @@ export default Ember.Controller.extend(sharedActions, {
 			"text": null
 		},
 	providedAndSelectedLicense: Ember.computed('providedLicense', 'selectedLicense', function(){
-		if (this.get('selectedLicense') && this.get('providedLicense')){
+		if (this.get('selectedLicense') && this.get('providedLicense.text')){
 				return true;
 		}
 	}),

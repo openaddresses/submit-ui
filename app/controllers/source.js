@@ -21,6 +21,13 @@ export default Ember.Controller.extend(sharedActions, {
 			return false;
 		}
 	}),
+	errorState: Ember.computed('sourceError', 'frequencyError', function(){
+		if (this.get('sourceError') || this.get('frequencyError')){
+			return true;
+		} else {
+			return false;
+		}
+	}),
 
 	actions: {
 		changeRoute: function(route){
@@ -28,11 +35,15 @@ export default Ember.Controller.extend(sharedActions, {
 				this.store.peekAll('submission').get('firstObject').set('source_name', this.get('source'));
 				this.store.peekAll('submission').get('firstObject').set('update_frequency', this.get('frequency'));
 				this.transitionToRoute(route);
-			} else if (this.get('sourceError')){
-				this.set('sourceMissing', true)
-			} else if (this.get('frequencyError')){
-				this.set('frequencyMissing', true)
-			} 
+			} else {
+				if (this.get('source') === null){
+					this.set('sourceMissing', true)
+				}
+
+				if (this.get('frequency') === null){
+					this.set('frequencyMissing', true)
+				} 
+			}
 		}
 	}
 });
