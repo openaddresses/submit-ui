@@ -1,0 +1,42 @@
+{
+	"type":"FeatureCollection",
+	"features":[{
+		"type":"Feature",
+		"properties":{
+			"OBJECTID":1001,
+			"ADDNUMBER":129,
+			"STREET":"DONALD DR",
+			"SUITE":" ",
+			"NAME":"",
+			"ACCESS":" ",
+			"TYPE":"SF",
+			"LAND_USE":"RESIDENTIAL",
+			"STORIES":"1",
+			"EXTERIOR":"BRICK",
+			"COMMENT":" ",
+			"FULL_ADD":"129 DONALD DR",
+			"CITY":"RICHMOND",
+			"ADDRESS":"DONALD DR 129",
+			"PREFIX_DIR":" ",
+			"STREET_NAM":"DONALD",
+			"ROAD_TYPE":"DR",
+			"SUFFIX_DIR":" ",
+			"LAST_UPDT":null,
+			"UPDT_COMM":" ",
+			"newadd":0,
+			"oldadd":0,
+			"Flood":" ",
+			"Flood1990":" ",
+			"ENGRD_STRC":" ",
+			"GlobalID":"{C5CF962D-9863-4604-B3F8-BB85731B32F5}",
+			"ESN":56,
+			"JURISD":"COUNTY",
+			"ADDNUM":"129",
+			"ZIP_CODE":40475
+		},
+		"geometry":{
+			"type":"Point",
+			"coordinates":[-84.26567376599093,37.660876106177746]
+		}
+	}]
+}
