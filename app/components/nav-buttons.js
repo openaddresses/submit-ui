@@ -14,7 +14,7 @@ export default Ember.Component.extend({
             this.sendAction('sendChangeRoute', route);
           } else {
             //do something
-            console.log('Hi! You cannot proceed with form errors');
+            //console.log('Hi! You cannot proceed with form errors');
           }
         })
       } else {
