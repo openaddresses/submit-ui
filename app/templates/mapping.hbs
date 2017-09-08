@@ -1,15 +1,30 @@
 <div class="ui text container">
 	<h3 class="first headroom">Column mapping</h3>
-	<p>
-		Here's where you can verify data column mapping.
-	</p>
-	number: {{sampleNumber}}<br>
-	street: {{sampleStreet}}<br>
-	unit: {{sampleUnit}}<br>
-	city: {{sampleCity}}<br>
-	district: {{sampleDistrict}}<br>
-	region: {{sampleRegion}}<br>
-	postcode: {{samplePostcode}}<br>
+	<table class="ui celled table">
+	  <thead>
+	    <tr>
+		    <th>number</th>
+				<th>street</th>
+				<th>unit</th>
+				<th>city</th>
+				<th>district</th>
+				<th>region</th>
+				<th>postcode</th>
+		  </tr>
+		</thead>
+	  <tbody>
+	    <tr>
+	      <td>{{sampleNumber}}</td>
+				<td>{{sampleStreet}}</td>
+				<td>{{sampleUnit}}</td>
+				<td>{{sampleCity}}</td>
+				<td>{{sampleDistrict}}</td>
+				<td>{{sampleRegion}}</td>
+				<td>{{samplePostcode}}</td>
+	    </tr>
+	  </tbody>
+	</table>
+	
 	<form class="ui form segment">
 		<div class="required field">
 			<label>number{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
