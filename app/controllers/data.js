@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import sharedActions from '../mixins/shared-actions';
 
+import DataValidator from '../validator/data';
+
 export default Ember.Controller.extend(sharedActions, {
+	DataValidator,
 	formats: ["Direct upload", "ArcGIS server link", "Download link (.zip, etc.)"],
 	selectedFormat: null,
 	formatChange: Ember.computed('selectedFormat', function(){
@@ -20,13 +23,8 @@ export default Ember.Controller.extend(sharedActions, {
 		updateData(input){
 			this.set('data', input);
 		},
-		changeRoute: function(route){
-			// Create new record in store for this submission. 
-			this.store.createRecord('submission', {
-				data_type: this.get('selectedFormat'),
-				data_link: this.get('data')
-			});
-			this.transitionToRoute(route);
+		changeRoute(route){
+      this.transitionToRoute(route);
 		}
 	}
 });

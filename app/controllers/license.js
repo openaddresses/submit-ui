@@ -41,9 +41,9 @@ export default Ember.Controller.extend(sharedActions, {
 			}
 			if (this.get('licensePresent')) {
 				if (this.get('providedLicense')) {
-					this.store.peekAll('submission').get('firstObject').set('license', this.get('providedLicense'));
+					this.model.set('license', this.get('providedLicense'));
 				} else {
-					this.store.peekAll('submission').get('firstObject').set('license', this.get('selectedLicense'));
+					this.model.set('license', this.get('selectedLicense'));
 				}
 				this.transitionToRoute(route);
 			}
