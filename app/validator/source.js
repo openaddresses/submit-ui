@@ -1,4 +1,4 @@
-import { validatePresence, validateLength, validateFormat } from 'ember-changeset-validations/validators';
+import { validatePresence, validateLength } from 'ember-changeset-validations/validators';
 
 export default {
   source_name: [
