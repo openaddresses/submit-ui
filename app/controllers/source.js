@@ -1,8 +1,10 @@
 import Ember from 'ember';
 import sharedActions from '../mixins/shared-actions';
 
+import SourceValidator from '../validator/source';
 
 export default Ember.Controller.extend(sharedActions, {
+	SourceValidator,
 	source: null,
 	frequency: null,
 	sourceMissing: false,
@@ -30,20 +32,10 @@ export default Ember.Controller.extend(sharedActions, {
 	}),
 
 	actions: {
-		changeRoute: function(route){
-			if (this.get('source') && this.get('frequency')){
-				this.store.peekAll('submission').get('firstObject').set('source_name', this.get('source'));
-				this.store.peekAll('submission').get('firstObject').set('update_frequency', this.get('frequency'));
-				this.transitionToRoute(route);
-			} else {
-				if (this.get('source') === null){
-					this.set('sourceMissing', true)
-				}
-
-				if (this.get('frequency') === null){
-					this.set('frequencyMissing', true)
-				} 
-			}
+		changeRoute: function(route, changeset){
+			this.model.set('source_name', changeset.get('source_name'));
+			this.model.set('update_frequency', changeset.get('update_frequency'));
+			this.transitionToRoute(route);
 		}
 	}
 });

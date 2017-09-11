@@ -3,20 +3,24 @@
 	<p>
 		Here's where you can provide contact information. (email address*, name)
 	</p>
-	<div class="ui equal width form {{if emailError "error"}}">
-	  <div class="fields">
-	    <div class="field">
-	      <label>Name</label>
-	      {{input type="text" value=name placeholder="name" autofocus=true}}
-	    </div>
-	    <div class="required field {{if emailError "error"}}">
-	      <label>Email address</label>
-	      {{input type="text" value=email placeholder="email address" autofocus=true}}
-	      <div class="ui error message">
-			    <p>Please provide an email address to proceed</p>
-			  </div>
-	    </div>
-	  </div>
-	</div>
-	{{nav-buttons sendChangeRoute="changeRoute" back="mapping" next="review"}}
+	{{#with (changeset model MaintainerValidastor) as |changeset|}}
+		<div class="ui equal width form {{if emailError "error"}}">
+		  <div class="fields">
+		    <div class="field">
+		      <!-- <label>Name</label>
+		      {{input type="text" value=name placeholder="name" autofocus=true}} -->
+		      {{validated-input label="Name" changeset=changeset propertyName="maintainer_name" placeholder="name"}}
+		    </div>
+		    <div class="required field {{if emailError "error"}}">
+		      <!-- <label>Email address</label>
+		      {{input type="text" value=email placeholder="email address" autofocus=true}} -->
+		      {{validated-input label="Email address" changeset=changeset propertyName="maintainer_email" placeholder="email address"}}
+		      <div class="ui error message">
+				    <p>Please provide an email address to proceed</p>
+				  </div>
+		    </div>
+		  </div>
+		</div>
+		{{nav-buttons sendChangeRoute="changeRoute" back="mapping" next="review" changeset=changeset}}
+	{{/with}}
 </div>
