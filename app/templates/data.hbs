@@ -6,7 +6,6 @@
 	<p>
 		Here's where you can add data.
 	</p>
-
 	{{#with (changeset model DataValidator) as |changeset|}}
 		<form class="ui form segment">
 			<div class="required field">
@@ -28,21 +27,14 @@
 			</div>
 	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
 				<div class="required field">
-					{{input type="text" placeholder="http://... .zip" autofocus=true}}
+					{{validated-input label="Paste the URL to download" changeset=changeset propertyName="data_link" placeholder="http://..."}}
 				</div>
 			{{/if}}
 			{{#if (eq selectedFormat "ArcGIS server link")}}
 				<div class="required field">
-					<label>Paste the ArcGIS server URL</label>
-					{{input type="text" value=changeset.data_link changeset=changeset placeholder="http://... .???"}}
+					{{validated-input label="Paste the ArcGIS server URL" changeset=changeset propertyName="data_link" placeholder="http://... .???"}}
+					<!-- {{input type="text" value=changeset.data_link changeset=changeset placeholder="http://... .???"}} -->
 				</div>
-				<ul>
-			  {{#each changeset.errors as |errorSet|}}
-			    {{#each errorSet.validation as |error|}}
-			      <li>{{error}}</li>
-			    {{/each}}
-			  {{/each}}
-			</ul>
 			{{/if}}
 			{{#if (eq selectedFormat "Direct upload")}}
 				<div class="required field">

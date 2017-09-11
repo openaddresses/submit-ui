@@ -6,15 +6,15 @@ export default Ember.Component.extend({
 	actions: {
 		sendChangeRoute: function(route, changeset){
 			if(changeset) {
-        changeset.validate().then(()=>{
+        changeset.validate().then(()=> {
           if(changeset.get('isValid')) {
             for (const keyName in this.attrs.changeset._changes) {
               changeset.set(keyName, this.attrs.changeset._changes[keyName]);
             }
-            this.sendAction('sendChangeRoute', route);
+            this.sendAction('sendChangeRoute', route, changeset);
           } else {
             //do something
-            //console.log('Hi! You cannot proceed with form errors');
+            // console.log('Hi! You cannot proceed with form errors');
           }
         })
       } else {
