@@ -5,6 +5,8 @@ export default Ember.Component.extend({
 	back: null,
 	actions: {
 		sendChangeRoute: function(route, changeset){
+      // If this is navigation with changeset, check the changes are valid
+      // Only proceed when changes are valid
 			if(changeset) {
         changeset.validate().then(()=> {
           if(changeset.get('isValid')) {
@@ -13,8 +15,7 @@ export default Ember.Component.extend({
             }
             this.sendAction('sendChangeRoute', route, changeset);
           } else {
-            //do something
-            // console.log('Hi! You cannot proceed with form errors');
+            this.sendAction('showError');
           }
         })
       } else {

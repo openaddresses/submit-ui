@@ -3,24 +3,27 @@
 	<p>
 		Here's where you can provide contact information. (email address*, name)
 	</p>
-	{{#with (changeset model MaintainerValidastor) as |changeset|}}
-		<div class="ui equal width form {{if emailError "error"}}">
-		  <div class="fields">
-		    <div class="field">
-		      <!-- <label>Name</label>
-		      {{input type="text" value=name placeholder="name" autofocus=true}} -->
-		      {{validated-input label="Name" changeset=changeset propertyName="maintainer_name" placeholder="name"}}
+	{{#with (changeset model MaintainerValidator) as |changeset|}}
+		<div class="ui grid">
+		  <div class="eight wide column ui form">
+		    {{validated-input
+		    	label="Name"
+		    	propertyName="maintainer_name"
+		    	placeholder="name"
+		    	changeset=changeset
+		    	showErrorState=showErrorState}}
 		    </div>
-		    <div class="required field {{if emailError "error"}}">
-		      <!-- <label>Email address</label>
-		      {{input type="text" value=email placeholder="email address" autofocus=true}} -->
-		      {{validated-input label="Email address" changeset=changeset propertyName="maintainer_email" placeholder="email address"}}
-		      <div class="ui error message">
-				    <p>Please provide an email address to proceed</p>
-				  </div>
-		    </div>
-		  </div>
+		    <div class="eight wide column ui form">
+		      {{validated-input
+		      	label="Email address"
+		      	propertyName="maintainer_email"
+		      	placeholder="email address"
+		      	required=true
+		      	changeset=changeset
+		      	showErrorState=showErrorState}}
+		      </div>
+
 		</div>
-		{{nav-buttons sendChangeRoute="changeRoute" back="mapping" next="review" changeset=changeset}}
+		{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="mapping" next="review" changeset=changeset}}
 	{{/with}}
 </div>

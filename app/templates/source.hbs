@@ -6,22 +6,29 @@
   {{#with (changeset model SourceValidator) as |changeset|}}
   	<div class="ui form segment {{if errorState "error"}}">
   		<div class="required field {{if sourceError "error"}}">
-      	<!-- <label>Data Source</label>
-      	{{input type="text" value=source placeholder="source name" autofocus=true}} -->
-        {{validated-input label="Data source" changeset=changeset propertyName="source_name" placeholder="source name"}}
-      	<div class="ui error message">
-  		    <p>Please provide the source to proceed</p>
-  		  </div>
+        {{validated-input
+          label="Data source"
+          propertyName="source_name"
+          placeholder="source name"
+          required=true
+          showErrorState=showErrorState
+          changeset=changeset }}
       </div>
       <div class="required field {{if frequencyError "error"}}">
-      	<!-- <label>Update frequency</label>
-      	{{input type="text" value=frequency placeholder="frequency" autofocus=true}} -->
-        {{validated-input label="Update frequency" changeset=changeset propertyName="update_frequency" placeholder="frequency"}}
-      	<div class="ui error message">
-  		    <p>Please provide the update frequency to proceed</p>
-  		  </div>
+        {{validated-input
+          label="Update frequency"
+           propertyName="update_frequency"
+           required=true
+           placeholder="frequency"
+           changeset=changeset
+           showErrorState=showErrorState}}
       </div>
   	</div>
-  	{{nav-buttons sendChangeRoute="changeRoute" back="data" next="license" changeset=changeset}}
+  	{{nav-buttons
+      showError="showError"
+      sendChangeRoute="changeRoute"
+      back="data"
+      next="license"
+      changeset=changeset}}
   {{/with}}
 </div>

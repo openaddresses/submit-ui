@@ -27,14 +27,24 @@
 			</div>
 	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
 				<div class="required field">
-					{{validated-input label="Paste the URL to download" changeset=changeset propertyName="data_link" placeholder="http://..."}}
+					{{validated-input
+						label="Paste the URL to download"
+						propertyName="data_link"
+						placeholder="http://..."
+						required=true
+						changeset=changeset
+						showErrorState=showErrorState }}
 				</div>
 			{{/if}}
 			{{#if (eq selectedFormat "ArcGIS server link")}}
-				<div class="required field">
-					{{validated-input label="Paste the ArcGIS server URL" changeset=changeset propertyName="data_link" placeholder="http://... .???"}}
-					<!-- {{input type="text" value=changeset.data_link changeset=changeset placeholder="http://... .???"}} -->
-				</div>
+					{{validated-input
+						label="Paste the ArcGIS server URL"
+						propertyName="data_link"
+						placeholder="http://... .???"
+						required=true
+						changeset=changeset
+						showErrorState=showErrorState}}
+
 			{{/if}}
 			{{#if (eq selectedFormat "Direct upload")}}
 				<div class="required field">
@@ -43,6 +53,6 @@
 				</div>
 			{{/if}}
 		</form>
-		{{nav-buttons sendChangeRoute="changeRoute" back="intro" next="source" changeset=changeset}}
+		{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="intro" next="source" changeset=changeset}}
 	{{/with}}
 </div>
