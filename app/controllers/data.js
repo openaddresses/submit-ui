@@ -14,7 +14,7 @@ export default Ember.Controller.extend(sharedActions, {
 		changeRoute(route, changeset){
 			this.model.set('data_type', this.get('selectedFormat'));
 			this.model.set('data_link', changeset.get('data_link'));
-      this.transitionToRoute(route);
+			this.transitionToRoute(route);
 		}
 	}
 });

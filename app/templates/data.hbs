@@ -9,23 +9,23 @@
 	{{#with (changeset model DataValidator) as |changeset|}}
 		<form class="ui form segment">
 			<div class="required field">
-	    	<label>Choose data format</label>
-	    	<div class="ui error message">
-			    <p>Please add data to proceed</p>
-			  </div>
+				<label>Choose data format</label>
+				<div class="ui error message">
+					<p>Please add data to proceed</p>
+				</div>
 				{{#ui-dropdown class="selection" selected=selectedFormat onChange=(action (mut selectedFormat)) as |execute mapper|}}
 					<div class="default text">Formats</div>
-				  <i class="dropdown icon"></i>
-				  <div class="menu">
-				    {{#each formats as |format|}}
-				      <div class="item" data-value="{{ map-value mapper format}}">
-				        {{format}}
-				      </div>
-				    {{/each}}
-				  </div>
+					<i class="dropdown icon"></i>
+					<div class="menu">
+						{{#each formats as |format|}}
+							<div class="item" data-value="{{ map-value mapper format}}">
+								{{format}}
+							</div>
+						{{/each}}
+					</div>
 				{{/ui-dropdown}}
 			</div>
-	    {{#if (eq selectedFormat "Download link (.zip, etc.)")}}
+			{{#if (eq selectedFormat "Download link (.zip, etc.)")}}
 				<div class="required field">
 					{{validated-input
 						label="Paste the URL to download"
