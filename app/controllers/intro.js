@@ -12,7 +12,6 @@ export default Ember.Controller.extend(sharedActions, {
 	actions: {
 		selectCountry: function(selected){
 			this.set('selectedCountry', selected);
-			console.log(this.get('selectedCountry').title)
 		},
 		// selectRegion: function(selected){
 		// 	this.set('selectedRegion', selected);
