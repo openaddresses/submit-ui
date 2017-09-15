@@ -1,7 +1,20 @@
 <div class="ui text container center aligned">
 	<h3 class="first headroom">Welcome!</h3>
 	<p>
-		Some introduction info can go here.
+		The user will begin by searching to see if data exists in their country and region. If it does, they will enter "edit mode," with fields pre-populated with existing data.
 	</p>
+		{{#ui-search source=countries searchFields=country onSearchQuery=(action (mut query)) onSelect=(action "selectCountry")}}
+		<!-- this inline style is temporary and needs to be fixed -->
+		  <input class="prompt" style="width:300px;text-align:center" type="text" placeholder="Search existing countries">
+		  <div class="results"></div>
+		{{/ui-search}}
+	<!-- <div>
+		{{#if selectedCountry}}
+			{{#ui-search source=regions searchFields=country onSearchQuery=(action (mut query)) onSelect=(action "selectRegion")}}
+			  <input class="prompt" type="text" placeholder="Regions in {{selectedCountry.title}}">
+			  <div class="results"></div>
+			{{/ui-search}}
+		{{/if}}
+	</div> -->
 	{{nav-buttons sendChangeRoute="changeRoute" next="data"}}
 </div>
