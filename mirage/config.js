@@ -24,12 +24,13 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.get('/countries', () => {
-    return {
-      countries: [
-        {id: 1, name: "United States"},
-        {id: 2, name: "Canada"}
-      ]
-    };
+  this.get('/countries', (schema, request) => {
+    // return {
+    //   countries: [
+    //     {id: 1, name: "United States"},
+    //     {id: 2, name: "Canada"}
+    //   ]
+    // };
+    return schema.countries.all();
   });
 }
