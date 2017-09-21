@@ -3,41 +3,27 @@ import sharedActions from '../mixins/shared-actions';
 
 
 export default Ember.Controller.extend(sharedActions, {
-	// these are placeholders, country and region data will be supplied through api
-	countries: [{title: 'United States'},{title: 'Canada'}],
-	// countries: Ember.computed(function(){
-	// 	Ember.$.ajax({
-	// 		type: "GET",
- //    	contentType: "text/xml",
-	// 		url: 'api/countries'
-	// 	}).then(function(response){
-	// 		console.log('test happened')
-	// 		return response;
-	// 	})
-	// }),
-	// regions:
-	selectedCountry: null,
-	// selectedRegion: null,
+	country: null,
+	region: null,
+	regionPlaceholder: Ember.computed('country', function(){
+		return "Search for a region in " + this.get('country').attributes.name;
+	}),
 	
 	actions: {
-		selectCountry: function(selected){
-			Ember.$.ajax({
-				type: "GET",
-      	contentType: "text/xml",
-				url: 'api/countries'
-			}).then(function(response){
-				for(var i=0; i < response.countries.length; i++) {console.log(response.countries[i].name)}
-			})
-			this.set('selectedCountry', selected);
-		},
-		// selectRegion: function(selected){
-		// 	this.set('selectedRegion', selected);
-		// 	console.log(this.get('selectedRegion').title)
-		// }
 		changeRoute: function(route){
 			// Create new record in store for this submission.
 			this.store.createRecord('submission', {});
 			this.transitionToRoute(route);
-		}
+		},
+		searchCountries: function(term) {
+      if (Ember.isBlank(term)) { return []; }
+      const url = 'api/countries'      
+      return Ember.$.ajax({ url }).then(json => json.data);
+    },
+    searchRegions: function(term) {
+      if (Ember.isBlank(term)) { return []; }
+      const url = 'api/regions'      
+      return Ember.$.ajax({ url }).then(json => json.data);
+    }
 	}
 });
