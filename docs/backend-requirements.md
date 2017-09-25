@@ -89,6 +89,8 @@
 - none
 
 ## Update job
+[Machine issue #668](https://github.com/openaddresses/machine/issues/668)
+
 ### Query type: POST
 ### Parameters
 - JSON with any changes to: 
