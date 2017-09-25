@@ -1,6 +1,8 @@
 # Backend Requirements for OpenAddresses Data Management Tool
 
 ## Query for list of countries
+[Machine issue #664](https://github.com/openaddresses/machine/issues/664)
+
 ### Query type: GET
 ### Parameters 
 - none
@@ -11,6 +13,8 @@
 - none
 
 ## Query for list of regions within a country
+[Machine issue #664](https://github.com/openaddresses/machine/issues/664)
+
 ### Query type: GET
 ### Parameters 
 - country: value should be any alpha-2 country code
