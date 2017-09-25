@@ -1,7 +1,17 @@
 export default [
-  {id: 1, name: 'United States'},
-  {id: 2, name: 'Canada'},
-  {id: 3, name: 'Mexico'},
-  {id: 4, name: 'Brazil'},
-  {id: 5, name: 'Chile'},
+  {
+  	id: 1,
+  	name: 'United States',
+  	countryShortCode: 'US'
+  },
+  {
+  	id: 2,
+  	name: 'Canada',
+  	countryShortCode: 'CA'
+  },
+  {
+  	id: 3,
+  	name: 'Mexico',
+  	countryShortCode: 'MX'
+  }
 ];

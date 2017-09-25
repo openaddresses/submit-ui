@@ -17,7 +17,7 @@ export default Ember.Controller.extend(sharedActions, {
 		},
 		searchCountries: function(term) {
       if (Ember.isBlank(term)) { return []; }
-      const url = 'api/countries'      
+      let url = 'api/countries'      
       return Ember.$.ajax({ url }).then(json => json.data);
     },
     searchRegions: function(term) {

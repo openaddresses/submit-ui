@@ -25,6 +25,7 @@ export default function() {
   */
 
   this.get('/countries', (schema, request) => {
+    console.log(request)
     return schema.countries.all();
   });
   this.get('/regions', (schema, request) => {
