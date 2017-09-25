@@ -70,6 +70,8 @@
 - none
 
 ## Retrieve OA schema
+[Machine issue #665](https://github.com/openaddresses/machine/issues/665)
+
 ### Query type: GET
 ### Parameters
 - none
