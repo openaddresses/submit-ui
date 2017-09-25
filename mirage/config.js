@@ -24,11 +24,13 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
 
-  this.get('/countries', (schema, request) => {
-    console.log(request)
+  this.get('/countries', (schema) => {
+    // returns all data from mirage/fixtures/countries.js
     return schema.countries.all();
   });
-  this.get('/regions', (schema, request) => {
-    return schema.regions.all();
+  this.get('/regions/:countryShortCode', (schema, request) => {
+    var countryCode = request.params.countryShortCode;
+    // returns data from mirage/fixtures/regions.js for country matching the country code provided in the request
+    return schema.db.regions.findBy({countryShortCode: countryCode}).regions;
   });
 }

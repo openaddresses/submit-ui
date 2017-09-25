@@ -11,19 +11,25 @@ export default Ember.Controller.extend(sharedActions, {
 	
 	actions: {
 		changeRoute: function(route){
-			// Create new record in store for this submission.
-			this.store.createRecord('submission', {});
+			var country = this.get('country').attributes.code;
+			var region = this.get('region').name;
+			// Create new record in store for this submission, with country and region from user input
+			this.store.createRecord('submission', {country: country, region: region});
 			this.transitionToRoute(route);
 		},
 		searchCountries: function(term) {
       if (Ember.isBlank(term)) { return []; }
-      let url = 'api/countries'      
+      var url = 'api/countries';
+      // view request format in mirage/config.js 
       return Ember.$.ajax({ url }).then(json => json.data);
     },
     searchRegions: function(term) {
       if (Ember.isBlank(term)) { return []; }
-      const url = 'api/regions'      
-      return Ember.$.ajax({ url }).then(json => json.data);
+      var country = this.get('country').attributes.code;
+      var url = 'api/regions/' + country;
+      // returns regions for the country provided in the request
+      // view request format in mirage/config.js 
+      return Ember.$.ajax({ url });
     }
 	}
 });

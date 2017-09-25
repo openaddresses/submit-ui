@@ -13,7 +13,8 @@ export default DS.Model.extend({
 	maintainer_email: DS.attr('string'),
 	// columns to map
 	// test: DS.attr('string')
-	test: "test 2"
+	country: DS.attr('string'),
+	region: DS.attr('string')
 
 
 });

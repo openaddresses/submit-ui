@@ -21,9 +21,11 @@
 	      onchange=(action (mut region))
 	      as | regions |
 	    }}
-	      {{regions.attributes.name}}
+	      {{regions.name}}
 	    {{/power-select}}
     {{/if}}
+
+   
 
 	{{nav-buttons sendChangeRoute="changeRoute" next="data"}}
 </div>
