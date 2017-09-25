@@ -25,6 +25,8 @@
 - none
 
 ## Retrieve list of existing sources for specified region
+[Machine issue #666](https://github.com/openaddresses/machine/issues/666)
+
 ### Query type: GET
 ### Parameters 
 - region: value should be a two-letter region code
@@ -52,6 +54,8 @@
 - Job begins processing data
 
 ## Retrieve all job information
+[Machine issue #666](https://github.com/openaddresses/machine/issues/666)
+
 ### Query type: GET
 ### Parameters 
 - Job ID: Job ID number for an existing source
@@ -99,6 +103,8 @@
 - kicks off preview build
 
 ## Query for job status
+[Machine issue #666](https://github.com/openaddresses/machine/issues/666)
+
 ### Query type: GET
 ### Parameters
 - Job ID
