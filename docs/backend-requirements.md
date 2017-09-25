@@ -37,6 +37,8 @@
 - none
 
 ## Start new job
+[Machine issue #667](https://github.com/openaddresses/machine/issues/667)
+
 ### Query type: POST
 ### Parameters
 - region
