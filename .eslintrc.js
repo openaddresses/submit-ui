@@ -12,5 +12,6 @@ module.exports = {
     browser: true
   },
   rules: {
+    "no-tabs": [2],
   }
 };
