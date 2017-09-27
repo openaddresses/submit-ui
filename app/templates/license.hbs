@@ -54,5 +54,9 @@
 			{{/if}}
 		{{/unless}}
 	</div>
-	{{nav-buttons sendChangeRoute="changeRoute" back="source" next="mapping"}}
+	{{#if model.edit_mode}}
+		<button class="ui button purple right floated" onClick={{action "changeRoute" "review"}}><i class="checkmark icon"></i>Finished editing</button>
+	{{else}}
+		{{nav-buttons sendChangeRoute="changeRoute" back="source" next="mapping"}}
+	{{/if}}
 </div>
