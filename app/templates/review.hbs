@@ -1,12 +1,9 @@
 <div class="ui text container">
 	<h3 class="first headroom">Review</h3>
-	<p>
-		Here's where you can review information before submitting.
-	</p>
-	<table class="ui celled striped table">
+	<table class="ui table">
 		<thead>
 			<tr><th colspan="2">
-				Submission details
+				Data<button class="ui right floated basic icon button mini" onClick={{action "editField" "data"}}><i class="icon edit"></i></button>
 			</th>
 		</tr></thead>
 		<tbody>
@@ -22,9 +19,18 @@
 				</td>
 				<td>{{model.data_link}}</td>
 			</tr>
+		</tbody>
+	</table>
+	<table class="ui table">
+		<thead>
+			<tr><th colspan="2">
+				Source<button class="ui right floated basic icon button mini" onClick={{action "editField" "source"}}><i class="icon edit"></i></button>
+			</th>
+		</tr></thead>
+		<tbody>
 			<tr>
 				<td>
-					Source
+					Source name
 				</td>
 				<td>{{model.source_name}}</td>
 			</tr>
@@ -34,6 +40,17 @@
 				</td>
 				<td>{{model.update_frequency}}</td>
 			</tr>
+		</tbody>
+	</table>
+	<table class="ui table">
+		<thead>
+			<tr>
+				<th colspan="2">
+					License<button class="ui right floated basic icon button mini" onClick={{action "editField" "license"}}><i class="icon edit"></i></button>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
 			<tr>
 				<td>
 					License name
@@ -46,6 +63,15 @@
 				</td>
 				<td>{{model.license.text}}</td>
 			</tr>
+		</tbody>
+	</table>
+	<table class="ui table">
+		<thead>
+			<tr>
+				<th colspan="2">Maintainer contact information<button class="ui right floated basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i></button></th>
+			</tr>
+		</thead>
+		<tbody>
 			<tr>
 				<td>
 					Name
@@ -60,5 +86,6 @@
 			</tr>
 		</tbody>
 	</table>
-	{{nav-buttons sendChangeRoute="changeRoute" back="contact" next="success"}}
+	<!-- {{nav-buttons sendChangeRoute="changeRoute" back="contact" next="success"}} -->
+	<button class="ui button green fluid" onClick={{action "submit"}}>Submit</button>
 </div>

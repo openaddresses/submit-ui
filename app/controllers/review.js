@@ -6,8 +6,16 @@ export default Ember.Controller.extend(sharedActions, {
 
 	actions: {
 		changeRoute: function(route){
-			// debugger;		
 			this.transitionToRoute(route);
+		},
+		editField: function(route){
+			this.model.set('edit_mode', true);
+			this.transitionToRoute(route);
+		},
+		submit: function(){
+			console.log("submitted")
+			// communicate with backend here
+			this.transitionToRoute("success");
 		}
 	}
 });
