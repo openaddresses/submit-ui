@@ -13,5 +13,7 @@ module.exports = {
   },
   rules: {
     "no-tabs": [2],
+    "no-mixed-spaces-and-tabs": [2],
+    "indent": ["error", 2]
   }
 };
