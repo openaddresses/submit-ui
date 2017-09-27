@@ -1,7 +1,129 @@
 <div class="ui text container">
-	<h3 class="first headroom">Column mapping</h3>
-	<p>
-		Here's where you can verify data column mapping.
-	</p>
-	{{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
+  <h3 class="first headroom">Column mapping</h3>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        <th>number</th>
+        <th>street</th>
+        <th>unit</th>
+        <th>city</th>
+        <th>district</th>
+        <th>region</th>
+        <th>postcode</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{sampleNumber}}</td>
+        <td>{{sampleStreet}}</td>
+        <td>{{sampleUnit}}</td>
+        <td>{{sampleCity}}</td>
+        <td>{{sampleDistrict}}</td>
+        <td>{{sampleRegion}}</td>
+        <td>{{samplePostcode}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <form class="ui form segment">
+    <div class="required field">
+      <label>number{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut number)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="required field">
+      <label>street{{ui-popup tagName="i" class="help circle icon" content="the street the address is on"}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut street)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="field">
+      <label>unit{{ui-popup tagName="i" class="help circle icon" content="the apartment, suite, flat, etc of an address"}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut unit)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="field">
+      <label>city{{ui-popup tagName="i" class="help circle icon" content="the city that the address is in"}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut city)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="field">
+      <label>district{{ui-popup tagName="i" class="help circle icon" content="the first level administrative divisions within a country, such as state or province"}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut district)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    <div class="field">
+      <label>region{{ui-popup tagName="i" class="help circle icon" content=""}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut region)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}<br>
+    </div>
+    <div class="field">
+      <label>postcode{{ui-popup tagName="i" class="help circle icon" content="the alphanumeric code used in many countries for sorting mail"}}</label>
+      {{#ui-dropdown class="selection" onChange=(action (mut postcode)) as |execute mapper|}}
+        <div class="default text">Source column headings</div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}}
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}<br>
+    </div>
+  </form>
 </div>
+{{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
