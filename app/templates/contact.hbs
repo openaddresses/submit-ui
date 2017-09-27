@@ -22,7 +22,7 @@
 
 		</div>
 		{{#if model.edit_mode}}
-			<button class="ui button purple right floated" onClick={{action "returnToReview"}}><i class="checkmark icon"></i>Finished editing</button>
+			<button class="ui button purple right floated" onClick={{action "returnToReview" changeset}}><i class="checkmark icon"></i>Finished editing</button>
 		{{else}}
 			{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="mapping" next="review" changeset=changeset}}
 		{{/if}}		

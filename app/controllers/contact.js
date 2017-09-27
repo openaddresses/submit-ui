@@ -15,7 +15,7 @@ export default Ember.Controller.extend(sharedActions, {
 			this.model.set('maintainer_email', changeset.get('maintainer_email'));
 			this.transitionToRoute(route);
 		},
-		returnToReview: function(){
+		returnToReview: function(changeset){
 			this.model.set('maintainer_name', changeset.get('maintainer_name'));
 			this.model.set('maintainer_email', changeset.get('maintainer_email'));
 			this.transitionToRoute("review");
