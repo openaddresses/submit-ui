@@ -1,64 +1,76 @@
 <div class="ui text container">
-	<h3 class="first headroom">Review</h3>
-	<p>
-		Here's where you can review information before submitting.
-	</p>
-	<table class="ui celled striped table">
-	  <thead>
-	    <tr><th colspan="2">
-	      Submission details
-	    </th>
-	  </tr></thead>
-	  <tbody>
-	    <tr>
-	      <td class="collapsing">
-	        Data type
-	      </td>
-	      <td>{{model.data_type}}</td>
-	    </tr>
-	    <tr>
-	      <td>
-	        Data link
-	      </td>
-	      <td>{{model.data_link}}</td>
-	    </tr>
-	    <tr>
-	      <td>
-	        Source
-	      </td>
-	      <td>{{model.source_name}}</td>
-	    </tr>
-	    <tr>
-	      <td>
-	        Update frequency
-	      </td>
-	      <td>{{model.update_frequency}}</td>
-	    </tr>
-	    <tr>
-	      <td>
-	        License name
-	      </td>
-	      <td>{{model.license.name}}</td>
-	    </tr>
-	     <tr>
-	      <td>
-	        License text
-	      </td>
-	      <td>{{model.license.text}}</td>
-	    </tr>
-	    <tr>
-	      <td>
-	        Name
-	      </td>
-	      <td>{{#if model.maintainer_name}}{{model.maintainer_name}}{{else}}<i>not provided</i>{{/if}}</td>
-	    </tr>
-	    <tr>
-	      <td>
-	        Email
-	      </td>
-	      <td>{{model.maintainer_email}}</td>
-	    </tr>
-	  </tbody>
-	</table>
-	{{nav-buttons sendChangeRoute="changeRoute" back="contact" next="success"}}
+  <h3 class="first headroom">Review</h3>
+  <p>
+    Here's where you can review information before submitting.
+  </p>
+  <table class="ui celled striped table">
+    <thead>
+      <tr><th colspan="2">
+        Submission details
+      </th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="collapsing">
+          Country
+        </td>
+        <td>{{model.country}}</td>
+      </tr>
+      <tr>
+        <td class="collapsing">
+          Region
+        </td>
+        <td>{{model.region}}</td>
+      </tr>
+      <tr>
+        <td class="collapsing">
+          Data type
+        </td>
+        <td>{{model.data_type}}</td>
+      </tr>
+      <tr>
+        <td>
+          Data link
+        </td>
+        <td>{{model.data_link}}</td>
+      </tr>
+      <tr>
+        <td>
+          Source
+        </td>
+        <td>{{model.source_name}}</td>
+      </tr>
+      <tr>
+        <td>
+          Update frequency
+        </td>
+        <td>{{model.update_frequency}}</td>
+      </tr>
+      <tr>
+        <td>
+          License name
+        </td>
+        <td>{{model.license.name}}</td>
+      </tr>
+       <tr>
+        <td>
+          License text
+        </td>
+        <td>{{model.license.text}}</td>
+      </tr>
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>{{#if model.maintainer_name}}{{model.maintainer_name}}{{else}}<i>not provided</i>{{/if}}</td>
+      </tr>
+      <tr>
+        <td>
+          Email
+        </td>
+        <td>{{model.maintainer_email}}</td>
+      </tr>
+    </tbody>
+  </table>
+  {{nav-buttons sendChangeRoute="changeRoute" back="contact" next="success"}}
 </div>
