@@ -6,38 +6,38 @@
 	<div class="ui form segment error">
 		{{#if (eq licensePresent false)}}
 			<div class="ui error message">
-		    <p>Please add license information to proceed</p>
-		  </div>
+				<p>Please add license information to proceed</p>
+			</div>
 		{{/if}}
 		{{#if providedAndSelectedLicense}}
 			<div class="ui error message">
-		    <p>Please provide a license OR choose from the list</p>
-		  </div>
+				<p>Please provide a license OR choose from the list</p>
+			</div>
 		{{/if}}
 		<div class="field">
 			<label>Select a pre-formatted License</label>
-      {{#ui-dropdown class="selection" selected=selectedLicense onChange=(action "selectLicense") as | execture mapper|}}
+      {{#ui-dropdown class="selection" selected=selectedLicense onChange=(action "selectLicense") as | execute mapper|}}
 				<div class="default text">Licenses</div>
 				<i class="dropdown icon"></i>
 				<div class="menu">
-				  <div class="item" data-value={{map-value mapper null}}>
-			      Licenses
-			    </div>
+					<div class="item" data-value={{map-value mapper null}}>
+						Licenses
+					</div>
 					{{#each licenses as | license |}}
-				    <div class="item" data-value={{map-value mapper license}}>
-				      {{license.name}}
-				    </div>
-				  {{/each}}
+						<div class="item" data-value={{map-value mapper license}}>
+							{{license.name}}
+						</div>
+					{{/each}}
 				</div>
 			{{/ui-dropdown}}
 		</div>
-    <div class="field">
-    	<label>Copy/paste your own</label>
-    	{{input type="text" value=providedLicense.text placeholder="source name"}}
-    </div>
-   	{{#unless providedAndSelectedLicense}}
-	    {{#if selectedLicense}}
-	    	<div class="field">
+		<div class="field">
+			<label>Copy/paste your own</label>
+			{{input type="text" value=providedLicense.text placeholder="source name"}}
+		</div>
+		{{#unless providedAndSelectedLicense}}
+			{{#if selectedLicense}}
+				<div class="field">
 					<div class="ui message">
 						<div class="header">License: {{selectedLicense.name}}</div>
 						<p>{{selectedLicense.text}}</p>
@@ -45,7 +45,7 @@
 				</div>
 			{{/if}}
 			{{#if providedLicense.text}}
-	    	<div class="field">
+				<div class="field">
 					<div class="ui message">
 						<div class="header">License: {{providedLicense.name}}</div>
 						<p>{{providedLicense.text}}</p>

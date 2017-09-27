@@ -1,6 +1,8 @@
 # Backend Requirements for OpenAddresses Data Management Tool
 
 ## Query for list of countries
+[Machine issue #664](https://github.com/openaddresses/machine/issues/664)
+
 ### Query type: GET
 ### Parameters 
 - none
@@ -11,6 +13,8 @@
 - none
 
 ## Query for list of regions within a country
+[Machine issue #664](https://github.com/openaddresses/machine/issues/664)
+
 ### Query type: GET
 ### Parameters 
 - country: value should be any alpha-2 country code
@@ -21,6 +25,8 @@
 - none
 
 ## Retrieve list of existing sources for specified region
+[Machine issue #666](https://github.com/openaddresses/machine/issues/666)
+
 ### Query type: GET
 ### Parameters 
 - region: value should be a two-letter region code
@@ -31,6 +37,8 @@
 - none
 
 ## Start new job
+[Machine issue #667](https://github.com/openaddresses/machine/issues/667)
+
 ### Query type: POST
 ### Parameters
 - region
@@ -48,6 +56,8 @@
 - Job begins processing data
 
 ## Retrieve all job information
+[Machine issue #666](https://github.com/openaddresses/machine/issues/666)
+
 ### Query type: GET
 ### Parameters 
 - Job ID: Job ID number for an existing source
@@ -66,6 +76,8 @@
 - none
 
 ## Retrieve OA schema
+[Machine issue #665](https://github.com/openaddresses/machine/issues/665)
+
 ### Query type: GET
 ### Parameters
 - none
@@ -77,6 +89,8 @@
 - none
 
 ## Update job
+[Machine issue #668](https://github.com/openaddresses/machine/issues/668)
+
 ### Query type: POST
 ### Parameters
 - JSON with any changes to: 
@@ -93,6 +107,8 @@
 - kicks off preview build
 
 ## Query for job status
+[Machine issue #666](https://github.com/openaddresses/machine/issues/666)
+
 ### Query type: GET
 ### Parameters
 - Job ID
