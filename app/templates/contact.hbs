@@ -9,22 +9,17 @@
 					placeholder="name"
 					changeset=changeset
 					showErrorState=showErrorState}}
-				</div>
-				<div class="eight wide column ui form">
-					{{validated-input
-						label="Email address"
-						propertyName="maintainer_email"
-						placeholder="email address"
-						required=true
-						changeset=changeset
-						showErrorState=showErrorState}}
-					</div>
-
+			</div>
+			<div class="eight wide column ui form">
+				{{validated-input
+					label="Email address"
+					propertyName="maintainer_email"
+					placeholder="email address"
+					required=true
+					changeset=changeset
+					showErrorState=showErrorState}}
+			</div>
 		</div>
-		{{#if model.edit_mode}}
-			<button class="ui button purple right floated" onClick={{action "returnToReview" changeset}}><i class="checkmark icon"></i>Finished editing</button>
-		{{else}}
-			{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="mapping" next="review" changeset=changeset}}
-		{{/if}}		
+		{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="mapping" next="review" changeset=changeset}}
 	{{/with}}
 </div>

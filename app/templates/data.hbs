@@ -53,10 +53,6 @@
 				</div>
 			{{/if}}
 		</form>
-		{{#if model.edit_mode}}
-			<button class="ui button purple right floated" onClick={{action "changeRoute" "review" changeset}}><i class="checkmark icon"></i>Finished editing</button>
-		{{else}}
-			{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="intro" next="source" changeset=changeset}}
-		{{/if}}
+		{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="intro" next="source" changeset=changeset}}
 	{{/with}}
 </div>
