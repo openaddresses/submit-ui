@@ -12,8 +12,6 @@ module.exports = {
     browser: true
   },
   rules: {
-    "no-tabs": [2],
-    "no-mixed-spaces-and-tabs": [2],
     /* using two spaces for indentation */
     "indent": ["error", 2]
   }
