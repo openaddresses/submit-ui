@@ -14,11 +14,6 @@ export default Ember.Controller.extend(sharedActions, {
 			this.model.set('source_name', changeset.get('source_name'));
 			this.model.set('update_frequency', changeset.get('update_frequency'));
 			this.transitionToRoute(route);
-		},
-		returnToReview: function(changeset){
-			this.model.set('source_name', changeset.get('source_name'));
-			this.model.set('update_frequency', changeset.get('update_frequency'));
-			this.transitionToRoute("review");
 		}
 	}
 });
