@@ -13,7 +13,6 @@ export default Ember.Controller.extend(sharedActions, {
 			this.transitionToRoute(route);
 		},
 		submit: function(){
-			console.log("submitted")
 			// communicate with backend here
 			this.transitionToRoute("success");
 		}
