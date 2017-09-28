@@ -1,5 +1,10 @@
 <div class="ui text container">
   <h3 class="first headroom">Column mapping</h3>
+  <div class="ui buttons">
+    <button class="ui button {{if (eq selectedDataset "simple_data") "active"}}" {{action "selectDataSet" "simple_data"}}>no functions</button>
+    <button class="ui button {{if (eq selectedDataset "join_data") "active"}}" {{action "selectDataSet" "join_data"}}>join</button>
+    <button class="ui button {{if (eq selectedDataset "split_data") "active"}}" {{action "selectDataSet" "split_data"}}>split</button>
+  </div>
   <table class="ui celled table">
     <thead>
       <tr>
