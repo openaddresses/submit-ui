@@ -22,6 +22,15 @@
         <td>{{sampleRegion}}</td>
         <td>{{samplePostcode}}</td>
       </tr>
+       <tr>
+        <td>{{sampleNumberTwo}}</td>
+        <td>{{sampleStreetTwo}}</td>
+        <td>{{sampleUnitTwo}}</td>
+        <td>{{sampleCityTwo}}</td>
+        <td>{{sampleDistrictTwo}}</td>
+        <td>{{sampleRegionTwo}}</td>
+        <td>{{samplePostcodeTwo}}</td>
+      </tr>
     </tbody>
   </table>
   
@@ -40,6 +49,8 @@
         </div>
       {{/ui-dropdown}}
     </div>
+  </form>
+  <form class="ui form segment">
     <div class="required field">
       <label>street{{ui-popup tagName="i" class="help circle icon" content="the street the address is on"}}</label>
       {{#ui-dropdown class="selection" onChange=(action (mut street)) as |execute mapper|}}
@@ -53,7 +64,10 @@
           {{/each}}
         </div>
       {{/ui-dropdown}}
+      <button class="ui button basic mini blue" onClick={{action "joinColumns" "street"}}>Join two columns for this field</button>
     </div>
+  </form>
+  <form class="ui form segment">
     <div class="field">
       <label>unit{{ui-popup tagName="i" class="help circle icon" content="the apartment, suite, flat, etc of an address"}}</label>
       {{#ui-dropdown class="selection" onChange=(action (mut unit)) as |execute mapper|}}
@@ -68,6 +82,8 @@
         </div>
       {{/ui-dropdown}}
     </div>
+  </form>
+  <form class="ui form segment">
     <div class="field">
       <label>city{{ui-popup tagName="i" class="help circle icon" content="the city that the address is in"}}</label>
       {{#ui-dropdown class="selection" onChange=(action (mut city)) as |execute mapper|}}
@@ -82,6 +98,8 @@
         </div>
       {{/ui-dropdown}}
     </div>
+  </form>
+  <form class="ui form segment">
     <div class="field">
       <label>district{{ui-popup tagName="i" class="help circle icon" content="the first level administrative divisions within a country, such as state or province"}}</label>
       {{#ui-dropdown class="selection" onChange=(action (mut district)) as |execute mapper|}}
@@ -96,6 +114,8 @@
         </div>
       {{/ui-dropdown}}
     </div>
+  </form>
+  <form class="ui form segment">
     <div class="field">
       <label>region{{ui-popup tagName="i" class="help circle icon" content=""}}</label>
       {{#ui-dropdown class="selection" onChange=(action (mut region)) as |execute mapper|}}
@@ -110,6 +130,8 @@
         </div>
       {{/ui-dropdown}}<br>
     </div>
+  </form>
+  <form class="ui form segment">
     <div class="field">
       <label>postcode{{ui-popup tagName="i" class="help circle icon" content="the alphanumeric code used in many countries for sorting mail"}}</label>
       {{#ui-dropdown class="selection" onChange=(action (mut postcode)) as |execute mapper|}}
