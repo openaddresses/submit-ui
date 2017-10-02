@@ -83,6 +83,7 @@ export default Ember.Controller.extend(sharedActions, {
   district: null,
   region: null,
   postcode: null,
+  joinStreet: false,
   // the following is super inefficient, but will be refactored once there's an API repsonse to work with.
   sampleNumber: Ember.computed('number', function(){
     return this.user_data.features[0].properties[this.number];
@@ -128,7 +129,15 @@ export default Ember.Controller.extend(sharedActions, {
   }),
   actions: {
     joinColumns: function(column){
-      console.log(column);
+      this.set('joinStreet', true);
+    },
+    addJoin: function(selected){
+      var joinStreet = this.user_data.features[0].properties[selected];
+      var joinStreetTwo = this.user_data.features[1].properties[selected];
+      var originalStreet = this.get('sampleStreet');
+      var originalStreetTwo = this.get('sampleStreetTwo');
+      this.set('sampleStreet', originalStreet + " " + joinStreet);
+      this.set('sampleStreetTwo', originalStreet + " " + joinStreetTwo);
     }
   }
 });
