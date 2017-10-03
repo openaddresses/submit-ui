@@ -76,43 +76,6 @@ export default Ember.Controller.extend(sharedActions, {
   columnHeadings: Ember.computed('user_data', function(){
     return Object.keys(this.user_data.features[0].properties);
   }),
-  // oaFields:{
-  //   number:{
-  //     columns: [],
-  //     action: null,
-  //     separator: " "
-  //   },
-  //   street:{
-  //     columns: [],
-  //     action: null,
-  //     separator:  " "
-  //   },
-  //   unit:{
-  //     columns: [],
-  //     action: null,
-  //     separator:  " "
-  //   },
-  //   city:{
-  //     columns: [],
-  //     action: null,
-  //     separator:  " "
-  //   },
-  //   district:{
-  //     columns: [],
-  //     action: null,
-  //     separator:  " "
-  //   },
-  //   region:{
-  //     columns: [],
-  //     action: null,
-  //     separator:  " "
-  //   },
-  //   postcode:{
-  //     columns: [],
-  //     action: null,
-  //     separator:  " "
-  //   }
-  // },
   exampleRows:[{
     number: null,
     street: null,
