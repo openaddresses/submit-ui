@@ -76,15 +76,44 @@ export default Ember.Controller.extend(sharedActions, {
   columnHeadings: Ember.computed('user_data', function(){
     return Object.keys(this.user_data.features[0].properties);
   }),
-  mappings: ["number", "street", "unit", "city", "district", "region", "postcode"],
-  number: null,
-  street: null,
-  unit: null,
-  city: null,
-  district: null,
-  region: null,
-  postcode: null,
-  samples:[{
+  oaFields:{
+    number:{
+      columns: [],
+      action: null,
+      separator: null
+    },
+    street:{
+      columns: [],
+      action: null,
+      separator: null
+    },
+    unit:{
+      columns: [],
+      action: null,
+      separator: null
+    },
+    city:{
+      columns: [],
+      action: null,
+      separator: null
+    },
+    district:{
+      columns: [],
+      action: null,
+      separator: null
+    },
+    region:{
+      columns: [],
+      action: null,
+      separator: null
+    },
+    postcode:{
+      columns: [],
+      action: null,
+      separator: null
+    }
+  },
+  exampleRows:[{
     number: null,
     street: null,
     unit: null,
@@ -102,24 +131,19 @@ export default Ember.Controller.extend(sharedActions, {
     region: null,
     postcode: null,
   }],
+  join_number: false,
   actions: {
-    setColumn: function(heading, column){
-      this.set(heading, column);
+    chooseColumn: function(heading, column){
+      this.oaFields[heading].columns.push(column);
       for (var i = 0; i < 2; i++){
-        Ember.set(this.samples[i], heading, this.user_data.features[i].properties[column]);
+        Ember.set(this.exampleRows[i], heading, this.user_data.features[i].properties[column]);
       }
     },
-    joinColumns: function(column){
-      this.set('joinStreet', true);
+    joinColumns: function(field){
+      Ember.set(this.oaFields[field], "action", "join")
     },
-    addJoin: function(selected){
-      this.get(heading).column_two = selected;
-      // var joinStreet = this.user_data.features[0].properties[selected];
-      // var joinStreetTwo = this.user_data.features[1].properties[selected];
-      // var originalStreet = this.get('sampleStreet');
-      // var originalStreetTwo = this.get('sampleStreetTwo');
-      // this.set('sampleStreet', originalStreet + " " + joinStreet);
-      // this.set('sampleStreetTwo', originalStreet + " " + joinStreetTwo);
+    removeJoin: function(field){
+      Ember.set(this.oaFields[field], "action", null)
     }
   }
 });
