@@ -11,10 +11,42 @@ export default DS.Model.extend({
   license: DS.attr(),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
-  // columns to map
-  // test: DS.attr('string')
-  country: DS.attr('string'),
-  region: DS.attr('string')
-
-
+  oaFields:{
+    number:{
+      columns: [],
+      action: null,
+      separator: " ",
+      test: "TEST!"
+    },
+    street:{
+      columns: [],
+      action: null,
+      separator:  " "
+    },
+    unit:{
+      columns: [],
+      action: null,
+      separator:  " "
+    },
+    city:{
+      columns: [],
+      action: null,
+      separator:  " "
+    },
+    district:{
+      columns: [],
+      action: null,
+      separator:  " "
+    },
+    region:{
+      columns: [],
+      action: null,
+      separator:  " "
+    },
+    postcode:{
+      columns: [],
+      action: null,
+      separator:  " "
+    }
+  }
 });
