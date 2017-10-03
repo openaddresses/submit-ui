@@ -134,7 +134,6 @@ export default Ember.Controller.extend(sharedActions, {
   actions: {
     chooseColumn: function(heading, column){
       this.model.get('oaFields')[heading].columns[0] = column;
-      // Ember.set(this.model.get('oaFields')[heading], columns[0], column);
       this.model.get('oaFields')[heading].columns[0] = column;
       for (var i = 0; i < 2; i++){
         Ember.set(this.exampleRows[i], heading, this.user_data.features[i].properties[column]);

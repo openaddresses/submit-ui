@@ -15,8 +15,7 @@ export default DS.Model.extend({
     number:{
       columns: [],
       action: null,
-      separator: " ",
-      test: "TEST!"
+      separator: " "
     },
     street:{
       columns: [],
