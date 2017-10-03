@@ -131,20 +131,21 @@ export default Ember.Controller.extend(sharedActions, {
     region: null,
     postcode: null,
   }],
-  join_number: false,
   actions: {
     chooseColumn: function(heading, column){
-      this.oaFields[heading].columns.push(column);
+      this.oaFields[heading].columns[0]= column;
       for (var i = 0; i < 2; i++){
         Ember.set(this.exampleRows[i], heading, this.user_data.features[i].properties[column]);
       }
+      console.log(this.oaFields[heading].columns);
     },
     addColumn: function(heading, column){
-      this.oaFields[heading].columns.push(column);
+      this.oaFields[heading].columns[1]= column;
       for (var i = 0; i < 2; i++){
         var joined = this.exampleRows[i][heading] + this.oaFields[heading].separator + this.user_data.features[i].properties[column];
         Ember.set(this.exampleRows[i], heading, joined);
       }
+      console.log(this.oaFields[heading].columns);
     },
     addJoin: function(field){
       Ember.set(this.oaFields[field], "action", "join");
