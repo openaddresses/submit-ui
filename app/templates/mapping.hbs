@@ -13,48 +13,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>{{sampleNumber}}</td>
-        <td>{{sampleStreet}}</td>
-        <td>{{sampleUnit}}</td>
-        <td>{{sampleCity}}</td>
-        <td>{{sampleDistrict}}</td>
-        <td>{{sampleRegion}}</td>
-        <td>{{samplePostcode}}</td>
-      </tr>
-       <tr>
-        <td>{{sampleNumberTwo}}</td>
-        <td>{{sampleStreetTwo}}</td>
-        <td>{{sampleUnitTwo}}</td>
-        <td>{{sampleCityTwo}}</td>
-        <td>{{sampleDistrictTwo}}</td>
-        <td>{{sampleRegionTwo}}</td>
-        <td>{{samplePostcodeTwo}}</td>
-      </tr>
+      {{#each samples as |sample| }}
+        <tr>
+          <td>{{sample.number}}</td>
+          <td>{{sample.street}}</td>
+          <td>{{sample.unit}}</td>
+          <td>{{sample.city}}</td>
+          <td>{{sample.district}}</td>
+          <td>{{sample.region}}</td>
+          <td>{{sample.postcode}}</td>
+        </tr>
+      {{/each}}
     </tbody>
   </table>
-  
-  <form class="ui form segment">
-    <div class="required field">
-      <label>number{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
-      {{#ui-dropdown class="selection" onChange=(action (mut number)) as |execute mapper|}}
-        <div class="default text">Source column headings</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          {{#each columnHeadings as |heading|}}
-            <div class="item" data-value="{{map-value mapper heading}}">
-              {{heading}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}
-    </div>
-  </form>
-  <form class="ui form segment">
-    <div class="required field">
-      <label>street{{ui-popup tagName="i" class="help circle icon" content="the street the address is on"}}</label>
-      {{#unless joinStreet}}
-        {{#ui-dropdown class="selection" onChange=(action (mut street)) as |execute mapper|}}
+  {{#each mappings as | mapping | }}
+    <form class="ui form segment">
+      <div class="required field">
+        <label>{{mapping}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
+        {{#ui-dropdown class="selection" onChange=(action "setColumn" mapping) as |execute mapper|}}
           <div class="default text">Source column headings</div>
           <i class="dropdown icon"></i>
           <div class="menu">
@@ -65,124 +41,9 @@
             {{/each}}
           </div>
         {{/ui-dropdown}}
-        <button class="ui button basic mini blue" onClick={{action "joinColumns" "street"}}>Join two columns for this field</button>
-      {{else}}
-        <div class="ui stackable three column center aligned grid">
-          <div class="seven wide column">
-           {{#ui-dropdown class="selection fluid" onChange=(action (mut street)) as |execute mapper|}}
-              <div class="default text">Source column headings</div>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                {{#each columnHeadings as |heading|}}
-                  <div class="item" data-value="{{map-value mapper heading}}">
-                    {{heading}}
-                  </div>
-                {{/each}}
-              </div>
-            {{/ui-dropdown}}
-          </div>
-          <div class="two wide column">
-            <a class="item">
-              <i class="plus icon"></i>
-            </a>
-          </div>
-          <div class="seven wide column">
-            {{#ui-dropdown class="selection fluid" onChange=(action "addJoin") as |execute mapper|}}
-              <div class="default text">Source column headings</div>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                {{#each columnHeadings as |heading|}}
-                  <div class="item" data-value="{{map-value mapper heading}}">
-                    {{heading}}
-                  </div>
-                {{/each}}
-              </div>
-            {{/ui-dropdown}}
-          </div>
-        </div>
-        <button class="ui button basic mini blue" onClick={{action "joinColumns" "street"}}>Remove join</button>
-      {{/unless}}
-    </div>
-  </form>
-  <form class="ui form segment">
-    <div class="field">
-      <label>unit{{ui-popup tagName="i" class="help circle icon" content="the apartment, suite, flat, etc of an address"}}</label>
-      {{#ui-dropdown class="selection" onChange=(action (mut unit)) as |execute mapper|}}
-        <div class="default text">Source column headings</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          {{#each columnHeadings as |heading|}}
-            <div class="item" data-value="{{map-value mapper heading}}">
-              {{heading}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}
-    </div>
-  </form>
-  <form class="ui form segment">
-    <div class="field">
-      <label>city{{ui-popup tagName="i" class="help circle icon" content="the city that the address is in"}}</label>
-      {{#ui-dropdown class="selection" onChange=(action (mut city)) as |execute mapper|}}
-        <div class="default text">Source column headings</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          {{#each columnHeadings as |heading|}}
-            <div class="item" data-value="{{map-value mapper heading}}">
-              {{heading}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}
-    </div>
-  </form>
-  <form class="ui form segment">
-    <div class="field">
-      <label>district{{ui-popup tagName="i" class="help circle icon" content="the first level administrative divisions within a country, such as state or province"}}</label>
-      {{#ui-dropdown class="selection" onChange=(action (mut district)) as |execute mapper|}}
-        <div class="default text">Source column headings</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          {{#each columnHeadings as |heading|}}
-            <div class="item" data-value="{{map-value mapper heading}}">
-              {{heading}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}
-    </div>
-  </form>
-  <form class="ui form segment">
-    <div class="field">
-      <label>region{{ui-popup tagName="i" class="help circle icon" content=""}}</label>
-      {{#ui-dropdown class="selection" onChange=(action (mut region)) as |execute mapper|}}
-        <div class="default text">Source column headings</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          {{#each columnHeadings as |heading|}}
-            <div class="item" data-value="{{map-value mapper heading}}">
-              {{heading}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}<br>
-    </div>
-  </form>
-  <form class="ui form segment">
-    <div class="field">
-      <label>postcode{{ui-popup tagName="i" class="help circle icon" content="the alphanumeric code used in many countries for sorting mail"}}</label>
-      {{#ui-dropdown class="selection" onChange=(action (mut postcode)) as |execute mapper|}}
-        <div class="default text">Source column headings</div>
-        <i class="dropdown icon"></i>
-        <div class="menu">
-          {{#each columnHeadings as |heading|}}
-            <div class="item" data-value="{{map-value mapper heading}}">
-              {{heading}}
-            </div>
-          {{/each}}
-        </div>
-      {{/ui-dropdown}}<br>
-    </div>
-  </form>
+      </div>
+      <button class="ui button basic mini blue" onClick={{action "joinColumns" "street"}}>Join two columns for this field</button>
+    </form>
+  {{/each}}
 </div>
 {{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}

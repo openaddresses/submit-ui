@@ -76,6 +76,7 @@ export default Ember.Controller.extend(sharedActions, {
   columnHeadings: Ember.computed('user_data', function(){
     return Object.keys(this.user_data.features[0].properties);
   }),
+  mappings: ["number", "street", "unit", "city", "district", "region", "postcode"],
   number: null,
   street: null,
   unit: null,
@@ -83,61 +84,42 @@ export default Ember.Controller.extend(sharedActions, {
   district: null,
   region: null,
   postcode: null,
-  joinStreet: false,
-  // the following is super inefficient, but will be refactored once there's an API repsonse to work with.
-  sampleNumber: Ember.computed('number', function(){
-    return this.user_data.features[0].properties[this.number];
-  }),
-   sampleNumberTwo: Ember.computed('number', function(){
-    return this.user_data.features[1].properties[this.number];
-  }),
-  sampleStreet: Ember.computed('street', function(){
-    return this.user_data.features[0].properties[this.street];
-  }),
-  sampleStreetTwo: Ember.computed('street', function(){
-    return this.user_data.features[1].properties[this.street];
-  }),
-  sampleUnit: Ember.computed('unit', function(){
-    return this.user_data.features[0].properties[this.unit];
-  }),
-  sampleUnitTwo: Ember.computed('unit', function(){
-    return this.user_data.features[1].properties[this.unit];
-  }),
-  sampleCity: Ember.computed('city', function(){
-    return this.user_data.features[0].properties[this.city];
-  }),
-  sampleCityTwo: Ember.computed('city', function(){
-    return this.user_data.features[1].properties[this.city];
-  }),
-  sampleDistrict: Ember.computed('district', function(){
-    return this.user_data.features[0].properties[this.district];
-  }),
-  sampleDistrictTwo: Ember.computed('district', function(){
-    return this.user_data.features[1].properties[this.district];
-  }),
-  sampleRegion: Ember.computed('region', function(){
-    return this.user_data.features[0].properties[this.region];
-  }),
-  sampleRegionTwo: Ember.computed('region', function(){
-    return this.user_data.features[1].properties[this.region];
-  }),
-  samplePostcode: Ember.computed('postcode', function(){
-    return this.user_data.features[0].properties[this.postcode];
-  }),
-   samplePostcodeTwo: Ember.computed('postcode', function(){
-    return this.user_data.features[1].properties[this.postcode];
-  }),
+  samples:[{
+    number: null,
+    street: null,
+    unit: null,
+    city: null,
+    district: null,
+    region: null,
+    postcode: null,
+  },
+  {
+    number: null,
+    street: null,
+    unit: null,
+    city: null,
+    district: null,
+    region: null,
+    postcode: null,
+  }],
   actions: {
+    setColumn: function(heading, column){
+      this.set(heading, column);
+      for (var i = 0; i < 2; i++){
+        Ember.set(this.samples[i], heading, this.user_data.features[i].properties[column]);
+      }
+    },
     joinColumns: function(column){
       this.set('joinStreet', true);
     },
     addJoin: function(selected){
-      var joinStreet = this.user_data.features[0].properties[selected];
-      var joinStreetTwo = this.user_data.features[1].properties[selected];
-      var originalStreet = this.get('sampleStreet');
-      var originalStreetTwo = this.get('sampleStreetTwo');
-      this.set('sampleStreet', originalStreet + " " + joinStreet);
-      this.set('sampleStreetTwo', originalStreet + " " + joinStreetTwo);
+      this.get(heading).column_two = selected;
+      // var joinStreet = this.user_data.features[0].properties[selected];
+      // var joinStreetTwo = this.user_data.features[1].properties[selected];
+      // var originalStreet = this.get('sampleStreet');
+      // var originalStreetTwo = this.get('sampleStreetTwo');
+      // this.set('sampleStreet', originalStreet + " " + joinStreet);
+      // this.set('sampleStreetTwo', originalStreet + " " + joinStreetTwo);
     }
   }
 });
