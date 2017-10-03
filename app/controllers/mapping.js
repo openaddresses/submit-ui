@@ -80,37 +80,37 @@ export default Ember.Controller.extend(sharedActions, {
     number:{
       columns: [],
       action: null,
-      separator: null
+      separator: " "
     },
     street:{
       columns: [],
       action: null,
-      separator: null
+      separator:  " "
     },
     unit:{
       columns: [],
       action: null,
-      separator: null
+      separator:  " "
     },
     city:{
       columns: [],
       action: null,
-      separator: null
+      separator:  " "
     },
     district:{
       columns: [],
       action: null,
-      separator: null
+      separator:  " "
     },
     region:{
       columns: [],
       action: null,
-      separator: null
+      separator:  " "
     },
     postcode:{
       columns: [],
       action: null,
-      separator: null
+      separator:  " "
     }
   },
   exampleRows:[{
@@ -139,11 +139,22 @@ export default Ember.Controller.extend(sharedActions, {
         Ember.set(this.exampleRows[i], heading, this.user_data.features[i].properties[column]);
       }
     },
-    joinColumns: function(field){
-      Ember.set(this.oaFields[field], "action", "join")
+    addColumn: function(heading, column){
+      this.oaFields[heading].columns.push(column);
+      for (var i = 0; i < 2; i++){
+        var joined = this.exampleRows[i][heading] + this.oaFields[heading].separator + this.user_data.features[i].properties[column];
+        Ember.set(this.exampleRows[i], heading, joined);
+      }
+    },
+    addJoin: function(field){
+      Ember.set(this.oaFields[field], "action", "join");
     },
     removeJoin: function(field){
-      Ember.set(this.oaFields[field], "action", null)
+      this.oaFields[field].columns.pop()
+      for (var i = 0; i < 2; i++){
+        Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.oaFields[field].columns[0]]);
+      }
+      Ember.set(this.oaFields[field], "action", null);
     }
   }
 });

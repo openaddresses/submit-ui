@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each exampleRows as |row| }}
+      {{#each exampleRows as |row|}}
         <tr>
           <td>{{row.number}}</td>
           <td>{{row.street}}</td>
@@ -27,14 +27,14 @@
     </tbody>
   </table>
 
-  {{#each-in oaFields as | field category| }}
+  {{#each-in oaFields as |field category|}}
     <form class="ui form segment">
       <div class="required field">
         <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
         {{#if category.action}}
           <div class="ui stackable three column center aligned grid">
             <div class="seven wide column">
-              {{#ui-dropdown class="selection fluid" onChange=(action (mut street)) as |execute mapper|}}
+             {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
                 <div class="default text">Source column headings</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
@@ -52,7 +52,7 @@
               </a>
             </div>
             <div class="seven wide column">
-              {{#ui-dropdown class="selection fluid" onChange=(action (mut street)) as |execute mapper|}}
+              {{#ui-dropdown class="selection fluid" onChange=(action "addColumn" field) as |execute mapper|}}
                 <div class="default text">Source column headings</div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
@@ -78,7 +78,7 @@
               {{/each}}
             </div>
           {{/ui-dropdown}}
-          <button class="ui button basic mini blue" onClick={{action "joinColumns" field}}>Join two columns for this field</button>
+          <button class="ui button basic mini blue" onClick={{action "addJoin" field}}>Join two columns for this field</button>
         {{/if}}
       </div>
     </form>
