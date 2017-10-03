@@ -28,10 +28,10 @@
   </table>
 
   {{#each-in oaFields as | field category| }}
-    {{#if category.action}}      
-      <form class="ui form segment">
-        <div class="required field">
-          <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
+    <form class="ui form segment">
+      <div class="required field">
+        <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
+        {{#if category.action}}
           <div class="ui stackable three column center aligned grid">
             <div class="seven wide column">
               {{#ui-dropdown class="selection fluid" onChange=(action (mut street)) as |execute mapper|}}
@@ -65,13 +65,8 @@
               {{/ui-dropdown}}
             </div>
           </div>
-        </div>
-        <button class="ui button basic mini blue" onClick={{action "removeJoin" field}}>Remove join</button>
-      </form>
-    {{else}}
-      <form class="ui form segment">
-        <div class="required field">{{field.action}}
-          <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
+          <button class="ui button basic mini blue" onClick={{action "removeJoin" field}}>Remove join</button>
+        {{else}}
           {{#ui-dropdown class="selection" onChange=(action "chooseColumn" field) as |execute mapper|}}
             <div class="default text">Source column headings</div>
             <i class="dropdown icon"></i>
@@ -83,10 +78,10 @@
               {{/each}}
             </div>
           {{/ui-dropdown}}
-        </div>
-        <button class="ui button basic mini blue" onClick={{action "joinColumns" field}}>Join two columns for this field</button>
-      </form>
-    {{/if}}
+          <button class="ui button basic mini blue" onClick={{action "joinColumns" field}}>Join two columns for this field</button>
+        {{/if}}
+      </div>
+    </form>
   {{/each-in}}
 </div>
 {{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
