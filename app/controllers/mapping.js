@@ -147,27 +147,25 @@ export default Ember.Controller.extend(sharedActions, {
         var prefix = "";
         var postfix = "";
         var original = this.exampleRows[i][field].split("");
-        var prefixArray = [];
-        var postfixArray = [];
         var splitIndex = original.length;
         for (var j = 0; j < original.length; j++){
           if (j < splitIndex) {
-            prefix += original[j]
+            prefix += original[j];
             if (isNaN(parseInt(original[j+1]))){
               splitIndex = j+1;
             }
           } else {
             if (j === splitIndex && original[j] === " "){
               continue;
-            } 
-            postfix += original[j]
+            }
+            postfix += original[j];
           }
-        }  
+        }
         if (extractionFunction === "removePrefixNumber"){
           Ember.set(this.exampleRows[i], field, postfix);
         } else if (extractionFunction === "removePostfixStreet") {
           Ember.set(this.exampleRows[i], field, prefix);
-        }   
+        }
       }
     },
     removeExtractionFunction: function(field){
