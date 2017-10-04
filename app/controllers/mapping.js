@@ -130,39 +130,50 @@ export default Ember.Controller.extend(sharedActions, {
       Ember.set(this.model.get('oaFields')[field], "action", action);
     },
     removeAction: function(field){
-      if (this.model.get('oaFields')[field].action === "join"){
+      if (this.model.get('oaFields')[field].action === "join" && this.model.get('oaFields')[field].columns.length > 1){
         this.model.get('oaFields')[field].columns.pop();
       }
       for (var i = 0; i < 2; i++){
         Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
       }
       Ember.set(this.model.get('oaFields')[field], "action", null);
+      Ember.set(this.model.get('oaFields')[field], "extractionFunction", null);
       Ember.set(this.model.get('oaFields')[field], "separator", " ");
     },
-    selectCharacter: function(character, field){
-      var field = this.user_data.features[0].properties[this.model.get('oaFields')[field].columns[0]];
-      var prefix = field.substr(0, character.index);
-      var postfix = field.substr(character.index, field.length);
-      this.set('splitColumn',[{
-        string: prefix,
-        part: 0,
-        index: character.index
-      },
-      {
-        string: postfix,
-        part: 1,
-        index: character.index
-      }]);
-    },
-    selectSegment: function(segment, field){
-      this.model.oaFields[field].separator = segment.index;
+    setExtractionFunction: function(field, extractionFunction, extractionText){
+      Ember.set(this.model.oaFields[field], "extractionFunction", extractionFunction);
+      Ember.set(this.model.oaFields[field], "extractionText", extractionText);
       for (var i = 0; i < 2; i++){
-        var fullString = this.user_data.features[i].properties[this.model.oaFields[field].columns];
-        if (segment.part === 0){
-          Ember.set(this.exampleRows[i], field, fullString.slice(0, segment.index));
-        } else if (segment.part === 1) {
-          Ember.set(this.exampleRows[i], field, fullString.slice(segment.index, fullString.length));
-        }
+        var prefix = "";
+        var postfix = "";
+        var original = this.exampleRows[i][field].split("");
+        var prefixArray = [];
+        var postfixArray = [];
+        var splitIndex = original.length;
+        for (var j = 0; j < original.length; j++){
+          if (j < splitIndex) {
+            prefix += original[j]
+            if (isNaN(parseInt(original[j+1]))){
+              splitIndex = j+1;
+            }
+          } else {
+            if (j === splitIndex && original[j] === " "){
+              continue;
+            } 
+            postfix += original[j]
+          }
+        }  
+        if (extractionFunction === "removePrefixNumber"){
+          Ember.set(this.exampleRows[i], field, postfix);
+        } else if (extractionFunction === "removePostfixStreet") {
+          Ember.set(this.exampleRows[i], field, prefix);
+        }   
+      }
+    },
+    removeExtractionFunction: function(field){
+      Ember.set(this.model.oaFields[field], "extractionFunction", null);
+      for (var i = 0; i < 2; i++){
+        Ember.set(this.exampleRows[i], field, this.user_data.features[0].properties[this.model.get('oaFields')[field].columns[0]]);
       }
     }
   }

@@ -15,37 +15,58 @@ export default DS.Model.extend({
     number:{
       columns: null,
       action: null,
-      separator: " "
+      separator: " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     },
     street:{
       columns: [],
       action: null,
-      separator:  " "
+      separator:  " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     },
     unit:{
       columns: [],
       action: null,
-      separator:  " "
+      separator:  " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     },
     city:{
       columns: [],
       action: null,
-      separator:  " "
+      separator:  " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     },
     district:{
       columns: [],
       action: null,
-      separator:  " "
+      separator:  " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     },
     region:{
       columns: [],
       action: null,
-      separator:  " "
+      separator:  " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     },
     postcode:{
       columns: [],
       action: null,
-      separator:  " "
+      separator:  " ",
+      extractionFunction: null,
+      extractionText: null,
+      extractionColumn: null
     }
   }
 });
