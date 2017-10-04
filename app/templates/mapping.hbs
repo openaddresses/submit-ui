@@ -31,9 +31,14 @@
       <div class="required field">
         <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
           <div class="ui stackable three column center aligned grid">
-            <div class={{if properties.action "seven wide column" "sixteen wide column"}}>
-             {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
-                <div class="default text">Source column headings</div>
+            <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>
+              {{#if (eq properties.action "split")}}
+                1. Choose column to split:
+              {{/if}}
+              {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
+                <div class="default text">
+                    Source column headings
+                </div>
                 <i class="dropdown icon"></i>
                 <div class="menu">
                   {{#each columnHeadings as |heading|}}
@@ -43,8 +48,26 @@
                   {{/each}}
                 </div>
               {{/ui-dropdown}}
+              {{#if (eq properties.action "split")}}
+                {{#if properties.columns}}
+                  2. Choose character to split on:
+                  <div class="fluid">
+                    <div class="ui mini buttons purple">
+                      {{#each splitCharacters as |character|}}
+                        <button class="ui button" onClick={{action "selectCharacter" character field}}>{{character.character}}</button>
+                      {{/each}} 
+                    </div> 
+                    {{#if splitColumn}}
+                      3. Choose which segment to use:
+                      {{#each splitColumn as |segment|}}
+                        <button class="ui button basic green" onClick={{action "selectSegment" segment field}}>{{segment.string}}</button>
+                      {{/each}}
+                    {{/if}}
+                  </div>
+                {{/if}}
+              {{/if}}
             </div>
-          {{#if properties.action}}
+          {{#if (eq properties.action "join")}}
             <div class="two wide column">
               <a class="item">
                 <i class="plus icon"></i>
@@ -65,10 +88,13 @@
             </div>
           {{/if}}
         </div>
-        {{#if properties.action}}
-          <button class="ui button basic mini blue" onClick={{action "removeJoin" field}}>Remove join</button>
+        {{#if (eq properties.action "join")}}
+          <button class="ui button basic mini blue" onClick={{action "removeAction" field}}>Remove join</button>
+        {{else if (eq properties.action "split")}}
+          <button class="ui button basic mini blue" onClick={{action "removeAction" field}}>Remove split</button>
         {{else}}
-          <button class="ui button basic mini blue" onClick={{action "addJoin" field}}>Join two columns for this field</button>
+          <button class="ui button basic mini blue" onClick={{action "addAction" field "join"}}>Join two columns for this field</button>
+          <button class="ui button basic mini blue" onClick={{action "addAction" field "split"}}>Split one column for this field</button>
         {{/if}}
       </div>
     </form>

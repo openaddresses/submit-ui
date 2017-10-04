@@ -13,7 +13,7 @@ export default DS.Model.extend({
   maintainer_email: DS.attr('string'),
   oaFields:{
     number:{
-      columns: [],
+      columns: null,
       action: null,
       separator: " "
     },

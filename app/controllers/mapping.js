@@ -15,7 +15,7 @@ export default Ember.Controller.extend(sharedActions, {
         "LAND_USE":"COMMERCIAL",
         "STORIES":"1",
         "EXTERIOR":"BRICK",
-        "FULL_ADD":"400 E CAPTIOL ST NE",
+        "FULL_ADD":"400 E CAPITOL ST NE",
         "CITY":"WASHINGTON",
         "ROAD_TYPE":"ST",
         "PREFIX_DIR":"E",
@@ -72,7 +72,6 @@ export default Ember.Controller.extend(sharedActions, {
       }
     }]
   },
-  selectedDataset: "simple_data",
   columnHeadings: Ember.computed('user_data', function(){
     return Object.keys(this.user_data.features[0].properties);
   }),
@@ -94,8 +93,26 @@ export default Ember.Controller.extend(sharedActions, {
     region: null,
     postcode: null,
   }],
+  splitCharacters: Ember.computed('currentField', function(){
+    var characters =  this.user_data.features[0].properties[this.model.get('oaFields')[this.get('currentField')].columns[0]].split("");
+    var characterPairs = [];
+    for (var i = 0; i < characters.length; i++){
+      var pair = {
+        index: null,
+        character: null
+      };
+      pair.index = i;
+      pair.character = characters[i];
+      characterPairs.push(pair);
+    }
+    return characterPairs;
+  }),
+  splitColumn: null,
+  currentField: null,
   actions: {
     chooseColumn: function(heading, column){
+      this.set('currentField', heading);
+      Ember.set(this.model.get('oaFields')[heading], "columns", []);
       this.model.get('oaFields')[heading].columns[0] = column;
       this.model.get('oaFields')[heading].columns[0] = column;
       for (var i = 0; i < 2; i++){
@@ -109,15 +126,44 @@ export default Ember.Controller.extend(sharedActions, {
         Ember.set(this.exampleRows[i], heading, joined);
       }
     },
-    addJoin: function(field){
-      Ember.set(this.model.get('oaFields')[field], "action", "join");
+    addAction: function(field, action){
+      Ember.set(this.model.get('oaFields')[field], "action", action);
     },
-    removeJoin: function(field){
-      this.model.get('oaFields')[field].columns.pop();
+    removeAction: function(field){
+      if (this.model.get('oaFields')[field].action === "join"){
+        this.model.get('oaFields')[field].columns.pop();
+      }
       for (var i = 0; i < 2; i++){
         Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
       }
       Ember.set(this.model.get('oaFields')[field], "action", null);
+      Ember.set(this.model.get('oaFields')[field], "separator", " ");
+    },
+    selectCharacter: function(character, field){
+      var field = this.user_data.features[0].properties[this.model.get('oaFields')[field].columns[0]];
+      var prefix = field.substr(0, character.index);
+      var postfix = field.substr(character.index, field.length);
+      this.set('splitColumn',[{
+        string: prefix,
+        part: 0,
+        index: character.index
+      },
+      {
+        string: postfix,
+        part: 1,
+        index: character.index
+      }]);
+    },
+    selectSegment: function(segment, field){
+      this.model.oaFields[field].separator = segment.index;
+      for (var i = 0; i < 2; i++){
+        var fullString = this.user_data.features[i].properties[this.model.oaFields[field].columns];
+        if (segment.part === 0){
+          Ember.set(this.exampleRows[i], field, fullString.slice(0, segment.index));
+        } else if (segment.part === 1) {
+          Ember.set(this.exampleRows[i], field, fullString.slice(segment.index, fullString.length));
+        }
+      }
     }
   }
 });
