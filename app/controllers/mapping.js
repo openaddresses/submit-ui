@@ -43,7 +43,7 @@ export default Ember.Controller.extend(sharedActions, {
       "properties":{
         "OBJECTID":1001,
         "ADDNUMBER":3001,
-        "STREET":"RIVER DRIVE",
+        "STREET":"CONNETICUT AVE NW",
         "TYPE":"SF",
         "LAND_USE":"COMMERCIAL",
         "STORIES":"1",
@@ -52,7 +52,7 @@ export default Ember.Controller.extend(sharedActions, {
         "CITY":"WASHINGTON",
         "ROAD_TYPE":"AVE",
         "PREFIX_DIR":"",
-        "SUFFIX_DIR":"",
+        "SUFFIX_DIR":"NW",
         "UNIT":null,
         "DISTRICT":"DISTRICT OF COLUMBIA",
         "LAST_UPDT":null,
@@ -93,30 +93,27 @@ export default Ember.Controller.extend(sharedActions, {
     region: null,
     postcode: null,
   }],
-  splitCharacters: Ember.computed('currentField', function(){
-    var characters =  this.user_data.features[0].properties[this.model.get('oaFields')[this.get('currentField')].columns[0]].split("");
-    var characterPairs = [];
-    for (var i = 0; i < characters.length; i++){
-      var pair = {
-        index: null,
-        character: null
-      };
-      pair.index = i;
-      pair.character = characters[i];
-      characterPairs.push(pair);
-    }
-    return characterPairs;
-  }),
-  splitColumn: null,
-  currentField: null,
   actions: {
     chooseColumn: function(heading, column){
-      this.set('currentField', heading);
       Ember.set(this.model.get('oaFields')[heading], "columns", []);
       this.model.get('oaFields')[heading].columns[0] = column;
       this.model.get('oaFields')[heading].columns[0] = column;
       for (var i = 0; i < 2; i++){
         Ember.set(this.exampleRows[i], heading, this.user_data.features[i].properties[column]);
+      }
+    },
+    chooseColumnToRemove: function(heading, column){
+      Ember.set(this.model.get('oaFields')[heading], "extractionColumn", column);
+      for (var i = 0; i < 2; i++){
+        var originalColumn = this.model.oaFields[heading].columns[0];
+        var originalString = this.user_data.features[i].properties[originalColumn].toString();
+        var extractionString = this.user_data.features[i].properties[this.model.get('oaFields')[heading].extractionColumn].toString();
+        var newString = originalString.replace(extractionString, "");
+        
+        if (newString[0] === " "){
+          newString = newString.slice(1, newString.length);
+        }
+        Ember.set(this.exampleRows[i], heading, newString);
       }
     },
     addColumn: function(heading, column){
@@ -130,11 +127,13 @@ export default Ember.Controller.extend(sharedActions, {
       Ember.set(this.model.get('oaFields')[field], "action", action);
     },
     removeAction: function(field){
-      if (this.model.get('oaFields')[field].action === "join" && this.model.get('oaFields')[field].columns.length > 1){
+      if (this.model.get('oaFields')[field].action === "join" && this.model.get('oaFields')[field].columns){
         this.model.get('oaFields')[field].columns.pop();
       }
       for (var i = 0; i < 2; i++){
-        Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
+        if (this.exampleRows[i][field]){
+          Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
+        }
       }
       Ember.set(this.model.get('oaFields')[field], "action", null);
       Ember.set(this.model.get('oaFields')[field], "extractionFunction", null);
@@ -143,35 +142,39 @@ export default Ember.Controller.extend(sharedActions, {
     setExtractionFunction: function(field, extractionFunction, extractionText){
       Ember.set(this.model.oaFields[field], "extractionFunction", extractionFunction);
       Ember.set(this.model.oaFields[field], "extractionText", extractionText);
-      for (var i = 0; i < 2; i++){
-        var prefix = "";
-        var postfix = "";
-        var original = this.exampleRows[i][field].split("");
-        var splitIndex = original.length;
-        for (var j = 0; j < original.length; j++){
-          if (j < splitIndex) {
-            prefix += original[j];
-            if (isNaN(parseInt(original[j+1]))){
-              splitIndex = j+1;
+      if (extractionFunction !== "removeDuplicateValue"){
+        for (var i = 0; i < 2; i++){
+          var prefix = "";
+          var postfix = "";
+          var original = this.exampleRows[i][field].split("");
+          var splitIndex = original.length;
+          if (!isNaN(parseInt(original[0]))){
+            for (var j = 0; j < original.length; j++){
+              if (j < splitIndex) {
+                prefix += original[j];
+                if (isNaN(parseInt(original[j+1]))){
+                  splitIndex = j+1;
+                }
+              } else {
+                if (j === splitIndex && original[j] === " "){
+                  continue;
+                }
+                postfix += original[j];
+              }
             }
-          } else {
-            if (j === splitIndex && original[j] === " "){
-              continue;
-            }
-            postfix += original[j];
           }
-        }
-        if (extractionFunction === "removePrefixNumber"){
-          Ember.set(this.exampleRows[i], field, postfix);
-        } else if (extractionFunction === "removePostfixStreet") {
-          Ember.set(this.exampleRows[i], field, prefix);
+          if (extractionFunction === "removePrefixNumber"){
+            Ember.set(this.exampleRows[i], field, postfix);
+          } else if (extractionFunction === "removePostfixStreet") {
+            Ember.set(this.exampleRows[i], field, prefix);
+          }
         }
       }
     },
     removeExtractionFunction: function(field){
       Ember.set(this.model.oaFields[field], "extractionFunction", null);
       for (var i = 0; i < 2; i++){
-        Ember.set(this.exampleRows[i], field, this.user_data.features[0].properties[this.model.get('oaFields')[field].columns[0]]);
+        Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
       }
     }
   }
