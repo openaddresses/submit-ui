@@ -62,7 +62,7 @@
                             <div class="menu">
                               {{#each columnHeadings as |heading|}}
                                 <div class="item" data-value="{{map-value mapper heading}}">
-                                  {{heading}}
+                                  {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
                                 </div>
                               {{/each}}
                             </div>
@@ -102,7 +102,7 @@
                 <div class="menu">
                   {{#each columnHeadings as |heading|}}
                     <div class="item" data-value="{{map-value mapper heading}}">
-                      {{heading}}
+                      {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
                     </div>
                   {{/each}}
                 </div>
