@@ -95,9 +95,6 @@ export default Ember.Controller.extend(sharedActions, {
     }
   }),
   actions: {
-    testAction: function(message){
-      console.log(message);
-    },
     chooseColumn: function(heading, column){
       Ember.set(this.model.get('oaFields')[heading], "columns", []);
       this.model.get('oaFields')[heading].columns[0] = column;
@@ -183,9 +180,6 @@ export default Ember.Controller.extend(sharedActions, {
     },
     goToField: function(field){
       this.set('currentField', field);
-    },
-    nextField: function(nextField){
-      this.set('currentField', this.get('nextField'));
     }
   }
 });
