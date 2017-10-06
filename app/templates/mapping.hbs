@@ -5,7 +5,7 @@
     <thead>
       <tr>
         {{#each-in model.oaFields as |field properties|}}
-          {{#if (eq currentField field)}}
+          {{#if (not properties.columns)}}
             <th>{{field}}</th>
           {{else}}
             <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
@@ -120,14 +120,22 @@
             <button class="ui button basic blue" onClick={{action "addAction" field "split"}}>Split one column for this field</button>
           {{/if}}
           {{#if properties.columns}}
-            {{#if (eq field "street")}}
-              <div class="ui segments">
-                <div class="ui segment">
-                  <div>You've mapped the two required columns. Would you like to continue mapping the remaining columns?</div>
-                  <button class="ui button" onClick={{action "nextField" field}}>Yes, move on to {{nextField}}</button>
-                  <button class="ui button" onClick={{action "changeRoute" "contact"}}>No, move on to next step.</button>
+            {{#if (eq currentField "street")}}
+              {{#if (and model.oaFields.number.columns model.oaFields.street.columns)}}
+                <div class="ui segments">
+                  <div class="ui tertiary segment inverted">
+                    <div>You've mapped the two required columns. Would you like to continue mapping the remaining columns?</div>
+                    <button class="ui button" onClick={{action "nextField" field}}>Yes, move on to {{nextField}}</button>
+                    <button class="ui button" onClick={{action "changeRoute" "contact"}}>No, move on to next step.</button>
+                  </div>
                 </div>
-              </div>
+              {{/if}}
+            {{else if (eq currentField "postcode")}}
+                <div class="ui segments">
+                  <div class="ui tertiary segment inverted green">
+                    <div>You've mapped all of the columns!</div>
+                  </div>
+                </div>
             {{else}}
                <button class="ui button" onClick={{action "nextField" field}}>Looks good, move on to {{nextField}} <i class="right arrow icon"></i></button>
             {{/if}}

@@ -82,6 +82,7 @@ export default Ember.Controller.extend(sharedActions, {
       "street": "unit",
       "unit": "city",
       "city": "district",
+      "district": "region",
       "region": "postcode"
     };
     return nextFields[this.get('currentField')];
