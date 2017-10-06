@@ -75,31 +75,27 @@ export default Ember.Controller.extend(sharedActions, {
   columnHeadings: Ember.computed('user_data', function(){
     return Object.keys(this.user_data.features[0].properties);
   }),
-  exampleRows:[{
-    number: null,
-    street: null,
-    unit: null,
-    city: null,
-    district: null,
-    region: null,
-    postcode: null,
-  },
-  {
-    number: null,
-    street: null,
-    unit: null,
-    city: null,
-    district: null,
-    region: null,
-    postcode: null,
-  }],
+  currentField: "number",
+  nextField: Ember.computed('currentField', function(){
+    var nextFields = {
+      "number": "street",
+      "street": "unit",
+      "unit": "city",
+      "city": "district",
+      "region": "postcode"
+    };
+    return nextFields[this.get('currentField')];
+  }),
   actions: {
+    testAction: function(message){
+      console.log(message);
+    },
     chooseColumn: function(heading, column){
       Ember.set(this.model.get('oaFields')[heading], "columns", []);
       this.model.get('oaFields')[heading].columns[0] = column;
       this.model.get('oaFields')[heading].columns[0] = column;
       for (var i = 0; i < 2; i++){
-        Ember.set(this.exampleRows[i], heading, this.user_data.features[i].properties[column]);
+        Ember.set(this.model.get('exampleRows')[i], heading, this.user_data.features[i].properties[column]);
       }
     },
     chooseColumnToRemove: function(heading, column){
@@ -113,14 +109,14 @@ export default Ember.Controller.extend(sharedActions, {
         if (newString[0] === " "){
           newString = newString.slice(1, newString.length);
         }
-        Ember.set(this.exampleRows[i], heading, newString);
+        Ember.set(this.model.get('exampleRows')[i], heading, newString);
       }
     },
     addColumn: function(heading, column){
       this.model.get('oaFields')[heading].columns[1] = column;
       for (var i = 0; i < 2; i++){
-        var joined = this.exampleRows[i][heading] + this.model.get('oaFields')[heading].separator + this.user_data.features[i].properties[column];
-        Ember.set(this.exampleRows[i], heading, joined);
+        var joined = this.model.get('exampleRows')[i][heading] + this.model.get('oaFields')[heading].separator + this.user_data.features[i].properties[column];
+        Ember.set(this.model.get('exampleRows')[i], heading, joined);
       }
     },
     addAction: function(field, action){
@@ -131,8 +127,8 @@ export default Ember.Controller.extend(sharedActions, {
         this.model.get('oaFields')[field].columns.pop();
       }
       for (var i = 0; i < 2; i++){
-        if (this.exampleRows[i][field]){
-          Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
+        if (this.model.get('exampleRows')[i][field]){
+          Ember.set(this.model.get('exampleRows')[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
         }
       }
       Ember.set(this.model.get('oaFields')[field], "action", null);
@@ -146,7 +142,7 @@ export default Ember.Controller.extend(sharedActions, {
         for (var i = 0; i < 2; i++){
           var prefix = "";
           var postfix = "";
-          var original = this.exampleRows[i][field].split("");
+          var original = this.model.get('exampleRows')[i][field].split("");
           var splitIndex = original.length;
           if (!isNaN(parseInt(original[0]))){
             for (var j = 0; j < original.length; j++){
@@ -164,9 +160,9 @@ export default Ember.Controller.extend(sharedActions, {
             }
           }
           if (extractionFunction === "removePrefixNumber"){
-            Ember.set(this.exampleRows[i], field, postfix);
+            Ember.set(this.model.get('exampleRows')[i], field, postfix);
           } else if (extractionFunction === "removePostfixStreet") {
-            Ember.set(this.exampleRows[i], field, prefix);
+            Ember.set(this.model.get('exampleRows')[i], field, prefix);
           }
         }
       }
@@ -174,8 +170,14 @@ export default Ember.Controller.extend(sharedActions, {
     removeExtractionFunction: function(field){
       Ember.set(this.model.oaFields[field], "extractionFunction", null);
       for (var i = 0; i < 2; i++){
-        Ember.set(this.exampleRows[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
+        Ember.set(this.model.get('exampleRows')[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
       }
+    },
+    goToField: function(field){
+      this.set('currentField', field);
+    },
+    nextField: function(nextField){
+      this.set('currentField', this.get('nextField'));
     }
   }
 });

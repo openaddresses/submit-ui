@@ -68,5 +68,23 @@ export default DS.Model.extend({
       extractionText: null,
       extractionColumn: null
     }
-  }
+  },
+  exampleRows:[{
+    number: null,
+    street: null,
+    unit: null,
+    city: null,
+    district: null,
+    region: null,
+    postcode: null,
+  },
+  {
+    number: null,
+    street: null,
+    unit: null,
+    city: null,
+    district: null,
+    region: null,
+    postcode: null,
+  }]
 });

@@ -6,4 +6,5 @@ export default Ember.Route.extend({
     this.store.createRecord('submission');
     return this.get('store').peekAll('submission').get('firstObject');
   }
+
 });

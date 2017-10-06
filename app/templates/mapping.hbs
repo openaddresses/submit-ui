@@ -1,128 +1,150 @@
 <div class="ui text container">
   <h3 class="first headroom">Column mapping</h3>
+      {{#each-in model.exampleRows as |rows labels|}}
+      {{rows}}
+      {{#each-in rows as |row label|}}
+        {{row.label}}
+      {{/each-in}}
+      {{/each-in}}
   <table class="ui celled table">
     <thead>
       <tr>
-        <th>number</th>
-        <th>street</th>
-        <th>unit</th>
-        <th>city</th>
-        <th>district</th>
-        <th>region</th>
-        <th>postcode</th>
+        <th><a onClick={{action "goToField" "number"}} class={{if (not-eq currentField "number") "inactiveField"}}>number</a></th>
+        <th><a class={{if (not-eq currentField "street") "inactiveField"}}>street</a></th>
+        <th><a class={{if (not-eq currentField "unit") "inactiveField"}}>unit</a></th>
+        <th><a class={{if (not-eq currentField "city") "inactiveField"}}>city</a></th>
+        <th><a class={{if (not-eq currentField "district") "inactiveField"}}>district</a></th>
+        <th><a class={{if (not-eq currentField "region") "inactiveField"}}>region</a></th>
+        <th><a class={{if (not-eq currentField "postcode") "inactiveField"}}>postcode</a></th>
       </tr>
     </thead>
     <tbody>
-      {{#each exampleRows as |row|}}
+      {{#each model.exampleRows as |row|}}
         <tr>
-          <td>{{row.number}}</td>
-          <td>{{row.street}}</td>
-          <td>{{row.unit}}</td>
-          <td>{{row.city}}</td>
-          <td>{{row.district}}</td>
-          <td>{{row.region}}</td>
-          <td>{{row.postcode}}</td>
+          <td class={{if (eq currentField "number") "active"}}>{{row.number}}</td>
+          <td class={{if (eq currentField "street") "active"}}>{{row.street}}</td>
+          <td class={{if (eq currentField "unit") "active"}}>{{row.unit}}</td>
+          <td class={{if (eq currentField "city") "active"}}>{{row.city}}</td>
+          <td class={{if (eq currentField "district") "active"}}>{{row.district}}</td>
+          <td class={{if (eq currentField "region") "active"}}>{{row.region}}</td>
+          <td class={{if (eq currentField "postcode") "active"}}>{{row.postcode}}</td>
         </tr>
       {{/each}}
     </tbody>
   </table>
   {{#each-in model.oaFields as |field properties|}}
-    <form class="ui form segment">
-      <div class="required field">
-        <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
-          <div class="ui stackable three column center aligned grid">
-            <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>
-              {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
-                <div class="default text">
-                    Source column headings
-                </div>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                  {{#each columnHeadings as |heading|}}
-                    <div class="item" data-value="{{map-value mapper heading}}">
-                      {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-                    </div>
-                  {{/each}}
-                </div>
-              {{/ui-dropdown}}
-              {{#if (eq properties.action "split")}}
-                {{#if properties.columns}}
-                  {{#if properties.extractionFunction}}
-                    {{#if (eq properties.extractionFunction "removeDuplicateValue")}}
+    {{#if (eq field currentField)}}
+      <form class="ui form segment">
+        <div class="required field">
+          <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
+            <div class="ui stackable three column center aligned grid">
+              <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>
+                {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
+                  <div class="default text">
+                      Source column headings
+                  </div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    {{#each columnHeadings as |heading|}}
+                      <div class="item" data-value="{{map-value mapper heading}}">
+                        {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/ui-dropdown}}
+                {{#if (eq properties.action "split")}}
+                  {{#if properties.columns}}
+                    {{#if properties.extractionFunction}}
+                      {{#if (eq properties.extractionFunction "removeDuplicateValue")}}
+                        <div class="ui segments">
+                          <div class="ui segment">
+                            <p>Choose the column with the value you'd like to remove from the first column</p>
+                          </div>
+                          <div class="ui segment">
+                            {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumnToRemove" field) as |execute mapper|}}
+                              <div class="default text">
+                                  Source column headings
+                              </div>
+                              <i class="dropdown icon"></i>
+                              <div class="menu">
+                                {{#each columnHeadings as |heading|}}
+                                  <div class="item" data-value="{{map-value mapper heading}}">
+                                    {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                                  </div>
+                                {{/each}}
+                              </div>
+                            {{/ui-dropdown}}
+                          </div>
+                        </div>
+                      {{/if}}
+                    {{else}}
                       <div class="ui segments">
                         <div class="ui segment">
-                          <p>Choose the column with the value you'd like to remove from the first column</p>
+                          <p>Choose a split method:</p>
                         </div>
                         <div class="ui segment">
-                          {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumnToRemove" field) as |execute mapper|}}
-                            <div class="default text">
-                                Source column headings
-                            </div>
-                            <i class="dropdown icon"></i>
-                            <div class="menu">
-                              {{#each columnHeadings as |heading|}}
-                                <div class="item" data-value="{{map-value mapper heading}}">
-                                  {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-                                </div>
-                              {{/each}}
-                            </div>
-                          {{/ui-dropdown}}
+                            <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removePrefixNumber" "Remove prefix street"}}>Remove prefix number</button>
+                            <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removePostfixStreet" "Remove postfix street"}}>Remove postfix street</button>
+                            <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removeDuplicateValue"}}>Remove value found an another column</button>
                         </div>
                       </div>
                     {{/if}}
                   {{else}}
-                    <div class="ui segments">
-                      <div class="ui segment">
-                        <p>Choose a split method:</p>
-                      </div>
-                      <div class="ui segment">
-                          <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removePrefixNumber" "Remove prefix street"}}>Remove prefix number</button>
-                          <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removePostfixStreet" "Remove postfix street"}}>Remove postfix street</button>
-                          <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removeDuplicateValue"}}>Remove value found an another column</button>
-                      </div>
+                    <div class="ui segment">
+                      <p>Choose a column to split</p>
                     </div>
                   {{/if}}
-                {{else}}
-                  <div class="ui segment">
-                    <p>Choose a column to split</p>
-                  </div>
                 {{/if}}
-              {{/if}}
-            </div>
+              </div>
+            {{#if (eq properties.action "join")}}
+              <div class="two wide column">
+                <a class="item">
+                  <i class="plus icon"></i>
+                </a>
+              </div>
+              <div class="seven wide column">
+                {{#ui-dropdown class="selection fluid" onChange=(action "addColumn" field) as |execute mapper|}}
+                  <div class="default text">Source column headings</div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    {{#each columnHeadings as |heading|}}
+                      <div class="item" data-value="{{map-value mapper heading}}">
+                        {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/ui-dropdown}}
+              </div>
+            {{/if}}
+          </div>
           {{#if (eq properties.action "join")}}
-            <div class="two wide column">
-              <a class="item">
-                <i class="plus icon"></i>
-              </a>
-            </div>
-            <div class="seven wide column">
-              {{#ui-dropdown class="selection fluid" onChange=(action "addColumn" field) as |execute mapper|}}
-                <div class="default text">Source column headings</div>
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                  {{#each columnHeadings as |heading|}}
-                    <div class="item" data-value="{{map-value mapper heading}}">
-                      {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-                    </div>
-                  {{/each}}
+            <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove join <i class="remove icon"></i></button>
+          {{else if (eq properties.action "split")}}
+            <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove split <i class="remove icon"></i></button>
+            {{#if properties.extractionFunction}}
+              <button class="ui button basic green" onClick={{action "removeExtractionFunction" field}}>Remove extraction function <i class="remove icon"></i></button>
+            {{/if}}
+          {{else}}
+            <button class="ui button basic blue" onClick={{action "addAction" field "join"}}>Join two columns for this field</button>
+            <button class="ui button basic blue" onClick={{action "addAction" field "split"}}>Split one column for this field</button>
+          {{/if}}
+          {{#if properties.columns}}
+            {{#if (eq field "street")}}
+              <div class="ui segments">
+                <div class="ui segment">
+                  <div>You've mapped the two required columns. Would you like to continue mapping the remaining columns?</div>
+                  <button class="ui button" onClick={{action "nextField" field}}>Yes, move on to {{nextField}}</button>
+                  <button class="ui button" onClick={{action "changeRoute" "contact"}}>No, move on to next step.</button>
                 </div>
-              {{/ui-dropdown}}
-            </div>
+              </div>
+            {{else}}
+               <button class="ui button" onClick={{action "nextField" field}}>Looks good, move on to {{nextField}} <i class="right arrow icon"></i></button>
+            {{/if}}
           {{/if}}
         </div>
-        {{#if (eq properties.action "join")}}
-          <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove join <i class="remove icon"></i></button>
-        {{else if (eq properties.action "split")}}
-          <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove split <i class="remove icon"></i></button>
-          {{#if properties.extractionFunction}}
-            <button class="ui button basic green" onClick={{action "removeExtractionFunction" field}}>Remove extraction function <i class="remove icon"></i></button>
-          {{/if}}
-        {{else}}
-          <button class="ui button basic blue" onClick={{action "addAction" field "join"}}>Join two columns for this field</button>
-          <button class="ui button basic blue" onClick={{action "addAction" field "split"}}>Split one column for this field</button>
-        {{/if}}
-      </div>
-    </form>
+      </form>
+
+    {{/if}}
   {{/each-in}}
 </div>
 {{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
