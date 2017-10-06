@@ -180,6 +180,9 @@ export default Ember.Controller.extend(sharedActions, {
     },
     goToField: function(field){
       this.set('currentField', field);
+    },
+    nextField: function(){
+      this.set('currentField', this.get('nextField'));
     }
   }
 });
