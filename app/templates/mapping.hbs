@@ -26,7 +26,7 @@
   {{#each-in model.oaFields as |field properties|}}
     {{#if (eq field currentField)}}
       <form class="ui form segment">
-        <div class="required field">
+        <div class={{if isRequired "required field"}}>
           <label>{{field}}{{ui-popup tagName="i" class="help circle icon" content="the house number of an address"}}</label>
             <div class="ui stackable three column center aligned grid">
               <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>

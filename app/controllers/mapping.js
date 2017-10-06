@@ -86,6 +86,13 @@ export default Ember.Controller.extend(sharedActions, {
     };
     return nextFields[this.get('currentField')];
   }),
+  isRequired: Ember.computed('currentField', function(){
+    if (this.get('currentField') === "number" || this.get('currentField') === "street"){
+      return true;
+    } else {
+      return false;
+    }
+  }),
   actions: {
     testAction: function(message){
       console.log(message);
