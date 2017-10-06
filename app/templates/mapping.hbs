@@ -1,35 +1,26 @@
 <div class="ui text container">
   <h3 class="first headroom">Column mapping</h3>
-      {{#each-in model.exampleRows as |rows labels|}}
-      {{rows}}
-      {{#each-in rows as |row label|}}
-        {{row.label}}
-      {{/each-in}}
-      {{/each-in}}
+  <!-- field: {{field}}<br> -->
   <table class="ui celled table">
     <thead>
       <tr>
-        <th><a onClick={{action "goToField" "number"}} class={{if (not-eq currentField "number") "inactiveField"}}>number</a></th>
-        <th><a class={{if (not-eq currentField "street") "inactiveField"}}>street</a></th>
-        <th><a class={{if (not-eq currentField "unit") "inactiveField"}}>unit</a></th>
-        <th><a class={{if (not-eq currentField "city") "inactiveField"}}>city</a></th>
-        <th><a class={{if (not-eq currentField "district") "inactiveField"}}>district</a></th>
-        <th><a class={{if (not-eq currentField "region") "inactiveField"}}>region</a></th>
-        <th><a class={{if (not-eq currentField "postcode") "inactiveField"}}>postcode</a></th>
+        {{#each-in model.oaFields as |field properties|}}
+          {{#if (eq currentField field)}}
+            <th>{{field}}</th>
+          {{else}}
+            <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+          {{/if}}
+        {{/each-in}}
       </tr>
     </thead>
     <tbody>
-      {{#each model.exampleRows as |row|}}
+      {{#each-in model.exampleRows as |rows fields|}}
         <tr>
-          <td class={{if (eq currentField "number") "active"}}>{{row.number}}</td>
-          <td class={{if (eq currentField "street") "active"}}>{{row.street}}</td>
-          <td class={{if (eq currentField "unit") "active"}}>{{row.unit}}</td>
-          <td class={{if (eq currentField "city") "active"}}>{{row.city}}</td>
-          <td class={{if (eq currentField "district") "active"}}>{{row.district}}</td>
-          <td class={{if (eq currentField "region") "active"}}>{{row.region}}</td>
-          <td class={{if (eq currentField "postcode") "active"}}>{{row.postcode}}</td>
+          {{#each-in fields as |field label|}}
+            <td class={{if (eq currentField field) "active"}}>{{label}}</td>
+          {{/each-in}}
         </tr>
-      {{/each}}
+      {{/each-in}}
     </tbody>
   </table>
   {{#each-in model.oaFields as |field properties|}}
