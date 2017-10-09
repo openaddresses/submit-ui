@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  source_region: DS.attr('string'),
+  country: DS.attr('string'),
+  region: DS.attr('string'),
   data_type: DS.attr('string'),
   data_link: DS.attr('string'),
   data_upload: DS.attr(),
@@ -11,10 +12,4 @@ export default DS.Model.extend({
   license: DS.attr(),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
-  // columns to map
-  // test: DS.attr('string')
-  country: DS.attr('string'),
-  region: DS.attr('string')
-
-
 });

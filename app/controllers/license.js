@@ -4,12 +4,13 @@ import sharedActions from '../mixins/shared-actions';
 
 export default Ember.Controller.extend(sharedActions, {
   selectedLicense: null,
-  providedLicense: {
+  providedLicense:
+  {
     "name": "User-provided license",
     "text": null
   },
   providedAndSelectedLicense: Ember.computed('providedLicense', 'selectedLicense', function(){
-    if (this.get('selectedLicense') && this.get('providedLicense.text')){
+    if (this.get('selectedLicense') && this.get('providedLicense').text) {
       return true;
     }
   }),
@@ -24,11 +25,10 @@ export default Ember.Controller.extend(sharedActions, {
     }
   ],
   licensePresent: null,
-
   actions: {
     selectLicense: function(license){
       this.set('selectedLicense', license);
-      this.set('licensePresent', true);
+      this.set('licensePresent', true)
     },
     changeRoute: function(route){
       if (this.get('providedAndSelectedLicense')){
@@ -39,7 +39,7 @@ export default Ember.Controller.extend(sharedActions, {
         this.set('licensePresent', false);
       }
       if (this.get('licensePresent')) {
-        if (this.get('providedLicense')) {
+        if (this.get('providedLicense').text) {
           this.model.set('license', this.get('providedLicense'));
         } else {
           this.model.set('license', this.get('selectedLicense'));
