@@ -36,7 +36,6 @@ export default Ember.Controller.extend(sharedActions, {
       coordinates.push(lat);
       coordinates.push(lng);
       this.set('place', selected);
-      console.log(this.get('place'));
       this.transitionToRoute('index', {queryParams: {pin: this.get('pin'), bbox: null}});
     },
     clearPlace: function(){
