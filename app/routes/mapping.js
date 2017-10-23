@@ -4,5 +4,4 @@ export default Ember.Route.extend({
   model: function(){
     return this.get('store').peekAll('submission').get('firstObject');
   }
-
 });
