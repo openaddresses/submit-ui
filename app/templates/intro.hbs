@@ -4,7 +4,7 @@
     The user will begin by searching to see if data exists in their country and region. If it does, they will enter "edit mode," with fields pre-populated with existing data.
   </p>
   {{#power-select
-    search=(action "searchCountries")
+    search=(perform searchCountries)
     selected=country
     placeholder="search for country"
     onchange=(action (mut country))
@@ -15,7 +15,7 @@
  
   {{#if country}}
     {{#power-select
-      search=(action "searchRegions")
+      search=(perform searchRegions)
       selected=region
       placeholder=regionPlaceholder
       onchange=(action (mut region))
