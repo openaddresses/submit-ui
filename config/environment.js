@@ -7,6 +7,8 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'hash',
+    // temporary key created for this project. The usage should not surpass the free level, but TriMet should create a new key under their own accout.
+    searchKey: 'mapzen-CqrszPU',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build

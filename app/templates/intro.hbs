@@ -1,31 +1,29 @@
 <div class="ui text container center aligned">
-	<h3 class="first headroom">Welcome!</h3>
-	<p>
-		The user will begin by searching to see if data exists in their country and region. If it does, they will enter "edit mode," with fields pre-populated with existing data.
-	</p>
-		{{#power-select
-      search=(action "searchCountries")
-      selected=country
-      placeholder="search for country"
-      onchange=(action (mut country))
-      as | countries |
+  <h3 class="first headroom">Welcome!</h3>
+  <p>
+    The user will begin by searching to see if data exists in their country and region. If it does, they will enter "edit mode," with fields pre-populated with existing data.
+  </p>
+  {{#power-select
+    search=(perform searchCountries)
+    selected=country
+    placeholder="search for country"
+    onchange=(action (mut country))
+    as |countries|
+  }}
+    {{countries.properties.name}}
+  {{/power-select}}
+ 
+  {{#if country}}
+    {{#power-select
+      search=(perform searchRegions)
+      selected=region
+      placeholder=regionPlaceholder
+      onchange=(action (mut region))
+      as |regions|
     }}
-      {{countries.attributes.name}}
+      {{regions.properties.name}}
     {{/power-select}}
-    
-    {{#if country}}
-    	{{#power-select
-	      search=(action "searchRegions")
-	      selected=region
-	      placeholder=regionPlaceholder
-	      onchange=(action (mut region))
-	      as | regions |
-	    }}
-	      {{regions.name}}
-	    {{/power-select}}
-    {{/if}}
-
-   
-
-	{{nav-buttons sendChangeRoute="changeRoute" next="data"}}
+  {{/if}}
+ 
+  {{nav-buttons sendChangeRoute="changeRoute" next="data"}}
 </div>
