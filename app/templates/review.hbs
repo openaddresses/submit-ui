@@ -93,23 +93,23 @@
       </tr>
     </thead>
     <tbody>
-      <!-- <tr>
-        <td>
-          Number
-        </td>
-        <td>{{model.oaFields.number.columns}}</td>
-      </tr>
-      <tr>
-        <td>
-          Street
-        </td>
-        <td>{{model.oaFields.street.columns}}</td>
-      </tr> -->
       {{#each-in model.oaFields as |field properties|}}
         {{#if properties.columns}}
           <tr>
             <td>{{field}}</td>
-            <td>{{properties.columns}}</td>
+            <td>Columns: {{properties.columns}}</td>
+            {{#if properties.separator}}
+              <td>Separator: {{properties.separator}}</td>
+            {{/if}}
+            {{#if properties.extractionFunction}}
+              <td>Extraction function: {{properties.extractionFunction}}</td>
+            {{/if}}
+            {{#if properties.extractionText}}
+              <td>Extraction text: {{properties.extractionText}}</td>
+            {{/if}}
+            {{#if properties.extractionColumn}}
+              <td>Extraction column: {{properties.extractionColumn}}</td>
+            {{/if}}
           </tr>
         {{/if}}
       {{/each-in}}
