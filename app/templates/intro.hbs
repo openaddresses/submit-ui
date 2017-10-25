@@ -10,7 +10,7 @@
     onchange=(action (mut country))
     as |countries|
   }}
-    {{countries.properties.label}}
+    {{countries.properties.name}}
   {{/power-select}}
  
   {{#if country}}
@@ -21,7 +21,7 @@
       onchange=(action (mut region))
       as |regions|
     }}
-      {{regions.properties.label}}
+      {{regions.properties.name}}
     {{/power-select}}
   {{/if}}
  
