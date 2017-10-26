@@ -18,7 +18,6 @@ export default DS.Model.extend({
       action: null,
       separator: " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     },
     street:{
@@ -26,7 +25,6 @@ export default DS.Model.extend({
       action: null,
       separator:  " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     },
     unit:{
@@ -34,7 +32,6 @@ export default DS.Model.extend({
       action: null,
       separator:  " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     },
     city:{
@@ -42,7 +39,6 @@ export default DS.Model.extend({
       action: null,
       separator:  " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     },
     district:{
@@ -50,7 +46,6 @@ export default DS.Model.extend({
       action: null,
       separator:  " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     },
     region:{
@@ -58,7 +53,6 @@ export default DS.Model.extend({
       action: null,
       separator:  " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     },
     postcode:{
@@ -66,7 +60,6 @@ export default DS.Model.extend({
       action: null,
       separator:  " ",
       extractionFunction: null,
-      extractionText: null,
       extractionColumn: null
     }
   },

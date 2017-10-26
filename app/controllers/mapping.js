@@ -139,9 +139,8 @@ export default Ember.Controller.extend(sharedActions, {
       Ember.set(this.model.get('oaFields')[field], "extractionFunction", null);
       Ember.set(this.model.get('oaFields')[field], "separator", " ");
     },
-    setExtractionFunction: function(field, extractionFunction, extractionText){
+    setExtractionFunction: function(field, extractionFunction){
       Ember.set(this.model.oaFields[field], "extractionFunction", extractionFunction);
-      Ember.set(this.model.oaFields[field], "extractionText", extractionText);
       if (extractionFunction !== "removeDuplicateValue"){
         for (var i = 0; i < 2; i++){
           var prefix = "";
