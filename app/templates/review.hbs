@@ -86,35 +86,52 @@
 			</tr>
 		</tbody>
 	</table>
-  <table class="ui table">
-    <thead>
-      <tr>
-        <th colspan="2">Column mapping<button class="ui right floated basic icon button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i></button></th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each-in model.oaFields as |field properties|}}
-        {{#if properties.columns}}
-          <tr>
-            <td>{{field}}</td>
-            <td>Columns: {{properties.columns}}</td>
+  <div class="ui segment">
+    <h3 class="ui floated header">Column mapping</h3><i class="icon edit" onClick={{action "editField" "mapping"}}></i>
+    <div class="ui clearing divider"></div>
+    {{#each-in model.oaFields as |field properties|}}
+      {{#if properties.columns}}
+        <table class="ui definition table">
+          <tbody>
+            <tr>
+              <td class="two wide column">Field</td>
+              <td>{{field}}</td>
+            </tr>
+            <tr>
+              <td>Column{{#if (gt properties.columns 1)}}s{{/if}}</td>
+              <td>{{properties.columns}}</td>
+            </tr>
             {{#if properties.separator}}
-              <td>Separator: {{properties.separator}}</td>
+              <tr>
+                <td>Separator</td>
+                <td>{{properties.separator}}</td>
+              </tr>
             {{/if}}
             {{#if properties.extractionFunction}}
-              <td>Extraction function: {{properties.extractionFunction}}</td>
-            {{/if}}
-            {{#if properties.extractionText}}
-              <td>Extraction text: {{properties.extractionText}}</td>
+              <tr>
+                <td>Extraction function</td>
+                <td>
+                  {{#if (eq properties.extractionFunction "removePrefixNumber")}}
+                    Remove prefix number
+                  {{else if (eq properties.extractionFunction "removePostfixStreet")}}
+                    Remove postfix street
+                  {{else if (eq properties.extractionFunction "removeDuplicateValue")}}
+                    Remove value found in another column
+                  {{/if}}
+                </td>
+              </tr>
             {{/if}}
             {{#if properties.extractionColumn}}
-              <td>Extraction column: {{properties.extractionColumn}}</td>
+              <tr>
+                <td>Extraction column</td>
+                <td>{{properties.extractionColumn}}</td>
+              </tr>
             {{/if}}
-          </tr>
-        {{/if}}
-      {{/each-in}}
-    </tbody>
-  </table>
+          </tbody>
+        </table>
+      {{/if}}
+    {{/each-in}}
+  </div>
 	<table class="ui table">
 		<thead>
 			<tr>
