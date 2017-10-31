@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import sharedActions from '../mixins/shared-actions';
-import { task, timeout } from 'ember-concurrency';
-import ENV from '../config/environment';
 
 export default Ember.Controller.extend(sharedActions, {
   dataURL: null,
@@ -29,7 +27,7 @@ export default Ember.Controller.extend(sharedActions, {
       } else if (this.get('dataFile')){
         this.store.createRecord('submission', {data_file: this.get('dataFile')});
       } else {
-        console.log("set up form validation requiring either url or file")
+        // set up form validation requiring either url or file
       }
       this.transitionToRoute(route);
     }
