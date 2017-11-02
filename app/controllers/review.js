@@ -14,6 +14,10 @@ export default Ember.Controller.extend(sharedActions, {
     submit: function(){
       // communicate with backend here
       this.transitionToRoute("success");
+    },
+    cancel: function(){
+      this.get('store').unloadAll('submission');
+      this.transitionToRoute("intro");
     }
   }
 });
