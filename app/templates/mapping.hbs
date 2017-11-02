@@ -44,8 +44,8 @@
                 {{/ui-dropdown}}
                 {{#if (eq properties.action "split")}}
                   {{#if properties.columns}}
-                    {{#if properties.extractionFunction}}
-                      {{#if (eq properties.extractionFunction "removeDuplicateValue")}}
+                    {{#if properties.function}}
+                      {{#if (eq properties.function "removeDuplicateValue")}}
                         <div class="ui segments">
                           <div class="ui segment">
                             <p>Choose the column with the value you'd like to remove from the first column</p>
@@ -73,9 +73,9 @@
                           <p>Choose a split method:</p>
                         </div>
                         <div class="ui segment">
-                            <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removePrefixNumber" "Remove prefix street"}}>Remove prefix number</button>
-                            <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removePostfixStreet" "Remove postfix street"}}>Remove postfix street</button>
-                            <button class="ui button basic green" onClick={{action "setExtractionFunction" field "removeDuplicateValue"}}>Remove value found an another column</button>
+                            <button class="ui button basic green" onClick={{action "setfunction" field "removePrefixNumber" "Remove prefix street"}}>Remove prefix number</button>
+                            <button class="ui button basic green" onClick={{action "setFunction" field "removePostfixStreet" "Remove postfix street"}}>Remove postfix street</button>
+                            <button class="ui button basic green" onClick={{action "setFunction" field "removeDuplicateValue"}}>Remove value found an another column</button>
                         </div>
                       </div>
                     {{/if}}
@@ -111,8 +111,8 @@
             <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove join <i class="remove icon"></i></button>
           {{else if (eq properties.action "split")}}
             <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove split <i class="remove icon"></i></button>
-            {{#if properties.extractionFunction}}
-              <button class="ui button basic green" onClick={{action "removeExtractionFunction" field}}>Remove extraction function <i class="remove icon"></i></button>
+            {{#if properties.function}}
+              <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction function <i class="remove icon"></i></button>
             {{/if}}
           {{else}}
             <button class="ui button basic blue" onClick={{action "addAction" field "join"}}>Join two columns for this field</button>
