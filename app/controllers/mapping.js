@@ -164,7 +164,7 @@ export default Ember.Controller.extend(sharedActions, {
           }
           if (oaFunction === "removePrefixNumber"){
             Ember.set(this.model.get('exampleRows')[i], field, postfix);
-          } else if (extractionFunction === "removePostfixStreet") {
+          } else if (oaFunction === "removePostfixStreet") {
             Ember.set(this.model.get('exampleRows')[i], field, prefix);
           }
         }
