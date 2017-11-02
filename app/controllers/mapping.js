@@ -119,7 +119,7 @@ export default Ember.Controller.extend(sharedActions, {
     addColumn: function(heading, column){
       this.model.get('oaFields')[heading].columns[1] = column;
       for (var i = 0; i < 2; i++){
-        var joined = this.model.get('exampleRows')[i][heading] + this.model.get('oaFields')[heading].separator + this.user_data.features[i].properties[column];
+        var joined = this.model.get('exampleRows')[i][heading] + " " + this.user_data.features[i].properties[column];
         Ember.set(this.model.get('exampleRows')[i], heading, joined);
       }
     },
