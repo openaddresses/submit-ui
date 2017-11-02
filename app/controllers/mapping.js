@@ -139,9 +139,9 @@ export default Ember.Controller.extend(sharedActions, {
       Ember.set(this.model.get('oaFields')[field], "extractionFunction", null);
       Ember.set(this.model.get('oaFields')[field], "separator", " ");
     },
-    setFunction: function(field, oaFunction){
-      Ember.set(this.model.oaFields[field], "function", oaFunction);
-      if (oaFunction !== "removeDuplicateValue"){
+    setExtractionFunction: function(field, extractionFunction){
+      Ember.set(this.model.oaFields[field], "extractionFunction", extractionFunction);
+      if (extractionFunction !== "removeDuplicateValue"){
         for (var i = 0; i < 2; i++){
           var prefix = "";
           var postfix = "";
@@ -162,16 +162,16 @@ export default Ember.Controller.extend(sharedActions, {
               }
             }
           }
-          if (oaFunction === "removePrefixNumber"){
+          if (extractionFunction === "removePrefixNumber"){
             Ember.set(this.model.get('exampleRows')[i], field, postfix);
-          } else if (oaFunction === "removePostfixStreet") {
+          } else if (extractionFunction === "removePostfixStreet") {
             Ember.set(this.model.get('exampleRows')[i], field, prefix);
           }
         }
       }
     },
-    removeFunction: function(field){
-      Ember.set(this.model.oaFields[field], "function", null);
+    removeExtractionFunction: function(field){
+      Ember.set(this.model.oaFields[field], "extractionFunction", null);
       for (var i = 0; i < 2; i++){
         Ember.set(this.model.get('exampleRows')[i], field, this.user_data.features[i].properties[this.model.get('oaFields')[field].columns[0]]);
       }

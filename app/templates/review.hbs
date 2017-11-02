@@ -101,6 +101,14 @@
               <td>Column{{#if (gt properties.columns 1)}}s{{/if}}</td>
               <td>{{properties.columns}}</td>
             </tr>
+            {{#if properties.action}}
+              <tr>
+                <td>Function</td>
+                <td>
+                  {{properties.action}}
+                </td>
+              </tr>
+            {{/if}}
             {{#if properties.extractionFunction}}
               <tr>
                 <td>Extraction function</td>
