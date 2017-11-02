@@ -31,21 +31,7 @@ export default Ember.Controller.extend(sharedActions, {
       this.set('licensePresent', true)
     },
     changeRoute: function(route){
-      if (this.get('providedAndSelectedLicense')){
-        this.set('licensePresent', null);
-      } else if (this.get('selectedLicense') || this.get('providedLicense')){
-        this.set('licensePresent', true);
-      } else {
-        this.set('licensePresent', false);
-      }
-      if (this.get('licensePresent')) {
-        if (this.get('providedLicense').text) {
-          this.model.set('license', this.get('providedLicense'));
-        } else {
-          this.model.set('license', this.get('selectedLicense'));
-        }
         this.transitionToRoute(route);
-      }
     }
   }
 });
