@@ -27,7 +27,6 @@ export default Ember.Controller.extend(sharedActions, {
   licensePresent: null,
   actions: {
     selectLicense: function(license){
-      debugger;
       this.model.set('license', license)
       this.set('licensePresent', true)
     },
