@@ -1,111 +1,109 @@
 <div class="ui text container">
-	<h3 class="first headroom">Review</h3>
-	<table class="ui table">
-		<thead>
-			<tr><th colspan="2">
-				Location<button class="ui right floated basic icon button mini" onClick={{action "editField" "intro"}}><i class="icon edit"></i></button>
-			</th>
-		</tr></thead>
-		<tbody>
-			<tr>
-				<td class="collapsing">
-					Country
-				</td>
-				<td>{{model.country}}</td>
-			</tr>
-			<tr>
-				<td>
-					Region
-				</td>
-				<td>{{model.region}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<table class="ui table">
-		<thead>
-			<tr><th colspan="2">
-				Data<button class="ui right floated basic icon button mini" onClick={{action "editField" "data"}}><i class="icon edit"></i></button>
-			</th>
-		</tr></thead>
-		<tbody>
-			<tr>
-				<td class="collapsing">
-					Data type
-				</td>
-				<td>{{model.data_type}}</td>
-			</tr>
-			<tr>
-				<td>
-					Data link
-				</td>
-				<td>{{model.data_link}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<table class="ui table">
-		<thead>
-			<tr><th colspan="2">
-				Source<button class="ui right floated basic icon button mini" onClick={{action "editField" "source"}}><i class="icon edit"></i></button>
-			</th>
-		</tr></thead>
-		<tbody>
-			<tr>
-				<td>
-					Source name
-				</td>
-				<td>{{model.source_name}}</td>
-			</tr>
-			<tr>
-				<td>
-					Update frequency
-				</td>
-				<td>{{model.update_frequency}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<table class="ui table">
-		<thead>
-			<tr>
-				<th colspan="2">
-					License<button class="ui right floated basic icon button mini" onClick={{action "editField" "license"}}><i class="icon edit"></i></button>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					License name
-				</td>
-				<td>{{model.license.name}}</td>
-			</tr>
-			 <tr>
-				<td>
-					License text
-				</td>
-				<td>{{model.license.text}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<table class="ui table">
-		<thead>
-			<tr>
-				<th colspan="2">Maintainer contact information<button class="ui right floated basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i></button></th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					Name
-				</td>
-				<td>{{#if model.maintainer_name}}{{model.maintainer_name}}{{else}}<i>not provided</i>{{/if}}</td>
-			</tr>
-			<tr>
-				<td>
-					Email
-				</td>
-				<td>{{model.maintainer_email}}</td>
-			</tr>
-		</tbody>
-	</table>
-	<button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
+  <h3 class="first headroom">Review</h3>
+  <table class="ui table">
+    <thead>
+      <tr><th colspan="2">
+        Data
+      </th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="collapsing">
+          {{#if model.data_url}}Link to data{{/if}}
+          {{#if model.data_file}}Data upload file name{{/if}}
+        </td>
+        <td>
+          {{#if model.data_url}}{{model.data_url}}{{/if}}
+          {{#if model.data_file}}{{model.data_file.name}}{{/if}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="ui table">
+    <thead>
+      <tr><th colspan="2">
+        Data information<button class="ui right floated basic icon button mini" onClick={{action "editField" "data"}}><i class="icon edit"></i></button>
+      </th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td class="collapsing">
+          Data type
+        </td>
+        <td>{{model.data_type}}</td>
+      </tr>
+      <tr>
+        <td>
+          Data link
+        </td>
+        <td>{{model.data_link}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="ui table">
+    <thead>
+      <tr><th colspan="2">
+        Source<button class="ui right floated basic icon button mini" onClick={{action "editField" "source"}}><i class="icon edit"></i></button>
+      </th>
+    </tr></thead>
+    <tbody>
+      <tr>
+        <td>
+          Source name
+        </td>
+        <td>{{model.source_name}}</td>
+      </tr>
+      <tr>
+        <td>
+          Update frequency
+        </td>
+        <td>{{model.update_frequency}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th colspan="2">
+          License<button class="ui right floated basic icon button mini" onClick={{action "editField" "license"}}><i class="icon edit"></i></button>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          License name
+        </td>
+        <td>{{model.license.name}}</td>
+      </tr>
+       <tr>
+        <td>
+          License text
+        </td>
+        <td>{{model.license.text}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table class="ui table">
+    <thead>
+      <tr>
+        <th colspan="2">Maintainer contact information<button class="ui right floated basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i></button></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          Name
+        </td>
+        <td>{{#if model.maintainer_name}}{{model.maintainer_name}}{{else}}<i>not provided</i>{{/if}}</td>
+      </tr>
+      <tr>
+        <td>
+          Email
+        </td>
+        <td>{{model.maintainer_email}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
 </div>

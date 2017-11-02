@@ -1,11 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  country: DS.attr('string'),
-  region: DS.attr('string'),
-  data_type: DS.attr('string'),
-  data_link: DS.attr('string'),
-  data_upload: DS.attr(),
+  data_url: DS.attr('string'),
+  data_file: DS.attr(),
   source_name: DS.attr('string'),
   update_frequency: DS.attr(),
   edit_mode: false,
