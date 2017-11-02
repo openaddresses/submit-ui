@@ -14,7 +14,7 @@ export default DS.Model.extend({
   maintainer_email: DS.attr('string'),
   oaFields:{
     number:{
-      columns: null,
+      columns: [],
       action: null,
       separator: " ",
       extractionFunction: null,
@@ -23,42 +23,42 @@ export default DS.Model.extend({
     street:{
       columns: [],
       action: null,
-      separator:  " ",
+      separator: " ",
       extractionFunction: null,
       extractionColumn: null
     },
     unit:{
       columns: [],
       action: null,
-      separator:  " ",
+      separator: " ",
       extractionFunction: null,
       extractionColumn: null
     },
     city:{
       columns: [],
       action: null,
-      separator:  " ",
+      separator: " ",
       extractionFunction: null,
       extractionColumn: null
     },
     district:{
       columns: [],
       action: null,
-      separator:  " ",
+      separator: " ",
       extractionFunction: null,
       extractionColumn: null
     },
     region:{
       columns: [],
       action: null,
-      separator:  " ",
+      separator: " ",
       extractionFunction: null,
       extractionColumn: null
     },
     postcode:{
       columns: [],
       action: null,
-      separator:  " ",
+      separator: " ",
       extractionFunction: null,
       extractionColumn: null
     }
