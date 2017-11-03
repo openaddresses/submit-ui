@@ -4,3 +4,54 @@
 .inactiveField {
   cursor: pointer;
 }
+
+.ui.inverted.vertical.masthead.center.aligned.segment.teal {
+  padding-bottom: 0px;
+  margin-bottom: 30px;
+}
+
+h1 {
+  font-size: 48px !important;
+}
+
+h2 {
+  font-size: 36px !important;
+}
+
+h3 {
+  font-size: 24px !important;
+}
+
+h4 {
+  font-size: 20px !important;
+}
+
+h5 {
+  font-size: 16px !important;
+}
+
+nav {
+  padding: 0px;
+  margin: 0px;
+  background: #134045 ;
+}
+
+nav ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px 15px 5px 15px;
+  margin: 0px 20px;
+  color: lightgray;
+  letter-spacing: 2px;
+  border-bottom: solid 3px gray;
+}
+
+.active {
+  color: white;
+  font-weight: bold;
+  border-bottom: solid 3px white;
+}
