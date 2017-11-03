@@ -9,6 +9,7 @@ export default DS.Model.extend({
   source_name: DS.attr('string'),
   update_frequency: DS.attr(),
   edit_mode: false,
+  license_exists: DS.attr(),
   license: DS.attr(),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
