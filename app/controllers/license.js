@@ -31,7 +31,7 @@ export default Ember.Controller.extend(sharedActions, {
       this.set('licensePresent', true)
     },
     changeRoute: function(route){
-        this.transitionToRoute(route);
+      this.transitionToRoute(route);
     }
   }
 });
