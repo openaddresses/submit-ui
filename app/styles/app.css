@@ -4,3 +4,7 @@
 .inactiveField {
   cursor: pointer;
 }
+
+.review.ui.button {
+  margin: 0px;
+}
