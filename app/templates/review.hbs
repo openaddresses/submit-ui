@@ -155,6 +155,26 @@
 			</tr>
 		</tbody>
 	</table>
-  <button class="ui button red left floated" onClick={{action "cancel"}}>Cancel</button>
+  <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
 	<button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
+  {{#ui-modal name="profile" class="review-cancel" onApprove=(action "approveModal") onDeny=(action 'denyModal')}}
+    <i class="close icon"></i>
+    <div class="header">
+      Cancel Submission
+    </div>
+    <div class="content">
+      <div class="description">
+        <p>Are you sure you want to start over? </p>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button">
+        No
+      </div>
+      <div class="ui positive right labeled icon button">
+        Yes
+        <i class="checkmark icon"></i>
+      </div>
+    </div>
+  {{/ui-modal}}
 </div>
