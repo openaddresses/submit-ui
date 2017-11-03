@@ -4,5 +4,24 @@
 		<h2>subtitle text here</h2>
 	</div>
 	<div class="ui vertical stripe segment"></div>
+  <nav class="progress">
+    <ul>
+      {{#link-to 'intro' tagName="li" href=false}}
+        Feed
+      {{/link-to}}
+      {{#link-to 'data' tagName="li" href=false}}
+        More Info
+      {{/link-to}}
+      {{#link-to 'mapping' tagName="li" href=false}}
+        Column Mapping
+      {{/link-to}}
+      {{#link-to 'contact' tagName="li" href=false}}
+        Contact Info
+      {{/link-to}}
+      {{#link-to 'review' tagName="li" href=false}}
+        Review
+      {{/link-to}}
+    </ul>
+  </nav>
 </div>
 {{outlet}}
