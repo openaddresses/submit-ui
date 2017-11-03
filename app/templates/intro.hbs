@@ -1,29 +1,23 @@
 <div class="ui text container center aligned">
   <h3 class="first headroom">Welcome!</h3>
   <p>
-    The user will begin by searching to see if data exists in their country and region. If it does, they will enter "edit mode," with fields pre-populated with existing data.
+    Provide link to data or upload data. (add information about accepted formats)
   </p>
-  {{#power-select
-    search=(perform searchCountries)
-    selected=country
-    placeholder="search for country"
-    onchange=(action (mut country))
-    as |countries|
-  }}
-    {{countries.properties.name}}
-  {{/power-select}}
- 
-  {{#if country}}
-    {{#power-select
-      search=(perform searchRegions)
-      selected=region
-      placeholder=regionPlaceholder
-      onchange=(action (mut region))
-      as |regions|
-    }}
-      {{regions.properties.name}}
-    {{/power-select}}
-  {{/if}}
- 
+  <div class="ui labeled input">
+    <div class="ui label">
+      URL
+    </div>
+    <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
+  </div>
+  <div>
+    or
+  </div>
+  <div>
+    <label for="uploadfile" class="ui icon button">
+      <i class="file icon"></i>
+      Choose file to upload
+    </label>
+    <input type="file" id="uploadfile" style="display:none" onChange={{action "uploadFile"}}>{{fileName}}
+  </div>
   {{nav-buttons sendChangeRoute="changeRoute" next="more-info"}}
 </div>
