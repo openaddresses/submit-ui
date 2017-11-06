@@ -6,44 +6,40 @@
   <div class="ui form segment">
     <div class="field">
       <label>Does the data have a license?</label>
-      <button class="ui button" {{action "licenseExists" true}}>Yes</button>
+      <button class="ui button {{if (eq model.license_exists true) "active"}}" {{action "licenseExists" true}}>Yes</button>
       <button class="ui button" {{action "licenseExists" false}}>No</button>
       <button class="ui button" {{action "licenseExists" "unknown"}}>I don't know</button>
     </div>
     {{#if (eq model.license_exists true)}}
       <form class="ui form">
         <div class="field">
-          <div class="two fields">
-            <div class="field">
+          <div class="fields">
+            <div class="seven wide field">
               <label>Choose from license</label>
-              <input type="text" name="shipping[first-name]" placeholder="First Name">
+              {{#ui-dropdown class="selection" selected=model.license onChange=(action "selectLicense") as | execute mapper|}}
+                <div class="default text">Licenses</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  {{#each licenses as | license |}}
+                    <div class="item" data-value={{map-value mapper license}}>
+                      {{license.name}}
+                    </div>
+                  {{/each}}
+                </div>
+              {{/ui-dropdown}}
             </div>
-            <div class="field">
+            <div class="two wide field">
+              OR
+            </div>
+            <div class="seven wide field">
               <label>Provide link to license</label>
-              <input type="text" name="shipping[last-name]" placeholder="Last Name">
+              <input type="text" placeholder="www.sample.com..." value={{model.user_submitted_url}} onInput={{action "userSubmittedLicense"}}>
             </div>
           </div>
         </div>
       </form>
-      <!-- <div class="field">
-        <label>Choose from licenses</label> -->
-        <!-- {{#ui-dropdown class="selection" selected=selectedLicense onChange=(action "selectLicense") as | execute mapper|}}
-          <div class="default text">Licenses</div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            <div class="item" data-value={{map-value mapper null}}>
-              Licenses
-            </div>
-            {{#each licenses as | license |}}
-              <div class="item" data-value={{map-value mapper license}}>
-                {{license.name}}
-              </div>
-            {{/each}}
-          </div>
-        {{/ui-dropdown}} -->
-      <!-- </div> -->
     {{/if}}
   </div>
  
-  {{nav-buttons back="intro" sendChangeRoute="changeRoute" next="column-mapping"}}
+  {{nav-buttons back="intro" sendChangeRoute="changeRoute" next="mapping"}}
 </div>

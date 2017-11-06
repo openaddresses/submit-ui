@@ -7,7 +7,9 @@ export default DS.Model.extend({
   update_frequency: DS.attr(),
   edit_mode: false,
   license_exists: DS.attr(),
-  license: DS.attr(),
+  license: DS.attr('string'),
+  license_url: DS.attr('string'),
+  user_submitted_url: DS.attr('string'),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
   oaFields:{
