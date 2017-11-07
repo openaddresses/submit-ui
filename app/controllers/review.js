@@ -8,9 +8,9 @@ export default Ember.Controller.extend(sharedActions, {
       $('.ui.' + name + '.modal').modal('show');
     },
     approveModal: function(element, component) {
+      $('.ui.modal').modal('toggle', element, component);
       this.get('store').unloadAll('submission');
-      this.transitionToRoute("intro");
-      return true;
+      this.transitionToRoute('intro');
     },
     denyModal: function(element, component) {
       return true;
