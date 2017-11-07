@@ -50,6 +50,12 @@
         <button class="ui button {{if (eq model.attribution false) "active"}}" {{action "setAttribution" false}}>No</button>
         <button class="ui button {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
       </div>
+      {{#if (eq model.attribution true)}}
+        <div class="field">
+          <label>Attribution</label>
+          <input type="text" onInput={{action "setAttributionText"}}>
+        </div>
+      {{/if}}
     {{/if}}
     <div class="field">
       <h4 class="ui dividing header">Data information</h4>

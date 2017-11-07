@@ -15,6 +15,7 @@ export default Ember.Controller.extend({
       this.model.set('license_url', null);
       this.model.set('user_submitted_url', null);
       this.model.set('attribution', null);
+      this.model.set('attribution_text', null);
     },
     selectLicense: function(license){
       this.model.set('license', null)
@@ -40,6 +41,13 @@ export default Ember.Controller.extend({
     },
     setAttribution: function(input){
       this.model.set('attribution', input);
+      if (input === false || input === "unknown"){
+        this.model.set('attribution_text', null);
+      }
+    },
+    setAttributionText: function(text){
+      console.log(text)
+      this.model.set('attribution_text', text.target.value);
     }
   }
 });

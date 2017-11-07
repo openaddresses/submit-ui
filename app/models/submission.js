@@ -12,6 +12,7 @@ export default DS.Model.extend({
   user_submitted_url: DS.attr('string'),
   share_alike: false,
   attribution: DS.attr(),
+  attribution_text: DS.attr('string'),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
   oaFields:{
