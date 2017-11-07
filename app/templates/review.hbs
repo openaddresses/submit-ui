@@ -21,51 +21,9 @@
   </table>
   <table class="ui table">
     <thead>
-      <tr><th colspan="2">
-        Data information<button class="ui right floated basic icon button mini" onClick={{action "editField" "data"}}><i class="icon edit"></i></button>
-      </th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <td class="collapsing">
-          Data type
-        </td>
-        <td>{{model.data_type}}</td>
-      </tr>
-      <tr>
-        <td>
-          Data link
-        </td>
-        <td>{{model.data_link}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <table class="ui table">
-    <thead>
-      <tr><th colspan="2">
-        Source<button class="ui right floated basic icon button mini" onClick={{action "editField" "source"}}><i class="icon edit"></i></button>
-      </th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <td>
-          Source name
-        </td>
-        <td>{{model.source_name}}</td>
-      </tr>
-      <tr>
-        <td>
-          Update frequency
-        </td>
-        <td>{{model.update_frequency}}</td>
-      </tr>
-    </tbody>
-  </table>
-  <table class="ui table">
-    <thead>
       <tr>
         <th colspan="2">
-          License<button class="ui right floated basic icon button mini" onClick={{action "editField" "license"}}><i class="icon edit"></i></button>
+          More info<button class="ui right floated basic icon button mini" onClick={{action "editField" "more-info"}}><i class="icon edit"></i></button>
         </th>
       </tr>
     </thead>
@@ -81,6 +39,30 @@
           License text
         </td>
         <td>{{model.license.text}}</td>
+      </tr>
+      <tr>
+        <td>
+          Attribution
+        </td>
+        <td>{{model.attribution}}</td>
+      </tr>
+      <tr>
+        <td>
+          Attribution text
+        </td>
+        <td>{{model.attribution_text}}</td>
+      </tr>
+      <tr>
+        <td>
+          Update Frequency
+        </td>
+        <td>{{model.update_frequency}}</td>
+      </tr>
+      <tr>
+        <td>
+          Source
+        </td>
+        <td>{{model.source}}</td>
       </tr>
     </tbody>
   </table>

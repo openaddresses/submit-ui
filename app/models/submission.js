@@ -3,7 +3,7 @@ import DS from 'ember-data';
 export default DS.Model.extend({
   data_url: DS.attr('string'),
   data_file: DS.attr(),
-  source_name: DS.attr('string'),
+  source: DS.attr('string'),
   update_frequency: DS.attr(),
   edit_mode: false,
   license_exists: DS.attr(),

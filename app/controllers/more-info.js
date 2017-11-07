@@ -33,7 +33,6 @@ export default Ember.Controller.extend({
       this.model.set('user_submitted_url', input.target.value)
     },
     setShareAlike: function(input){
-      // input === "true" ? this.model.set('share_alike', true) : this.model.set('share_alike', null)
       if (input === true){
         this.model.set('share_alike', true);
       } else {
@@ -51,6 +50,9 @@ export default Ember.Controller.extend({
     },
     setFrequency: function(frequency){
       this.model.set('update_frequency', frequency);
+    },
+    setSource: function(source){
+      this.model.set('source', source.target.value);
     }
   }
 });
