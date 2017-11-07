@@ -1,15 +1,18 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  country: DS.attr('string'),
-  region: DS.attr('string'),
-  data_type: DS.attr('string'),
-  data_link: DS.attr('string'),
-  data_upload: DS.attr(),
-  source_name: DS.attr('string'),
+  data_url: DS.attr('string'),
+  data_file: DS.attr(),
+  source: DS.attr('string'),
   update_frequency: DS.attr(),
   edit_mode: false,
-  license: DS.attr(),
+  license_exists: DS.attr(),
+  license: DS.attr('string'),
+  license_url: DS.attr('string'),
+  user_submitted_url: DS.attr('string'),
+  share_alike: false,
+  attribution: DS.attr(),
+  attribution_text: DS.attr('string'),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
   oaFields:{
