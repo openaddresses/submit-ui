@@ -6,21 +6,11 @@
 	<div class="ui vertical stripe segment"></div>
   <nav class="progress">
     <ul>
-      {{#link-to 'intro' tagName="li" disabled=true}}
-        Feed
-      {{/link-to}}
-      {{#link-to 'data' tagName="li" disabled=true}}
-        More Info
-      {{/link-to}}
-      {{#link-to 'mapping' tagName="li" disabled=true}}
-        Column Mapping
-      {{/link-to}}
-      {{#link-to 'contact' tagName="li" disabled=true}}
-        Contact Info
-      {{/link-to}}
-      {{#link-to 'review' tagName="li" disabled=true}}
-        Review
-      {{/link-to}}
+      <li class={{if (eq currentRouteName 'intro') "active"}}> Feed </li>
+      <li class={{if (eq currentRouteName 'data') "active"}}> More Info </li>
+      <li class={{if (eq currentRouteName 'mapping') "active"}}> Column Mapping </li>
+      <li class={{if (eq currentRouteName 'contact') "active"}}> Contact Info </li>
+      <li class={{if (eq currentRouteName 'review') "active"}}> Review </li>
     </ul>
   </nav>
 </div>
