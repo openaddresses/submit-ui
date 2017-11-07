@@ -28,42 +28,54 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>
-          License name
-        </td>
-        <td>{{model.license.name}}</td>
-      </tr>
-       <tr>
-        <td>
-          License text
-        </td>
-        <td>{{model.license.text}}</td>
-      </tr>
-      <tr>
-        <td>
-          Attribution
-        </td>
-        <td>{{model.attribution}}</td>
-      </tr>
-      <tr>
-        <td>
-          Attribution text
-        </td>
-        <td>{{model.attribution_text}}</td>
-      </tr>
-      <tr>
-        <td>
-          Update Frequency
-        </td>
-        <td>{{model.update_frequency}}</td>
-      </tr>
-      <tr>
-        <td>
-          Source
-        </td>
-        <td>{{model.source}}</td>
-      </tr>
+      {{#if model.license}}
+        <tr>
+          <td>
+            License name
+          </td>
+          <td>{{model.license}}</td>
+        </tr>
+      {{/if}}
+      {{#if model.license_url}}
+        <tr>
+          <td>
+            License URL
+          </td>
+          <td>{{model.license_url}}</td>
+        </tr>
+      {{/if}}
+      {{#if model.attribution}}
+        <tr>
+          <td>
+            Attribution
+          </td>
+          <td>{{model.attribution}}</td>
+        </tr>
+      {{/if}}
+      {{#if model.attribution_text}}
+        <tr>
+          <td>
+            Attribution text
+          </td>
+          <td>{{model.attribution_text}}</td>
+        </tr>
+      {{/if}}
+      {{#if model.update_frequency}}
+        <tr>
+          <td>
+            Update Frequency
+          </td>
+          <td>{{model.update_frequency}}</td>
+        </tr>
+      {{/if}}
+      {{#if model.source}}
+        <tr>
+          <td>
+            Source
+          </td>
+          <td>{{model.source}}</td>
+        </tr>
+      {{/if}}
     </tbody>
   </table>
   <table class="ui table">
