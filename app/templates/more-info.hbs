@@ -5,6 +5,7 @@
   </p>
   <div class="ui form segment">
     <div class="field">
+      <h4 class="ui dividing header">License information</h4>
       <label>Does the data have a license?</label>
       <button class="ui button {{if (eq model.license_exists true) "active"}}" {{action "licenseExists" true}}>Yes</button>
       <button class="ui button" {{action "licenseExists" false}}>No</button>
@@ -38,7 +39,21 @@
           </div>
         </div>
       </form>
+      <div class="field">
+        <div class="inline field">
+          {{ui-checkbox label="License is share-alike" checked=checked onChange=(action "setShareAlike")}}
+        </div>
+      </div>
+      <div class="field">
+        <label>Does the license require attribution?</label>
+        <button class="ui button {{if (eq model.attribution true) "active"}}" {{action "setAttribution" true}}>Yes</button>
+        <button class="ui button {{if (eq model.attribution false) "active"}}" {{action "setAttribution" false}}>No</button>
+        <button class="ui button {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
+      </div>
     {{/if}}
+    <div class="field">
+      <h4 class="ui dividing header">Data information</h4>
+    </div>
   </div>
  
   {{nav-buttons back="intro" sendChangeRoute="changeRoute" next="mapping"}}

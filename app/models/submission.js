@@ -10,6 +10,8 @@ export default DS.Model.extend({
   license: DS.attr('string'),
   license_url: DS.attr('string'),
   user_submitted_url: DS.attr('string'),
+  share_alike: false,
+  attribution: DS.attr(),
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
   oaFields:{

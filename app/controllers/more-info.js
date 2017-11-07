@@ -14,6 +14,7 @@ export default Ember.Controller.extend({
       this.model.set('license', null);
       this.model.set('license_url', null);
       this.model.set('user_submitted_url', null);
+      this.model.set('attribution', null);
     },
     selectLicense: function(license){
       this.model.set('license', null)
@@ -28,6 +29,17 @@ export default Ember.Controller.extend({
       this.model.set('license', null)
       this.model.set('license_url', null)
       this.model.set('user_submitted_url', input.target.value)
+    },
+    setShareAlike: function(input){
+      // input === "true" ? this.model.set('share_alike', true) : this.model.set('share_alike', null)
+      if (input === true){
+        this.model.set('share_alike', true);
+      } else {
+        this.model.set('share_alike', null);
+      }
+    },
+    setAttribution: function(input){
+      this.model.set('attribution', input);
     }
   }
 });
