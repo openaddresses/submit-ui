@@ -8,6 +8,7 @@ export default Ember.Controller.extend({
     name: "license 2",
     url: "www.license-2.com"
   }],
+  frequencies: ["daily", "weekly", "monthly", "quarterly", "annually", "Unknown"],
   actions: {
     licenseExists: function(input){
       this.model.set('license_exists', input)
@@ -46,8 +47,10 @@ export default Ember.Controller.extend({
       }
     },
     setAttributionText: function(text){
-      console.log(text)
       this.model.set('attribution_text', text.target.value);
+    },
+    setFrequency: function(frequency){
+      this.model.set('update_frequency', frequency);
     }
   }
 });
