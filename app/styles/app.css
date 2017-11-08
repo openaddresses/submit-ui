@@ -8,3 +8,7 @@
 .review.ui.button {
   margin: 0px;
 }
+
+.review-nav .ui.button {
+  margin: 15px 0px;
+}
