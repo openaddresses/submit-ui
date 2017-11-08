@@ -7,7 +7,6 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('data');
   this.route('source');
   this.route('license');
   this.route('mapping', function() {});
