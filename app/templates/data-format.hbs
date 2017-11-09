@@ -1,0 +1,27 @@
+<div class="ui text container">
+  <h3 class="first headroom">Column mapping</h3>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        {{#each-in model.oaFields as |field properties|}}
+          {{#if (not properties.columns)}}
+            <th>{{field}}</th>
+          {{else}}
+            <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+          {{/if}}
+        {{/each-in}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each-in model.exampleRows as |rows fields|}}
+        <tr>
+          {{#each-in fields as |field label|}}
+            <td class={{if (eq currentField field) "active"}}>{{label}}</td>
+          {{/each-in}}
+        </tr>
+      {{/each-in}}
+    </tbody>
+  </table>
+  <button class="ui button" onClick={{action "requestWebServceData"}}>fetch data</button>
+  {{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
+</div>

@@ -14,6 +14,7 @@ Router.map(function() {
   this.route('success');
   this.route('intro');
   this.route('review');
+  this.route('data-format');
 });
 
 export default Router;
