@@ -13,6 +13,11 @@
   margin: 15px 0px;
 }
 
+.field .ui.button.active {
+  background: #508478;
+  color: white;
+}
+
 .ui.inverted.vertical.masthead.center.aligned.segment.teal {
   padding-bottom: 0px;
   margin-bottom: 30px;
