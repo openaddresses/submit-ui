@@ -13,6 +13,13 @@ export default Ember.Controller.extend({
         Ember.set(this.model.submission.get('exampleRows')[i], heading, this.model.webServiceResponse.responses[i].properties[column]);
       }
     },
+    addColumn: function(heading, column){
+      this.model.submission.get('oaFields')[heading].columns[1] = column;
+      for (var i = 0; i < 2; i++){
+        var joined = this.model.submission.get('exampleRows')[i][heading] + this.model.submission.get('oaFields')[heading].separator + this.model.webServiceResponse.responses[i].properties[column];
+        Ember.set(this.model.submission.get('exampleRows')[i], heading, joined);
+      }
+    },
     addAction: function(field, action){
       Ember.set(this.model.submission.get('oaFields')[field], "action", action);
     },
