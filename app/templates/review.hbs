@@ -21,7 +21,7 @@
   </table>
 
   <div class="ui segment">
-    <h3 class="ui floated header">More Info</h3><button class="review ui right floated labeled blue basic icon button mini" onClick={{action "editField" "more-info"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui floated header">More Info</h3><button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "more-info"}}><i class="icon edit"></i>Edit</button>
     <div class="ui clearing divider"></div>
     <div class="ui sixteen column grid">
       {{#if model.license}}
@@ -95,7 +95,7 @@
   <table class="ui table">
     <thead>
       <tr>
-        <th colspan="2">Maintainer contact information<button class="review ui right floated labeled blue basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</button></th>
+        <th colspan="2">Maintainer contact information<button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</button></th>
       </tr>
     </thead>
     <tbody>
@@ -115,7 +115,7 @@
   </table>
 
   <div class="ui segment">
-    <h3 class="ui floated header">Column mapping</h3><button class="review ui right floated labeled blue basic icon button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui floated header">Column mapping</h3><button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i>Edit</button>
     <div class="ui clearing divider"></div>
     {{#each-in model.oaFields as |field properties|}}
       {{#if properties.columns}}
