@@ -19,65 +19,78 @@
       </tr>
     </tbody>
   </table>
-  <table class="ui table">
-    <thead>
-      <tr>
-        <th colspan="2">
-          More info<button class="ui right floated basic icon button mini" onClick={{action "editField" "more-info"}}><i class="icon edit"></i></button>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
+  <div class="ui segment">
+    <h3 class="ui floated header">More Info</h3><i class="icon edit" onClick={{action "editField" "contact"}}></i>
+    <div class="ui clearing divider"></div>
+    <div class="ui sixteen column grid">
       {{#if model.license}}
-        <tr>
-          <td>
+        <div class="row">
+          <div class="six wide column">
             License name
-          </td>
-          <td>{{model.license}}</td>
-        </tr>
+          </div>
+          <div class="ten wide column">
+            {{model.license}}
+          </div>
+        </div>
+        <div class="ui section divider"></div>
       {{/if}}
       {{#if model.license_url}}
-        <tr>
-          <td>
+        <div class="row">
+          <div class="six wide column">
             License URL
-          </td>
-          <td>{{model.license_url}}</td>
-        </tr>
+          </div>
+          <div class="ten wide olumn">
+            {{model.license_url}}
+          </div>
+        </div>
+        <div class="ui section divider"></div>
       {{/if}}
       {{#if model.attribution}}
-        <tr>
-          <td>
+        <div class="row">
+          <div class="six wide column">
             Attribution
-          </td>
-          <td>{{model.attribution}}</td>
-        </tr>
+          </div>
+          <div class="ten wide column">
+            {{model.attribution}}
+          </div>
+        </div>
+        <div class="ui section divider"></div>
       {{/if}}
       {{#if model.attribution_text}}
-        <tr>
-          <td>
+        <div class="row">
+          <div class="six wide column">
             Attribution text
-          </td>
-          <td>{{model.attribution_text}}</td>
-        </tr>
+          </div>
+          <div class="ten wide column">
+            {{model.attribution_text}}
+          </div>
+        </div>
+        <div class="ui section divider"></div>
       {{/if}}
       {{#if model.update_frequency}}
-        <tr>
-          <td>
+        <div class="row">
+          <div class="six wide wide column">
             Update Frequency
-          </td>
-          <td>{{model.update_frequency}}</td>
-        </tr>
+          </div>
+          <div class="ten wide column">
+            {{model.update_frequency}}
+          </div>
+        </div>
+        <div class="ui section divider"></div>
       {{/if}}
       {{#if model.source}}
-        <tr>
-          <td>
+        <div class="row">
+          <div class="six wide column">
             Source
-          </td>
-          <td>{{model.source}}</td>
-        </tr>
+          </div>
+          <div class="ten wide column">
+            {{model.source}}
+          </div>
+        </div>
+        <div class="ui section divider"></div>
       {{/if}}
-    </tbody>
-  </table>
+    </div>
+  </div>
   <table class="ui table">
     <thead>
       <tr>
