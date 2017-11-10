@@ -5,7 +5,76 @@
   cursor: pointer;
 }
 
-.review.ui.button {
+.ui.inverted.vertical.masthead.center.aligned.segment.teal {
+  padding-bottom: 0px;
+  margin-bottom: 30px;
+}
+
+/* general font size styling */
+h1 {
+  font-size: 48px !important;
+}
+
+h2 {
+  font-size: 36px !important;
+}
+
+h3 {
+  font-size: 24px !important;
+}
+
+h4 {
+  font-size: 20px !important;
+}
+
+h5 {
+  font-size: 16px !important;
+}
+
+/* add feed progress tabs styling */
+nav {
+  padding: 0px;
+  margin: 0px;
+  background: #134045 ;
+}
+
+nav ul {
+  padding: 0px;
+  margin: 0px;
+}
+
+nav ul li {
+  display: inline-block;
+  padding: 10px 15px 5px 15px;
+  margin: 0px 20px;
+  color: lightgray;
+  letter-spacing: 2px;
+  border-bottom: solid 3px gray;
+}
+
+nav ul li.active {
+  color: white;
+  font-weight: bold;
+  border-bottom: solid 3px white;
+}
+
+/* styling for more-info page */
+.ui.form.field {
+  margin-top: 0.5em;
+}
+
+.field .ui.button.active {
+  background: #508478;
+  color: white;
+}
+
+.divider.column {
+  position: relative;
+  padding: 25px;
+}
+
+/* styling for review page */
+.edit.ui.button {
   margin: 0px;
 }
 
