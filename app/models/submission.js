@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  data_url: DS.attr('string'),
+  // data_url: DS.attr('string'),
+  data_url: 'api/responses',
   data_file: DS.attr(),
   source_name: DS.attr('string'),
   update_frequency: DS.attr(),

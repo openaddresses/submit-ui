@@ -1,10 +1,21 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  getWebServiceResponse: function(request){
+    var url = request;
+    return Ember.$.ajax({ url })
+  },
   model: function(){
     // for development, remove before merging
     this.store.createRecord('submission');
     // 
-    return this.get('store').peekAll('submission').get('firstObject');
+    var submission = this.get('store').peekAll('submission').get('firstObject');
+    var request = submission.data_url;
+    var webServiceResponse = this.getWebServiceResponse(request);
+      
+    return Ember.RSVP.hash({
+      submission: submission,
+      webServiceResponse: webServiceResponse
+    })
   }
 });

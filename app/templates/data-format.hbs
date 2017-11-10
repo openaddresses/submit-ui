@@ -3,7 +3,7 @@
   <table class="ui celled table">
     <thead>
       <tr>
-        {{#each-in model.oaFields as |field properties|}}
+        {{#each-in model.submission.oaFields as |field properties|}}
           {{#if (not properties.columns)}}
             <th>{{field}}</th>
           {{else}}
@@ -13,7 +13,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each-in model.exampleRows as |rows fields|}}
+      {{#each-in model.submission.exampleRows as |rows fields|}}
         <tr>
           {{#each-in fields as |field label|}}
             <td class={{if (eq currentField field) "active"}}>{{label}}</td>
@@ -22,6 +22,4 @@
       {{/each-in}}
     </tbody>
   </table>
-  <button class="ui button" onClick={{action "requestWebServceData"}}>fetch data</button>
-  {{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
 </div>
