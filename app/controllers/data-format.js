@@ -13,5 +13,20 @@ export default Ember.Controller.extend({
         Ember.set(this.model.submission.get('exampleRows')[i], heading, this.model.webServiceResponse.responses[i].properties[column]);
       }
     },
+    addAction: function(field, action){
+      Ember.set(this.model.submission.get('oaFields')[field], "action", action);
+    },
+    removeAction: function(field){
+      if (this.model.submission.get('oaFields')[field].action === "join" && this.model.submission.get('oaFields')[field].columns){
+        this.model.submission.get('oaFields')[field].columns.pop();
+      }
+      for (var i = 0; i < 2; i++){
+        if (this.model.submission.get('exampleRows')[i][field]){
+          Ember.set(this.model.submission.get('exampleRows')[i], field, this.model.webServiceResponse.responses[i].properties[this.model.submission.get('oaFields')[field].columns[0]]);
+        }
+      }
+      Ember.set(this.model.submission.get('oaFields')[field], "action", null);
+      Ember.set(this.model.submission.get('oaFields')[field], "extractionFunction", null);
+    },
   }
 });

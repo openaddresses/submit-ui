@@ -20,21 +20,36 @@
   </table>
   {{#each-in model.submission.oaFields as |field properties|}}
     <form class="ui form segment">
-      <label>{{field}}</label>
-      <div class="ui stackable three column center aligned grid">
-        {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
-          <div class="default text">
-              Source column headings
-          </div>
-          <i class="dropdown icon"></i>
-          <div class="menu">
-            {{#each columnHeadings as |heading|}}
-              <div class="item" data-value="{{map-value mapper heading}}">
-                {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+      <div class="field">
+
+        <label>{{field}}</label>
+        <div class="ui stackable three column center aligned grid">
+          <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>
+
+            {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
+              <div class="default text">
+                  Source column headings
               </div>
-            {{/each}}
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                {{#each columnHeadings as |heading|}}
+                  <div class="item" data-value="{{map-value mapper heading}}">
+                    {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                  </div>
+                {{/each}}
+              </div>
+            {{/ui-dropdown}}
+            {{#if (eq properties.action "join")}}
+              <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove join <i class="remove icon"></i></button>
+            {{else if (eq properties.action "split")}}
+              <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove split <i class="remove icon"></i></button>
+            {{else}}
+              <button class="ui button basic blue" onClick={{action "addAction" field "join"}}>Join two columns for this field</button>
+              <button class="ui button basic blue" onClick={{action "addAction" field "split"}}>Split one column for this field</button>
+            {{/if}}
+          
           </div>
-        {{/ui-dropdown}}
+        </div>
       </div>
     </form>
   {{/each-in}}
