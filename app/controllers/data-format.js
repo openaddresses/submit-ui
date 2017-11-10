@@ -8,16 +8,15 @@ export default Ember.Controller.extend({
   actions: {
     chooseColumn: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "columns", []);
-      this.model.submission.get('oaFields')[heading].columns[0] = column;
+      this.model.submission.get('oaFields')[heading].columns[0] = {column:column, index:0};
       for (var i = 0; i < 2; i++){
         Ember.set(this.model.submission.get('exampleRows')[i], heading, this.model.webServiceResponse.responses[i].properties[column]);
       }
     },
     addColumn: function(heading, column){
-      this.model.submission.get('oaFields')[heading].columns[1] = column;
+      this.model.submission.get('oaFields')[heading].columns.push({column:column, index: 1})
       for (var i = 0; i < 2; i++){
-        var joined = this.model.submission.get('exampleRows')[i][heading] + this.model.submission.get('oaFields')[heading].separator + this.model.webServiceResponse.responses[i].properties[column];
-        Ember.set(this.model.submission.get('exampleRows')[i], heading, joined);
+        this.model.submission.exampleRows[i][heading] += this.model.submission.get('oaFields')[heading].separator + this.model.webServiceResponse.responses[i].properties[column];
       }
     },
     addAction: function(field, action){
