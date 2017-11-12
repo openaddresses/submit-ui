@@ -1,16 +1,17 @@
 <div class="ui inverted vertical masthead center aligned segment teal">
-    <div class="ui text container">
-        <h1 class="ui inverted header">Mobility-on-Demand Sandbox</h1>
-        <h2>subtitle text here</h2>
-    </div>
-    <div class="ui vertical stripe segment"></div>
-    <nav class="progress">
-        <ul>
-            <li class="steps"> Step 1 </li>
-            <li class="steps"> Step 2 </li>
-            <li class="steps"> Step 3 </li>
-            <li class="steps"> Step 4 </li>
-        </ul>
-    </nav>
+	<div class="ui text container">
+		<h1 class="ui inverted header">Mobility-on-Demand Sandbox</h1>
+		<h2>subtitle text here</h2>
+	</div>
+	<div class="ui vertical stripe segment"></div>
+  <nav class="progress">
+    <ul>
+      <li class={{if (eq currentRouteName 'intro') "active"}}> Feed </li>
+      <li class={{if (eq currentRouteName 'more-info') "active"}}> More Info </li>
+      <li class={{if (eq currentRouteName 'mapping.index') "active"}}> Column Mapping </li>
+      <li class={{if (eq currentRouteName 'contact') "active"}}> Contact Info </li>
+      <li class={{if (eq currentRouteName 'review') "active"}}> Review </li>
+    </ul>
+  </nav>
 </div>
 {{outlet}}
