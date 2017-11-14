@@ -81,12 +81,3 @@ nav ul li.active {
 .review-nav .ui.button {
   margin: 15px 0px;
 }
-
-.ui.section.divider {
-  margin-top: 5px !important;
-  margin-bottom: 5px !important;
-}
-
-.ui.section.divider:last-child {
-  display: none;
-}
