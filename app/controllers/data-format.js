@@ -5,6 +5,7 @@ export default Ember.Controller.extend({
   columnHeadings: Ember.computed('model.webServiceResponse', function(){
     return Object.keys(this.model.webServiceResponse.responses[0].properties);
   }),
+  showAdditionalJoinOption: false,
   actions: {
     chooseColumn: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "columns", []);
@@ -15,10 +16,15 @@ export default Ember.Controller.extend({
       }
     },
     addColumn: function(heading, column){
-      this.model.submission.get('oaFields')[heading].columns.push({column:column, index: 1})
+      this.model.submission.get('oaFields')[heading].columns.addObject({column:column, index: 1})
       for (var i = 0; i < 2; i++){
         this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.responses[i].properties[column]);
       }
+      console.log("model changed");
+      console.log(this.model.submission.oaFields[heading].columns)
+    },
+    addJoin: function(){
+      this.set('showAdditionalJoinOption', true);
     },
     addAction: function(field, action){
       Ember.set(this.model.submission.get('oaFields')[field], "action", action);
@@ -35,6 +41,7 @@ export default Ember.Controller.extend({
       }
       Ember.set(this.model.submission.get('oaFields')[field], "action", null);
       Ember.set(this.model.submission.get('oaFields')[field], "extractionFunction", null);
+      this.set('showAdditionalJoinOption', false);
     },
   }
 });
