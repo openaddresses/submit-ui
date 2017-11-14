@@ -1,26 +1,23 @@
 <div class="ui text container">
   <h3 class="first headroom">Review</h3>
-  <table class="ui table">
-    <thead>
-      <tr><th colspan="2"><button class="review ui right floated labeled blue basic icon button mini" onClick={{action "editField" "intro"}}><i class="icon edit"></i>Edit</button>
-        Data
-      </th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <td class="collapsing">
+   <div class="ui segment">
+    <h3 class="ui floated header">Data</h3><i class="icon edit" onClick={{action "editField" "intro"}}></i>
+    <div class="ui clearing divider"></div>
+    <div class="ui five column grid">
+      <div class="row">
+        <div class="two wide column">
           {{#if model.data_url}}Link to data{{/if}}
           {{#if model.data_file}}Data upload file name{{/if}}
-        </td>
-        <td>
+        </div>
+        <div class="fluid column">
           {{#if model.data_url}}{{model.data_url}}{{/if}}
           {{#if model.data_file}}{{model.data_file.name}}{{/if}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="ui segment">
-    <h3 class="ui floated header">More Info</h3><i class="icon edit" onClick={{action "editField" "contact"}}></i>
+    <h3 class="ui floated header">More Info</h3><i class="icon edit" onClick={{action "editField" "more-info"}}></i>
     <div class="ui clearing divider"></div>
     <div class="ui sixteen column grid">
       {{#if model.license}}
@@ -91,28 +88,31 @@
       {{/if}}
     </div>
   </div>
-  <table class="ui table">
-    <thead>
-      <tr>
-        <th colspan="2">Maintainer contact information<button class="review ui right floated labeled blue basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</button></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>
-          Name
-        </td>
-        <td>{{#if model.maintainer_name}}{{model.maintainer_name}}{{else}}<i>not provided</i>{{/if}}</td>
-      </tr>
-      <tr>
-        <td>
+  <div class="ui segment">
+    <h3 class="ui floated header">Maintainer contact information</h3><i class="icon edit" onClick={{action "editField" "contact"}}></i>
+    <div class="ui clearing divider"></div>
+    <div class="ui five column grid">
+      <div class="row">
+        <div class="two wide column">
           Email
-        </td>
-        <td>{{model.maintainer_email}}</td>
-      </tr>
-    </tbody>
-  </table>
-
+        </div>
+        <div class="fluid column">
+          {{model.maintainer_email}}
+        </div>
+      </div>
+      {{#if model.maintainer_name}}
+        <div class="ui section divider"></div>
+        <div class="row">
+          <div class="two wide column">
+            Name
+          </div>
+          <div class="fluid column">
+            {{model.maintainer_name}}
+          </div>
+        </div>
+      {{/if}}
+    </div>
+  </div>
   <div class="ui segment">
     <h3 class="ui floated header">Column mapping</h3><button class="review ui right floated labeled blue basic icon button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i>Edit</button>
     <div class="ui clearing divider"></div>
@@ -161,7 +161,6 @@
       {{/if}}
     {{/each-in}}
   </div>
-
   <div class="review-nav">
     <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
   	<button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
