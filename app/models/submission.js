@@ -16,14 +16,14 @@ export default DS.Model.extend({
       action: null,
       separator: " ",
       extractionFunction: null,
-      extractionColumn: null
+      extractionColumn: null,
     },
     street:{
       columns: [],
       action: null,
       separator: " ",
       extractionFunction: null,
-      extractionColumn: null
+      extractionColumn: null,
     },
     unit:{
       columns: [],
@@ -68,7 +68,7 @@ export default DS.Model.extend({
     city: null,
     district: null,
     region: null,
-    postcode: null,
+    postcode: null
   },
   {
     number: null,

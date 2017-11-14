@@ -12,13 +12,12 @@
       {{#each-in model.submission.exampleRows as |rows fields|}}
         <tr>
           {{#each-in fields as |field label|}}
-            <td>{{label}}</td>
+            <td>{{#each label as |aaa|}}{{aaa}} {{/each}}</td>
           {{/each-in}}
         </tr>
       {{/each-in}}
     </tbody>
   </table>
-
   {{#each-in model.submission.oaFields as |field properties|}}
     <form class="ui form segment">
       <div class="field">

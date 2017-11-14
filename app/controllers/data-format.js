@@ -10,25 +10,27 @@ export default Ember.Controller.extend({
       Ember.set(this.model.submission.get('oaFields')[heading], "columns", []);
       this.model.submission.get('oaFields')[heading].columns[0] = {column:column, index:0};
       for (var i = 0; i < 2; i++){
-        Ember.set(this.model.submission.get('exampleRows')[i], heading, this.model.webServiceResponse.responses[i].properties[column]);
+        // Ember.set(this.model.submission.get('exampleRows')[i], heading, this.model.webServiceResponse.responses[i].properties[column]);
+        Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.responses[i].properties[column]]);
       }
     },
     addColumn: function(heading, column){
       this.model.submission.get('oaFields')[heading].columns.push({column:column, index: 1})
       for (var i = 0; i < 2; i++){
-        this.model.submission.exampleRows[i][heading] += this.model.submission.get('oaFields')[heading].separator + this.model.webServiceResponse.responses[i].properties[column];
+        this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.responses[i].properties[column]);
       }
     },
     addAction: function(field, action){
       Ember.set(this.model.submission.get('oaFields')[field], "action", action);
     },
     removeAction: function(field){
-      if (this.model.submission.get('oaFields')[field].action === "join" && this.model.submission.get('oaFields')[field].columns){
-        this.model.submission.get('oaFields')[field].columns.pop();
-      }
-      for (var i = 0; i < 2; i++){
-        if (this.model.submission.get('exampleRows')[i][field]){
-          Ember.set(this.model.submission.get('exampleRows')[i], field, this.model.webServiceResponse.responses[i].properties[this.model.submission.get('oaFields')[field].columns[0]]);
+      if (this.model.submission.get('oaFields')[field].action === "join" && this.model.submission.get('oaFields')[field].columns.length > 1){
+        this.model.submission.get('oaFields')[field].columns = [this.model.submission.get('oaFields')[field].columns[0]];
+        for (var i = 0; i < 2; i++){
+          if (this.model.submission.get('exampleRows')[i][field]){
+            var originalColumn = this.model.submission.get('oaFields')[field].columns[0].column
+            Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.responses[i].properties[originalColumn]]);
+          }
         }
       }
       Ember.set(this.model.submission.get('oaFields')[field], "action", null);
