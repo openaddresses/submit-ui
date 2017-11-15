@@ -15,13 +15,19 @@ export default Ember.Controller.extend({
         Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.responses[i].properties[column]]);
       }
     },
-    addColumn: function(heading, column){
-      this.model.submission.get('oaFields')[heading].columns.addObject({column:column, index: 1})
-      for (var i = 0; i < 2; i++){
-        this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.responses[i].properties[column]);
+    addColumn: function(heading, index, column){
+      index += 1;
+      if (this.model.submission.get('oaFields')[heading].columns[index]){
+        Ember.set(this.model.submission.get('oaFields')[heading].columns[index], "column", column);
+        for (var i = 0; i < 2; i++){
+         this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.responses[i].properties[column])
+        }
+      } else {
+        this.model.submission.get('oaFields')[heading].columns.addObject({column:column, index: index})
+        for (var i = 0; i < 2; i++){
+          this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.responses[i].properties[column]);
+        }
       }
-      console.log("model changed");
-      console.log(this.model.submission.oaFields[heading].columns)
     },
     addJoin: function(){
       this.set('showAdditionalJoinOption', true);
