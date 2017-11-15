@@ -30,6 +30,12 @@ export default Ember.Controller.extend({
       }
       this.set('showAdditionalJoinButton', true)
     },
+    removeColumn: function(heading, column){
+      this.model.submission.get('oaFields')[heading].columns.removeObject(column);
+      for (var i = 0; i < 2; i++){
+        this.model.submission.exampleRows[i][heading].removeObject(this.model.webServiceResponse.responses[i].properties[column]);
+      }
+    },
     addJoin: function(){
       this.set('showAdditionalJoinDropdown', true);
       this.set('showAdditionalJoinButton', false);
