@@ -4,3 +4,6 @@
 .inactiveField {
   cursor: pointer;
 }
+.hidden {
+  visibility: hidden;
+}
