@@ -52,6 +52,7 @@ nav ul li {
   border-bottom: solid 3px gray;
 }
 
+
 nav ul li.active {
   color: white;
   font-weight: bold;
