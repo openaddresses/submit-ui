@@ -25,29 +25,26 @@
         <label>{{field}}</label>
         <div class="ui stackable three column center aligned grid">
           <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>
-
-            {{#ui-dropdown class="selection fluid" onChange=(action "chooseColumn" field) as |execute mapper|}}
-              <div class="default text">
-                  Source column headings
-              </div>
-              <i class="dropdown icon"></i>
-              <div class="menu">
-                {{#each columnHeadings as |heading|}}
-                  <div class="item" data-value="{{map-value mapper heading}}">
-                    {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+              <div class={{if (eq properties.action "join") "hidden"}}>
+                {{#ui-dropdown class="selection fluid" selected=properties.column onChange=(action "chooseColumn" field) as |execute mapper|}}
+                  <div class="default text">
+                      Source column headings
                   </div>
-                {{/each}}
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    {{#each columnHeadings as |heading|}}
+                      <div class="item" data-value="{{map-value mapper heading}}">
+                        {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/ui-dropdown}}
               </div>
-            {{/ui-dropdown}}
-            
-            {{#each-in properties as |property value|}}
-              {{#if (eq property "columns")}}
-                {{#each value as |column index|}}
-                  {{#if (eq properties.action "join")}}
-                    <a class="item">
-                      <i class="plus icon"></i>
-                    </a>
-                    {{#ui-dropdown class="selection fluid" onChange=(action "addColumn" field index) as |execute mapper|}}
+            {{#if (eq properties.action "join")}}
+              {{#each-in properties as |property value|}}
+                {{#if (eq property "columns")}}
+                  {{#each value as |column index|}}
+                    {{#ui-dropdown class="selection fluid" selected=column.column onChange=(action "chooseColumn" field) as |execute mapper|}}
                       <div class="default text">
                           Source column headings
                       </div>
@@ -60,14 +57,32 @@
                         {{/each}}
                       </div>
                     {{/ui-dropdown}}
-                  {{/if}}
-                {{/each}}
-              {{/if}}
-            {{/each-in}}
+                  {{/each}}
+                {{/if}}
+              {{/each-in}}
 
-            {{#if (eq properties.action "join")}}
+              {{#if showAdditionalJoinOption}}
+                <a class="item">
+                  <i class="plus icon"></i>
+                </a>
+                {{#ui-dropdown class="selection fluid" onChange=(action "addColumn" field index) as |execute mapper|}}
+                  <div class="default text">
+                      Source column headings
+                  </div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    {{#each columnHeadings as |heading|}}
+                      <div class="item" data-value="{{map-value mapper heading}}">
+                        {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/ui-dropdown}}
+              {{/if}}
               <div>
-                <button class="ui button basic blue" onClick={{action "addJoin" field}}>Join another column <i class="plus icon"></i></button>
+                {{#if showAdditionalJoinButton}}
+                  <button class="ui button basic blue" onClick={{action "addJoin" field}}>Join another column <i class="plus icon"></i></button>
+                {{/if}}
                 <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove join <i class="remove icon"></i></button>
               </div>
             {{else if (eq properties.action "split")}}

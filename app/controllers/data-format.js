@@ -6,16 +6,18 @@ export default Ember.Controller.extend({
     return Object.keys(this.model.webServiceResponse.responses[0].properties);
   }),
   showAdditionalJoinOption: false,
+  showAdditionalJoinButton: false,
   actions: {
     chooseColumn: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "columns", []);
       this.model.submission.get('oaFields')[heading].columns[0] = {column:column, index:0};
       for (var i = 0; i < 2; i++){
-        // Ember.set(this.model.submission.get('exampleRows')[i], heading, this.model.webServiceResponse.responses[i].properties[column]);
         Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.responses[i].properties[column]]);
       }
+      this.set('showAdditionalJoinOption', true);
     },
     addColumn: function(heading, index, column){
+      this.set('showAdditionalJoinOption', false);
       index += 1;
       if (this.model.submission.get('oaFields')[heading].columns[index]){
         Ember.set(this.model.submission.get('oaFields')[heading].columns[index], "column", column);
@@ -28,9 +30,11 @@ export default Ember.Controller.extend({
           this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.responses[i].properties[column]);
         }
       }
+      this.set('showAdditionalJoinButton', true)
     },
     addJoin: function(){
       this.set('showAdditionalJoinOption', true);
+      this.set('showAdditionalJoinButton', false);
     },
     addAction: function(field, action){
       Ember.set(this.model.submission.get('oaFields')[field], "action", action);
@@ -38,6 +42,7 @@ export default Ember.Controller.extend({
     removeAction: function(field){
       if (this.model.submission.get('oaFields')[field].action === "join" && this.model.submission.get('oaFields')[field].columns.length > 1){
         this.model.submission.get('oaFields')[field].columns = [this.model.submission.get('oaFields')[field].columns[0]];
+        this.set('showAdditionalJoinButton', false);
         for (var i = 0; i < 2; i++){
           if (this.model.submission.get('exampleRows')[i][field]){
             var originalColumn = this.model.submission.get('oaFields')[field].columns[0].column
