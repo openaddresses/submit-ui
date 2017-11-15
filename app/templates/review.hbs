@@ -1,13 +1,19 @@
 <div class="ui text container">
-  <h3 class="first headroom">Review</h3>
-   <div class="ui segment">
-    <h3 class="ui floated header">Data</h3><button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "intro"}}><i class="icon edit"></i>Edit</button>
-    <div class="ui clearing divider"></div>
+  <h3 class="first headroom"> Review </h3>
+  <div class="ui attached message">
+    <button class="ui labeled icon right floated blue basic button mini" onClick={{action "editField" "intro"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui header">Data</h3>
+  </div>
+  <div class="ui segment attached">
     <div class="ui five column grid">
       <div class="row">
-        <div class="three wide column">
-          {{#if model.data_url}}Link to Data{{/if}}
-          {{#if model.data_file}}Data upload file name{{/if}}
+        <div class="four wide column">
+          {{#if model.data_url}}
+            <div class="field label">Link to Data</div>
+          {{/if}}
+          {{#if model.data_file}}
+            <div class="field label">Data upload file name</div>
+          {{/if}}
         </div>
         <div class="fluid column">
           {{#if model.data_url}}{{model.data_url}}{{/if}}
@@ -16,87 +22,74 @@
       </div>
     </div>
   </div>
-  <div class="ui segment">
-    <h3 class="ui floated header">More Info</h3><button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "more-info"}}><i class="icon edit"></i>Edit</button>
-    <div class="ui clearing divider"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui attached message">
+    <button class="ui labeled icon right floated blue basic button mini" onClick={{action "editField" "more-info"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui header">More Info</h3>
+  </div>
+  <div class="ui segment attached">
     <div class="ui sixteen column grid">
       {{#if model.license}}
-        <div class="row">
-          <div class="six wide column">
-            License name
-          </div>
-          <div class="ten wide column">
-            {{model.license}}
-          </div>
+      <div class="row">
+        <div class="seven wide column">
+          <div class="field label">License Name</div>
+          <div class="info value">{{model.license}}</div>
         </div>
-        <div class="ui section divider"></div>
-      {{/if}}
-      {{#if model.license_url}}
-        <div class="row">
-          <div class="six wide column">
-            License URL
-          </div>
-          <div class="ten wide olumn">
-            {{model.license_url}}
-          </div>
+        <div class="nine wide column">
+          <div class="field label">License URL</div>
+          <div class="info value">{{model.license_url}}</div>
         </div>
-        <div class="ui section divider"></div>
+      </div>
+      <div class="ui fitted divider"></div>
       {{/if}}
       {{#if model.attribution}}
         <div class="row">
-          <div class="six wide column">
-            Attribution
+          <div class="seven wide column">
+            <div class="field label">Attribution</div>
+            <div class="info value">{{model.attribution}}</div>
           </div>
-          <div class="ten wide column">
-            {{model.attribution}}
-          </div>
-        </div>
-        <div class="ui section divider"></div>
-      {{/if}}
-      {{#if model.attribution_text}}
-        <div class="row">
-          <div class="six wide column">
-            Attribution text
-          </div>
-          <div class="ten wide column">
-            {{model.attribution_text}}
+          <div class="nine wide column">
+            <div class="field label">Attribution Text</div>
+            <div class="info value">{{model.attribution_text}}</div>
           </div>
         </div>
-        <div class="ui section divider"></div>
+        <div class="ui fitted divider"></div>
       {{/if}}
       {{#if model.update_frequency}}
         <div class="row">
-          <div class="six wide wide column">
-            Update Frequency
+          <div class="seven wide wide column">
+            <div class="field label">Update Frequency</div>
           </div>
-          <div class="ten wide column">
+          <div class="nine wide column">
             {{model.update_frequency}}
           </div>
         </div>
-        <div class="ui section divider"></div>
+        <div class="ui fitted divider"></div>
       {{/if}}
       {{#if model.source}}
         <div class="row">
-          <div class="six wide column">
-            Source
+          <div class="seven wide column">
+            <div class="field label">Source</div>
           </div>
-          <div class="ten wide column">
+          <div class="nine wide column">
             {{model.source}}
           </div>
         </div>
-        <div class="ui section divider"></div>
+        <div class="ui fitted divider"></div>
       {{/if}}
     </div>
   </div>
-  <div class="ui segment">
-    <h3 class="ui floated header">Maintainer contact information</h3>
-    <button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</button>
-    <div class="ui clearing divider"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui attached message">
+    <button class="ui labeled icon right floated blue basic button mini" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui header">Maintainer Contact Information</h3>
+  </div>
+  <div class="ui segment attached">
     <div class="ui five column grid">
       {{#if model.maintainer_email}}
       <div class="row">
-        <div class="two wide column">
-          Email
+        <div class="four wide column">
+          <div class="field label">Email</div>
         </div>
         <div class="fluid column">
           {{model.maintainer_email}}
@@ -104,10 +97,10 @@
       </div>
       {{/if}}
       {{#if model.maintainer_name}}
-        <div class="ui section divider"></div>
+        <div class="ui fitted divider"></div>
         <div class="row">
-          <div class="two wide column">
-            Name
+          <div class="four wide column">
+            <div class="field label">Name</div>
           </div>
           <div class="fluid column">
             {{model.maintainer_name}}
@@ -116,9 +109,12 @@
       {{/if}}
     </div>
   </div>
-  <div class="ui segment">
-    <h3 class="ui floated header">Column mapping</h3><button class="edit ui right floated labeled blue basic icon button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i>Edit</button>
-    <div class="ui clearing divider"></div>
+  <div class="ui hidden divider"></div>
+  <div class="ui attached message">
+    <button class="ui labeled icon right floated blue basic button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui header">Column Mapping</h3>
+  </div>
+  <div class="ui segment attached">
     {{#each-in model.oaFields as |field properties|}}
       {{#if properties.columns}}
         <table class="ui definition table">
@@ -164,9 +160,10 @@
       {{/if}}
     {{/each-in}}
   </div>
+  <div class="ui hidden divider"></div>
   <div class="review-nav">
     <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
-  	<button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
+    <button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
   </div>
   {{#ui-modal name="review-cancel" class="review-cancel" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
     <i class="close icon"></i>
