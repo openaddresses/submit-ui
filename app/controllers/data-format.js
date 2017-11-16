@@ -7,6 +7,9 @@ export default Ember.Controller.extend({
   }),
   showAdditionalJoinDropdown: false,
   showAdditionalJoinButton: false,
+  user_data: Ember.computed('model.webServiceResponse', function(){
+    return this.model.webServiceResponse.source_data.results;
+  }),
   actions: {
     chooseColumn: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "columns", []);
