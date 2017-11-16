@@ -12,53 +12,46 @@ export default DS.Model.extend({
   maintainer_email: DS.attr('string'),
   oaFields:{
     number:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null,
+      field_to_remove: null,
     },
     street:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null,
+      field_to_remove: null,
     },
     unit:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      field_to_remove: null,
     },
     city:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      field_to_remove: null,
     },
     district:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      field_to_remove: null,
     },
     region:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      field_to_remove: null,
     },
     postcode:{
-      columns: [],
-      action: null,
+      fields: [],
+      function: null,
       separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      field_to_remove: null,
     }
   },
   exampleRows:[{

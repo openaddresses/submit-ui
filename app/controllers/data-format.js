@@ -11,30 +11,30 @@ export default Ember.Controller.extend({
     return this.model.webServiceResponse.source_data.results;
   }),
   actions: {
-    chooseColumn: function(heading, column){
-      Ember.set(this.model.submission.get('oaFields')[heading], "columns", []);
-      this.model.submission.get('oaFields')[heading].columns.addObject(column);
+    chooseField: function(heading, column){
+      Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
+      this.model.submission.get('oaFields')[heading].fields.addObject(column);
       for (var i = 0; i < 2; i++){
         Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
       }
       this.set('showAdditionalJoinDropdown', true);
     },
-    editColumn: function(heading, index, column){
-      this.model.submission.get('oaFields')[heading].columns.replace(index, 1, column);
+    editField: function(heading, index, column){
+      this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
       for (var i = 0; i < 2; i++){
         this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.source_data.results[i][column])
       }
     },
-    addColumn: function(heading, column){
+    addField: function(heading, column){
       this.set('showAdditionalJoinDropdown', false);
-      this.model.submission.get('oaFields')[heading].columns.addObject(column)
+      this.model.submission.get('oaFields')[heading].fields.addObject(column)
       for (var i = 0; i < 2; i++){
         this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.source_data.results[i][column]);
       }
       this.set('showAdditionalJoinButton', true)
     },
-    removeColumn: function(heading, column){
-      this.model.submission.get('oaFields')[heading].columns.removeObject(column);
+    removeField: function(heading, column){
+      this.model.submission.get('oaFields')[heading].fields.removeObject(column);
       for (var i = 0; i < 2; i++){
         this.model.submission.exampleRows[i][heading].removeObject(this.model.webServiceResponse.source_data.results[i][column]);
       }
@@ -43,24 +43,24 @@ export default Ember.Controller.extend({
       this.set('showAdditionalJoinDropdown', true);
       this.set('showAdditionalJoinButton', false);
     },
-    addAction: function(field, action){
-      Ember.set(this.model.submission.get('oaFields')[field], "action", action);
+    addFunction: function(field, action){
+      Ember.set(this.model.submission.get('oaFields')[field], "function", action);
       if (action === "join"){
         this.set('showAdditionalJoinDropdown', true);
       }
     },
-    removeAction: function(field){
-      if (this.model.submission.get('oaFields')[field].action === "join" && this.model.submission.get('oaFields')[field].columns.length > 1){
-        Ember.set(this.model.submission.get('oaFields')[field], "columns", [this.model.submission.get('oaFields')[field].columns[0]]);
+    removeFunction: function(field){
+      if (this.model.submission.get('oaFields')[field].action === "join" && this.model.submission.get('oaFields')[field].fields.length > 1){
+        Ember.set(this.model.submission.get('oaFields')[field], "fields", [this.model.submission.get('oaFields')[field].fields[0]]);
         this.set('showAdditionalJoinButton', false);
         for (var i = 0; i < 2; i++){
           if (this.model.submission.get('exampleRows')[i][field]){
-            var originalColumn = this.model.submission.get('oaFields')[field].columns[0]
+            var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
             Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
           }
         }
       }
-      Ember.set(this.model.submission.get('oaFields')[field], "action", null);
+      Ember.set(this.model.submission.get('oaFields')[field], "function", null);
       Ember.set(this.model.submission.get('oaFields')[field], "extractionFunction", null);
       this.set('showAdditionalJoinDropdown', false);
     },

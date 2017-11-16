@@ -24,9 +24,9 @@
 
         <label>{{field}}</label>
         <div class="ui stackable three column center aligned grid">
-          <div class={{if (eq properties.action "join") "seven wide column" "sixteen wide column"}}>
-            <div class={{if (eq properties.action "join") "hidden"}}>
-              {{#ui-dropdown class="selection fluid" selected=properties.column onChange=(action "chooseColumn" field) as |execute mapper|}}
+          <div class={{if (eq properties.function "join") "seven wide column" "sixteen wide column"}}>
+            <div class={{if (eq properties.function "join") "hidden"}}>
+              {{#ui-dropdown class="selection fluid" selected=properties.column onChange=(action "chooseField" field) as |execute mapper|}}
                 <div class="default text">
                   Source column headings
                 </div>
@@ -41,8 +41,8 @@
               {{/ui-dropdown}}
             </div>
             
-            {{#if (eq properties.action "join")}}
-              {{#each properties.columns as |column index|}}
+            {{#if (eq properties.function "join")}}
+              {{#each properties.fields as |column index|}}
                 {{#if (gte index 1)}}
                   <a class="item">
                     <i class="plus icon"></i>
@@ -51,7 +51,7 @@
                 <div class="field">
                   <div class="fields">
                     <div class="fifteen wide field">
-                      {{#ui-dropdown class="selection fluid" selected=column onChange=(action "editColumn" field index) as |execute mapper|}}
+                      {{#ui-dropdown class="selection fluid" selected=column onChange=(action "editField" field index) as |execute mapper|}}
                         <div class="default text">
                           Source column headings
                         </div>
@@ -67,7 +67,7 @@
                     </div>
                     {{#if (gte index 1)}}
                       <div class="one wide field">
-                        <button class="ui icon mini button basic red" onClick={{action "removeColumn" field column}}>
+                        <button class="ui icon mini button basic red" onClick={{action "removeField" field column}}>
                           <i class="remove icon"></i>
                         </button>
                       </div>
@@ -79,7 +79,7 @@
                 <a class="item">
                   <i class="plus icon"></i>
                 </a>
-                {{#ui-dropdown class="selection fluid" onChange=(action "addColumn" field) as |execute mapper|}}
+                {{#ui-dropdown class="selection fluid" onChange=(action "addField" field) as |execute mapper|}}
                   <div class="default text">
                     Source column headings
                   </div>
@@ -97,13 +97,13 @@
                 {{#if showAdditionalJoinButton}}
                   <button class="ui button basic blue" onClick={{action "addJoin" field}}>Join another column <i class="plus icon"></i></button>
                 {{/if}}
-                <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove join <i class="remove icon"></i></button>
+                <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove join <i class="remove icon"></i></button>
               </div>
-            {{else if (eq properties.action "split")}}
-              <button class="ui button basic blue" onClick={{action "removeAction" field}}>Remove split <i class="remove icon"></i></button>
+            {{else if (eq properties.function "split")}}
+              <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove split <i class="remove icon"></i></button>
             {{else}}
-              <button class="ui button basic blue" onClick={{action "addAction" field "join"}}>Join two columns for this field</button>
-              <button class="ui button basic blue" onClick={{action "addAction" field "split"}}>Split one column for this field</button>
+              <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
+              <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
             {{/if}}
           </div>
         </div>
