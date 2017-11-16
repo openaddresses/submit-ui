@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export function sampleData(params, namedArgs) {
+  console.log("params")
+  console.log(params)
+  console.log("namedArgs")
+  console.log(namedArgs)
   var heading = namedArgs.heading;
   var exampleValue;
   if (namedArgs.user_data){
