@@ -61,8 +61,7 @@ nav ul li.active {
   border-bottom: solid 3px white;
 }
 
-@media only screen
-  and (max-width: 510px) {
+@media only screen and (max-width: 510px) {
     nav ul li {
       display: none;
     }
