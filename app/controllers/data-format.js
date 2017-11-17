@@ -43,6 +43,32 @@ export default Ember.Controller.extend({
       this.set('showAdditionalJoinDropdown', true);
       this.set('showAdditionalJoinButton', false);
     },
+    removePrefixNumber: function(field){
+      var postfixed_street_pattern = new RegExp('^(?:\\s*(?:[0-9]+(?:[ -]/[0-9]/[0-9])?|[0-9]+-[0-9]+|[0-9]+-?[A-Z])\\s+)?(.*)', 'i');
+      for (var i = 0; i < 2; i++){
+        var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[field].fields[0]];
+        var valueAfterFunction = postfixed_street_pattern.exec(fieldValue)[1];
+        this.model.submission.get('exampleRows')[i][field].replace(0, 1, valueAfterFunction);
+      }
+    },
+    removePostfixStreet: function(field){
+      var prefixed_number_pattern = new RegExp('^\\s*(\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+', 'i');
+      var testString =  this.model.submission.exampleRows[0][field][0];
+      var match = prefixed_number_pattern.exec(testString);
+      console.log(match[1]);
+    },
+    removePostfixUnit: function(field){
+      var postfixed_street_with_units_pattern = new RegExp('\\s((?:(?:UNIT|APARTMENT|APT\\.?|SUITE|STE\\.?|BUILDING|BLDG\\.?|LOT)\\s+|#).+)$', 'i');
+      var testString =  this.model.submission.exampleRows[0][field][0];
+      var match = postfixed_street_with_units_pattern.exec(testString);
+      console.log(match[1]);
+    },
+    removePrefixUnit: function(field){
+      var postfixed_unit_pattern = new RegExp('^(?:\\s*(?:\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+)?(.+?)(?:\\s+(?:(?:UNIT|APARTMENT|APT\\.?|SUITE|STE\\.?|BUILDING|BLDG\\.?|LOT)\\s+|#).+)?$', 'i');
+      var testString =  this.model.submission.exampleRows[0][field][0];
+      var match = postfixed_unit_pattern.exec(testString);
+      console.log(match[1]);
+    },
     addFunction: function(field, action){
       Ember.set(this.model.submission.get('oaFields')[field], "function", action);
       if (action === "join"){

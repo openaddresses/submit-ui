@@ -100,6 +100,10 @@
                 <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove join <i class="remove icon"></i></button>
               </div>
             {{else if (eq properties.function "split")}}
+              <button class="ui button basic green" onClick={{action "removePrefixNumber" field}}>Remove prefix number</button>
+              <button class="ui button basic green" onClick={{action "removePostfixStreet" field}}>Remove postfix street</button>
+              <button class="ui button basic green" onClick={{action "removePrefixUnit" field}}>Remove prefix unit</button>
+              <button class="ui button basic green" onClick={{action "removePostfixUnit" field}}>Remove postfix unit</button>
               <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove split <i class="remove icon"></i></button>
             {{else}}
               <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
