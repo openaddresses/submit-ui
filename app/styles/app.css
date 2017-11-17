@@ -58,7 +58,7 @@ nav ul li {
 nav ul li.active {
   color: white;
   font-weight: bold;
-  letter-spacing: 5px;
+  letter-spacing: 3px;
   border-bottom: solid 3px white;
 }
 
