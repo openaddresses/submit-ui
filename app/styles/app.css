@@ -58,6 +58,7 @@ nav ul li {
 nav ul li.active {
   color: white;
   font-weight: bold;
+  letter-spacing: 5px;
   border-bottom: solid 3px white;
 }
 
@@ -66,6 +67,9 @@ nav ul li.active {
       display: none;
     }
     nav ul li.active {
+      display: block;
+    }
+    nav ul li.active + li {
       display: block;
     }
 }
