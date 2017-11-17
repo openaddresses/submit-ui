@@ -53,9 +53,11 @@ export default Ember.Controller.extend({
     },
     removePostfixStreet: function(field){
       var prefixed_number_pattern = new RegExp('^\\s*(\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+', 'i');
-      var testString =  this.model.submission.exampleRows[0][field][0];
-      var match = prefixed_number_pattern.exec(testString);
-      console.log(match[1]);
+      for (var i = 0; i < 2; i++){
+        var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[field].fields[0]];
+        var valueAfterFunction = prefixed_number_pattern.exec(fieldValue)[1];
+        this.model.submission.get('exampleRows')[i][field].replace(0, 1, valueAfterFunction);
+      }
     },
     removePostfixUnit: function(field){
       var postfixed_street_with_units_pattern = new RegExp('\\s((?:(?:UNIT|APARTMENT|APT\\.?|SUITE|STE\\.?|BUILDING|BLDG\\.?|LOT)\\s+|#).+)$', 'i');
