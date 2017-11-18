@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import sharedActions from '../mixins/shared-actions';
 
 export default Ember.Controller.extend({
   columns: null,
@@ -85,5 +86,8 @@ export default Ember.Controller.extend({
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
       }
     },
+    changeRoute: function(route, changeset){
+      this.transitionToRoute(route);
+    }
   }
 });
