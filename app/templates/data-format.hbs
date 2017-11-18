@@ -100,11 +100,19 @@
                 <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove join <i class="remove icon"></i></button>
               </div>
             {{else if (eq properties.function "split")}}
-              <button class="ui button basic green" onClick={{action "removePrefixNumber" field}}>Remove prefix number</button>
-              <button class="ui button basic green" onClick={{action "removePostfixStreet" field}}>Remove postfix street</button>
-              <button class="ui button basic green" onClick={{action "removePrefixUnit" field}}>Remove prefix unit</button>
-              <button class="ui button basic green" onClick={{action "removePostfixUnit" field}}>Remove postfix unit</button>
+              <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_street_pattern" field}}>Remove prefix number</button>
+              <button class="ui button basic green" onClick={{action "extractionFunction" "prefixed_number_pattern" field}}>Remove postfix street</button>
+              <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Remove prefix unit</button>
+              <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Remove postfix unit</button>
               <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove split <i class="remove icon"></i></button>
+            {{else if (eq properties.function "postfixed_street_pattern")}}
+              <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+            {{else if (eq properties.function "prefixed_number_pattern")}}
+              <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+            {{else if (eq properties.function "postfixed_street_with_units_pattern")}}
+              <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+            {{else if (eq properties.function "postfixed_unit_pattern")}}
+              <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
             {{else}}
               <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
               <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
