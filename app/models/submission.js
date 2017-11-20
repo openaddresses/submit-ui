@@ -52,6 +52,18 @@ export default DS.Model.extend({
       function: null,
       separator: " ",
       field_to_remove: null,
+    },
+    lon:{
+      fields: [],
+      function: null,
+      separator: " ",
+      field_to_remove: null,
+    },
+    lat:{
+      fields: [],
+      function: null,
+      separator: " ",
+      field_to_remove: null,
     }
   },
   exampleRows:[{
@@ -61,7 +73,9 @@ export default DS.Model.extend({
     city: null,
     district: null,
     region: null,
-    postcode: null
+    postcode: null,
+    lon: null,
+    lat: null
   },
   {
     number: null,
@@ -71,5 +85,7 @@ export default DS.Model.extend({
     district: null,
     region: null,
     postcode: null,
+    lon: null,
+    lat: null
   }]
 });

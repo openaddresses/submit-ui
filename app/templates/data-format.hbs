@@ -4,7 +4,22 @@
     <thead>
       <tr>
         {{#each-in model.submission.oaFields as |field properties|}}
-            <th>{{field}}</th>
+          {{#unless (eq field "lon")}}
+            {{#unless (eq field "lat")}}
+              <th>{{field}}</th>
+            {{/unless}}
+          {{/unless}}
+          {{#if (eq field "lon")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th>{{field}}</th>
+            {{/if}}
+          {{/if}}
+          {{#if (eq field "lat")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th>{{field}}</th>
+            {{/if}}
+          {{/if}}
+
         {{/each-in}}
       </tr>
     </thead>
@@ -12,7 +27,21 @@
       {{#each-in model.submission.exampleRows as |rows fields|}}
         <tr>
           {{#each-in fields as |field label|}}
-            <td>{{#each label as |value|}}{{value}} {{/each}}</td>
+            {{#unless (eq field "lon")}}
+              {{#unless (eq field "lat")}}
+                <td>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/unless}}
+            {{/unless}}
+            {{#if (eq field "lon")}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                <td>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/if}}
+            {{/if}}
+            {{#if (eq field "lat")}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                <td>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/if}}
+            {{/if}}
           {{/each-in}}
         </tr>
       {{/each-in}}
@@ -21,7 +50,6 @@
   {{#each-in model.submission.oaFields as |field properties|}}
     <form class="ui form segment">
       <div class="field">
-
         <label>{{field}}</label>
         <div class="ui stackable three column center aligned grid">
           <div class={{if (eq properties.function "join") "seven wide column" "sixteen wide column"}}>
