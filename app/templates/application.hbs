@@ -4,5 +4,14 @@
 		<h2>subtitle text here</h2>
 	</div>
 	<div class="ui vertical stripe segment"></div>
+  <nav class="progress">
+    <ul>
+      <li class={{if (eq currentRouteName 'intro') "active"}}> Data </li>
+      <li class={{if (eq currentRouteName 'more-info') "active"}}> More Info </li>
+      <li class={{if (eq currentRouteName 'mapping.index') "active"}}> Column Mapping </li>
+      <li class={{if (eq currentRouteName 'contact') "active"}}> Contact Info </li>
+      <li class={{if (eq currentRouteName 'review') "active"}}> Review </li>
+    </ul>
+  </nav>
 </div>
 {{outlet}}

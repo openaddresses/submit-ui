@@ -9,8 +9,8 @@
     </div>
     <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
   </div>
-  <div>
-    or
+  <div class="ui horizontal divider">
+    Or
   </div>
   <div>
     <label for="uploadfile" class="ui icon button">
@@ -19,5 +19,5 @@
     </label>
     <input type="file" id="uploadfile" style="display:none" onChange={{action "uploadFile"}}>{{fileName}}
   </div>
-  {{nav-buttons sendChangeRoute="changeRoute" next="source"}}
+  {{nav-buttons sendChangeRoute="changeRoute" next="more-info"}}
 </div>
