@@ -11,6 +11,7 @@ export default Ember.Controller.extend(sharedActions, {
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
   }),
+  currentField: "number",
   actions: {
     chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
