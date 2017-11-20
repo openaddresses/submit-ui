@@ -12,9 +12,25 @@ export default Ember.Controller.extend(sharedActions, {
     return this.model.webServiceResponse.source_data.results;
   }),
   currentField: "number",
+  nextField: Ember.computed('currentField', function(){
+    var nextFields = {
+      "number": "street",
+      "street": "unit",
+      "unit": "city",
+      "city": "district",
+      "district": "region",
+      "region": "postcode",
+      "postcode": "lon",
+      "lon": "lat"
+    };
+    return nextFields[this.get('currentField')];
+  }),
   actions: {
     goToField: function(field){
       this.set('currentField', field);
+    },
+    nextField: function(){
+      this.set('currentField', this.get('nextField'));
     },
     chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);

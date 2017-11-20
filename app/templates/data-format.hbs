@@ -1,5 +1,5 @@
 <div class="ui text container">
-  <h3 class="first headroom">Column mapping</h3>
+  <h3 class="first headroom">Format data</h3>
   <table class="ui celled table">
     <thead>
       <tr>
@@ -11,12 +11,12 @@
           {{/unless}}
           {{#if (eq field "lon")}}
             {{#if (eq model.webServiceResponse.conform.type "csv")}}
-              <th>{{field}}</th>
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
             {{/if}}
           {{/if}}
           {{#if (eq field "lat")}}
             {{#if (eq model.webServiceResponse.conform.type "csv")}}
-              <th>{{field}}</th>
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
             {{/if}}
           {{/if}}
 
@@ -134,18 +134,21 @@
                 <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Remove prefix unit</button>
                 <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Remove postfix unit</button>
                 <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove split <i class="remove icon"></i></button>
-              {{else if (eq properties.function "postfixed_street_pattern")}}
-                <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
-              {{else if (eq properties.function "prefixed_number_pattern")}}
-                <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
-              {{else if (eq properties.function "postfixed_street_with_units_pattern")}}
-                <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
-              {{else if (eq properties.function "postfixed_unit_pattern")}}
+              {{else if properties.function}}
                 <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
               {{else}}
                 <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
                 <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
               {{/if}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                  {{#unless (eq currentField "lat")}}
+                    <button class="ui button" onClick={{action "nextField" field}}>Looks good, move on to {{nextField}} <i class="right arrow icon"></i></button>
+                  {{/unless}}
+                {{else}}
+                  {{#unless (eq currentField "postcode")}}
+                    <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+                  {{/unless}}
+                {{/if}}
             </div>
           </div>
         </div>
