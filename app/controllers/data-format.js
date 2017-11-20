@@ -13,6 +13,9 @@ export default Ember.Controller.extend(sharedActions, {
   }),
   currentField: "number",
   actions: {
+    goToField: function(field){
+      this.set('currentField', field);
+    },
     chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
       this.model.submission.get('oaFields')[heading].fields.addObject(column);

@@ -6,7 +6,7 @@
         {{#each-in model.submission.oaFields as |field properties|}}
           {{#unless (eq field "lon")}}
             {{#unless (eq field "lat")}}
-              <th>{{field}}</th>
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
             {{/unless}}
           {{/unless}}
           {{#if (eq field "lon")}}
