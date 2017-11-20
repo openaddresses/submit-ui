@@ -14,56 +14,47 @@ export default DS.Model.extend({
     number:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     street:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     unit:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     city:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     district:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     region:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     postcode:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     lon:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     },
     lat:{
       fields: [],
       function: null,
-      separator: " ",
-      field_to_remove: null,
+      separator: " "
     }
   },
   exampleRows:[{

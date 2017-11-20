@@ -106,10 +106,10 @@
     </tbody>
   </table>
   <div class="ui segment">
-    <h3 class="ui floated header">Column mapping</h3><i class="icon edit" onClick={{action "editField" "mapping"}}></i>
+    <h3 class="ui floated header">Data format</h3><i class="icon edit" onClick={{action "editField" "data-format"}}></i>
     <div class="ui clearing divider"></div>
     {{#each-in model.oaFields as |field properties|}}
-      {{#if properties.columns}}
+      {{#if properties.fields}}
         <table class="ui definition table">
           <tbody>
             <tr>
@@ -118,34 +118,14 @@
             </tr>
             <tr>
               <td>Column(s)</td>
-              <td>{{properties.columns}}</td>
+              <td>{{properties.fields}}</td>
             </tr>
-            {{#if properties.action}}
+            {{#if properties.function}}
               <tr>
                 <td>Function</td>
                 <td>
-                  {{properties.action}}
+                  {{properties.function}}
                 </td>
-              </tr>
-            {{/if}}
-            {{#if properties.extractionFunction}}
-              <tr>
-                <td>Extraction function</td>
-                <td>
-                  {{#if (eq properties.extractionFunction "removePrefixNumber")}}
-                    Remove prefix number
-                  {{else if (eq properties.extractionFunction "removePostfixStreet")}}
-                    Remove postfix street
-                  {{else if (eq properties.extractionFunction "removeDuplicateValue")}}
-                    Remove value found in another column
-                  {{/if}}
-                </td>
-              </tr>
-            {{/if}}
-            {{#if properties.extractionColumn}}
-              <tr>
-                <td>Extraction column</td>
-                <td>{{properties.extractionColumn}}</td>
               </tr>
             {{/if}}
           </tbody>
