@@ -7,7 +7,7 @@ export default Ember.Route.extend({
   },
   model: function(){
     // for development, remove before merging
-    this.store.createRecord('submission');
+    // this.store.createRecord('submission');
     // 
     var submission = this.get('store').peekAll('submission').get('firstObject');
     var request = submission.data_url;
