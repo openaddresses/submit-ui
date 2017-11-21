@@ -10,7 +10,9 @@ export default Ember.Route.extend({
     // this.store.createRecord('submission');
     // 
     var submission = this.get('store').peekAll('submission').get('firstObject');
-    var request = submission.data_url;
+    // var request = submission.data_url;
+    // request will change once app is set up to work with web service
+    var request = 'api/responses';
     var webServiceResponse = this.getWebServiceResponse(request);
       
     return Ember.RSVP.hash({
