@@ -86,3 +86,22 @@ nav ul li.active {
 .review-nav .ui.button {
   margin: 15px 0px;
 }
+
+.field.label {
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  color: #134045;
+  text-transform: uppercase;
+}
+
+.info.value {
+  padding: 10px 0px;
+}
+
+.ui.fitted.divider {
+  margin: 0px !important;
+}
+
+.ui.fitted.divider:last-child {
+  display: none;
+}
