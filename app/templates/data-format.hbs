@@ -54,7 +54,9 @@
           <label>{{field}}</label>
           <div class="ui stackable three column center aligned grid">
             <div class="sixteen wide column">
-              {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
+              {{#unless (eq properties.function "join")}}
+                {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
+              {{/unless}}
               {{#if (eq properties.function "join")}}
                 {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown columnHeadings=columnHeadings model=model}}
               {{else if (eq properties.function "split")}}
