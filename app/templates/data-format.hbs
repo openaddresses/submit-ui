@@ -53,22 +53,8 @@
         <div class="field">
           <label>{{field}}</label>
           <div class="ui stackable three column center aligned grid">
-            <div class={{if (eq properties.function "join") "seven wide column" "sixteen wide column"}}>
-              <div class={{if (eq properties.function "join") "hidden"}}>
-                {{#ui-dropdown class="selection fluid" selected=properties.fields.firstObject onChange=(action "chooseField" field) as |execute mapper|}}
-                  <div class="default text">
-                    Source column headings
-                  </div>
-                  <i class="dropdown icon"></i>
-                  <div class="menu">
-                    {{#each columnHeadings as |heading|}}
-                      <div class="item" data-value="{{map-value mapper heading}}">
-                        {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-                      </div>
-                    {{/each}}
-                  </div>
-                {{/ui-dropdown}}
-              </div>
+            <div class="sixteen wide column">
+              {{select-column sendChooseField=chooseField field=field properties=properties columnHeadings=columnHeadings model=model}}
               
               {{#if (eq properties.function "join")}}
                 {{#each properties.fields as |column index|}}

@@ -32,14 +32,6 @@ export default Ember.Controller.extend(sharedActions, {
     nextField: function(){
       this.set('currentField', this.get('nextField'));
     },
-    chooseField: function(heading, column){
-      Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
-      this.model.submission.get('oaFields')[heading].fields.addObject(column);
-      for (var i = 0; i < 2; i++){
-        Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
-      }
-      this.set('showAdditionalJoinDropdown', true);
-    },
     editField: function(heading, index, column){
       this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
       for (var i = 0; i < 2; i++){
