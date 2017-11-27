@@ -2,7 +2,9 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   showAdditionalJoinDropdown: null,
-
+  user_data: Ember.computed('model.webServiceResponse', function(){
+    return this.model.webServiceResponse.source_data.results;
+  }),
   actions: {
     editField: function(heading, index, column){
       this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
