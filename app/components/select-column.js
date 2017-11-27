@@ -2,12 +2,12 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   field: null,
-  columnHeadings: null,
+  // columnHeadings: null,
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
   }),
   actions: {
-    sendChooseField: function(heading, column){
+    chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
       this.model.submission.get('oaFields')[heading].fields.addObject(column);
       for (var i = 0; i < 2; i++){

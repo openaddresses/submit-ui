@@ -54,66 +54,9 @@
           <label>{{field}}</label>
           <div class="ui stackable three column center aligned grid">
             <div class="sixteen wide column">
-              {{select-column sendChooseField=chooseField field=field properties=properties columnHeadings=columnHeadings model=model}}
-              
+              {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
               {{#if (eq properties.function "join")}}
-                {{#each properties.fields as |column index|}}
-                  {{#if (gte index 1)}}
-                    <a class="item">
-                      <i class="plus icon"></i>
-                    </a>
-                  {{/if}}
-                  <div class="field">
-                    <div class="fields">
-                      <div class="fifteen wide field">
-                        {{#ui-dropdown class="selection fluid" selected=column onChange=(action "editField" field index) as |execute mapper|}}
-                          <div class="default text">
-                            Source column headings
-                          </div>
-                          <i class="dropdown icon"></i>
-                          <div class="menu">
-                            {{#each columnHeadings as |heading|}}
-                              <div class="item" data-value="{{map-value mapper heading}}">
-                                {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-                              </div>
-                            {{/each}}
-                          </div>
-                        {{/ui-dropdown}}
-                      </div>
-                      {{#if (gte index 1)}}
-                        <div class="one wide field">
-                          <button class="ui icon mini button basic red" onClick={{action "removeField" field column}}>
-                            <i class="remove icon"></i>
-                          </button>
-                        </div>
-                      {{/if}}
-                    </div>
-                  </div>
-                {{/each}}
-                {{#if showAdditionalJoinDropdown}}
-                  <a class="item">
-                    <i class="plus icon"></i>
-                  </a>
-                  {{#ui-dropdown class="selection fluid" onChange=(action "addField" field) as |execute mapper|}}
-                    <div class="default text">
-                      Source column headings
-                    </div>
-                    <i class="dropdown icon"></i>
-                    <div class="menu">
-                      {{#each columnHeadings as |heading|}}
-                        <div class="item" data-value="{{map-value mapper heading}}">
-                          {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-                        </div>
-                      {{/each}}
-                    </div>
-                  {{/ui-dropdown}}
-                {{/if}}
-                <div>
-                  {{#if showAdditionalJoinButton}}
-                    <button class="ui button basic blue" onClick={{action "addJoin" field}}>Join another column <i class="plus icon"></i></button>
-                  {{/if}}
-                  <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove join <i class="remove icon"></i></button>
-                </div>
+                {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown columnHeadings=columnHeadings model=model}}
               {{else if (eq properties.function "split")}}
                 <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_street_pattern" field}}>Remove prefix number</button>
                 <button class="ui button basic green" onClick={{action "extractionFunction" "prefixed_number_pattern" field}}>Remove postfix street</button>
