@@ -1,6 +1,7 @@
-/*.ui.button {
+.data-format .ui.button {
   margin-top: 15px;
-}*/
+}
+
 .inactiveField {
   cursor: pointer;
 }

@@ -50,7 +50,7 @@
     </table>
     {{#each-in model.submission.oaFields as |field properties|}}
       {{#if (eq field currentField)}}
-        <form class="ui form segment">
+        <form class="ui form segment data-format">
           <div class="field">
             <label>{{field}}</label>
             <div class="ui stackable three column center aligned grid">
