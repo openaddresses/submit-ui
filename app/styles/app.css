@@ -37,6 +37,19 @@ h5 {
 }
 
 /* styling changes */
+:root {
+  --error: #e50b17;
+  --error-hover: #94070f;
+  --success: #69cb01;
+  --success-hover: #468701;
+  --link: #1b90f9;
+  --link-hover: #0564ba;
+  --button-next: #00b5ad;
+  --button-next-hover: #00938d;
+  --button-back: #777777;
+  --button-back-hover: #444444;
+}
+
 .form-content {
   margin-top: 2em;
 }
