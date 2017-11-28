@@ -1,6 +1,6 @@
-.ui.button {
+/*.ui.button {
   margin-top: 15px;
-}
+}*/
 .inactiveField {
   cursor: pointer;
 }
@@ -58,6 +58,41 @@ h5 {
   margin-top: 4em !important;
 }
 
+.ui.input {
+  width: 80%;
+}
+
+.ui.horizontal.divider {
+  width: 80%;
+  margin: 40px auto;
+}
+
+.ui.upload.button {
+  width: 45%;
+  background: var(--link);
+  color: white;
+}
+
+.ui.upload.button:hover {
+  background: var(--link-hover);
+}
+
+#back {
+  background: var(--button-back);
+}
+
+#back:hover {
+  background: var(--button-back-hover);
+}
+
+#next {
+  background: var(--button-next);
+}
+
+#next:hover {
+  background: var(--button-next-hover);
+}
+
 /* add feed progress tabs styling */
 nav {
   padding: 0px;
@@ -75,17 +110,17 @@ nav ul {
 }
 
 nav ul li {
-  padding: 10px 10px 5px 10px;
+  padding: 20px 10px 5px 10px;
   margin: 0px 15px;
   color: lightgray;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   border-bottom: solid 3px gray;
 }
 
 nav ul li.active {
   color: white;
   font-weight: bold;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   border-bottom: solid 3px white;
 }
 
