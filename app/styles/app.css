@@ -36,6 +36,11 @@ h5 {
   font-size: 16px !important;
 }
 
+/* styling changes */
+.form-content {
+  margin-top: 2em;
+}
+
 /* add feed progress tabs styling */
 nav {
   padding: 0px;
