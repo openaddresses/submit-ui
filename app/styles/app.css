@@ -41,6 +41,10 @@ h5 {
   margin-top: 2em;
 }
 
+.nav-button {
+  margin-top: 4em !important;
+}
+
 /* add feed progress tabs styling */
 nav {
   padding: 0px;
