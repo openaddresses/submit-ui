@@ -58,6 +58,24 @@
           </div>
         {{/if}}
       {{/if}}
+      <div class="ui hidden divider"></div>
+      <div class="field">
+        <h4 class="ui dividing header">Data information</h4>
+        <div class="field">
+          <label>Frequency of update</label>
+          {{#ui-dropdown class="selection" selected=model.update_frequency onChange=(action "setFrequency") as | execute mapper|}}
+            <div class="default text">Frequency</div>
+            <i class="dropdown icon"></i>
+            <div class="menu">
+              {{#each frequencies as | frequency |}}
+                <div class="item" data-value={{map-value mapper frequency}}>
+                  {{frequency}}
+                </div>
+              {{/each}}
+            </div>
+          {{/ui-dropdown}}
+        </div>
+      </div>
     </div>
   </div>
   {{nav-buttons back="intro" sendChangeRoute="changeRoute" next="data-format"}}
