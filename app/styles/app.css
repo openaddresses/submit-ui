@@ -1,5 +1,5 @@
-.data-format .ui.button {
-  margin-top: 15px;
+.ui.button {
+  margin-top: 10px;
 }
 
 .inactiveField {
@@ -65,7 +65,8 @@ h5 {
 
 .ui.horizontal.divider {
   width: 80%;
-  margin: 40px auto;
+  margin: 35px auto;
+  margin-bottom: 25px; /* upload button has margin-top already */
 }
 
 .ui.upload.button {
@@ -92,6 +93,12 @@ h5 {
 
 #next:hover {
   background: var(--button-next-hover);
+}
+
+.ui.form .field .license {
+  width: 35% !important;
+  margin-left: 25px !important;
+  margin-bottom: 10px;
 }
 
 /* add feed progress tabs styling */
@@ -144,6 +151,11 @@ nav ul li.active {
 
 .field .ui.button.active {
   background: #508478;
+  color: white;
+}
+
+.field .ui.button.none.active {
+  background: gray;
   color: white;
 }
 
