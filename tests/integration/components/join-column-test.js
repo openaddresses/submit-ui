@@ -12,14 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{join-column}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'Remove join');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#join-column}}
-      template block text
-    {{/join-column}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

@@ -12,14 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{select-column}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'Source column headings');
 
-  // Template block usage:
-  this.render(hbs`
-    {{#select-column}}
-      template block text
-    {{/select-column}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });
