@@ -110,12 +110,12 @@
   </div>
   <div class="ui hidden divider"></div>
   <div class="ui attached message">
-    <button class="ui labeled icon right floated blue basic button mini" onClick={{action "editField" "mapping"}}><i class="icon edit"></i>Edit</button>
-    <h3 class="ui header">Column Mapping</h3>
+    <button class="ui labeled icon right floated blue basic button mini" onClick={{action "editField" "data-format"}}><i class="icon edit"></i>Edit</button>
+    <h3 class="ui header">Data format</h3>
   </div>
   <div class="ui segment attached">
     {{#each-in model.oaFields as |field properties|}}
-      {{#if properties.columns}}
+      {{#if properties.fields}}
         <table class="ui definition table">
           <tbody>
             <tr>
@@ -124,34 +124,14 @@
             </tr>
             <tr>
               <td>Column(s)</td>
-              <td>{{properties.columns}}</td>
+              <td>{{properties.fields}}</td>
             </tr>
-            {{#if properties.action}}
+            {{#if properties.function}}
               <tr>
                 <td>Function</td>
                 <td>
-                  {{properties.action}}
+                  {{properties.function}}
                 </td>
-              </tr>
-            {{/if}}
-            {{#if properties.extractionFunction}}
-              <tr>
-                <td>Extraction function</td>
-                <td>
-                  {{#if (eq properties.extractionFunction "removePrefixNumber")}}
-                    Remove prefix number
-                  {{else if (eq properties.extractionFunction "removePostfixStreet")}}
-                    Remove postfix street
-                  {{else if (eq properties.extractionFunction "removeDuplicateValue")}}
-                    Remove value found in another column
-                  {{/if}}
-                </td>
-              </tr>
-            {{/if}}
-            {{#if properties.extractionColumn}}
-              <tr>
-                <td>Extraction column</td>
-                <td>{{properties.extractionColumn}}</td>
               </tr>
             {{/if}}
           </tbody>

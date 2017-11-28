@@ -1,0 +1,161 @@
+<div class="ui text container">
+  <h3 class="first headroom">Data format</h3>
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        {{#each-in model.submission.oaFields as |field properties|}}
+          {{#unless (eq field "lon")}}
+            {{#unless (eq field "lat")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/unless}}
+          {{/unless}}
+          {{#if (eq field "lon")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/if}}
+          {{/if}}
+          {{#if (eq field "lat")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/if}}
+          {{/if}}
+
+        {{/each-in}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each-in model.submission.exampleRows as |rows fields|}}
+        <tr>
+          {{#each-in fields as |field label|}}
+            {{#unless (eq field "lon")}}
+              {{#unless (eq field "lat")}}
+                <td class={{if (eq field currentField) "active"}}>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/unless}}
+            {{/unless}}
+            {{#if (eq field "lon")}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                <td class={{if (eq field currentField) "active"}}>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/if}}
+            {{/if}}
+            {{#if (eq field "lat")}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                <td class={{if (eq field currentField) "active"}}>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/if}}
+            {{/if}}
+          {{/each-in}}
+        </tr>
+      {{/each-in}}
+    </tbody>
+  </table>
+  {{#each-in model.submission.oaFields as |field properties|}}
+    {{#if (eq field currentField)}}
+      <form class="ui form segment">
+        <div class="field">
+          <label>{{field}}</label>
+          <div class="ui stackable three column center aligned grid">
+            <div class={{if (eq properties.function "join") "seven wide column" "sixteen wide column"}}>
+              <div class={{if (eq properties.function "join") "hidden"}}>
+                {{#ui-dropdown class="selection fluid" selected=properties.fields.firstObject onChange=(action "chooseField" field) as |execute mapper|}}
+                  <div class="default text">
+                    Source column headings
+                  </div>
+                  <i class="dropdown icon"></i>
+                  <div class="menu">
+                    {{#each columnHeadings as |heading|}}
+                      <div class="item" data-value="{{map-value mapper heading}}">
+                        {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                      </div>
+                    {{/each}}
+                  </div>
+                {{/ui-dropdown}}
+              </div>
+              
+              {{#if (eq properties.function "join")}}
+                {{#each properties.fields as |column index|}}
+                  {{#if (gte index 1)}}
+                    <a class="item">
+                      <i class="plus icon"></i>
+                    </a>
+                  {{/if}}
+                  <div class="field">
+                    <div class="fields">
+                      <div class="fifteen wide field">
+                        {{#ui-dropdown class="selection fluid" selected=column onChange=(action "editField" field index) as |execute mapper|}}
+                          <div class="default text">
+                            Source column headings
+                          </div>
+                          <i class="dropdown icon"></i>
+                          <div class="menu">
+                            {{#each columnHeadings as |heading|}}
+                              <div class="item" data-value="{{map-value mapper heading}}">
+                                {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                              </div>
+                            {{/each}}
+                          </div>
+                        {{/ui-dropdown}}
+                      </div>
+                      {{#if (gte index 1)}}
+                        <div class="one wide field">
+                          <button class="ui icon mini button basic red" onClick={{action "removeField" field column}}>
+                            <i class="remove icon"></i>
+                          </button>
+                        </div>
+                      {{/if}}
+                    </div>
+                  </div>
+                {{/each}}
+                {{#if showAdditionalJoinDropdown}}
+                  <a class="item">
+                    <i class="plus icon"></i>
+                  </a>
+                  {{#ui-dropdown class="selection fluid" onChange=(action "addField" field) as |execute mapper|}}
+                    <div class="default text">
+                      Source column headings
+                    </div>
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                      {{#each columnHeadings as |heading|}}
+                        <div class="item" data-value="{{map-value mapper heading}}">
+                          {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+                        </div>
+                      {{/each}}
+                    </div>
+                  {{/ui-dropdown}}
+                {{/if}}
+                <div>
+                  {{#if showAdditionalJoinButton}}
+                    <button class="ui button basic blue" onClick={{action "addJoin" field}}>Join another column <i class="plus icon"></i></button>
+                  {{/if}}
+                  <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove join <i class="remove icon"></i></button>
+                </div>
+              {{else if (eq properties.function "split")}}
+                <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_street_pattern" field}}>Remove prefix number</button>
+                <button class="ui button basic green" onClick={{action "extractionFunction" "prefixed_number_pattern" field}}>Remove postfix street</button>
+                <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Remove prefix unit</button>
+                <button class="ui button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Remove postfix unit</button>
+                <button class="ui button basic blue" onClick={{action "removeFunction" field}}>Remove split <i class="remove icon"></i></button>
+              {{else if properties.function}}
+                <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+              {{else}}
+                {{#if properties.fields}}
+                  <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
+                  <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
+                {{/if}}
+              {{/if}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                  {{#unless (eq currentField "lat")}}
+                    <button class="ui button" onClick={{action "nextField" field}}>Looks good, move on to {{nextField}} <i class="right arrow icon"></i></button>
+                  {{/unless}}
+                {{else}}
+                  {{#unless (eq currentField "postcode")}}
+                    <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+                  {{/unless}}
+                {{/if}}
+            </div>
+          </div>
+        </div>
+      </form>
+    {{/if}}
+  {{/each-in}}
+  {{nav-buttons sendChangeRoute="changeRoute" back="license" next="contact"}}
+</div>

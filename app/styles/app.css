@@ -5,6 +5,11 @@
   cursor: pointer;
 }
 
+/*probably not ideal way to handle this*/
+.hidden {
+  visibility: hidden;
+}
+
 .ui.inverted.vertical.masthead.center.aligned.segment.teal {
   padding-bottom: 0px;
   margin-bottom: 30px;
