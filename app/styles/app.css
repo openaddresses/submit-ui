@@ -186,7 +186,7 @@ nav ul li.active {
 .review.edit {
   color: var(--link);
   position: absolute;
-  right: 15px;
+  right: 20px;
   cursor: pointer;
 }
 
