@@ -95,6 +95,10 @@ h5 {
   background: var(--button-next-hover);
 }
 
+span.required {
+  color: red;
+}
+
 /* add feed progress tabs styling */
 nav {
   padding: 0px;
