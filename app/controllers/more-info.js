@@ -50,9 +50,6 @@ export default Ember.Controller.extend({
     },
     setFrequency: function(frequency){
       this.model.set('update_frequency', frequency);
-    },
-    setSource: function(source){
-      this.model.set('source', source.target.value);
     }
   }
 });
