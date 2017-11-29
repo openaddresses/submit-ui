@@ -47,27 +47,6 @@
               <input type="text" class="license" placeholder="www.sample.com..." value={{model.user_submitted_url}} onInput={{action "userSubmittedLicense"}}>
             </div>
           {{/if}}
-              <!-- <div class="seven wide field">
-                <label>Choose from license</label>
-                {{#ui-dropdown class="selection" selected=model.license onChange=(action "selectLicense") as | execute mapper|}}
-                  <div class="default text">Licenses</div>
-                  <i class="dropdown icon"></i>
-                  <div class="menu">
-                    {{#each licenses as | license |}}
-                      <div class="item" data-value={{map-value mapper license}}>
-                        {{license.name}}
-                      </div>
-                    {{/each}}
-                  </div>
-                {{/ui-dropdown}}
-              </div>
-              <div class="divider column">
-                <div class="ui vertical divider">Or </div>
-              </div>
-              <div class="seven wide field">
-                <label>Provide link to license</label>
-                <input type="text" placeholder="www.sample.com..." value={{model.user_submitted_url}} onInput={{action "userSubmittedLicense"}}>
-              </div> -->
         </form>
         <div class="field">
           <div class="inline field">
