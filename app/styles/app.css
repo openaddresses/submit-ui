@@ -1,14 +1,6 @@
+/* general styling */
 .ui.button {
   margin-top: 10px;
-}
-
-.inactiveField {
-  cursor: pointer;
-}
-
-/*probably not ideal way to handle this*/
-.hidden {
-  visibility: hidden;
 }
 
 .ui.inverted.vertical.masthead.center.aligned.segment.teal {
@@ -16,7 +8,6 @@
   margin-bottom: 30px;
 }
 
-/* general font size styling */
 h1 {
   font-size: 48px !important;
 }
@@ -37,7 +28,6 @@ h5 {
   font-size: 16px !important;
 }
 
-/* styling changes */
 :root {
   --error: #e50b17;
   --error-hover: #94070f;
@@ -59,26 +49,6 @@ h5 {
   margin-top: 4em !important;
 }
 
-.ui.input {
-  width: 80%;
-}
-
-.ui.horizontal.divider {
-  width: 80%;
-  margin: 35px auto;
-  margin-bottom: 25px; /* upload button has margin-top already */
-}
-
-.ui.upload.button {
-  width: 45%;
-  background: var(--link);
-  color: white;
-}
-
-.ui.upload.button:hover {
-  background: var(--link-hover);
-}
-
 #back {
   background: var(--button-back);
 }
@@ -97,17 +67,6 @@ h5 {
 
 span.required {
   color: red;
-}
-
-.review.edit {
-  color: var(--link);
-  position: absolute;
-  right: 15px;
-  cursor: pointer;
-}
-
-.review.edit:hover {
-  color: var(--link-hover);
 }
 
 /* add feed progress tabs styling */
@@ -153,8 +112,29 @@ nav ul li.active {
     }
 }
 
+/* styling for data source page */
+.ui.url.input {
+  width: 80%;
+}
+
+.ui.horizontal.divider {
+  width: 80%;
+  margin: 35px auto;
+  margin-bottom: 25px; /* upload button has margin-top already */
+}
+
+.ui.upload.button {
+  width: 45%;
+  background: var(--link);
+  color: white;
+}
+
+.ui.upload.button:hover {
+  background: var(--link-hover);
+}
+
 /* styling for more-info page */
-.ui.form .inline.field {
+.ui.form .inline.sharealike.field {
   margin-top: 1em;
 }
 
@@ -168,14 +148,25 @@ nav ul li.active {
   color: white;
 }
 
+/* styling for data format page */
+.inactiveField {
+  cursor: pointer;
+}
+
+/*probably not ideal way to handle this*/
+.hidden {
+  visibility: hidden;
+}
+
 /* styling for review page */
 .review-nav .ui.button {
-  margin: 15px 0px;
+  margin-top: 4em !important;
+  margin-bottom: 20px;
 }
 
 .field.label {
   font-weight: bold;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   color: #134045;
   text-transform: uppercase;
 }
@@ -190,4 +181,15 @@ nav ul li.active {
 
 .ui.fitted.divider:last-child {
   display: none;
+}
+
+.review.edit {
+  color: var(--link);
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+
+.review.edit:hover {
+  color: var(--link-hover);
 }
