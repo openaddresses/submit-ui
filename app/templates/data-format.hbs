@@ -53,7 +53,7 @@
     {{#each-in model.submission.oaFields as |field properties|}}
       {{#if (eq field currentField)}}
         <form class="ui form segment data-format">
-          <div class="field">
+          <div class="field {{if (or (eq field "number") (eq field "street")) "required"}}">
             <label>{{field}}</label>
             <div class="ui stackable three column center aligned grid">
               <div class={{if (eq properties.function "join") "seven wide column" "sixteen wide column"}}>
