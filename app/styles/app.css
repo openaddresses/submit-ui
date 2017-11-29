@@ -99,6 +99,17 @@ span.required {
   color: red;
 }
 
+.review.edit {
+  color: var(--link);
+  position: absolute;
+  right: 15px;
+  cursor: pointer;
+}
+
+.review.edit:hover {
+  color: var(--link-hover);
+}
+
 /* add feed progress tabs styling */
 nav {
   padding: 0px;
@@ -157,16 +168,7 @@ nav ul li.active {
   color: white;
 }
 
-.divider.column {
-  position: relative;
-  padding: 25px;
-}
-
 /* styling for review page */
-.edit.ui.button {
-  margin: 0px;
-}
-
 .review-nav .ui.button {
   margin: 15px 0px;
 }
