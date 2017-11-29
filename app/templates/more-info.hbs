@@ -4,11 +4,9 @@
     We'll gather more info from the user about license/attribution/update frequency here.
   </p>
   <div class="form-content">
-    <div class="ui small teal message">
-      <p>
-        <span class="required"> * </span>
-        required fields
-      </p>
+    <div class="ui teal tiny message">
+      <p> <span class="required"> * </span>
+        indicates field is <b> required </b> to proceed </p>
     </div>
     <div class="ui form segment">
       <div class="required field">
@@ -21,7 +19,7 @@
       {{#if (eq model.license_exists true)}}
         <form class="ui form">
           <div class="inline required fields">
-            <label> Add a license </label>
+            <label> Add a license <span class="required"> * </span> </label>
             <div class="grouped fields">
               <div class="field">
                 {{ui-radio name="license" label="Choose from license" value="choose" current=license onChange=(action (mut license))}}
