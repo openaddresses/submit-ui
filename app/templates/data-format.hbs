@@ -4,19 +4,6 @@
     <thead>
       <tr>
         {{#each-in model.submission.oaFields as |field properties|}}
-          {{#unless (eq field "lon")}}
-            {{#unless (eq field "lat")}}
-              <th>
-                <a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
-                  {{#if (eq field "number")}}
-                    house number
-                  {{else}}
-                    {{field}}
-                  {{/if}}
-                </a>
-              </th>
-            {{/unless}}
-          {{/unless}}
           {{#if (eq field "lon")}}
             {{#if (eq model.webServiceResponse.conform.type "csv")}}
               <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
@@ -27,7 +14,11 @@
               <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
             {{/if}}
           {{/if}}
-
+          {{#unless (eq field "lon")}}
+            {{#unless (eq field "lat")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/unless}}
+          {{/unless}}
         {{/each-in}}
       </tr>
     </thead>
@@ -59,7 +50,13 @@
     {{#if (eq field currentField)}}
       <form class="ui form segment">
         <div class="field">
-          <label>{{field}}</label>
+          <label>
+            {{#if (eq field "number")}}
+              house number 
+            {{else}}
+              {{field}}
+            {{/if}}
+          </label>
           {{#unless (eq properties.function "join")}}
             {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
           {{/unless}}
@@ -83,15 +80,9 @@
               {{/unless}}
             {{/if}}
           {{/if}}
-          {{#if (eq model.webServiceResponse.conform.type "csv")}}
-            {{#unless (eq currentField "lat")}}
-                <button class="ui button" onClick={{action "nextField" field}}>Looks good, move on to {{nextField}} <i class="right arrow icon"></i></button>
-            {{/unless}}
-          {{else}}
-            {{#unless (eq currentField "postcode")}}
-              <button class="ui button" onClick={{action "nextField" field}}>Looks good, move on to {{nextField}} <i class="right arrow icon"></i></button>
-            {{/unless}}
-          {{/if}}
+          {{#unless (eq currentField "postcode")}}
+              <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+          {{/unless}}
         </div>
       </form>
     {{/if}}

@@ -10,17 +10,23 @@ export default Ember.Controller.extend(sharedActions, {
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
   }),
-  currentField: "number",
+  currentField: Ember.computed('model.webServiceResponse', function(){
+    if (this.model.webServiceResponse.conform.type === "csv"){
+      return "lon";
+    } else {
+      return "number";
+    }
+  }),
   nextField: Ember.computed('currentField', function(){
     var nextFields = {
+      "lon": "lat",
+      "lat": "number",
       "number": "street",
       "street": "unit",
       "unit": "city",
       "city": "district",
       "district": "region",
-      "region": "postcode",
-      "postcode": "lon",
-      "lon": "lat"
+      "region": "postcode"
     };
     return nextFields[this.get('currentField')];
   }),

@@ -17,6 +17,17 @@ export default DS.Model.extend({
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
   oaFields:{
+    lon:{
+      fields: [],
+      function: null,
+      separator: " "
+    },
+    lat:{
+      fields: [],
+      function: null,
+      separator: " ",
+      may_contain_units: false
+    },
     number:{
       fields: [],
       function: null,
@@ -25,8 +36,7 @@ export default DS.Model.extend({
     street:{
       fields: [],
       function: null,
-      separator: " ",
-      may_contain_units: false
+      separator: " "
     },
     unit:{
       fields: [],
@@ -52,38 +62,28 @@ export default DS.Model.extend({
       fields: [],
       function: null,
       separator: " "
-    },
-    lon:{
-      fields: [],
-      function: null,
-      separator: " "
-    },
-    lat:{
-      fields: [],
-      function: null,
-      separator: " "
     }
   },
   exampleRows:[{
+    lon: null,
+    lat: null,
     number: null,
     street: null,
     unit: null,
     city: null,
     district: null,
     region: null,
-    postcode: null,
-    lon: null,
-    lat: null
+    postcode: null
   },
   {
+    lon: null,
+    lat: null,
     number: null,
     street: null,
     unit: null,
     city: null,
     district: null,
     region: null,
-    postcode: null,
-    lon: null,
-    lat: null
+    postcode: null
   }]
 });
