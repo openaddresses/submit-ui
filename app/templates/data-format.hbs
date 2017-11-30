@@ -13,6 +13,9 @@
                   {{else}}
                     {{field}}
                   {{/if}}
+                  {{#if (or (eq field "number") (eq field "street"))}}
+                    <span class="required"> * </span>
+                  {{/if}}
                 </a>
               </th>
             {{/unless}}
@@ -59,7 +62,12 @@
     {{#if (eq field currentField)}}
       <form class="ui form segment">
         <div class="field">
-          <label>{{field}}</label>
+          <label>
+            {{field}}
+            {{#if (or (eq field "number") (eq field "street"))}}
+              <span class="required"> * </span>
+            {{/if}}
+          </label>
           <div class="ui stackable three column center aligned grid">
             <div class="sixteen wide column">
               {{#unless (eq properties.function "join")}}
