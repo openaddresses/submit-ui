@@ -59,7 +59,13 @@
     {{#if (eq field currentField)}}
       <form class="ui form segment">
         <div class="field">
-          <label>{{field}}</label>
+          <label>
+            {{#if (eq field "number")}}
+              house number 
+            {{else}}
+              {{field}}
+            {{/if}}
+          </label>
           <div class="ui stackable three column center aligned grid">
             <div class="sixteen wide column">
               {{#unless (eq properties.function "join")}}
