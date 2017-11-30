@@ -75,7 +75,9 @@
               {{#unless (eq field "city")}}
                 {{#unless (eq field "region")}}
                   {{#unless (eq field "district")}}
-                    <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
+                    {{#unless (eq field "postcode")}}
+                      <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
+                    {{/unless}}
                   {{/unless}}
                 {{/unless}}
               {{/unless}}
