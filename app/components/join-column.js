@@ -1,41 +1,34 @@
 import Ember from 'ember';
-import sharedActions from '../mixins/shared-actions';
 
-export default Ember.Controller.extend(sharedActions, {
-  columns: null,
-  columnHeadings: Ember.computed('model.webServiceResponse', function(){
-    return this.model.webServiceResponse.source_data.fields;
-  }),
-  showAdditionalJoinButton: false,
+export default Ember.Component.extend({
+  showAdditionalJoinDropdown: null,
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
   }),
-  currentField: "number",
-  nextField: Ember.computed('currentField', function(){
-    var nextFields = {
-      "number": "street",
-      "street": "unit",
-      "unit": "city",
-      "city": "district",
-      "district": "region",
-      "region": "postcode",
-      "postcode": "lon",
-      "lon": "lat"
-    };
-    return nextFields[this.get('currentField')];
-  }),
   actions: {
-    goToField: function(field){
-      this.set('currentField', field);
-    },
-    nextField: function(){
-      this.set('currentField', this.get('nextField'));
-    },
-    addFunction: function(field, action){
-      Ember.set(this.model.submission.get('oaFields')[field], "function", action);
-      if (action === "join"){
-        this.set('showAdditionalJoinDropdown', true);
+    editField: function(heading, index, column){
+      this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
+      for (var i = 0; i < 2; i++){
+        this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.source_data.results[i][column])
       }
+    },
+    addField: function(heading, column){
+      this.set('showAdditionalJoinDropdown', false);
+      this.model.submission.get('oaFields')[heading].fields.addObject(column)
+      for (var i = 0; i < 2; i++){
+        this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.source_data.results[i][column]);
+      }
+      this.set('showAdditionalJoinButton', true)
+    },
+    removeField: function(heading, column){
+      this.model.submission.get('oaFields')[heading].fields.removeObject(column);
+      for (var i = 0; i < 2; i++){
+        this.model.submission.exampleRows[i][heading].removeObject(this.model.webServiceResponse.source_data.results[i][column]);
+      }
+    },
+    addJoin: function(){
+      this.set('showAdditionalJoinDropdown', true);
+      this.set('showAdditionalJoinButton', false);
     },
     removeFunction: function(field){
       if (this.model.submission.get('oaFields')[field].function === "join" && this.model.submission.get('oaFields')[field].fields.length > 1){
@@ -53,8 +46,6 @@ export default Ember.Controller.extend(sharedActions, {
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
       }
     },
-    changeRoute: function(route){
-      this.transitionToRoute(route);
-    }
   }
+  
 });

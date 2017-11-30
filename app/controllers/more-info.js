@@ -2,11 +2,20 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
   licenses: [{
-    name: "license 1",
-    url: "www.license-1.com"
+    name: "Open Data Commons Attribution License (ODC-By)",
+    url: "http://opendatacommons.org/licenses/by/1.0/"
   },{
-    name: "license 2",
-    url: "www.license-2.com"
+    name: "Open Data Commons Open Database License (ODbL)",
+    url: "http://opendatacommons.org/licenses/odbl/1.0/"
+  },{
+    name: "Creative Commons Attribution (CC BY)",
+    url: "https://creativecommons.org/licenses/by/4.0/"
+  },{
+    name: "Creative Commons Attribution-ShareAlike (CC BY-SA)",
+    url: "https://creativecommons.org/licenses/by-sa/4.0/"
+  },{
+    name: "GNU Free Documentation License",
+    url: "http://www.gnu.org/licenses/fdl-1.3.en.html"
   }],
   frequencies: ["daily", "weekly", "monthly", "quarterly", "annually", "Unknown"],
   actions: {
@@ -50,9 +59,6 @@ export default Ember.Controller.extend({
     },
     setFrequency: function(frequency){
       this.model.set('update_frequency', frequency);
-    },
-    setSource: function(source){
-      this.model.set('source', source.target.value);
     }
   }
 });
