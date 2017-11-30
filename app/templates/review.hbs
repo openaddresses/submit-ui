@@ -121,7 +121,13 @@
             <tbody>
               <tr>
                 <td class="two wide column">Field</td>
-                <td>{{field}}</td>
+                <td>
+                  {{#if (eq field "number")}}
+                    house number
+                  {{else}}
+                    {{field}}
+                  {{/if}}
+                </td>
               </tr>
               <tr>
                 <td>Column(s)</td>

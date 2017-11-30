@@ -63,7 +63,11 @@
       <form class="ui form segment">
         <div class="field">
           <label>
-            {{field}}
+            {{#if (eq field "number")}} 
+              house number 
+            {{else}}
+              {{field}}
+            {{/if}}
             {{#if (or (eq field "number") (eq field "street"))}}
               <span class="required"> * </span>
             {{/if}}
