@@ -25,7 +25,8 @@ export default DS.Model.extend({
     street:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      may_contain_units: false
     },
     unit:{
       fields: [],

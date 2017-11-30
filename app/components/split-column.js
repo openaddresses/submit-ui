@@ -43,6 +43,13 @@ export default Ember.Component.extend({
       if (action === "join"){
         this.set('showAdditionalJoinDropdown', true);
       }
-    }
+    },
+    setMayContainUnits: function(){
+      if (this.model.submission.get('oaFields').street.may_contain_units === false){
+        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", true);
+      } else {
+        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", false);
+      }
+    },
   }
 });
