@@ -101,8 +101,7 @@ nav ul li.active {
   color: white;
   font-weight: bold;
   letter-spacing: 1px;
-  border-bottom: solid 3px white;
-  padding-bottom: 6px;
+  border-bottom: solid 4px white;
 }
 
 @media only screen and (max-width: 510px) {
