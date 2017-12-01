@@ -7,12 +7,13 @@ export default Ember.Component.extend({
       $('.ui.' + name + '.modal').modal('show');
       /*eslint-enable */
     },
-    approveModal: function(element, component) {
+    submitModal: function(element, component) {
       /*eslint-disable */
       $('.ui.modal').modal('toggle', element, component);
+      this.get('submit')("success");
       /*eslint-enable */
     },
-    denyModal: function() {
+    cancelModal: function() {
       return true;
     }
   }
