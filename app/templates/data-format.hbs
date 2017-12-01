@@ -1,5 +1,6 @@
 <div class="ui text container">
   <h3 class="first headroom">Data format</h3>
+<<<<<<< HEAD
   <div class="form-content">
     <div class="ui teal tiny message">
       <p> <span class="required"> * </span>
@@ -7,6 +8,41 @@
     </div>
     <table class="ui celled table">
       <thead>
+=======
+  <table class="ui celled table">
+    <thead>
+      <tr>
+        {{#each-in model.submission.oaFields as |field properties|}}
+          {{#unless (eq field "lon")}}
+            {{#unless (eq field "lat")}}
+              <th>
+                <a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
+                  {{#if (eq field "number")}}
+                    house number
+                  {{else}}
+                    {{field}}
+                  {{/if}}
+                </a>
+              </th>
+            {{/unless}}
+          {{/unless}}
+          {{#if (eq field "lon")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/if}}
+          {{/if}}
+          {{#if (eq field "lat")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/if}}
+          {{/if}}
+
+        {{/each-in}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each-in model.submission.exampleRows as |rows fields|}}
+>>>>>>> 5cfee66cbee4feec0e600014872babb0f807c3a3
         <tr>
           {{#each-in model.submission.oaFields as |field properties|}}
             {{#unless (eq field "lon")}}
