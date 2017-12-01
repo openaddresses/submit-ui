@@ -63,6 +63,23 @@ nav ul li.active {
   border-bottom: solid 3px white;
 }
 
+.first.headroom {
+  position: relative;
+}
+
+.help-button {
+  color: #1b90f9;
+  cursor: pointer;
+  font-size: medium;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+}
+
+.help-button:hover {
+  color: #0564ba;
+}
+
 /* styling for more-info page */
 .ui.form.field {
   margin-top: 0.5em;
