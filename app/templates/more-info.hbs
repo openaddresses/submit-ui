@@ -12,9 +12,9 @@
       <div class="required field">
         <h4 class="ui dividing header">License information</h4>
         <label>Does the data have a license?</label>
-        <button class="ui small button {{if (eq model.license_exists true) "active"}}" {{action "licenseExists" true}}>Yes</button>
-        <button class="ui small button none {{if (eq model.license_exists false) "active"}}" {{action "licenseExists" false}}>No</button>
-        <button class="ui small button none {{if (eq model.license_exists "unknown") "active"}}" {{action "licenseExists" "unknown"}}>I don't know</button>
+        <button class="ui compact button {{if (eq model.license_exists true) "active"}}" {{action "licenseExists" true}}>Yes</button>
+        <button class="ui compact button none {{if (eq model.license_exists false) "active"}}" {{action "licenseExists" false}}>No</button>
+        <button class="ui compact button none {{if (eq model.license_exists "unknown") "active"}}" {{action "licenseExists" "unknown"}}>I don't know</button>
       </div>
       {{#if (eq model.license_exists true)}}
         <form class="ui form">
@@ -60,9 +60,9 @@
       {{/if}}
       <div class="required field">
         <label>Does the license require attribution?</label>
-        <button class="ui small button {{if (eq model.attribution true) "active"}}" {{action "setAttribution" true}}>Yes</button>
-        <button class="ui small button none {{if (eq model.attribution false) "active"}}" {{action "setAttribution" false}}>No</button>
-        <button class="ui small button none {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
+        <button class="ui compact button {{if (eq model.attribution true) "active"}}" {{action "setAttribution" true}}>Yes</button>
+        <button class="ui compact button none {{if (eq model.attribution false) "active"}}" {{action "setAttribution" false}}>No</button>
+        <button class="ui compact button none {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
       </div>
       {{#if (eq model.attribution true)}}
         <div class="required field">

@@ -79,15 +79,15 @@
               {{else if (eq properties.function "split")}}
                 {{split-column field=field properties=properties columnHeadings=columnHeadings model=model}}
               {{else if properties.function}}
-                <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+                <button class="ui compact button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
               {{else}}
                 {{#if properties.fields}}
-                  <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
-                  <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
+                  <button class="ui compact button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
+                  <button class="ui compact button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
                 {{/if}}
               {{/if}}
               {{#unless (eq currentField "postcode")}}
-                  <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+                  <button class="ui compact button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
               {{/unless}}
             </div>
           </div>
