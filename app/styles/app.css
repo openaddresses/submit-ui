@@ -41,6 +41,10 @@ h5 {
   --button-back-hover: #444444;
 }
 
+.ui.warning.message {
+  display: none;
+}
+
 .form-content {
   margin-top: 2em;
 }
@@ -86,7 +90,7 @@ nav ul {
 }
 
 nav ul li {
-  padding: 20px 10px 5px 10px;
+  padding: 25px 10px 5px 10px;
   margin: 0px 15px;
   color: lightgray;
   letter-spacing: 1px;
@@ -108,6 +112,9 @@ nav ul li.active {
       display: block;
     }
     nav ul li.active + li {
+      display: block;
+    }
+    .ui.warning.message {
       display: block;
     }
 }
