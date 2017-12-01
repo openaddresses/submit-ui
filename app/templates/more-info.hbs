@@ -65,7 +65,7 @@
         <button class="ui small button none {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
       </div>
       {{#if (eq model.attribution true)}}
-        <div class="field">
+        <div class="required field">
           <label>Enter text for attribution</label>
           <input type="text" value="{{model.attribution_text}}" onInput={{action "setAttributionText"}}>
         </div>
