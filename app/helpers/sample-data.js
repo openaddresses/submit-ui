@@ -3,9 +3,11 @@ import Ember from 'ember';
 export function sampleData(params, namedArgs) {
   var heading = namedArgs.heading;
   var exampleValue;
+
   if (namedArgs.user_data){
-    exampleValue = namedArgs.user_data.features[0].properties[heading];
+    exampleValue = namedArgs.user_data[0][heading];
   }
+
   if (namedArgs.user_data && exampleValue){
     return exampleValue;
   } else if (namedArgs.user_data) {

@@ -1,7 +1,8 @@
 import DS from 'ember-data';
 
 export default DS.Model.extend({
-  data_url: DS.attr('string'),
+  // data_url: DS.attr('string'),
+  data_url: 'api/responses',
   data_file: DS.attr(),
   source: DS.attr('string'),
   update_frequency: DS.attr(),
@@ -16,72 +17,72 @@ export default DS.Model.extend({
   maintainer_name: DS.attr('string'),
   maintainer_email: DS.attr('string'),
   oaFields:{
+    lon:{
+      fields: [],
+      function: null,
+      separator: " "
+    },
+    lat:{
+      fields: [],
+      function: null,
+      separator: " "
+    },
     number:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     },
     street:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     },
     unit:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     },
     city:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     },
     district:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     },
     region:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     },
     postcode:{
-      columns: [],
-      action: null,
-      separator: " ",
-      extractionFunction: null,
-      extractionColumn: null
+      fields: [],
+      function: null,
+      separator: " "
     }
   },
   exampleRows:[{
+    lon: null,
+    lat: null,
     number: null,
     street: null,
     unit: null,
     city: null,
     district: null,
     region: null,
-    postcode: null,
+    postcode: null
   },
   {
+    lon: null,
+    lat: null,
     number: null,
     street: null,
     unit: null,
     city: null,
     district: null,
     region: null,
-    postcode: null,
+    postcode: null
   }]
 });
