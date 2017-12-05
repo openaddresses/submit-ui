@@ -121,7 +121,7 @@ nav ul li.active {
     .ui.negative.message.mobile {
       display: block;
     }
-    .content {
+    .intro {
       display: none;
     }
 }
