@@ -1,4 +1,8 @@
 /* general styling */
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
 .ui.negative.message.mobile {
   display: none;
 }
@@ -10,7 +14,7 @@
 .ui.inverted.vertical.masthead.center.aligned.segment {
   padding-bottom: 0px;
   margin-bottom: 30px;
-  background: rgba(81,172,46,0.88);
+  background: #50ad2d;
 }
 
 h1 {
@@ -82,7 +86,6 @@ span.required {
 nav {
   padding: 0px;
   margin: 0px;
-  background: #134045 ;
 }
 
 nav ul {
@@ -97,9 +100,9 @@ nav ul {
 nav ul li {
   padding: 25px 10px 5px 10px;
   margin: 0px 15px;
-  color: lightgray;
+  color: #eee;
   letter-spacing: 1px;
-  border-bottom: solid 3px gray;
+  border-bottom: solid 3px #eee;
 }
 
 nav ul li.active {
