@@ -14,7 +14,7 @@
 .ui.inverted.vertical.masthead.center.aligned.segment {
   padding-bottom: 0px;
   margin-bottom: 30px;
-  background: #50ad2d;
+  background: var(--openaddress-green);
 }
 
 h1 {
@@ -48,6 +48,10 @@ h5 {
   --button-next-hover: #00938d;
   --button-back: #777777;
   --button-back-hover: #444444;
+
+  --openaddress-green: #50ad2d;
+  --openaddress-gray: #eee;
+  --openaddress-green-hover: #7ecc64;
 }
 
 .ui.warning.message {
@@ -71,11 +75,11 @@ h5 {
 }
 
 #next {
-  background: var(--button-next);
+  background: var(--openaddress-green);
 }
 
 #next:hover {
-  background: var(--button-next-hover);
+  background: var(--openaddress-green-hover);
 }
 
 span.required {
@@ -100,9 +104,9 @@ nav ul {
 nav ul li {
   padding: 25px 10px 5px 10px;
   margin: 0px 15px;
-  color: #eee;
+  color: var(--openaddress-gray);
   letter-spacing: 1px;
-  border-bottom: solid 3px #eee;
+  border-bottom: solid 3px var(--openaddress-gray);
 }
 
 nav ul li.active {
