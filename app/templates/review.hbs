@@ -141,6 +141,14 @@
                   </td>
                 </tr>
               {{/if}}
+              {{#if (eq field "street")}}
+                <tr>
+                  <td>May contain unit number</td>
+                  <td>
+                    {{properties.may_contain_units}}
+                  </td>
+                </tr>
+              {{/if}}
             </tbody>
           </table>
         {{/if}}
@@ -148,8 +156,8 @@
     </div>
     <div class="ui hidden divider"></div>
     <div class="review-nav">
-      <button class="ui compact button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
-      <button class="ui compact button green right floated" onClick={{action "submit"}}>Submit</button>
+      <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
+      <button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
     </div>
     {{#ui-modal name="review-cancel" class="review-cancel" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
       <i class="close icon"></i>
