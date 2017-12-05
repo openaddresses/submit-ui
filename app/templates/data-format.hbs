@@ -16,7 +16,13 @@
           {{/if}}
           {{#unless (eq field "lon")}}
             {{#unless (eq field "lat")}}
-              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
+                {{#if (eq field "number")}}
+                  house number 
+                {{else}}
+                  {{field}}
+                {{/if}}
+              </a></th>
             {{/unless}}
           {{/unless}}
         {{/each-in}}
@@ -57,28 +63,40 @@
               {{field}}
             {{/if}}
           </label>
-          <div class="ui stackable three column center aligned grid">
-            <div class="sixteen wide column">
-              {{#unless (eq properties.function "join")}}
-                {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
-              {{/unless}}
-              {{#if (eq properties.function "join")}}
-                {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model}}
-              {{else if (eq properties.function "split")}}
-                {{split-column field=field properties=properties columnHeadings=columnHeadings model=model}}
-              {{else if properties.function}}
-                <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
-              {{else}}
-                {{#if properties.fields}}
+          {{#unless (eq properties.function "join")}}
+            {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
+          {{/unless}}
+          {{#if (eq properties.function "join")}}
+            {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model}}
+          {{else if (eq properties.function "split")}}
+            {{split-column field=field properties=properties columnHeadings=columnHeadings model=model}}
+          {{else if properties.function}}
+            <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+          {{else}}
+            {{#if properties.fields}}
+              {{#unless (eq field "lon")}}
+                {{#unless (eq field "lat")}}
                   <button class="ui button basic blue" onClick={{action "addFunction" field "join"}}>Join two columns for this field</button>
-                  <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
-                {{/if}}
-              {{/if}}
-              {{#unless (eq currentField "postcode")}}
-                  <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+                {{/unless}}
               {{/unless}}
-            </div>
-          </div>
+              {{#unless (eq field "city")}}
+                {{#unless (eq field "region")}}
+                  {{#unless (eq field "district")}}
+                    {{#unless (eq field "postcode")}}
+                      {{#unless (eq field "lon")}}
+                        {{#unless (eq field "lat")}}
+                          <button class="ui button basic blue" onClick={{action "addFunction" field "split"}}>Split one column for this field</button>
+                        {{/unless}}
+                      {{/unless}}
+                    {{/unless}}
+                  {{/unless}}
+                {{/unless}}
+              {{/unless}}
+            {{/if}}
+          {{/if}}
+          {{#unless (eq currentField "postcode")}}
+              <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+          {{/unless}}
         </div>
       </form>
     {{/if}}
