@@ -118,9 +118,6 @@ nav ul li.active {
     nav ul li.active + li {
       display: block;
     }
-    .ui.warning.message {
-      display: block;
-    }
     .ui.negative.message.mobile {
       display: block;
     }
