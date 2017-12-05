@@ -7,9 +7,10 @@
   margin-top: 10px;
 }
 
-.ui.inverted.vertical.masthead.center.aligned.segment.teal {
+.ui.inverted.vertical.masthead.center.aligned.segment {
   padding-bottom: 0px;
   margin-bottom: 30px;
+  background: rgba(81,172,46,0.88);
 }
 
 h1 {
