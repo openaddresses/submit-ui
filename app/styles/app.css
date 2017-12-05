@@ -1,4 +1,8 @@
 /* general styling */
+.ui.negative.message.mobile {
+  display: none;
+}
+
 .ui.button {
   margin-top: 10px;
 }
@@ -116,6 +120,12 @@ nav ul li.active {
     }
     .ui.warning.message {
       display: block;
+    }
+    .ui.negative.message.mobile {
+      display: block;
+    }
+    .content {
+      display: none;
     }
 }
 
