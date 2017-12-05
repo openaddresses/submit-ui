@@ -6,6 +6,9 @@
   .ui.negative.message.mobile {
     display: block;
   }
+  .content {
+    display: none;
+  }
 }
 
 .ui.button {
