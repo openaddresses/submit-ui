@@ -175,6 +175,18 @@ nav ul li.active {
   cursor: pointer;
   position: absolute;
   right: 20px;
+  font-weight: 500;
+  font-size: small;
+}
+
+.data-functions.remove {
+  color: var(--error);
+  font-size: small;
+  top: 15px;
+}
+
+.data-functions.remove:hover {
+  color: var(--error-hover);
 }
 
 .ui.selection.fluid.data-format {
@@ -185,12 +197,26 @@ nav ul li.active {
   display: inline-block;
   color: var(--link);
   margin: 0px 10px;
-  font-weight: 500;
-  font-size: small;
+}
+
+.data-functions .function:hover {
+  color: var(--link-hover);
 }
 
 .inactiveField {
   cursor: pointer;
+}
+
+.plus.icon.link,
+.add-join.link {
+  color: var(--link);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.plus.icon.link:hover,
+.add-join.link:hover {
+  color: var(--link-hover);
 }
 
 /*probably not ideal way to handle this*/

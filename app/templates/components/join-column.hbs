@@ -1,3 +1,6 @@
+<div class="data-functions remove" onClick={{action "removeFunction" field}}>
+  <i class="remove icon"></i> Cancel join
+</div>
 {{#each properties.fields as |column index|}}
   {{#if (gte index 1)}}
     <a class="item">
@@ -6,7 +9,7 @@
   {{/if}}
   <div class="field">
     <div class="fields">
-      <div class="fifteen wide field">
+      <div class="thirteen wide field">
         {{#ui-dropdown class="selection fluid data-format" selected=column onChange=(action "editField" field index) as |execute mapper|}}
           <div class="default text">
             Source column headings
@@ -33,10 +36,10 @@
 {{/each}}
 {{#if showAdditionalJoinDropdown}}
   <a class="item">
-    <i class="plus icon"></i>
+    <i class="plus icon link"></i>
   </a>
-  <div class="fifteen wide field">
-    {{#ui-dropdown class="selection fluid" onChange=(action "addField" field) as |execute mapper|}}
+  <div class="thirteen wide field">
+    {{#ui-dropdown class="selection fluid data-format" onChange=(action "addField" field) as |execute mapper|}}
       <div class="default text">
         Source column headings
       </div>
@@ -53,7 +56,8 @@
 {{/if}}
 <div>
   {{#if showAdditionalJoinButton}}
-    <button class="ui small button basic blue" onClick={{action "addJoin" field}}>Join another column <i class="plus icon"></i></button>
+    <div class="add-join link" onClick={{action "addJoin" field}}>
+      <i class="plus icon"></i> Add column
+    </div>
   {{/if}}
-  <button class="ui small button basic blue" onClick={{action "removeFunction" field}}>Remove join <i class="remove icon"></i></button>
 </div>
