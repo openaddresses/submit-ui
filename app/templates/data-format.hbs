@@ -63,8 +63,8 @@
     {{#each-in model.submission.oaFields as |field properties|}}
       {{#if (eq field currentField)}}
         <form class="ui form segment">
-          <div class="data-functions">
-            {{#if properties.fields}}
+          {{#if (and properties.fields (eq properties.function null))}}
+            <div class="data-functions">
               {{#unless (eq field "lon")}}
                 {{#unless (eq field "lat")}}
                   <div class="function" onClick={{action "addFunction" field "join"}}>
@@ -87,8 +87,8 @@
                   {{/unless}}
                 {{/unless}}
               {{/unless}}
-            {{/if}}
-          </div>
+            </div>
+          {{/if}}
           <div class="field">
             <label>
               {{#if (eq field "number")}}
@@ -112,7 +112,8 @@
             {{else}}
             {{/if}}
             {{#unless (eq currentField "postcode")}}
-                <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
+                <button class="ui blue compact right floated button link" style="margin-top: 15px" onClick={{action "nextField" field}}>{{nextField}} <i class="right arrow icon"></i></button>
+                <div class="ui hidden clearing divider" style="margin: 0px"></div>
             {{/unless}}
           </div>
         </form>

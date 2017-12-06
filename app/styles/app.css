@@ -73,6 +73,14 @@ h5 {
   background: var(--button-next-hover);
 }
 
+.ui.link.button {
+  background: var(--link);
+}
+
+.ui.link.button:hover {
+  background: var(--link-hover);
+}
+
 span.required {
   color: #da2929;
 }
@@ -169,7 +177,7 @@ nav ul li.active {
   right: 20px;
 }
 
-.ui.selection.fluid.dropdown.select {
+.ui.selection.fluid.data-format {
   margin-top: 10px;
 }
 
