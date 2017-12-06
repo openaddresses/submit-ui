@@ -209,10 +209,6 @@ nav ul li.active {
   margin: 0px 10px;
 }
 
-.data-functions .function:hover {
-  color: var(--link-hover);
-}
-
 .inactiveField {
   cursor: pointer;
 }
@@ -224,6 +220,7 @@ a .plus.icon,
   cursor: pointer;
 }
 
+.data-functions .function:hover,
 a .plus.icon:hover,
 .add-join.link:hover {
   color: var(--link-hover);
