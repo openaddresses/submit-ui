@@ -207,14 +207,14 @@ nav ul li.active {
   cursor: pointer;
 }
 
-.plus.icon.link,
+a .plus.icon,
 .add-join.link {
   color: var(--link);
   font-weight: 500;
   cursor: pointer;
 }
 
-.plus.icon.link:hover,
+a .plus.icon:hover,
 .add-join.link:hover {
   color: var(--link-hover);
 }

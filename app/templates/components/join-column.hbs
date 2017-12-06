@@ -26,8 +26,8 @@
       </div>
       {{#if (gte index 1)}}
         <div class="one wide field">
-          <button class="ui icon mini button basic red" onClick={{action "removeField" field column}}>
-            <i class="remove icon"></i>
+          <button class="ui icon tiny compact button basic red" onClick={{action "removeField" field column}} style="margin-top: 15px">
+            <i class="minus icon"></i>
           </button>
         </div>
       {{/if}}
@@ -36,7 +36,7 @@
 {{/each}}
 {{#if showAdditionalJoinDropdown}}
   <a class="item">
-    <i class="plus icon link"></i>
+    <i class="plus icon"></i>
   </a>
   <div class="thirteen wide field">
     {{#ui-dropdown class="selection fluid data-format" onChange=(action "addField" field) as |execute mapper|}}
