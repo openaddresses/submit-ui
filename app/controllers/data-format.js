@@ -10,23 +10,45 @@ export default Ember.Controller.extend(sharedActions, {
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
   }),
-  currentField: "number",
+  currentField: Ember.computed('model.webServiceResponse', function(){
+    if (this.model.webServiceResponse.conform.type === "csv"){
+      return "lon";
+    } else {
+      return "number";
+    }
+  }),
+  prevField: Ember.computed('currentField', function() {
+    var prevFields = {
+      lat: "lon",
+      "number": "lat",
+      "street": "house number",
+      "unit": "street",
+      "city": "unit",
+      "district": "city",
+      "region": "district",
+      "postcode": "region"
+    };
+    return prevFields[this.get('currentField')];
+  }),
   nextField: Ember.computed('currentField', function(){
     var nextFields = {
+      "lon": "lat",
+      "lat": "number",
       "number": "street",
       "street": "unit",
       "unit": "city",
       "city": "district",
       "district": "region",
-      "region": "postcode",
-      "postcode": "lon",
-      "lon": "lat"
+      "region": "postcode"
     };
     return nextFields[this.get('currentField')];
   }),
   actions: {
     goToField: function(field){
       this.set('currentField', field);
+    },
+    prevField: function() {
+      this.set('currentField', this.get('prevField'));
     },
     nextField: function(){
       this.set('currentField', this.get('nextField'));
