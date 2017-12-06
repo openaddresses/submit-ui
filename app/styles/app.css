@@ -219,6 +219,12 @@ a .plus.icon:hover,
   color: var(--link-hover);
 }
 
+.field .nav-buttons,
+.ui.hidden.clearing.divider {
+  margin: 0px;
+  margin-top: 5px !important;
+}
+
 /*probably not ideal way to handle this*/
 .hidden {
   visibility: hidden;

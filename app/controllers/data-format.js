@@ -17,6 +17,19 @@ export default Ember.Controller.extend(sharedActions, {
       return "number";
     }
   }),
+  prevField: Ember.computed('currentField', function() {
+    var prevFields = {
+      lat: "lon",
+      "number": "lat",
+      "street": "house number",
+      "unit": "street",
+      "city": "unit",
+      "district": "city",
+      "region": "district",
+      "postcode": "region"
+    };
+    return prevFields[this.get('currentField')];
+  }),
   nextField: Ember.computed('currentField', function(){
     var nextFields = {
       "lon": "lat",
@@ -33,6 +46,9 @@ export default Ember.Controller.extend(sharedActions, {
   actions: {
     goToField: function(field){
       this.set('currentField', field);
+    },
+    prevField: function() {
+      this.set('currentField', this.get('prevField'));
     },
     nextField: function(){
       this.set('currentField', this.get('nextField'));

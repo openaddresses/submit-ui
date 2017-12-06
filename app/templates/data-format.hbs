@@ -112,10 +112,15 @@
               <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
             {{else}}
             {{/if}}
-            {{#unless (eq currentField "postcode")}}
-                <button class="ui blue compact right floated button link" style="margin-top: 15px" onClick={{action "nextField" field}}>{{nextField}} <i class="right arrow icon"></i></button>
-                <div class="ui hidden clearing divider" style="margin: 0px"></div>
-            {{/unless}}
+            <div class="field nav-buttons">
+              {{#unless (or (eq currentField "lat") (eq currentField "number"))}}
+                <button class="ui blue compact left floated button link" onClick={{action "prevField" field}}><i class="left arrow icon"></i>{{prevField}}</button>
+              {{/unless}}
+              {{#unless (eq currentField "postcode")}}
+                <button class="ui blue compact right floated button link"  onClick={{action "nextField" field}}>{{nextField}} <i class="right arrow icon"></i></button>
+              {{/unless}}
+              <div class="ui hidden clearing divider"></div>
+            </div>
           </div>
         </form>
       {{/if}}
