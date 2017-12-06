@@ -89,6 +89,10 @@
                 {{/unless}}
               {{/unless}}
             </div>
+          {{else if (and (not-eq properties.function "join") (not-eq properties.function "split"))}}
+            <div class="data-functions remove" onClick={{action "removeFunction" field}}>
+              <i class="remove icon"></i> Remove extraction
+            </div>
           {{/if}}
           <div class="field">
             <label>
@@ -108,9 +112,6 @@
               {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown columnHeadings=columnHeadings model=model}}
             {{else if (eq properties.function "split")}}
               {{split-column field=field properties=properties columnHeadings=columnHeadings model=model}}
-            {{else if properties.function}}
-              <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
-            {{else}}
             {{/if}}
             <div class="field nav-buttons">
               {{#unless (or (eq currentField "lat") (eq currentField "number"))}}
