@@ -163,6 +163,24 @@ nav ul li.active {
 }
 
 /* styling for data format page */
+.data-functions {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+}
+
+.ui.selection.fluid.dropdown.select {
+  margin-top: 10px;
+}
+
+.data-functions .function {
+  display: inline-block;
+  color: var(--link);
+  margin: 0px 10px;
+  font-weight: 500;
+  font-size: small;
+}
+
 .inactiveField {
   cursor: pointer;
 }
