@@ -82,6 +82,14 @@ h5 {
   background: var(--openaddress-green-hover);
 }
 
+.ui.link.button {
+  background: var(--link);
+}
+
+.ui.link.button:hover {
+  background: var(--link-hover);
+}
+
 span.required {
   color: #da2929;
 }
@@ -161,18 +169,70 @@ nav ul li.active {
 }
 
 .field .ui.button.active {
-  background: #508478;
+  /*background: #508478;*/
+  background: var(--link);
   color: white;
 }
 
 .field .ui.button.none.active {
+  /*background: gray;*/
   background: gray;
   color: white;
 }
 
 /* styling for data format page */
+.data-functions {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  font-weight: 500;
+  font-size: small;
+}
+
+.data-functions.remove {
+  color: var(--error);
+  font-size: small;
+  top: 15px;
+}
+
+.data-functions.remove:hover {
+  color: var(--error-hover);
+}
+
+.ui.selection.fluid.data-format {
+  margin-top: 10px;
+}
+
+.data-functions .function {
+  display: inline-block;
+  color: var(--link);
+  margin: 0px 10px;
+}
+
+.data-functions .function:hover {
+  color: var(--link-hover);
+}
+
 .inactiveField {
   cursor: pointer;
+}
+
+a .plus.icon,
+.add-join.link {
+  color: var(--link);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+a .plus.icon:hover,
+.add-join.link:hover {
+  color: var(--link-hover);
+}
+
+.field .nav-buttons,
+.ui.hidden.clearing.divider {
+  margin: 0px;
+  margin-top: 5px !important;
 }
 
 /*probably not ideal way to handle this*/
