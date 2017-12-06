@@ -30,7 +30,8 @@ export default DS.Model.extend({
     number:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null,
     },
     street:{
       fields: [],
