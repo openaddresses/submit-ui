@@ -3,9 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   actions: {
     extractionFunction: function(extraction_function, field){
-      if (extraction_function === "row_fxn_remove_prefix"){
-        // debugger;
-      } else {
+      if (extraction_function !== "row_fxn_remove_prefix"){
         for (var i = 0; i < 2; i++){
           var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[field].fields[0]];
           var oa_extraction_regExp;
@@ -26,10 +24,6 @@ export default Ember.Component.extend({
       }
       Ember.set(this.model.submission.get('oaFields')[field], "function", extraction_function);
     },
-    // row_fxn_remove_prefix: function(sd, row, key, fxn){
-      // if row[fxn["field_to_remove"]] != "" and row[fxn["field"]].endswith(row[fxn["field_to_remove"]]):
-        // row[var_types[key]] = row[fxn["field"]][0:len(row[fxn["field_to_remove"]])*-1].rstrip(' ')
-    // },
     removeFunction: function(field){
       if (this.model.submission.get('oaFields')[field].function === "join" && this.model.submission.get('oaFields')[field].fields.length > 1){
         Ember.set(this.model.submission.get('oaFields')[field], "fields", [this.model.submission.get('oaFields')[field].fields[0]]);

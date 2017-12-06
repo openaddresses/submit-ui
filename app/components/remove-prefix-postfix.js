@@ -36,6 +36,24 @@ export default Ember.Component.extend({
       // for (var i = 0; i < 2; i++){
       //   this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.source_data.results[i][column]);
       // }
+
+      for (var i = 0; i < 2; i++){
+        var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[heading].fields[0]].toString();
+        var prefixOrPostfix = this.model.submission.oaFields[heading].function;
+        var field_to_remove = this.model.submission.oaFields[heading].prefix_or_postfix.toString();
+        var fieldValueToRemove = this.model.webServiceResponse.source_data.results[i][field_to_remove];
+        var valueAfterFunction;
+        if (prefixOrPostfix = "row_fxn_remove_prefix"){
+          if (field_to_remove !== "" && fieldValue.endsWith(fieldValueToRemove)){
+            valueAfterFunction = fieldValue.slice(0, (fieldValue.length - fieldValueToRemove.length)).trim()
+          }
+        } else {
+
+        }
+        
+        this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
+   
+      }
     },
   }
 });
