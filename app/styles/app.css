@@ -246,11 +246,14 @@ a .plus.icon:hover,
   margin-top: 5px !important;
 }
 
-.ui.checkbox {
-  margin-top: 10px;
+.ui.unit.checkbox {
+  margin-top: 5px;
   margin-bottom: 5px;
 }
 
+.ui.button.clear-field {
+  margin-top: 15px;
+}
 /*probably not ideal way to handle this*/
 .hidden {
   visibility: hidden;
