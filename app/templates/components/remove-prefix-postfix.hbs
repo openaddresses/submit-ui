@@ -29,4 +29,16 @@
      </div>
    {{/ui-dropdown}}
  </div>
+
+ <div class="ui form">
+   <div class="grouped inline fields">
+     <div class="field">
+       {{ui-radio name="fruit" label="Remove from beginning of field" value="prefix" current=prefixOrPostfix onChange=(action (mut prefixOrPostfix))}}
+     </div>
+     <div class="field">
+       {{ui-radio name="fruit" label="Remove from end of field" value="postfix" current=prefixOrPostfix onChange=(action (mut prefixOrPostfix))}}
+     </div>
+   </div>
+ </div>
+
  <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
