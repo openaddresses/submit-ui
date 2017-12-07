@@ -184,7 +184,7 @@ nav ul li.active {
   font-size: medium;
   position: absolute;
   right: 10px;
-  top: 5px;
+  top: 0px;
 }
 
 .help-button:hover {
