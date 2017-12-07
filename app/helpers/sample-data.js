@@ -3,7 +3,6 @@ import Ember from 'ember';
 export function sampleData(params, namedArgs) {
   var heading = namedArgs.heading;
   var exampleValue;
-
   if (namedArgs.user_data){
     exampleValue = namedArgs.user_data[0][heading];
   }
