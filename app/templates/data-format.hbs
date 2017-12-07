@@ -22,6 +22,9 @@
                 {{else}}
                   {{field}}
                 {{/if}}
+                {{#if (or (eq field "number") (eq field "street"))}}
+                  <span class="required"> * </span>
+                {{/if}}
               </a></th>
             {{/unless}}
           {{/unless}}
@@ -55,12 +58,45 @@
   {{#each-in model.submission.oaFields as |field properties|}}
     {{#if (eq field currentField)}}
       <form class="ui form segment">
+        {{#if (eq properties.function null)}}
+          <div class="data-functions">
+            {{#unless (eq field "lon")}}
+              {{#unless (eq field "lat")}}
+                <div class="function" onClick={{action "addFunction" field "join"}}>
+                  + Join columns
+                </div>
+              {{/unless}}
+            {{/unless}}
+            {{#unless (eq field "city")}}
+              {{#unless (eq field "region")}}
+                {{#unless (eq field "district")}}
+                  {{#unless (eq field "postcode")}}
+                    {{#unless (eq field "lon")}}
+                      {{#unless (eq field "lat")}}
+                        <div class="function" onClick={{action "addFunction" field "split"}}>
+                          - Split column
+                        </div>
+                      {{/unless}}
+                    {{/unless}}
+                  {{/unless}}
+                {{/unless}}
+              {{/unless}}
+            {{/unless}}
+          </div>
+        {{else if (and (not-eq properties.function "join") (not-eq properties.function "split"))}}
+          <div class="data-functions remove" onClick={{action "removeFunction" field}}>
+            <i class="remove icon"></i> Remove extraction
+          </div>
+        {{/if}}
         <div class="field">
           <label>
             {{#if (eq field "number")}}
               house number 
             {{else}}
               {{field}}
+            {{/if}}
+            {{#if (or (eq field "number") (eq field "street"))}}
+              <span class="required"> * </span>
             {{/if}}
           </label>
           {{#unless (eq properties.function "join")}}
@@ -100,9 +136,15 @@
               {{/unless}}
             {{/if}}
           {{/if}}
-          {{#unless (eq currentField "postcode")}}
-              <button class="ui button" onClick={{action "nextField" field}}>Move on to {{nextField}} <i class="right arrow icon"></i></button>
-          {{/unless}}
+          <div class="field nav-buttons">
+            {{#unless (or (eq currentField "lat") (eq currentField "number"))}}
+              <button class="ui blue compact left floated button link" onClick={{action "prevField" field}}><i class="left arrow icon"></i>{{prevField}}</button>
+            {{/unless}}
+            {{#unless (eq currentField "postcode")}}
+              <button class="ui blue compact right floated button link"  onClick={{action "nextField" field}}>{{nextField}} <i class="right arrow icon"></i></button>
+            {{/unless}}
+            <div class="ui hidden clearing divider"></div>
+          </div>
         </div>
       </form>
     {{/if}}
