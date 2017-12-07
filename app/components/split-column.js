@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   actions: {
     extractionFunction: function(extraction_function, field){
-      if (extraction_function !== "row_fxn_remove_prefix"){
+      if (extraction_function !== "removePrefixOrPostfix"){
         for (var i = 0; i < 2; i++){
           var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[field].fields[0]];
           var oa_extraction_regExp;

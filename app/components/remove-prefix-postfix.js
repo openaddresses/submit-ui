@@ -15,6 +15,9 @@ export default Ember.Component.extend({
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
   }),
+  extractionFunction: Ember.computed('properties.fields.[]', function(){
+    console.log(properties.fields)
+  }),
   actions: {
     editField: function(heading, index, column){
       this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
@@ -29,31 +32,52 @@ export default Ember.Component.extend({
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
       }
     },
-    setPrefixPostfixField: function(heading, column){
+    setPrefixPostfixFieldFromDropdown: function(heading, column){
+      var prefixOrPostfix;
+      if (this.model.submission.oaFields[heading].function === "removePrefixOrPostfix"){
+        prefixOrPostfix = "row_fxn_remove_prefix";
+      } else {
+        prefixOrPostfix = this.model.submission.oaFields[heading].function;
+      }
+
       Ember.set(this.model.submission.get('oaFields')[heading], "prefix_or_postfix", column);
-      // set up logic to remove postfix or prefix from another column using second dropdown selection
-      // use OA function to render sample rows here:
-      // for (var i = 0; i < 2; i++){
-      //   this.model.submission.exampleRows[i][heading].addObject(this.model.webServiceResponse.source_data.results[i][column]);
-      // }
+      var field_to_remove = this.model.submission.oaFields[heading].prefix_or_postfix.toString();
 
       for (var i = 0; i < 2; i++){
         var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[heading].fields[0]].toString();
-        var prefixOrPostfix = this.model.submission.oaFields[heading].function;
-        var field_to_remove = this.model.submission.oaFields[heading].prefix_or_postfix.toString();
         var fieldValueToRemove = this.model.webServiceResponse.source_data.results[i][field_to_remove];
         var valueAfterFunction;
         if (prefixOrPostfix = "row_fxn_remove_prefix"){
           if (field_to_remove !== "" && fieldValue.endsWith(fieldValueToRemove)){
-            valueAfterFunction = fieldValue.slice(0, (fieldValue.length - fieldValueToRemove.length)).trim()
+            valueAfterFunction = fieldValue.slice(0, (fieldValue.length - fieldValueToRemove.length)).trim();
+            this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
+          } else {
+            this.model.submission.get('exampleRows')[i][heading].replace(0, 1, fieldValue);
           }
         } else {
-
+          // funtion to remove postfix
         }
-        
-        this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
-   
       }
     },
+    setPrefixPostfixFieldFromRadio: function(heading, input){
+      Ember.set(this.model.submission.get('oaFields')[heading], "function", input);
+      var field_to_remove = this.model.submission.oaFields[heading].prefix_or_postfix.toString();
+
+      for (var i = 0; i < 2; i++){
+        var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[heading].fields[0]].toString();
+        var fieldValueToRemove = this.model.webServiceResponse.source_data.results[i][field_to_remove];
+        var valueAfterFunction;
+        if (input = "row_fxn_remove_prefix"){
+          if (field_to_remove !== "" && fieldValue.endsWith(fieldValueToRemove)){
+            valueAfterFunction = fieldValue.slice(0, (fieldValue.length - fieldValueToRemove.length)).trim();
+            this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
+          } else {
+            this.model.submission.get('exampleRows')[i][heading].replace(0, 1, fieldValue);
+          }
+        } else {
+          // funtion to remove postfix
+        }
+      }
+    }
   }
 });
