@@ -67,7 +67,7 @@
             {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
           {{/unless}}
           {{#if (eq properties.function "join")}}
-            {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown columnHeadings=columnHeadings model=model}}
+            {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model}}
           {{else if (eq properties.function "split")}}
             {{split-column field=field properties=properties columnHeadings=columnHeadings model=model}}
           {{else if (eq properties.function "row_fxn_remove_prefix")}}

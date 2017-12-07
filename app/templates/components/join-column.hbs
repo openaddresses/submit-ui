@@ -8,12 +8,12 @@
     <div class="fields">
       <div class="fifteen wide field">
         {{#ui-dropdown class="selection fluid" selected=column onChange=(action "editField" field index) as |execute mapper|}}
-          <div class="default text">
-            Source column headings
+          <div>
+            {{column}} (example value: {{sample-data user_data=user_data heading=column}})
           </div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            {{#each columnHeadings as |heading|}}
+            {{#each remainingColumnHeadings as |heading|}}
               <div class="item" data-value="{{map-value mapper heading}}">
                 {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
               </div>
@@ -42,7 +42,7 @@
       </div>
       <i class="dropdown icon"></i>
       <div class="menu">
-        {{#each columnHeadings as |heading|}}
+        {{#each remainingColumnHeadings as |heading|}}
           <div class="item" data-value="{{map-value mapper heading}}">
             {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
           </div>

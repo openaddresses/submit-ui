@@ -2,8 +2,23 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   showAdditionalJoinDropdown: null,
+  properties: null,
   user_data: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.results;
+  }),
+  columnHeadings: Ember.computed('model.submission', function(){
+    return this.model.webServiceResponse.source_data.fields;
+  }),
+  remainingColumnHeadings: Ember.computed('properties.fields.[]', function(){
+    var headings = this.properties.fields;
+    var fields = this.model.webServiceResponse.source_data.fields;
+    var unselectedFields = [];
+    for (var i = 0; i < fields.length; i++){
+      if (headings.indexOf(fields[i]) === -1){
+        unselectedFields.push(fields[i]);
+      }
+    }
+    return unselectedFields;
   }),
   actions: {
     editField: function(heading, index, column){
