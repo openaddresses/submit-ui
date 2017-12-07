@@ -21,7 +21,7 @@ export default Ember.Controller.extend(sharedActions, {
     var prevFields = {
       lat: "lon",
       "number": "lat",
-      "street": "house number",
+      "street": "number",
       "unit": "street",
       "city": "unit",
       "district": "city",

@@ -9,14 +9,14 @@
   {{/if}}
   <div class="field">
     <div class="fields">
-      <div class="thirteen wide field">
+      <div class="fifteen wide field">
         {{#ui-dropdown class="selection fluid data-format" selected=column onChange=(action "editField" field index) as |execute mapper|}}
-          <div class="default text">
-            Source column headings
+          <div>
+            {{column}} (example value: {{sample-data user_data=user_data}}
           </div>
           <i class="dropdown icon"></i>
           <div class="menu">
-            {{#each columnHeadings as |heading|}}
+            {{#each remainingColumnHeadings as |heading|}}
               <div class="item" data-value="{{map-value mapper heading}}">
                 {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
               </div>
@@ -26,7 +26,7 @@
       </div>
       {{#if (gte index 1)}}
         <div class="one wide field">
-          <button class="ui icon tiny compact button basic red" onClick={{action "removeField" field column}} style="margin-top: 15px">
+          <button class="ui icon tiny compact button basic red clear-field" onClick={{action "removeField" field column}}>
             <i class="minus icon"></i>
           </button>
         </div>
@@ -38,14 +38,14 @@
   <a class="item">
     <i class="plus icon"></i>
   </a>
-  <div class="thirteen wide field">
+  <div class="fifteen wide field">
     {{#ui-dropdown class="selection fluid data-format" onChange=(action "addField" field) as |execute mapper|}}
       <div class="default text">
         Source column headings
       </div>
       <i class="dropdown icon"></i>
       <div class="menu">
-        {{#each columnHeadings as |heading|}}
+        {{#each remainingColumnHeadings as |heading|}}
           <div class="item" data-value="{{map-value mapper heading}}">
             {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
           </div>

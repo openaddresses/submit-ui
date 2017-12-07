@@ -3,7 +3,7 @@
 </div>
 {{#if (eq field "street")}}
   <div class="row">
-    <div class="ui checkbox">
+    <div class="ui unit checkbox">
       {{#if this.model.submission.oaFields.street.may_contain_units}}
         <input type="checkbox" checked onClick={{action "setMayContainUnits"}}>
       {{else}}

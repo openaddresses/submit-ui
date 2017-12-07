@@ -12,6 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{join-column}}`);
 
-  assert.equal(this.$().text().trim(), 'Remove join');
+  assert.equal(this.$().text().trim(), 'Cancel join');
 
 });
