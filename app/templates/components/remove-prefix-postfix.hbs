@@ -1,30 +1,28 @@
- <a class="item">
-   <i class="minus icon"></i>
- </a>
- <div class="fifteen wide field">
-   {{#ui-dropdown class="selection fluid" selected=properties.prefix_or_postfix onChange=(action "setPrefixPostfixFieldFromDropdown" field) as |execute mapper|}}
-     <div class="default text">
-       Source column headings
-     </div>
-     <i class="dropdown icon"></i>
-     <div class="menu">
-       {{#each remainingColumnHeadings as |heading|}}
-         <div class="item" data-value="{{map-value mapper heading}}">
-           {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
-         </div>
-       {{/each}}
-     </div>
-   {{/ui-dropdown}}
- </div>
-  <div class="ui form">
-     <div class="grouped inline fields">
-       <div class="field">
-         {{ui-radio name="fruit" label="Remove prefix" value="row_fxn_remove_prefix" current=extractionFunction onChange=(action "setPrefixPostfixFieldFromRadio" field)}}
-       </div>
-       <div class="field">
-         {{ui-radio name="fruit" label="Remove postfix" value="row_fxn_remove_postfix" current=extractionFunction onChange=(action "setPrefixPostfixFieldFromRadio" field)}}
-       </div>
-     </div>
-   </div>
-
- <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
+<a class="item">
+  <i class="minus icon"></i>
+</a>
+<div class="fifteen wide field">
+  {{#ui-dropdown class="selection fluid" selected=properties.prefix_or_postfix onChange=(action "setPrefixPostfixFieldFromDropdown" field) as |execute mapper|}}
+    <div class="default text">
+      Source column headings
+    </div>
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      {{#each remainingColumnHeadings as |heading|}}
+        <div class="item" data-value="{{map-value mapper heading}}">
+         {{heading}} (example value: {{sample-data user_data=user_data heading=heading}})
+        </div>
+      {{/each}}
+    </div>
+ {{/ui-dropdown}}
+</div>
+<div class="ui form">
+   <div class="grouped inline fields">
+    <div class="field">
+      {{ui-radio name="row_fxn_remove_prefix" label="Remove prefix" value="row_fxn_remove_prefix" current=extractionFunction onChange=(action "setPrefixPostfixFieldFromRadio" field)}}
+    </div>
+    <div class="field">
+      {{ui-radio name="row_fxn_remove_postfix" label="Remove postfix" value="row_fxn_remove_postfix" current=extractionFunction onChange=(action "setPrefixPostfixFieldFromRadio" field)}}
+    </div>
+  </div>
+</div>
