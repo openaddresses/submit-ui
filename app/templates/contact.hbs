@@ -20,6 +20,15 @@
 					showErrorState=showErrorState}}
 			</div>
 		</div>
+    {{#if showErrorState}}
+      <div>
+        <ul class="list">
+          {{#each errorMessages as |errorMessage|}}
+            <li>{{errorMessage}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
 		{{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="mapping" next="review" forwardButtonText="Review" changeset=changeset}}
 	{{/with}}
 </div>
