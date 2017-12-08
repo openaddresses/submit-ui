@@ -66,7 +66,7 @@
             <div class="data-functions">
               {{#unless (eq field "lon")}}
                 {{#unless (eq field "lat")}}
-                  <div class="function" onClick={{action "addFunction" field "join"}}>
+                  <div class="function link-text" onClick={{action "addFunction" field "join"}}>
                     + Join columns
                   </div>
                 {{/unless}}
@@ -77,7 +77,7 @@
                     {{#unless (eq field "postcode")}}
                       {{#unless (eq field "lon")}}
                         {{#unless (eq field "lat")}}
-                          <div class="function" onClick={{action "addFunction" field "split"}}>
+                          <div class="function link-text" onClick={{action "addFunction" field "split"}}>
                             - Split column
                           </div>
                         {{/unless}}
