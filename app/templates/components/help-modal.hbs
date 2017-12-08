@@ -2,8 +2,8 @@
   <div class="help-button" onClick={{action "openModal" "help-modal"}}>
     <i class="help circle outline icon"></i> Help
   </div>
-  {{#ui-modal name="help-modal" class="help-modal" onApprove=(action 'submitModal') onDeny=(action 'cancelModal')}}
-    <i class="close icon"></i>
+  {{#ui-modal name="help-modal" class="help-modal"}}
+    <i class="close icon" onclick={{action "cancelModal" "help-modal"}}></i>
     <div class="header">
       How can we help?
     </div>
@@ -13,7 +13,7 @@
         <form class="ui form">
           <div class="eight wide field">
             <label> Contact Email </label>
-            <input type="text" name="email" placeholder="Email Address">
+            <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
           </div>
           <div class="field">
             <label> Data Source </label>
@@ -25,7 +25,7 @@
                 <div class="eight wide field" style="margin-left: 20px">
                   <div class="ui small labeled input">
                     <div class="ui label">URL</div>
-                    <input type="text" placeholder="URL for hosted data">
+                    <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
                   </div>
                 </div>
               {{/if}}
@@ -34,24 +34,24 @@
               </div>
               {{#if (eq source "upload")}}
                 <div class="eight wide field" style="margin-left: 20px">
-                  <label for="uploadfile" class="ui small icon button">
+                  <label for="uploadSource" class="ui small icon button">
                     <i class="file icon"></i>
                     Choose file to upload
                   </label>
-                  <input type="file" id="uploadfile" style="display:none">
+                  <input type="file" id="uploadSource" onChange={{action "uploadFile"}} style="display:none"><b>{{fileName}}</b>
                 </div>
               {{/if}}
             </div>
           </div>
           <div class="field">
             <label>Provide explanation of the problem </label>
-            <textarea rows="3"></textarea>
+            <textarea rows="3" onChange={{action "setText"}}></textarea>
           </div>
         </form>
       </div>
     </div>
     <div class="actions">
-      <div class="ui black deny button">
+      <div class="ui black deny button" onclick={{action "cancelModal" "help-modal"}}>
         Cancel
       </div>
       <div class="ui positive right button">
