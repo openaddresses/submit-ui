@@ -26,3 +26,15 @@
     </div>
   </div>
 </div>
+{{#if (eq field "street")}}
+  <div class="row">
+    <div class="ui unit checkbox">
+      {{#if this.model.submission.oaFields.street.may_contain_units}}
+        <input type="checkbox" checked onClick={{action "setMayContainUnits"}}>
+      {{else}}
+        <input type="checkbox" onClick={{action "setMayContainUnits"}}>
+      {{/if}}
+      <label>May contain unit number</label>
+    </div>
+  </div>
+{{/if}}

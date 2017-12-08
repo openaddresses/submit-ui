@@ -55,6 +55,6 @@ export default Ember.Component.extend({
       } else {
         Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", false);
       }
-    },
+    }
   }
 });
