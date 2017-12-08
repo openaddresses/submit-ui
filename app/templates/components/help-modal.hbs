@@ -2,8 +2,8 @@
   <div class="help-button" onClick={{action "openModal" "help-modal"}}>
     <i class="help circle outline icon"></i> Help
   </div>
-  {{#ui-modal name="help-modal" class="help-modal"}}
-    <i class="close icon" onclick={{action "cancelModal" "help-modal"}}></i>
+  {{#ui-modal name="help-modal" class="help-modal" onApprove=(action 'submitModal') onDeny=(action 'cancelModal')}}
+    <i class="close icon"></i>
     <div class="header">
       How can we help?
     </div>
@@ -42,7 +42,7 @@
       </div>
     </div>
     <div class="actions">
-      <div class="ui black deny button" onclick={{action "cancelModal" "help-modal"}}>
+      <div class="ui black deny button">
         Cancel
       </div>
       <div class="ui positive right button">
