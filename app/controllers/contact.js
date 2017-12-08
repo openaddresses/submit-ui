@@ -11,9 +11,15 @@ export default Ember.Controller.extend(sharedActions, {
       Ember.set(this, 'showErrorState', true);
     },
     changeRoute: function(route, changeset){
-      this.model.set('maintainer_name', changeset.get('maintainer_name'));
-      this.model.set('maintainer_email', changeset.get('maintainer_email'));
-      this.transitionToRoute(route);
+      changeset.validate().then(()=> {
+        if (changeset.get('isValid')) {
+          this.model.set('maintainer_name', changeset.get('maintainer_name'));
+          this.model.set('maintainer_email', changeset.get('maintainer_email'));
+          this.transitionToRoute(route);
+        } else {
+          Ember.set(this, 'showErrorState', true);
+        }
+      })
     },
     returnToReview: function(changeset){
       this.model.set('maintainer_name', changeset.get('maintainer_name'));

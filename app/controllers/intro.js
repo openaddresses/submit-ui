@@ -1,8 +1,12 @@
 import Ember from 'ember';
 import sharedActions from '../mixins/shared-actions';
 
+import DataURLValidator from '../validator/data'
+
 export default Ember.Controller.extend(sharedActions, {
-  dataURL: null,
+  DataURLValidator,
+  showErrorState: false,
+  errorMessages: [],
   dataFile: null,
   fileName: Ember.computed('dataFile', function(){
     if (this.get('dataFile')){
@@ -10,6 +14,9 @@ export default Ember.Controller.extend(sharedActions, {
     }
   }),
   actions: {
+    showFormError: function () {
+      Ember.set(this, 'showErrorState', true);
+    },
     setURL: function(input){
       this.set('dataFile', null);
       var url = input.currentTarget.value;
@@ -20,16 +27,36 @@ export default Ember.Controller.extend(sharedActions, {
       var file = document.getElementById('uploadfile').files[0];
       this.set('dataFile', file);
     },
-    changeRoute: function(route){
-      // Create new record in store for this submission, with data link or data file.
-      if (this.get('dataURL')){
-        this.store.createRecord('submission', {data_url: this.get('dataURL')});
-      } else if (this.get('dataFile')){
-        this.store.createRecord('submission', {data_file: this.get('dataFile')});
+    changeRoute: function(route, changeset){
+      // If there is data file uploaded, that takes priority
+      if (this.get('dataFile')){
+        this.model.set('data_file', changeset.get('data_file'))
+        this.transitionToRoute(route);
+      // If there is no data file, but url validate it
+      } else if (changeset.get('data_url')){
+        changeset.validate().then(()=> {
+          if(changeset.get('isValid')) {
+            this.model.set('data_url',  changeset.get('data_url'));
+            Ember.set(this, 'errorMessage', )
+            this.transitionToRoute(route);
+          } else {
+            const errors = changeset.get('errors')
+                        .reduce((errorMessages, error) => {
+                          error.validation.map((validationMessage) => {
+                            errorMessages.push(validationMessage)
+                          })
+                          return errorMessages;
+                          }, []);
+            Ember.set(this, 'showErrorState', true);
+            Ember.set(this, 'errorMessages', errors);
+          }
+        })
+      // if there are neither of url, file, throw Error
       } else {
-        // set up form validation requiring either url or file
+        var errors = ['You need to put a url or a file to proceed.'];
+        Ember.set(this, 'showErrorState', true);
+        Ember.set(this, 'errorMessages', errors);
       }
-      this.transitionToRoute(route);
     }
   }
 });
