@@ -37,7 +37,8 @@ export default DS.Model.extend({
       fields: [],
       function: null,
       separator: " ",
-      may_contain_units: false
+      prefix_or_postfix: null,
+      may_contain_units: false,
     },
     unit:{
       fields: [],

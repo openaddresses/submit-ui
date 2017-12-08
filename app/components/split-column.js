@@ -25,6 +25,9 @@ export default Ember.Component.extend({
       Ember.set(this.model.submission.get('oaFields')[field], "function", extraction_function);
     },
     removeFunction: function(field){
+      if (this.model.submission.get('oaFields')[field].may_contain_units === true){
+        Ember.set(this.model.submission.get('oaFields')[field], "may_contain_units", false);
+      }
       if (this.model.submission.get('oaFields')[field].function === "join" && this.model.submission.get('oaFields')[field].fields.length > 1){
         Ember.set(this.model.submission.get('oaFields')[field], "fields", [this.model.submission.get('oaFields')[field].fields[0]]);
         this.set('showAdditionalJoinButton', false);
