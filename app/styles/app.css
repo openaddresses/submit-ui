@@ -169,6 +169,12 @@ nav ul li.active {
   color: var(--link-hover) !important;
 }
 
+.or {
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 2em;
+  font-weight: bold;
+}
 /* styling for data source page */
 .ui.url.input {
   width: 80%;

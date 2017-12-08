@@ -13,11 +13,7 @@ export default Ember.Component.extend({
   actions: {
     openModal: function(name) {
       /*eslint-disable */
-      $('.ui.' + name + '.modal').modal('hide others');
-      $('.ui.' + name + '.modal').modal({
-        observeChanges: true,
-      }).modal('show');
-      return false;
+      $('.ui.' + name + '.modal').modal('show');
       /*eslint-enable */
     },
     submitModal: function(element, component) {
