@@ -20,12 +20,14 @@ export default DS.Model.extend({
     lon:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null
     },
     lat:{
       fields: [],
       function: null,
       separator: " ",
+      prefix_or_postfix: null
     },
     number:{
       fields: [],
@@ -43,27 +45,32 @@ export default DS.Model.extend({
     unit:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null
     },
     city:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null
     },
     district:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null
     },
     region:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null
     },
     postcode:{
       fields: [],
       function: null,
-      separator: " "
+      separator: " ",
+      prefix_or_postfix: null
     }
   },
   exampleRows:[{
