@@ -46,7 +46,7 @@ export default Ember.Component.extend({
       }
     },
     setPrefixPostfixFieldFromDropdown: function(heading, column){
-      var prefixOrPostfix;
+      var prefixOrPostfix = null;
       if (this.model.submission.oaFields[heading].function === "removePrefixOrPostfix"){
         prefixOrPostfix = "row_fxn_remove_prefix";
       } else {
@@ -60,7 +60,7 @@ export default Ember.Component.extend({
         var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.oaFields[heading].fields[0]].toString();
         var fieldValueToRemove = this.model.webServiceResponse.source_data.results[i][field_to_remove].toString();
         var valueAfterFunction;
-        if (prefixOrPostfix = "row_fxn_remove_prefix"){
+        if (prefixOrPostfix === "row_fxn_remove_prefix"){
           if (field_to_remove !== "" && fieldValue.startsWith(fieldValueToRemove)){
             valueAfterFunction = fieldValue.slice(fieldValueToRemove.length, fieldValue.length).trim();
             this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
