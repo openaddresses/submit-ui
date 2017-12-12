@@ -16,7 +16,7 @@
             <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
           </div>
 
-          {{#unless (and model model.submission.data_url}}
+          {{#unless model}}
             <div class="field">
               <label> Data Source </label>
               <div class="inline sixteen wide fields">

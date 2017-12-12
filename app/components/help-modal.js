@@ -14,7 +14,6 @@ export default Ember.Component.extend({
     openModal: function(name) {
       /*eslint-disable */
       $('.ui.' + name + '.modal').modal('show');
-      console.log(this.model.data_url);
       /*eslint-enable */
     },
     submitModal: function(element, component) {
