@@ -14,13 +14,13 @@ export default Ember.Component.extend({
     openModal: function(name) {
       /*eslint-disable */
       $('.ui.' + name + '.modal').modal('show');
+      console.log(this.model.data_url);
       /*eslint-enable */
     },
     submitModal: function(element, component) {
       /*eslint-disable */
       $('.ui.modal').modal('toggle', element, component);
-
-      /* TODO: create issue with collected information */
+      /* TODO: send information to back end */
 
       this.get('submit')("success");
       /*eslint-enable */
@@ -35,7 +35,7 @@ export default Ember.Component.extend({
       this.set('email', email);
     },
     setText: function(text) {
-      this.est('text', null);
+      this.set('text', null);
       var text = input.currentTarget.value;
       this.set('text', text);
     },
