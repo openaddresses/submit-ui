@@ -25,15 +25,17 @@ export default Ember.Component.extend({
       /*eslint-enable */
     },
     cancelModal: function(name) {
+      /*eslint-disable */
       $('.ui.' + name + '.modal').modal('hide');
       return true;
+      /*eslint-enable */
     },
     setEmail: function(input) {
       this.set('email', null);
       var email = input.currentTarget.value;
       this.set('email', email);
     },
-    setText: function(text) {
+    setText: function(input) {
       this.set('text', null);
       var text = input.currentTarget.value;
       this.set('text', text);
