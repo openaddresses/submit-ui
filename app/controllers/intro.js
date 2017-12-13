@@ -17,52 +17,57 @@ export default Ember.Controller.extend(sharedActions, {
     // If there is data file uploaded, that takes priority
     return (this.get('dataFile'));
   },
-  checkDataUrlError: function (changeset) {
-    if (changeset.get('isValid')) return [];
-    else return changeset.get('errors')
-                .reduce((errorMessages, error) => {
-                  error.validation.map((validationMessage) => {
-                    errorMessages.push(validationMessage)
-                  })
-                  return errorMessages;
-                }, []);
+  checkDataUrlError: async function (changeset) {
+    return new Promise((resolve, reject) =>
+      changeset.validate().then(()=> {
+        if (changeset.get('isValid')) resolve([]);
+        else resolve(changeset.get('errors')
+                    .reduce((errorMessages, error) => {
+                      error.validation.map((validationMessage) => {
+                        errorMessages.push(validationMessage)
+                      })
+                      return errorMessages;
+                    }, []));
+      })
+    )
   },
-  checkErrors: function (changeset) {
+  checkErrors: async function (changeset) {
     if (this.checkDataFile()) {
       this.model.set('data_file', this.get('dataFile'));
-      return [];
+      return new Promise((resolve, reject) => resolve([]));
     } else if (changeset.get('data_url')) {
       this.model.set('data_url',  changeset.get('data_url'));
       return this.checkDataUrlError(changeset);
-    } else return ['You need a file or a url to proceed'];
+    } else return new Promise((resolve, reject) => resolve(['You need a file or a url to proceed']));
   },
   resetErrorState: function () {
     Ember.set(this, 'showErrorState', false);
     Ember.set(this, 'errorMessages', []);
   },
   actions: {
-    showFormError: function () {
-      Ember.set(this, 'showErrorState', true);
-    },
-    setURL: function(input){
-      this.set('dataFile', null);
-      var url = input.currentTarget.value;
-      this.set('dataURL', url);
-    },
     uploadFile: function(){
       this.set('dataURL', null);
       var file = document.getElementById('uploadfile').files[0];
       this.set('dataFile', file);
     },
     changeRoute: function(route, changeset){
-      const errorMsgs = this.checkErrors(changeset)
-      if (errorMsgs.length) {
-        Ember.set(this, 'showErrorState', true);
-        Ember.set(this, 'errorMessages', errorMsgs);
-      } else {
-        this.resetErrorState();
-        this.transitionToRoute(route);
-      }
+      this.checkErrors(changeset)
+          .then((errorMsgs) => {
+            console.log(errorMsgs)
+            if (errorMsgs.length) {
+              Ember.set(this, 'showErrorState', true);
+              Ember.set(this, 'errorMessages', errorMsgs);
+            } else {
+              this.resetErrorState();
+              this.transitionToRoute(route);
+            }
+          })
+        .catch ((err) => {
+          const errorMsgs = ['Something went wrong. Please try later.'];
+          Ember.set(this, 'showErrorState', true);
+          Ember.set(this, 'errorMessages', errorMsgs);
+        })
+
     }
   }
 });

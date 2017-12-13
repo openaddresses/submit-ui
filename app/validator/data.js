@@ -1,4 +1,4 @@
-import { validatePresence, validateLength, validateFormat } from 'ember-changeset-validations/validators';
+import { validateLength, validateFormat } from 'ember-changeset-validations/validators';
 
 export default {
   data_url: [
