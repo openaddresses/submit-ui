@@ -11,27 +11,16 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  // this.render(hbs`{{help-modal}}`);
+  this.render(hbs`{{help-modal}}`);
 
-  // assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), '');
 
-  // // Template block usage:
-  // this.render(hbs`
-  //   {{#help-modal}}
-  //     template block text
-  //   {{/help-modal}}
-  // `);
+  // Template block usage:
+  this.render(hbs`
+    {{#help-modal}}
+      template block text
+    {{/help-modal}}
+  `);
 
-  // assert.equal(this.$().text().trim(), 'template block text');
-
-  test('should open modal on button click', function(assert) {
-    assert.expect(2);
-
-    this.render(hbs`{{help-modal}}`);
-    assert.equal(this.$('.help-button').text().trim(), '');
-
-    // Click on "Help Needed" button
-    Ember.run(() => document.querySelector('.help-button').click());
-    assert.equal(this.$('.help-modal').text(), "Having trouble contributing or editing a source? Please fill out this form so that we can help.", 'help modal opens on click');
-  })
+  assert.equal(this.$().text().trim(), 'template block text');
 });
