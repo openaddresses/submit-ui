@@ -1,7 +1,7 @@
 <div class="field">
   <div class="fields">
-    <div class="fifteen wide field">
-      {{#ui-dropdown class="selection fluid" selected=properties.fields.firstObject onChange=(action "chooseField" field) as |execute mapper|}}
+    <div class="sixteen wide field">
+      {{#ui-dropdown class="selection fluid data-format" selected=properties.fields.firstObject onChange=(action "chooseField" field) as |execute mapper|}}
         <div class="default text">
           Source column headings
         </div>
@@ -17,8 +17,8 @@
     </div>
     {{#if properties.fields.firstObject}}
       <div class="one wide field">
-        <button class="ui icon mini button basic red" onClick={{action "removeField" field}}>
-          <i class="remove icon"></i>
+        <button class="ui icon tiny compact button basic red clear-field" style="margin-top: 15px" onClick={{action "removeField" field}}>
+          <i class="minus icon"></i>
         </button>
       </div>
     {{/if}}
