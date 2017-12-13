@@ -29,16 +29,17 @@ export default Ember.Controller.extend(sharedActions, {
                       return errorMessages;
                     }, []));
       })
+      .catch((err) => {reject(err)})
     )
   },
   checkErrors: async function (changeset) {
     if (this.checkDataFile()) {
       this.model.set('data_file', this.get('dataFile'));
-      return new Promise((resolve, reject) => resolve([]));
+      return new Promise((resolve) => resolve([]));
     } else if (changeset.get('data_url')) {
       this.model.set('data_url',  changeset.get('data_url'));
       return this.checkDataUrlError(changeset);
-    } else return new Promise((resolve, reject) => resolve(['You need a file or a url to proceed']));
+    } else return new Promise((resolve) => resolve(['You need a file or a url to proceed']));
   },
   resetErrorState: function () {
     Ember.set(this, 'showErrorState', false);
@@ -53,7 +54,6 @@ export default Ember.Controller.extend(sharedActions, {
     changeRoute: function(route, changeset){
       this.checkErrors(changeset)
           .then((errorMsgs) => {
-            console.log(errorMsgs)
             if (errorMsgs.length) {
               Ember.set(this, 'showErrorState', true);
               Ember.set(this, 'errorMessages', errorMsgs);
@@ -63,7 +63,7 @@ export default Ember.Controller.extend(sharedActions, {
             }
           })
         .catch ((err) => {
-          const errorMsgs = ['Something went wrong. Please try later.'];
+          const errorMsgs = [err];
           Ember.set(this, 'showErrorState', true);
           Ember.set(this, 'errorMessages', errorMsgs);
         })

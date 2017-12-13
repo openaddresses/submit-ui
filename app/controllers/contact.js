@@ -19,6 +19,7 @@ export default Ember.Controller.extend(sharedActions, {
                             return errorMessages;
                           }, []));
       })
+      .catch((err) => {reject(err)})
     )
   },
   resetErrorState: function () {
@@ -30,11 +31,7 @@ export default Ember.Controller.extend(sharedActions, {
       this.model.set('maintainer_name', changeset.get('maintainer_name'));
       this.model.set('maintainer_email',  changeset.get('maintainer_email'));
       return this.checkFormError(changeset);
-    } else return new Promise((resolve, reject) => resolve(['We need your e-mail to proceed']));
-  },
-  resetErrorState: function () {
-    Ember.set(this, 'showErrorState', false);
-    Ember.set(this, 'errorMessages', []);
+    } else return new Promise((resolve) => resolve(['We need your e-mail to proceed']));
   },
   actions: {
     changeRoute: function(route, changeset){
@@ -48,8 +45,8 @@ export default Ember.Controller.extend(sharedActions, {
             this.transitionToRoute(route);
           }
         })
-        .catch ((err) => {
-          const errorMsgs = ['Something went wrong. Please try later.'];
+        .catch((err) => {
+          const errorMsgs = [err]; // We can replace this error message to something vague
           Ember.set(this, 'showErrorState', true);
           Ember.set(this, 'errorMessages', errorMsgs);
         })
