@@ -28,7 +28,7 @@ test('it renders', function(assert) {
     assert.expect(2);
 
     this.render(hbs`{{help-modal}}`);
-    assert.equal(this.$('.help-button').text(), 'Help Needed', 'Only "Help Needed" is displayed');
+    assert.equal(this.$('.help-button').text().trim(), '');
 
     // Click on "Help Needed" button
     Ember.run(() => document.querySelector('.help-button').click());
