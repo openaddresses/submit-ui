@@ -24,7 +24,7 @@ export default function() {
     http://www.ember-cli-mirage.com/docs/v0.3.x/shorthands/
   */
   // passthough whitelists this domain to avoid Mirage error
-  // this.passthrough('https://search.mapzen.com/v1/**');
+  // this.passthrough('');
  
   this.get('/responses', () => {
     return {
