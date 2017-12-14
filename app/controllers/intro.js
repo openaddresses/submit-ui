@@ -33,12 +33,15 @@ export default Ember.Controller.extend(sharedActions, {
     )
   },
   checkErrors: async function (changeset) {
+    // When there is data file, it takes priority
     if (this.checkDataFile()) {
       this.model.set('data_file', this.get('dataFile'));
       return new Promise((resolve) => resolve([]));
+    // If there is no data file but url, validate it
     } else if (changeset.get('data_url')) {
       this.model.set('data_url',  changeset.get('data_url'));
       return this.checkDataUrlError(changeset);
+    // If there is nothing, throw an error
     } else return new Promise((resolve) => resolve(['You need a file or a url to proceed']));
   },
   resetErrorState: function () {
@@ -54,9 +57,11 @@ export default Ember.Controller.extend(sharedActions, {
     changeRoute: function(route, changeset){
       this.checkErrors(changeset)
           .then((errorMsgs) => {
+            // When there is any error, show it and do not proceed
             if (errorMsgs.length) {
               Ember.set(this, 'showErrorState', true);
               Ember.set(this, 'errorMessages', errorMsgs);
+            // When there is no error message, proceed
             } else {
               this.resetErrorState();
               this.transitionToRoute(route);

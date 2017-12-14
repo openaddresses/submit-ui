@@ -16,13 +16,16 @@
             showErrorState=showErrorState}}
         </div>
         <div class="eight wide column ui form">
-          {{validated-input
-            label="Email address"
-            propertyName="maintainer_email"
-            placeholder="email address"
-            required=true
+        <div class="required field ">
+          <label>Email address</label>
+          {{input
+            type="text"
+            value=(get changeset "maintainer_email")
             changeset=changeset
-            showErrorState=showErrorState}}
+            placeholder="email address"
+            showErrorState=showFormErrorState
+          }}
+          </div>
         </div>
       </div>
       {{#if showErrorState}}
@@ -38,3 +41,4 @@
     {{/with}}
   </div>
 </div>
+=

@@ -27,6 +27,7 @@ export default Ember.Controller.extend(sharedActions, {
     Ember.set(this, 'errorMessages', []);
   },
   checkErrors: function (changeset) {
+    // Check there is an e-mail value or not to show less generic error message
     if (changeset.get('maintainer_email')) {
       this.model.set('maintainer_name', changeset.get('maintainer_name'));
       this.model.set('maintainer_email',  changeset.get('maintainer_email'));

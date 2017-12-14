@@ -17,11 +17,13 @@
           <div class="ui label">
             URL
           </div>
-          {{validated-input
-            propertyName="data_url"
-            placeholder="URL for hosted data"
+          {{input
+            type="text"
+            value=(get changeset "data_url")
             changeset=changeset
-            showErrorState=showFormErrorState}}
+            placeholder="URL for hosted data"
+            showErrorState=showFormErrorState
+          }}
         </div>
         <div class="ui horizontal divider">
           Or
