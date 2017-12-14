@@ -56,23 +56,22 @@ export default Ember.Controller.extend(sharedActions, {
     },
     changeRoute: function(route, changeset){
       this.checkErrors(changeset)
-          .then((errorMsgs) => {
-            // When there is any error, show it and do not proceed
-            if (errorMsgs.length) {
-              Ember.set(this, 'showErrorState', true);
-              Ember.set(this, 'errorMessages', errorMsgs);
-            // When there is no error message, proceed
-            } else {
-              this.resetErrorState();
-              this.transitionToRoute(route);
-            }
-          })
-        .catch ((err) => {
-          const errorMsgs = [err];
-          Ember.set(this, 'showErrorState', true);
-          Ember.set(this, 'errorMessages', errorMsgs);
+        .then((errorMsgs) => {
+          // When there is any error, show it and do not proceed
+          if (errorMsgs.length) {
+            Ember.set(this, 'showErrorState', true);
+            Ember.set(this, 'errorMessages', errorMsgs);
+          // When there is no error message, proceed
+          } else {
+            this.resetErrorState();
+            this.transitionToRoute(route);
+          }
         })
-
+      .catch ((err) => {
+        const errorMsgs = [err];
+        Ember.set(this, 'showErrorState', true);
+        Ember.set(this, 'errorMessages', errorMsgs);
+      })
     }
   }
 });
