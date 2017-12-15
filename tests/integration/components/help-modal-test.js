@@ -10,16 +10,28 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
+  // Check that it renders by checking .help-button
   this.render(hbs`{{help-modal}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#help-modal}}
-      template block text
-    {{/help-modal}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$('div.help-button').text().trim(), 'Help Needed');
 });
+
+test('help modal opens when "Help Needed" clicked', function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`{{help-modal}}`);
+  assert.equal(this.$('div.help-modal').hasClass("scale in"), false);
+
+  this.$('div.help-button').click();
+  assert.equal(this.$('div.help-modal').hasClass("scale in"), true);
+});
+
+test('help modal closes when "cancel" button is clicked', function(assert) {
+  assert.expect(2);
+
+  this.render(hbs`{{help-modal}}`);
+  this.$('.help-button').click();
+  assert.equal(this.$('.help-modal').hasClass("scale in"), true);
+
+  this.$('.ui.deny.button').click();
+  assert.equal(this.$('.help-modal').hasClass("scale out"), true);
+})
