@@ -29,18 +29,16 @@ export default Ember.Controller.extend({
     changeset.set(keyName, val);
     return new Promise((resolve, reject) => {
       changeset.validate().then(()=> {
-          console.log(changeset.get('errors'));
-          resolve(changeset.get('errors')
-                          .filter ((e) => e.key === keyName)
-                          .reduce((errorMessages, error) => {
-                            console.log(errorMessages);
-                            error.validation.map((validationMessage) => {
-                              errorMessages.push(validationMessage)
-                            })
-                            return errorMessages;
-                          }, []));
+        resolve(changeset.get('errors')
+          .filter ((e) => e.key === keyName)
+          .reduce((errorMessages, error) => {
+            error.validation.map((validationMessage) => {
+              errorMessages.push(validationMessage)
+            })
+            return errorMessages;
+          }, []));
         })
-      .catch((err) => {reject(err)})
+    .catch((err) => {reject(err)})
     })
   },
   checkErrors: function (changeset) {
@@ -48,18 +46,17 @@ export default Ember.Controller.extend({
     if (this.model.get('license') === 'provide' && !this.model.get('attribution')) return this.checkFormErrors(changeset, 'user_submitted_url');
     if (this.model.get('license') !== 'provide' && this.model.get('attribution')) return this.checkFormErrors(changeset, 'attribution_text');
     if (this.model.get('license') === 'provide' && this.model.get('attribution')) {
-        let msgs = [];
-        return this.checkFormErrors(changeset, 'user_submitted_url')
-        .then((errorMessages) => {
-          errorMessages.map((error) => msgs.push(error))
-        })
-        .then(() => this.checkFormErrors(changeset, 'attribution_text'))
-        .then((errorMessages) => {
-          console.log(errorMessages);
-          errorMessages.map((error) => msgs.push(error))
-          return msgs;
-        })
-      }
+      let msgs = [];
+      return this.checkFormErrors(changeset, 'user_submitted_url')
+      .then((errorMessages) => {
+        errorMessages.map((error) => msgs.push(error))
+      })
+      .then(() => this.checkFormErrors(changeset, 'attribution_text'))
+      .then((errorMessages) => {
+        errorMessages.map((error) => msgs.push(error))
+        return msgs;
+      })
+    }
 
     if (this.model.get('license') !== 'provide' && !this.model.get('attribution')) return new Promise(resolve => resolve([]))
   },
@@ -94,7 +91,7 @@ export default Ember.Controller.extend({
             this.resetErrorState();
             this.transitionToRoute(route);
           }
-          })
+        })
         .catch ((err) => {
           const errorMsgs = [err];
           Ember.set(this, 'showErrorState', true);
