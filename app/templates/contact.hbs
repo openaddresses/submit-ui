@@ -8,23 +8,39 @@
     {{#with (changeset model MaintainerValidator) as |changeset|}}
       <div class="ui grid">
         <div class="eight wide column ui form">
-          {{validated-input
-            label="Name"
-            propertyName="maintainer_name"
-            placeholder="name"
-            changeset=changeset
-            showErrorState=showErrorState}}
+          <div class="field ">
+            <label>Name</label>
+            {{input
+              type="text"
+              value=(get changeset "maintainer_name")
+              changeset=changeset
+              placeholder="name"
+              showErrorState=showFormErrorState
+            }}
+          </div>
         </div>
         <div class="eight wide column ui form">
-          {{validated-input
-            label="Email address"
-            propertyName="maintainer_email"
-            placeholder="email address"
-            required=true
+        <div class="required field ">
+          <label>Email address</label>
+          {{input
+            type="text"
+            value=(get changeset "maintainer_email")
             changeset=changeset
-            showErrorState=showErrorState}}
+            placeholder="email address"
+            showErrorState=showFormErrorState
+          }}
+          </div>
         </div>
       </div>
+      {{#if showErrorState}}
+        <div>
+          <ul class="list">
+            {{#each errorMessages as |errorMessage|}}
+              <li>{{errorMessage}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
       {{nav-buttons showError="showError" sendChangeRoute="changeRoute" back="mapping" next="review" forwardButtonText="Review" changeset=changeset}}
     {{/with}}
   </div>
