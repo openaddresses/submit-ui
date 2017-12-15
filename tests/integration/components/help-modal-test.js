@@ -1,6 +1,5 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
-import { run } from '@ember/runloop';
 
 moduleForComponent('help-modal', 'Integration | Component | help modal', {
   integration: true
