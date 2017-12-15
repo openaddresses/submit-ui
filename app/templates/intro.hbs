@@ -1,10 +1,4 @@
 <div class="ui text container center aligned">
-  {{# if (eq dataSource false)}}
-    <div class="ui tiny message">
-      <div class="header"> Missing data source </div>
-      <p> In order to proceed, you must provide a link to the data or upload the data file </p>
-    </div>
-  {{/if}}
   <div class="ui icon negative mobile message">
     <i class="warning icon"></i>
     <div class="content">
@@ -14,27 +8,44 @@
   </div>
   <div class="intro">
     <h3 class="first headroom">Welcome!</h3>
-    <p>
-      Provide link to data or upload data. (add information about accepted formats)
-    </p>
-    <div class="form-content">
-      <div class="ui url labeled input">
-        <div class="ui label">
-          URL
+    {{#with (changeset model DataURLValidator) as |changeset|}}
+      <p>
+        Provide link to data or upload data. (add information about accepted formats)
+      </p>
+      <div class="form-content">
+        <div class="ui url labeled input">
+          <div class="ui label">
+            URL
+          </div>
+          {{input
+            type="text"
+            value=(get changeset "data_url")
+            changeset=changeset
+            placeholder="URL for hosted data"
+            showErrorState=showFormErrorState
+          }}
         </div>
-        <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
+        <div class="ui horizontal divider">
+          Or
+        </div>
+        <div>
+          <label for="uploadfile" class="ui upload icon small button">
+            <i class="file icon"></i>
+            Choose file to upload
+          </label>
+          <input type="file" id="uploadfile" style="display:none" onChange={{action "uploadFile"}}>{{fileName}}
+        </div>
       </div>
-      <div class="ui horizontal divider">
-        Or
-      </div>
-      <div>
-        <label for="uploadfile" class="ui upload link icon small button">
-          <i class="file icon"></i>
-          Choose file to upload
-        </label>
-        <input type="file" id="uploadfile" style="display:none" onChange={{action "uploadFile"}}>{{fileName}}
-      </div>
-    </div>
-    {{nav-buttons sendChangeRoute="changeRoute" next="more-info"}}
+      {{#if showErrorState}}
+        <div>
+          <ul class="list">
+            {{#each errorMessages as |errorMessage|}}
+              <li>{{errorMessage}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+      {{nav-buttons sendChangeRoute="changeRoute" next="more-info" showError="showError" changeset=changeset}}
+    {{/with}}
   </div>
 </div>
