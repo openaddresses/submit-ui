@@ -6,7 +6,9 @@ export default Ember.Controller.extend({
   LicenseValidator,
   showErrorState: false,
   errorMessages: [],
-  license: '',
+  licenseType: '',
+  attributionSelected: false,
+  licenseSelected: false,
   licenses: [{
     name: "Open Data Commons Attribution License (ODC-By)",
     url: "http://opendatacommons.org/licenses/by/1.0/"
@@ -37,41 +39,70 @@ export default Ember.Controller.extend({
             })
             return errorMessages;
           }, []));
-        })
+      })
     .catch((err) => {reject(err)})
     })
   },
-  checkErrors: function (changeset) {
-    // return this.checkFormErrors(changeset, 'attribution_text');
-    if (this.model.get('license') === 'provide' && !this.model.get('attribution')) return this.checkFormErrors(changeset, 'user_submitted_url');
-    if (this.model.get('license') !== 'provide' && this.model.get('attribution')) return this.checkFormErrors(changeset, 'attribution_text');
-    if (this.model.get('license') === 'provide' && this.model.get('attribution')) {
-      let msgs = [];
-      return this.checkFormErrors(changeset, 'user_submitted_url')
-      .then((errorMessages) => {
-        errorMessages.map((error) => msgs.push(error))
-      })
-      .then(() => this.checkFormErrors(changeset, 'attribution_text'))
-      .then((errorMessages) => {
-        errorMessages.map((error) => msgs.push(error))
-        return msgs;
-      })
+  checkLicenseError: function (changeset) {
+    // This data has license?
+    if (this.model.get('license_exists')) {
+      switch (this.licenseType) {
+      case 'provide':
+        return this.checkFormErrors(changeset, 'user_submitted_url');
+      case 'choose':
+        if (this.model.get('license_url')) return new Promise(resolve => resolve([]))
+        else return new Promise (resolve => resolve(['Please choose a license to proceed']));
+      default:
+        return new Promise (resolve => resolve(['License Error 1']));
+      }
+    } else {
+      // User didn't interact with licesne selection at all
+      if (!this.licenseSelected) return new Promise (resolve => resolve(['Licesne Error 2']));
+      // This data doesn't have license
+      else return new Promise (resolve => resolve([]));
     }
-
-    if (this.model.get('license') !== 'provide' && !this.model.get('attribution')) return new Promise(resolve => resolve([]))
+  },
+  checkAttributionError: function (changeset) {
+    if (this.model.get('attribution')) {
+      return this.checkFormErrors(changeset, 'attribution_text')
+    } else {
+      if (!this.attributionSelected) return new Promise (resolve => resolve(['Attribution Error 1']));
+      else return new Promise (resolve => resolve([]));
+    }
+  },
+  checkFrequencyError: function () {
+    return new Promise (resolve => {
+      if (this.model.get('update_frequency')) resolve([]);
+      else resolve(['Frequency Error 1']);
+    })
+  },
+  checkErrors: function (changeset) {
+    let totalErrorMessages = [];
+    return this.checkLicenseError(changeset)
+      .then((licenseErrorMessages) => licenseErrorMessages.map((eMessage) => totalErrorMessages.push(eMessage)))
+      .then(() => this.checkAttributionError(changeset))
+      .then((attributionErrorMessages) => attributionErrorMessages.map((eMessage) => totalErrorMessages.push(eMessage)))
+      .then(() => this.checkFrequencyError())
+      .then((frequencyErrorMessages) => {
+        frequencyErrorMessages.map((eMessage) => totalErrorMessages.push(eMessage));
+        return totalErrorMessages;
+      })
   },
   resetErrorState: function () {
     Ember.set(this, 'showErrorState', false);
     Ember.set(this, 'errorMessages', []);
   },
   actions: {
-    licenseExists: function(input){
+    licenseExists: function(input) {
+      // Check user interacted with attribution at all
+      this.licenseSelected = true;
       this.model.set('license_exists', input)
       this.model.set('license', null);
       this.model.set('license_url', null);
       this.model.set('user_submitted_url', null);
-      this.model.set('attribution', null);
-      this.model.set('attribution_text', null);
+      // Confirm this part
+      // this.model.set('attribution', null);
+      // this.model.set('attribution_text', null);
     },
     selectLicense: function(license){
       this.model.set('license', null)
@@ -111,6 +142,8 @@ export default Ember.Controller.extend({
       }
     },
     setAttribution: function(input){
+      // Check user interacted with attribution at all
+      this.attributionSelected = true;
       this.model.set('attribution', input);
       if (input === false || input === "unknown"){
         this.model.set('attribution_text', null);
