@@ -1,7 +1,7 @@
 <div class="field">
   <div class="fields">
     <div class="sixteen wide field">
-      {{#ui-dropdown class="selection fluid data-format" selected=properties.fields.firstObject onChange=(action "chooseField" field) as |execute mapper|}}
+      {{#ui-dropdown class="selection fluid data-format" selected=properties.fields.firstObject onChange=(action "sendChooseField" field) as |execute mapper|}}
         <div class="default text">
           Source column headings
         </div>
