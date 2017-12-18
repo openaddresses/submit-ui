@@ -23,10 +23,10 @@
               <label> Add a license <span class="required"> * </span> </label>
               <div class="grouped fields">
                 <div class="field">
-                  {{ui-radio name="license" label="Choose from list of licenses" value="choose" current=license onChange=(action (mut licenseType))}}
+                  {{ui-radio name="license" label="Choose from list of licenses" value="choose" current=licenseType onChange=(action (mut licenseType))}}
                 </div>
                 <div class="field">
-                  {{ui-radio name="license" label="Provide link to license" value="provide" current=license onChange=(action (mut licenseType))}}
+                  {{ui-radio name="license" label="Provide link to license" value="provide" current=licenseType onChange=(action (mut licenseType))}}
                 </div>
               </div>
             </div>
