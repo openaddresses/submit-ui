@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
-import LicenseValidator from '../validator/license'
+import InfoValidator from '../validator/more-info'
 
 export default Ember.Controller.extend({
-  LicenseValidator,
+  InfoValidator,
   showErrorState: false,
   errorMessages: [],
   licenseType: '',
