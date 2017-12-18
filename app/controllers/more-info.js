@@ -45,7 +45,7 @@ export default Ember.Controller.extend({
   },
   checkLicenseError: function (changeset) {
     // This data has license?
-    if (this.model.get('license_exists')) {
+    if (this.model.get('license_exists') === true) {
       switch (this.licenseType) {
       case 'provide':
         return this.checkFormErrors(changeset, 'user_submitted_url');
@@ -63,7 +63,7 @@ export default Ember.Controller.extend({
     }
   },
   checkAttributionError: function (changeset) {
-    if (this.model.get('attribution')) {
+    if (this.model.get('attribution') === true) {
       return this.checkFormErrors(changeset, 'attribution_text')
     } else {
       if (!this.attributionSelected) return new Promise (resolve => resolve(['Attribution Error 1']));
