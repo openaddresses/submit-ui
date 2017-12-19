@@ -130,10 +130,9 @@ export default Ember.Controller.extend({
         })
     },
     userSubmittedLicense: function(input){
-      // this.model.set('license', 'provide')
-      // this.model.set('license_url', null)
-      // this.model.set('user_submitted_url', input.target.value)
-      this.model.set('license_url', input.target.value)
+      this.model.set('license', null)
+      this.model.set('license_url', null)
+      this.model.set('user_submitted_url', input.target.value)
     },
     setShareAlike: function(input){
       if (input === true){
