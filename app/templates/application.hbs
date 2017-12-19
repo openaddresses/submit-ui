@@ -1,7 +1,11 @@
 <div class="ui inverted vertical masthead center aligned segment">
 	<div class="ui text container">
     <div class="openaddress logo"></div>
-		<h1 class="ui inverted header">Mobility-on-Demand Sandbox</h1>
+    {{#if (eq currentRouteName 'success')}}
+		  <h1 class="ui inverted header">Success!</h1>
+    {{else}}
+      <h1 class="ui inverted header">Mobility-on-Demand Sandbox</h1>
+    {{/if}}
 	</div>
   <div class="ui hidden divider"></div>
   {{#if (eq currentRouteName 'success')}}
