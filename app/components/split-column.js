@@ -27,9 +27,6 @@ export default Ember.Component.extend({
       Ember.set(this.model.submission.get('oaFields')[field], "function", extraction_function);
     },
     removeFunction: function(field){
-      if (this.model.submission.get('oaFields')[field].may_contain_units === true){
-        Ember.set(this.model.submission.get('oaFields')[field], "may_contain_units", false);
-      }
       if (this.model.submission.get('oaFields')[field].function === "join" && this.model.submission.get('oaFields')[field].fields.length > 1){
         Ember.set(this.model.submission.get('oaFields')[field], "fields", [this.model.submission.get('oaFields')[field].fields[0]]);
         this.set('showAdditionalJoinButton', false);
@@ -49,13 +46,6 @@ export default Ember.Component.extend({
       Ember.set(this.model.submission.get('oaFields')[field], "function", action);
       if (action === "join"){
         this.set('showAdditionalJoinDropdown', true);
-      }
-    },
-    setMayContainUnits: function(){
-      if (this.model.submission.get('oaFields').street.may_contain_units === false){
-        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", true);
-      } else {
-        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", false);
       }
     }
   }
