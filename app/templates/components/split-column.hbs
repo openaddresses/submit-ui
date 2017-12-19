@@ -14,7 +14,7 @@
   </div>
   <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_pattern" field}}>Remove prefix number</button>
   {{#if this.model.submission.oaFields.street.may_contain_units}}
-    <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Remove postfix unit</button>
+    <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Remove postfix unit</button>
   {{/if}}
 {{/if}}
 
@@ -23,7 +23,7 @@
 {{/if}}
 
 {{#if (eq field "unit")}}
-<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Use postfix unit</button>
+<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Use postfix unit</button>
 {{/if}}
 
 <button class="ui button basic green" onClick={{action "extractionFunction" "removePrefixOrPostfix" field}}>Remove contents of another field</button>
