@@ -2,20 +2,8 @@
   <i class="remove icon"></i> Cancel split
 </div>
 {{#if (eq field "street")}}
-  <div class="row">
-    <div class="ui unit checkbox">
-      {{#if this.model.submission.oaFields.street.may_contain_units}}
-        <input type="checkbox" checked onClick={{action "setMayContainUnits"}}>
-      {{else}}
-        <input type="checkbox" onClick={{action "setMayContainUnits"}}>
-      {{/if}}
-      <label>May contain unit number</label>
-    </div>
-  </div>
   <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_pattern" field}}>Remove prefix number</button>
-  {{#if this.model.submission.oaFields.street.may_contain_units}}
-    <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Remove postfix unit</button>
-  {{/if}}
+  <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Remove postfix unit</button>
 {{/if}}
 
 {{#if (eq field "number")}}
@@ -23,7 +11,7 @@
 {{/if}}
 
 {{#if (eq field "unit")}}
-<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Use postfix unit</button>
+<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Use postfix unit</button>
 {{/if}}
 
 <button class="ui button basic green" onClick={{action "extractionFunction" "removePrefixOrPostfix" field}}>Trim column</button>
