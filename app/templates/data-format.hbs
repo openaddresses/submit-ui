@@ -1,5 +1,9 @@
 <div class="ui text container">
-  <h3 class="first headroom">Data format</h3>
+  <h3 class="first headroom">Data format {{help-modal model=model.submission submit=(action "changeRoute")}} </h3>
+  <p> This is a small sample of the data for preview </p>
+  <div class="ui tiny message">
+    <p> <span class="required"> * </span> indicates field is <b> required </b> to proceed </p>
+  </div>
   <table class="ui celled table">
     <thead>
       <tr>
@@ -62,7 +66,7 @@
           <div class="data-functions">
             {{#unless (eq field "lon")}}
               {{#unless (eq field "lat")}}
-                <div class="function" onClick={{action "addFunction" field "join"}}>
+                <div class="function link-text" onClick={{action "addFunction" field "join"}}>
                   + Join columns
                 </div>
               {{/unless}}
@@ -73,7 +77,7 @@
                   {{#unless (eq field "postcode")}}
                     {{#unless (eq field "lon")}}
                       {{#unless (eq field "lat")}}
-                        <div class="function" onClick={{action "addFunction" field "split"}}>
+                        <div class="function link-text" onClick={{action "addFunction" field "split"}}>
                           - Split column
                         </div>
                       {{/unless}}
@@ -121,8 +125,6 @@
             {{remove-prefix-postfix field=field properties=properties model=model}}
           {{else if (eq properties.function "row_fxn_remove_postfix")}}
             {{remove-prefix-postfix field=field properties=properties model=model}}
-          {{else if properties.function}}
-            <button class="ui button basic green" onClick={{action "removeFunction" field}}>Remove extraction <i class="remove icon"></i></button>
           {{/if}}
           <div class="field nav-buttons">
             {{#unless (or (eq currentField "lat") (eq currentField "number"))}}
