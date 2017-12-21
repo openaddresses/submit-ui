@@ -24,6 +24,9 @@
     <div class="field">
       {{ui-radio name="row_fxn_remove_postfix" label="Remove postfix" value="row_fxn_remove_postfix" current=extractionFunction onChange=(action "setPrefixPostfixFieldFromRadio" field)}}
     </div>
+    <div>
+      <i>The value can only be removed if it occurs at the beginning or end of the original field.</i>
+    </div>
   </div>
 </div>
 {{#if (eq field "street")}}
