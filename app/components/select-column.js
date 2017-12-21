@@ -6,12 +6,8 @@ export default Ember.Component.extend({
     return this.model.webServiceResponse.source_data.results;
   }),
   actions: {
-    chooseField: function(heading, column){
-      Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
-      this.model.submission.get('oaFields')[heading].fields.addObject(column);
-      for (var i = 0; i < 2; i++){
-        Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
-      }
+    sendChooseField: function(heading, column){
+      this.sendAction('sendChooseField', heading, column);
     },
     removeField: function(heading){
       var column = this.model.submission.get('oaFields')[heading].fields[0];
