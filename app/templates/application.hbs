@@ -1,18 +1,29 @@
 <div class="ui inverted vertical masthead center aligned segment">
-	<div class="ui text container">
+  <div class="ui text container">
     <div class="openaddress logo"></div>
-		<h1 class="ui inverted header">Mobility-on-Demand Sandbox</h1>
-		<h2>subtitle text here</h2>
-	</div>
+    {{#if (eq currentRouteName 'success')}}
+      <h1 class="ui inverted header">Success!</h1>
+    {{else}}
+      <h1 class="ui inverted header">Mobility-on-Demand Sandbox</h1>
+    {{/if}}
+  </div>
   <div class="ui hidden divider"></div>
-  <nav class="progress">
-    <ul>
-      <li class={{if (eq currentRouteName 'intro') "active"}}> 1. Data Source </li>
-      <li class={{if (eq currentRouteName 'more-info') "active"}}> 2. More Information </li>
-      <li class={{if (eq currentRouteName 'data-format') "active"}}> 3. Data Formatting </li>
-      <li class={{if (eq currentRouteName 'contact') "active"}}> 4. Contact Information </li>
-      <li class={{if (eq currentRouteName 'review') "active"}}> 5. Review </li>
-    </ul>
-  </nav>
+  {{#if (eq currentRouteName 'success')}}
+    <nav class="progress">
+      <ul>
+        <li class="active">Submission complete</li>
+      </ul>
+    </nav>
+  {{else}}
+    <nav class="progress">
+      <ul>
+        <li class={{if (eq currentRouteName 'intro') "active"}}> 1. Data Source </li>
+        <li class={{if (eq currentRouteName 'more-info') "active"}}> 2. Data Information </li>
+        <li class={{if (eq currentRouteName 'data-format') "active"}}> 3. Column Mapping </li>
+        <li class={{if (eq currentRouteName 'contact') "active"}}> 4. Contact </li>
+        <li class={{if (eq currentRouteName 'review') "active"}}> 5. Review </li>
+      </ul>
+    </nav>
+  {{/if}}
 </div>
 {{outlet}}
