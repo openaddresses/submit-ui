@@ -1,5 +1,5 @@
 <div class="ui text container">
-  <h3 class="first headroom">Contact information</h3>
+  <h3 class="first headroom">Contact information {{help-modal model=model submit=(action "changeRoute")}}</h3>
   <div class="form-content">
     <div class="ui tiny message">
       <p> <span class="required"> * </span>
@@ -9,7 +9,7 @@
       <div class="ui grid">
         <div class="eight wide column ui form">
           <div class="field ">
-            <label>Name</label>
+            <label>What should we call you?</label>
             {{input
               type="text"
               value=(get changeset "maintainer_name")
@@ -26,7 +26,7 @@
             type="text"
             value=(get changeset "maintainer_email")
             changeset=changeset
-            placeholder="email address"
+            placeholder="you@example.com"
             showErrorState=showFormErrorState
           }}
           </div>

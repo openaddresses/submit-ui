@@ -1,15 +1,16 @@
 <div class="ui text container">
-  <h3 class="first headroom"> Review </h3>
+  <h3 class="first headroom"> Review {{help-modal model=model submit=(action "changeRoute")}}</h3>
+  <p>Submitting this form will create a pull request on GitHub to <a href="https://github.com/openaddresses/submit-service"> OpenAddresses repository</a>.</p>
   <div class="form-content">
     <div class="ui attached message">
-      <h3 class="ui header">Data</h3>
+      <h3 class="ui header">Data Source</h3>
     </div>
     <div class="ui segment attached">
       <div class="ui five column grid">
         <div class="row">
           <div class="four wide column">
             {{#if model.data_url}}
-              <div class="field label">Link to Data</div>
+              <div class="field label">URL</div>
             {{/if}}
             {{#if model.data_file}}
               <div class="field label">Data upload file name</div>
@@ -24,8 +25,8 @@
     </div>
     <div class="ui hidden divider"></div>
     <div class="ui attached message">
-      <span class="review edit" onClick={{action "editField" "more-info"}}> <i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">More Info</h3>
+      <span class="review edit link-text" onClick={{action "editField" "more-info"}}> <i class="icon edit"></i>Edit</span>
+      <h3 class="ui header">More Information</h3>
     </div>
     <div class="ui segment attached">
       <div class="ui sixteen column grid">
@@ -112,7 +113,7 @@
     <div class="ui hidden divider"></div>
     <div class="ui attached message">
       <span class="review edit" onClick={{action "editField" "data-format"}}><i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">Data format</h3>
+      <h3 class="ui header">Data Formatting</h3>
     </div>
     <div class="ui segment attached">
       {{#each-in model.oaFields as |field properties|}}
@@ -120,7 +121,7 @@
           <table class="ui definition table">
             <tbody>
               <tr>
-                <td class="two wide column">Field</td>
+                <td class="two wide column">OpenAddresses column</td>
                 <td>
                   {{#if (eq field "number")}}
                     house number
@@ -130,7 +131,7 @@
                 </td>
               </tr>
               <tr>
-                <td>Column(s)</td>
+                <td>Matched column(s)</td>
                 <td>{{properties.fields}}</td>
               </tr>
               {{#if properties.function}}
@@ -149,18 +150,40 @@
                   </td>
                 </tr>
               {{/if}}
-              {{#if (eq field "street")}}
-                <tr>
-                  <td>May contain unit number</td>
-                  <td>
-                    {{properties.may_contain_units}}
-                  </td>
-                </tr>
-              {{/if}}
             </tbody>
           </table>
         {{/if}}
       {{/each-in}}
+    </div>
+    <div class="ui hidden divider"></div>
+    <div class="ui attached message">
+      <span class="review edit" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</span>
+      <h3 class="ui header">Contact Information</h3>
+    </div>
+    <div class="ui segment attached">
+      <div class="ui five column grid">
+        {{#if model.maintainer_email}}
+        <div class="row">
+          <div class="four wide column">
+            <div class="field label">Email</div>
+          </div>
+          <div class="fluid column">
+            {{model.maintainer_email}}
+          </div>
+        </div>
+        {{/if}}
+        {{#if model.maintainer_name}}
+          <div class="ui fitted divider"></div>
+          <div class="row">
+            <div class="four wide column">
+              <div class="field label">Name</div>
+            </div>
+            <div class="fluid column">
+              {{model.maintainer_name}}
+            </div>
+          </div>
+        {{/if}}
+      </div>
     </div>
     <div class="ui hidden divider"></div>
     <div class="review-nav">
@@ -170,11 +193,11 @@
     {{#ui-modal name="review-cancel" class="review-cancel" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
       <i class="close icon"></i>
       <div class="header">
-        Cancel Submission
+        Are you sure you want to cancel?
       </div>
       <div class="content">
         <div class="description">
-          <p>Are you sure you want to start over? All changes made will be erased. </p>
+          <p>All changes made will be erased.</p>
         </div>
       </div>
       <div class="actions">
