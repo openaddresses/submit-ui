@@ -104,7 +104,8 @@
             {{/if}}
           </label>
           {{#if showErrorState}}
-            <div>
+            <div class="ui hidden divider"></div>
+            <div class="ui tiny error message">
               <ul class="list">
                 {{#each errorMessages as |errorMessage|}}
                   <li>{{errorMessage}}</li>
