@@ -213,6 +213,13 @@ nav ul li.active {
 }
 
 /* styling for more-info page */
+.ui.dropdown .text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
 .ui.form .inline.sharealike.field {
   margin-top: 1em;
 }
