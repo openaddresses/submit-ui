@@ -227,6 +227,10 @@ nav ul li.active {
   color: white;
 }
 
+.ui.selection.frequency {
+  margin-top: 5px;
+}
+
 /* styling for data format page */
 .data-functions {
   cursor: pointer;

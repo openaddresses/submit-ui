@@ -154,6 +154,17 @@ export default Ember.Controller.extend({
     },
     setFrequency: function(frequency){
       this.model.set('update_frequency', frequency);
+    },
+    setRadioButton: function(checkbox) {
+      /*eslint-disable */
+      if (checkbox === 'provide') {
+        $('.provide.checkbox').checkbox('check');
+        $('.choose.checkbox').checkbox('uncheck');
+      } else {
+        $('.choose.checkbox').checkbox('check');
+        $('.provide.checkbox').checkbox('uncheck');
+      }
+      /*eslint-enable */
     }
   }
 });
