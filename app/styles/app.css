@@ -16,8 +16,12 @@
   background-size: contain;
   background-position: center;
   width: 100%;
-  height: 20vh;
-  margin-top: 5px;
+  height: 12vh;
+}
+
+.ui.inverted.header {
+  margin: 5px;
+  margin-bottom: 15px;
 }
 
 .ui.inverted.vertical.masthead.center.aligned.segment {
@@ -77,7 +81,7 @@ h5 {
 }
 
 .nav-button {
-  margin-top: 4em !important;
+  margin-top: 2em !important;
 }
 
 #back {
@@ -188,8 +192,8 @@ nav ul li.active {
 
 .ui.horizontal.divider {
   width: 80%;
-  margin: 35px auto;
-  margin-bottom: 25px;
+  margin: 25px auto;
+  margin-bottom: 15px;
 }
 
 .ui.upload.button {
