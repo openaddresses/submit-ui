@@ -1,0 +1,56 @@
+<div class="help">
+  <div class="help-button" onClick={{action "openModal" "help-modal"}}>
+    <i class="help circle outline icon"></i> Help Needed
+  </div>
+  {{#ui-modal name="help-modal" class="help-modal"}}
+    <i class="close icon"></i>
+    <div class="header">
+      How can we help?
+    </div>
+    <div class="content">
+      <div class="description" style="font-weight: normal !important;">
+        <p>Having trouble contributing or editing a source? Please fill out this form so that we can help. </p>
+        <form class="ui form">
+          <div class="eight wide field">
+            <label> Contact Email </label>
+            <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
+          </div>
+
+          {{#unless (or model.data_url model.data_file)}}
+            <div class="field">
+              <label> Data Source </label>
+              <div class="inline sixteen wide fields">
+                <div class="six wide field">
+                  <div class="ui small labeled input">
+                    <div class="ui label">URL</div>
+                    <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
+                  </div>
+                </div>
+                <div class="or"> OR </div>
+                <div class="fluid field">
+                  <label for="uploadSource" class="ui icon button">
+                    <i class="file icon"></i>
+                    Choose file to upload
+                  </label>
+                  <input type="file" id="uploadSource" onChange={{action "uploadFile"}} style="display:none">{{fileName}}
+                </div>
+              </div>
+            </div>
+          {{/unless}}
+          <div class="field">
+            <label>Provide explanation of the problem </label>
+            <textarea rows="3" onChange={{action "setText"}}></textarea>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui black deny button" onclick={{action "cancelModal" "help-modal"}}>
+        Cancel
+      </div>
+      <div class="ui positive right button" onclick={{action "submitModal" "help-modal"}}>
+        Submit
+      </div>
+    </div>
+  {{/ui-modal}}
+</div>

@@ -173,6 +173,13 @@ nav ul li.active {
   color: var(--link-hover) !important;
 }
 
+.or {
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 2em;
+  font-weight: bold;
+}
+
 /* styling for data source page */
 .ui.url.input {
   width: 80%;
@@ -186,6 +193,23 @@ nav ul li.active {
 
 .ui.upload.button {
   width: 45%;
+}
+
+.first.headroom {
+  position: relative;
+}
+
+.help-button {
+  color: #1b90f9;
+  cursor: pointer;
+  font-size: medium;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+
+.help-button:hover {
+  color: #0564ba;
 }
 
 /* styling for more-info page */

@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="intro">
-    <h3 class="first headroom">Welcome!</h3>
+    <h3 class="first headroom">Welcome! {{help-modal model=model submit=(action "changeRoute")}}</h3>
     {{#with (changeset model DataURLValidator) as |changeset|}}
       <p>
         Provide link to data or upload data. (add information about accepted formats)
@@ -29,7 +29,7 @@
           Or
         </div>
         <div>
-          <label for="uploadfile" class="ui upload icon small button">
+          <label for="uploadfile" class="ui upload icon link small button">
             <i class="file icon"></i>
             Choose file to upload
           </label>
