@@ -9,7 +9,7 @@
       <div class="ui grid">
         <div class="eight wide column ui form">
           <div class="field ">
-            <label>Name</label>
+            <label>What should we call you?</label>
             {{input
               type="text"
               value=(get changeset "maintainer_name")
@@ -26,7 +26,7 @@
             type="text"
             value=(get changeset "maintainer_email")
             changeset=changeset
-            placeholder="email address"
+            placeholder="you@example.com"
             showErrorState=showFormErrorState
           }}
           </div>

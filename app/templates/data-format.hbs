@@ -103,8 +103,17 @@
               <span class="required"> * </span>
             {{/if}}
           </label>
+          {{#if showErrorState}}
+            <div>
+              <ul class="list">
+                {{#each errorMessages as |errorMessage|}}
+                  <li>{{errorMessage}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
           {{#unless (eq properties.function "join")}}
-            {{select-column field=field properties=properties columnHeadings=columnHeadings model=model}}
+            {{select-column field=field properties=properties columnHeadings=columnHeadings model=model sendChooseField="chooseField"}}
           {{/unless}}
           {{#if (eq properties.function "join")}}
             {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model}}
