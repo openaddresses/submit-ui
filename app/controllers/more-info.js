@@ -6,7 +6,7 @@ export default Ember.Controller.extend({
   InfoValidator,
   showErrorState: false,
   errorMessages: [],
-  licenseType: '',
+  licenseType: 'choose',
   attributionSelected: false,
   licenseSelected: false,
   licenses: [{
