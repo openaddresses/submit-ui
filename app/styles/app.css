@@ -3,6 +3,14 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+body, p {
+  color: #444;
+}
+
+input:placeholder-shown {
+  color: #bfbfbf;
+}
+
 .ui.negative.message.mobile {
   display: none;
 }
@@ -74,6 +82,10 @@ h5 {
 
 .ui.warning.message {
   display: none;
+}
+
+.ui.text.container.flow {
+  margin-bottom: 150px;
 }
 
 .form-content {
@@ -304,6 +316,10 @@ nav ul li.active {
   padding: 10px 0px;
 }
 
+.info.attribution.value {
+  text-transform: capitalize;
+}
+
 .ui.fitted.divider {
   margin: 0px !important;
 }
@@ -317,7 +333,8 @@ nav ul li.active {
   position: absolute;
   right: 20px;
   cursor: pointer;
-  font-size: small;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .review.edit:hover {
