@@ -1,4 +1,4 @@
-<div class="ui text container">
+<div class="ui text container flow">
   <h3 class="first headroom"> Review {{help-modal model=model submit=(action "changeRoute")}}</h3>
   <p>Submitting this form will create a pull request on GitHub to <a href="https://github.com/openaddresses/submit-service"> OpenAddresses repository</a>.</p>
   <div class="form-content">
@@ -47,7 +47,7 @@
           <div class="row">
             <div class="seven wide column">
               <div class="field label">Attribution</div>
-              <div class="info value">{{model.attribution}}</div>
+              <div class="info attribution value">{{model.attribution}}</div>
             </div>
             <div class="nine wide column">
               <div class="field label">Attribution Text</div>
