@@ -1,10 +1,6 @@
 <div class="ui text container">
   <h3 class="first headroom">Contact information {{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
   <div class="form-content">
-    <div class="ui tiny message">
-      <p> <span class="required"> * </span>
-        indicates field is <b> required </b> to proceed </p>
-    </div>
     {{#with (changeset model MaintainerValidator) as |changeset|}}
       <div class="ui grid">
         <div class="eight wide column ui form">
@@ -33,7 +29,8 @@
         </div>
       </div>
       {{#if showErrorState}}
-        <div>
+        <div class="ui hidden divider"></div>
+        <div class="ui tiny error message">
           <ul class="list">
             {{#each errorMessages as |errorMessage|}}
               <li>{{errorMessage}}</li>

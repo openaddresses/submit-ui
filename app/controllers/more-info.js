@@ -56,8 +56,8 @@ export default Ember.Controller.extend(sharedActions, {
         return new Promise (resolve => resolve(['License Error 1']));
       }
     } else {
-      // User didn't interact with licesne selection at all
-      if (!this.licenseSelected) return new Promise (resolve => resolve(['Licesne Error 2']));
+      // User didn't interact with license selection at all
+      if (!this.licenseSelected) return new Promise (resolve => resolve(['License Error 2']));
       // This data doesn't have license
       else return new Promise (resolve => resolve([]));
     }
