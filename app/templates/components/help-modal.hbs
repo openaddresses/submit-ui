@@ -11,13 +11,13 @@
       <div class="description" style="font-weight: normal !important;">
         <p>Having trouble contributing or editing a source? Please fill out this form so that we can help. </p>
         <form class="ui form">
-          <div class="eight wide field">
+          <div class="eight wide required field">
             <label> Contact Email </label>
             <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
           </div>
 
           {{#unless (or model.data_url model.data_file)}}
-            <div class="field">
+            <div class="required field">
               <label> Data Source </label>
               <div class="inline sixteen wide fields">
                 <div class="six wide field">
@@ -37,7 +37,7 @@
               </div>
             </div>
           {{/unless}}
-          <div class="field">
+          <div class="required field">
             <label>Provide explanation of the problem </label>
             <textarea rows="3" onChange={{action "setText"}}></textarea>
           </div>
