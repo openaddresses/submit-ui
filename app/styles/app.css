@@ -255,10 +255,6 @@ nav ul li.active {
   margin-top: 5px;
 }
 
-.ui.radio.checkbox {
-  opacity: 0.5;
-}
-
 .ui.radio.checkbox.checked {
   opacity: 1;
 }
