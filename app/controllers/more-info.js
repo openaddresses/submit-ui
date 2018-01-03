@@ -6,7 +6,7 @@ export default Ember.Controller.extend(sharedActions, {
   InfoValidator,
   showErrorState: false,
   errorMessages: [],
-  licenseType: '',
+  licenseType: 'choose',
   attributionSelected: false,
   licenseSelected: false,
   licenses: [{
@@ -154,6 +154,9 @@ export default Ember.Controller.extend(sharedActions, {
     },
     setFrequency: function(frequency){
       this.model.set('update_frequency', frequency);
+    },
+    setRadioButton: function(type) {
+      this.set('licenseType', type);
     }
   }
 });
