@@ -21,7 +21,7 @@ export default Ember.Component.extend({
       $('.ui.modal').modal('toggle', element, component);
       /* TODO: send information to back end */
 
-      this.get('submit')("success");
+      this.routeToSuccessPage();
       /*eslint-enable */
     },
     cancelModal: function(name) {

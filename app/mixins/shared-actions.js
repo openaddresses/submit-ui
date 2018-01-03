@@ -4,6 +4,9 @@ export default Ember.Mixin.create({
   actions: {
     changeRoute: function(route){
       this.transitionToRoute(route);
+    },
+    routeToSuccessPage: function() {
+      this.transitionToRoute("success");
     }
   }
 });
