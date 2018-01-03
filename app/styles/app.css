@@ -3,6 +3,14 @@
   font-family: 'Open Sans', sans-serif;
 }
 
+body, p {
+  color: #444;
+}
+
+input:placeholder-shown {
+  color: #bfbfbf;
+}
+
 .ui.negative.message.mobile {
   display: none;
 }
@@ -16,8 +24,12 @@
   background-size: contain;
   background-position: center;
   width: 100%;
-  height: 20vh;
-  margin-top: 5px;
+  height: 12vh;
+}
+
+.ui.inverted.header {
+  margin: 15px;
+  margin-bottom: 20px;
 }
 
 .ui.inverted.vertical.masthead.center.aligned.segment {
@@ -72,12 +84,16 @@ h5 {
   display: none;
 }
 
+.ui.text.container.flow {
+  margin-bottom: 150px;
+}
+
 .form-content {
   margin-top: 2em;
 }
 
 .nav-button {
-  margin-top: 4em !important;
+  margin-top: 2em !important;
 }
 
 #back {
@@ -112,6 +128,7 @@ span.required {
 nav {
   padding: 0px;
   margin: 0px;
+  background-color: rgba(0,0,0,0.5);
 }
 
 nav ul {
@@ -187,8 +204,8 @@ nav ul li.active {
 
 .ui.horizontal.divider {
   width: 80%;
-  margin: 35px auto;
-  margin-bottom: 25px;
+  margin: 25px auto;
+  margin-bottom: 15px;
 }
 
 .ui.upload.button {
@@ -318,6 +335,10 @@ nav ul li.active {
   padding: 10px 0px;
 }
 
+.info.attribution.value {
+  text-transform: capitalize;
+}
+
 .ui.fitted.divider {
   margin: 0px !important;
 }
@@ -331,7 +352,8 @@ nav ul li.active {
   position: absolute;
   right: 20px;
   cursor: pointer;
-  font-size: small;
+  font-weight: bold;
+  font-size: 1em;
 }
 
 .review.edit:hover {

@@ -1,4 +1,4 @@
-<div class="ui text container center aligned">
+<div class="ui text container center aligned flow">
   <div class="ui icon negative mobile message">
     <i class="warning icon"></i>
     <div class="content">
@@ -39,7 +39,8 @@
         </div>
       </div>
       {{#if showErrorState}}
-        <div>
+        <div class="ui hidden divider"></div>
+        <div class="ui tiny error message">
           <ul class="list">
             {{#each errorMessages as |errorMessage|}}
               <li>{{errorMessage}}</li>

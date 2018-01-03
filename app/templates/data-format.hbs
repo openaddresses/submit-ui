@@ -1,4 +1,4 @@
-<div class="ui text container">
+<div class="ui text container flow">
   <h3 class="first headroom">Data format {{help-modal model=model.submission submit=(action "changeRoute")}} </h3>
   <p> This is a small sample of the data for preview </p>
   <div class="ui tiny message">
@@ -22,7 +22,7 @@
             {{#unless (eq field "lat")}}
               <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
                 {{#if (eq field "number")}}
-                  house number
+                  house <br/> number
                 {{else}}
                   {{field}}
                 {{/if}}
@@ -104,7 +104,7 @@
             {{/if}}
           </label>
           {{#if showErrorState}}
-            <div>
+            <div class="ui tiny negative message">
               <ul class="list">
                 {{#each errorMessages as |errorMessage|}}
                   <li>{{errorMessage}}</li>
