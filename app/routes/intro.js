@@ -72,6 +72,93 @@ export default Ember.Route.extend({
         district: null,
         region: null,
         postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },{
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      },
+      {
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
       }],
     });
     return submission;

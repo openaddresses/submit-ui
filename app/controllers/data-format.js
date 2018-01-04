@@ -68,7 +68,8 @@ export default Ember.Controller.extend(sharedActions, {
     chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
       this.model.submission.get('oaFields')[heading].fields.addObject(column);
-      for (var i = 0; i < 2; i++){
+
+      for (var i = 0; i < 10; i++){
         Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
       }
       this.resetErrorState();
@@ -99,7 +100,7 @@ export default Ember.Controller.extend(sharedActions, {
       } else {
         Ember.set(this.model.submission.get('oaFields')[field], "function", null);
       }
-      for (var i = 0; i < 2; i++){
+      for (var i = 0; i < 10; i++){
         var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
       }
