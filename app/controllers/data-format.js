@@ -3,7 +3,9 @@ import sharedActions from '../mixins/shared-actions';
 
 export default Ember.Controller.extend(sharedActions, {
   columns: null,
-  numberOfExamples: 10,
+  numberOfExamples: Ember.computed('model.submission.exampleRows', function(){
+    return this.model.submission.get('exampleRows').length;
+  }),
   columnHeadings: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.fields;
   }),
@@ -69,7 +71,6 @@ export default Ember.Controller.extend(sharedActions, {
     chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
       this.model.submission.get('oaFields')[heading].fields.addObject(column);
-
       for (var i = 0; i < this.get('numberOfExamples'); i++){
         Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
       }
