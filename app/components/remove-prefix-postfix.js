@@ -27,7 +27,7 @@ export default Ember.Component.extend({
   actions: {
     editField: function(heading, index, column){
       this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
-      for (var i = 0; i < 10; i++){
+      for (var i = 0; i < this.get('numberOfExamples'); i++){
         this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.source_data.results[i][column])
       }
     },
@@ -40,7 +40,7 @@ export default Ember.Component.extend({
     },
     removeFunction: function(field){
       Ember.set(this.model.submission.get('oaFields')[field], "function", "split");
-      for (var i = 0; i < 10; i++){
+      for (var i = 0; i < this.get('numberOfExamples'); i++){
         var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
       }
@@ -56,7 +56,7 @@ export default Ember.Component.extend({
       Ember.set(this.model.submission.get('oaFields')[heading], "prefix_or_postfix", column);
       var field_to_remove = this.model.submission.get('oaFields')[heading].prefix_or_postfix.toString();
 
-      for (var i = 0; i < 10; i++){
+      for (var i = 0; i < this.get('numberOfExamples'); i++){
         var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
         var fieldValueToRemove = this.model.webServiceResponse.source_data.results[i][field_to_remove].toString();
         var valueAfterFunction;
@@ -81,7 +81,7 @@ export default Ember.Component.extend({
       Ember.set(this.model.submission.get('oaFields')[heading], "function", input);
       var field_to_remove = this.model.submission.get('oaFields')[heading].prefix_or_postfix.toString();
 
-      for (var i = 0; i < 10; i++){
+      for (var i = 0; i < this.get('numberOfExamples'); i++){
         var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
         var fieldValueToRemove = this.model.webServiceResponse.source_data.results[i][field_to_remove].toString();
         var valueAfterFunction;

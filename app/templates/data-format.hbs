@@ -124,18 +124,18 @@
             </div>
           {{/if}}
           {{#unless (eq properties.function "join")}}
-            {{select-column field=field properties=properties columnHeadings=columnHeadings model=model sendChooseField="chooseField"}}
+            {{select-column field=field properties=properties columnHeadings=columnHeadings model=model numberOfExamples=numberOfExamples sendChooseField="chooseField"}}
           {{/unless}}
           {{#if (eq properties.function "join")}}
-            {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model}}
+            {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model numberOfExamples=numberOfExamples}}
           {{else if (eq properties.function "split")}}
-            {{split-column field=field properties=properties columnHeadings=columnHeadings model=model}}
+            {{split-column field=field properties=properties columnHeadings=columnHeadings model=model numberOfExamples=numberOfExamples}}
           {{else if (eq properties.function "removePrefixOrPostfix")}}
-            {{remove-prefix-postfix field=field properties=properties model=model}}
+            {{remove-prefix-postfix field=field properties=properties model=model numberOfExamples=numberOfExamples}}
           {{else if (eq properties.function "row_fxn_remove_prefix")}}
-            {{remove-prefix-postfix field=field properties=properties model=model}}
+            {{remove-prefix-postfix field=field properties=properties model=model numberOfExamples=numberOfExamples}}
           {{else if (eq properties.function "row_fxn_remove_postfix")}}
-            {{remove-prefix-postfix field=field properties=properties model=model}}
+            {{remove-prefix-postfix field=field properties=properties model=model numberOfExamples=numberOfExamples}}
           {{/if}}
           <div class="field nav-buttons">
             {{#unless (or (eq currentField "lat") (eq currentField "number"))}}
