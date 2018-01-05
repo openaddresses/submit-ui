@@ -51,7 +51,7 @@ export default Ember.Route.extend({
           separator: " "
         }
       },
-      exampleRows: Array.from({length: 10}).map(e => ({
+      exampleRows: Array.from({length: 10}).map(() => ({
         lon: null,
         lat: null,
         number: null,
