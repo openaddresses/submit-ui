@@ -52,7 +52,8 @@ export default Ember.Route.extend({
         }
       }
     });
-    var exampleRows = Array(10).fill({
+
+    var exampleRows = Array.from({length: 10}).map(e => ({
       lon: null,
       lat: null,
       number: null,
@@ -62,7 +63,8 @@ export default Ember.Route.extend({
       district: null,
       region: null,
       postcode: null
-    });
+    }));
+    
     this.get('store').peekAll('submission').get('firstObject').set('exampleRows', exampleRows)
     return submission;
   }
