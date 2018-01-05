@@ -3,6 +3,9 @@ import sharedActions from '../mixins/shared-actions';
 
 export default Ember.Controller.extend(sharedActions, {
   columns: null,
+  numberOfExamples: Ember.computed('model.submission.exampleRows', function(){
+    return this.model.submission.get('exampleRows').length;
+  }),
   columnHeadings: Ember.computed('model.webServiceResponse', function(){
     return this.model.webServiceResponse.source_data.fields;
   }),
@@ -44,12 +47,16 @@ export default Ember.Controller.extend(sharedActions, {
     return nextFields[this.get('currentField')];
   }),
   showErrorState: false,
+  showMore: false,
   errorMessages: [],
   resetErrorState: function () {
     Ember.set(this, 'showErrorState', false);
     Ember.set(this, 'errorMessages', []);
   },
   actions: {
+    toggleShowMore: function() {
+      this.set('showMore', !this.showMore);
+    },
     goToField: function(field){
       this.set('currentField', field);
     },
@@ -64,7 +71,7 @@ export default Ember.Controller.extend(sharedActions, {
     chooseField: function(heading, column){
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
       this.model.submission.get('oaFields')[heading].fields.addObject(column);
-      for (var i = 0; i < 2; i++){
+      for (var i = 0; i < this.get('numberOfExamples'); i++){
         Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
       }
       this.resetErrorState();
@@ -95,7 +102,7 @@ export default Ember.Controller.extend(sharedActions, {
       } else {
         Ember.set(this.model.submission.get('oaFields')[field], "function", null);
       }
-      for (var i = 0; i < 2; i++){
+      for (var i = 0; i < this.get('numberOfExamples'); i++){
         var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
       }
