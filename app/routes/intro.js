@@ -50,22 +50,20 @@ export default Ember.Route.extend({
           function: null,
           separator: " "
         }
-      }
+      },
+      exampleRows: Array.from({length: 10}).map(e => ({
+        lon: null,
+        lat: null,
+        number: null,
+        street: null,
+        unit: null,
+        city: null,
+        district: null,
+        region: null,
+        postcode: null
+      }))
     });
 
-    var exampleRows = Array.from({length: 10}).map(e => ({
-      lon: null,
-      lat: null,
-      number: null,
-      street: null,
-      unit: null,
-      city: null,
-      district: null,
-      region: null,
-      postcode: null
-    }));
-    
-    this.get('store').peekAll('submission').get('firstObject').set('exampleRows', exampleRows)
     return submission;
   }
 });
