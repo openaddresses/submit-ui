@@ -41,6 +41,7 @@ input:placeholder-shown {
 
 .ui.header {
   font-family: 'Open Sans', sans-serif;
+  padding-top: 50px;
 }
 
 h1 {
@@ -84,8 +85,8 @@ h5 {
   display: none;
 }
 
-.ui.text.container.flow {
-  margin-bottom: 150px;
+.ui.text.container {
+  margin-bottom: 75px;
 }
 
 .form-content {

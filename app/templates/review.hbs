@@ -82,36 +82,6 @@
     </div>
     <div class="ui hidden divider"></div>
     <div class="ui attached message">
-      <span class="review edit" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">Maintainer Contact Information</h3>
-    </div>
-    <div class="ui segment attached">
-      <div class="ui five column grid">
-        {{#if model.maintainer_email}}
-        <div class="row">
-          <div class="four wide column">
-            <div class="field label">Email</div>
-          </div>
-          <div class="fluid column">
-            {{model.maintainer_email}}
-          </div>
-        </div>
-        {{/if}}
-        {{#if model.maintainer_name}}
-          <div class="ui fitted divider"></div>
-          <div class="row">
-            <div class="four wide column">
-              <div class="field label">Name</div>
-            </div>
-            <div class="fluid column">
-              {{model.maintainer_name}}
-            </div>
-          </div>
-        {{/if}}
-      </div>
-    </div>
-    <div class="ui hidden divider"></div>
-    <div class="ui attached message">
       <span class="review edit" onClick={{action "editField" "data-format"}}><i class="icon edit"></i>Edit</span>
       <h3 class="ui header">Data Formatting</h3>
     </div>
@@ -158,7 +128,7 @@
     <div class="ui hidden divider"></div>
     <div class="ui attached message">
       <span class="review edit" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">Contact Information</h3>
+      <h3 class="ui header">Contact</h3>
     </div>
     <div class="ui segment attached">
       <div class="ui five column grid">
