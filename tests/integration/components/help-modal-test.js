@@ -12,10 +12,10 @@ test('it renders', function(assert) {
 
   // Check that it renders by checking .help-button
   this.render(hbs`{{help-modal}}`);
-  assert.equal(this.$('div.help-button').text().trim(), 'Help Needed');
+  assert.equal(this.$('div.help-button').text().trim(), 'Help');
 });
 
-test('help modal opens when "Help Needed" clicked', function(assert) {
+test('help modal opens when "Help" clicked', function(assert) {
   assert.expect(2);
 
   this.render(hbs`{{help-modal}}`);
