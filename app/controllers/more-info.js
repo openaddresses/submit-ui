@@ -156,6 +156,7 @@ export default Ember.Controller.extend(sharedActions, {
       this.model.set('update_frequency', frequency);
     },
     setRadioButton: function(type) {
+      this.model.set('share_alike', null);
       this.set('licenseType', type);
     }
   }
