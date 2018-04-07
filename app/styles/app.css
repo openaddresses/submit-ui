@@ -84,8 +84,8 @@ h5 {
   display: none;
 }
 
-.ui.text.container.flow {
-  margin-bottom: 150px;
+.ui.text.container {
+  margin-bottom: 75px;
 }
 
 .form-content {

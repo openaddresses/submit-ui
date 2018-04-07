@@ -10,7 +10,7 @@ export function sampleData(params, namedArgs) {
   if (namedArgs.user_data && exampleValue){
     return exampleValue;
   } else if (namedArgs.user_data) {
-    return "no example value available for this column";
+    return "no sample value available for this column";
   } else {
     return params;
   }
