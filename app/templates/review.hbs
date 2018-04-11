@@ -41,17 +41,28 @@
           </div>
           <div class="ui fitted divider"></div>
         {{/if}}
-        {{#if model.license}}
-          <div class="row">
-            <div class="seven wide column">
-              <div class="field label">License Name</div>
-              <div class="info value">{{model.license}}</div>
+        {{#if model.license_exists}}
+          {{#if model.license}}
+            <div class="row">
+              <div class="seven wide column">
+                <div class="field label">License Name</div>
+                <div class="info value">{{model.license}}</div>
+              </div>
+              <div class="nine wide column">
+                <div class="field label">License URL</div>
+                <div class="info value">{{model.license_url}}</div>
+              </div>
             </div>
-            <div class="nine wide column">
-              <div class="field label">License URL</div>
-              <div class="info value">{{model.license_url}}</div>
+          {{else}}
+            <div class="row">
+              <div class="seven wide wide column">
+                <div class="field label">License URL</div>
+              </div>
+              <div class="nine wide column">
+                {{model.user_submitted_url}}
+              </div>
             </div>
-          </div>
+          {{/if}}
           <div class="ui fitted divider"></div>
         {{/if}}
         {{#if model.attribution}}
