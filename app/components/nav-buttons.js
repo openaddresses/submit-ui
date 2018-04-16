@@ -8,6 +8,9 @@ export default Ember.Component.extend({
   actions: {
     sendChangeRoute: function(route, changeset){
       this.sendAction('sendChangeRoute', route, changeset);
+    },
+    sendPreviousRoute: function(route){
+    	this.sendAction('sendPreviousRoute', route)
     }
   }
 });
