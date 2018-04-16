@@ -19,6 +19,11 @@ input:placeholder-shown {
   margin-top: 10px;
 }
 
+.ui.modal {
+ position: fixed;
+ top: 30%;
+}
+
 .openaddress.logo {
   background: url('/assets/images/openaddress-logo.png') no-repeat 0 0;
   background-size: contain;
