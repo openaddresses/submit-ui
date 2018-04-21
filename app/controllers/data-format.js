@@ -65,12 +65,12 @@ export default Ember.Controller.extend(sharedActions, {
     goToField: function(field){
       this.set('currentField', field);
     },
-    prevField: function(field) {
+    prevField: function() {
       this.checkFunctionRequired();
       this.resetErrorState();
       this.set('currentField', this.get('prevField'));
     },
-    nextField: function(field){
+    nextField: function(){
       this.checkFunctionRequired();
       this.resetErrorState();
       this.set('currentField', this.get('nextField'));
