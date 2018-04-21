@@ -53,6 +53,11 @@ export default Ember.Controller.extend(sharedActions, {
     Ember.set(this, 'showErrorState', false);
     Ember.set(this, 'errorMessages', []);
   },
+  checkFunctionRequired: function(){
+    if (this.model.submission.get('oaFields')[this.get('currentField')].function === 'join' && this.model.submission.get('oaFields')[this.get('currentField')].fields.length < 2 || this.model.submission.get('oaFields')[this.get('currentField')].function === 'split'){
+      Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "function", null);
+    }
+  },
   actions: {
     toggleShowMore: function() {
       this.set('showMore', !this.showMore);
@@ -60,11 +65,13 @@ export default Ember.Controller.extend(sharedActions, {
     goToField: function(field){
       this.set('currentField', field);
     },
-    prevField: function() {
+    prevField: function(field) {
+      this.checkFunctionRequired();
       this.resetErrorState();
       this.set('currentField', this.get('prevField'));
     },
-    nextField: function(){
+    nextField: function(field){
+      this.checkFunctionRequired();
       this.resetErrorState();
       this.set('currentField', this.get('nextField'));
     },
@@ -108,6 +115,7 @@ export default Ember.Controller.extend(sharedActions, {
       }
     },
     changeRoute: function(route){
+      this.checkFunctionRequired();
       this.transitionToRoute(route);
     }
   }
