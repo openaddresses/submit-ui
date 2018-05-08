@@ -55,18 +55,34 @@ export default Ember.Controller.extend(sharedActions, {
       this.set('dataFile', file);
     },
     changeRoute: function(route, changeset){
-      this.checkErrors(changeset)
-        .then((errorMsgs) => {
-          // When there is any error, show it and do not proceed
-          if (errorMsgs.length) {
-            Ember.set(this, 'showErrorState', true);
-            Ember.set(this, 'errorMessages', errorMsgs);
-          // When there is no error message, proceed
-          } else {
+      this.checkErrors(changeset).then((errorMsgs) => {
+        // When there is any error, show it and do not proceed
+        if (errorMsgs.length) {
+          Ember.set(this, 'showErrorState', true);
+          Ember.set(this, 'errorMessages', errorMsgs);
+        // When there is no error message, proceed
+        } else {
+          var url = 'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/sample?source=' + changeset.get('data_url');
+          var request = Ember.$.ajax({ url });
+
+          // test URL:
+          // http://gis2.co.dakota.mn.us/arcgis/rest/services/DCGIS_OL_PropertyInformation/MapServer/3
+
+          request.then(response => {
+            return this.get('store').createRecord('webServiceResponse', {
+               data_url: response.data,
+               source_data: response.source_data,
+               conform: {type:response.conform.type}
+             })
+          }, response => {
+            // TODO: set up UI for error messages
+            console.log(response.responseText)
+          }).then(()=> {
             this.resetErrorState();
-            this.transitionToRoute(route);
-          }
-        })
+            this.transitionToRoute(route)
+          })
+        }
+      })
       .catch ((err) => {
         const errorMsgs = [err];
         Ember.set(this, 'showErrorState', true);

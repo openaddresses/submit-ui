@@ -7,14 +7,14 @@ export default Ember.Controller.extend(sharedActions, {
     return this.model.submission.get('exampleRows').length;
   }),
   columnHeadings: Ember.computed('model.webServiceResponse', function(){
-    return this.model.webServiceResponse.source_data.fields;
+    return this.model.webServiceResponse.get('source_data').fields;
   }),
   showAdditionalJoinButton: false,
   user_data: Ember.computed('model.webServiceResponse', function(){
-    return this.model.webServiceResponse.source_data.results;
+    return this.model.webServiceResponse.get('source_data').results;
   }),
   currentField: Ember.computed('model.webServiceResponse', function(){
-    if (this.model.webServiceResponse.conform.type === "csv"){
+    if (this.model.webServiceResponse.get('conform').type === "csv"){
       return "lon";
     } else {
       return "number";
@@ -79,7 +79,7 @@ export default Ember.Controller.extend(sharedActions, {
       Ember.set(this.model.submission.get('oaFields')[heading], "fields", []);
       this.model.submission.get('oaFields')[heading].fields.addObject(column);
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.source_data.results[i][column]]);
+        Ember.set(this.model.submission.get('exampleRows')[i], heading, [this.model.webServiceResponse.get('source_data').results[i][column]]);
       }
       this.resetErrorState();
     },
@@ -111,7 +111,8 @@ export default Ember.Controller.extend(sharedActions, {
       }
       for (var i = 0; i < this.get('numberOfExamples'); i++){
         var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
-        Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
+        Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.get(
+          'source_data').results[i][originalColumn]]);
       }
     },
     changeRoute: function(route){

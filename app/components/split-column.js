@@ -5,7 +5,7 @@ export default Ember.Component.extend({
     extractionFunction: function(extraction_function, field){
       if (extraction_function !== "removePrefixOrPostfix"){
         for (var i = 0; i < this.get('numberOfExamples'); i++){
-          var fieldValue =  this.model.webServiceResponse.source_data.results[i][this.model.submission.get('oaFields')[field].fields[0]];
+          var fieldValue =  this.model.webServiceResponse.get('source_data').results[i][this.model.submission.get('oaFields')[field].fields[0]];
           var oa_extraction_regExp;
           if (extraction_function === "postfixed_street_pattern"){
             oa_extraction_regExp = new RegExp('^(?:\\s*(?:[0-9]+(?:[ -]/[0-9]/[0-9])?|[0-9]+-[0-9]+|[0-9]+-?[A-Z])\\s+)?(.*)', 'i');
@@ -39,7 +39,7 @@ export default Ember.Component.extend({
       }
       for (var i = 0; i < this.get('numberOfExamples'); i++){
         var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
-        Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.source_data.results[i][originalColumn]]);
+        Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.get('source_data').results[i][originalColumn]]);
       }
     },
     addFunction: function(field, action){
