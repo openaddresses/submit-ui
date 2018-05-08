@@ -22,12 +22,12 @@ export default Ember.Controller.extend(sharedActions, {
       changeset.validate().then(()=> {
         if (changeset.get('isValid')) resolve([]);
         else resolve(changeset.get('errors')
-                    .reduce((errorMessages, error) => {
-                      error.validation.map((validationMessage) => {
-                        errorMessages.push(validationMessage)
-                      })
-                      return errorMessages;
-                    }, []));
+          .reduce((errorMessages, error) => {
+            error.validation.map((validationMessage) => {
+              errorMessages.push(validationMessage)
+            })
+            return errorMessages;
+          }, []));
       })
       .catch((err) => {reject(err)})
     )
@@ -70,13 +70,15 @@ export default Ember.Controller.extend(sharedActions, {
 
           request.then(response => {
             return this.get('store').createRecord('webServiceResponse', {
-               data_url: response.data,
-               source_data: response.source_data,
-               conform: {type:response.conform.type}
-             })
+              data_url: response.data,
+              source_data: response.source_data,
+              conform: {type:response.conform.type}
+            })
           }, response => {
             // TODO: set up UI for error messages
+            /*eslint-disable */
             console.log(response.responseText)
+            /*eslint-enable */
           }).then(()=> {
             this.resetErrorState();
             this.transitionToRoute(route)
