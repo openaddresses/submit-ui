@@ -57,8 +57,8 @@ export default Ember.Component.extend({
       var field_to_remove = this.model.submission.get('oaFields')[heading].prefix_or_postfix.toString();
 
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        var fieldValue =  this.model.webServiceResponse.source_data.get('results')[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
-        var fieldValueToRemove = this.model.webServiceResponse.source_data.get('results')[i][field_to_remove].toString();
+        var fieldValue =  this.model.webServiceResponse.get('source_data').results[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
+        var fieldValueToRemove = this.model.webServiceResponse.get('source_data').results[i][field_to_remove].toString();
         var valueAfterFunction;
         if (prefixOrPostfix === "row_fxn_remove_prefix"){
           if (field_to_remove !== "" && fieldValue.startsWith(fieldValueToRemove)){
@@ -82,7 +82,7 @@ export default Ember.Component.extend({
       var field_to_remove = this.model.submission.get('oaFields')[heading].prefix_or_postfix.toString();
 
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        var fieldValue =  this.model.webServiceResponse.source_data.get('results')[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
+        var fieldValue =  this.model.webServiceResponse.get('source_data').results[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
         var fieldValueToRemove = this.model.webServiceResponse.get('source_data').results[i][field_to_remove].toString();
         var valueAfterFunction;
         if (input === "row_fxn_remove_prefix"){
