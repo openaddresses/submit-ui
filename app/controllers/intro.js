@@ -49,10 +49,14 @@ export default Ember.Controller.extend(sharedActions, {
     Ember.set(this, 'errorMessages', []);
   },
   actions: {
-    uploadFile: function(){
+    uploadFile: function(changeset){
+      changeset.set('data_url', null)
       this.set('dataURL', null);
       var file = document.getElementById('uploadfile').files[0];
       this.set('dataFile', file);
+    },
+    clearUploadFile: function(){
+      this.set('dataFile', null);
     },
     changeRoute: function(route, changeset){
       this.checkErrors(changeset).then((errorMsgs) => {

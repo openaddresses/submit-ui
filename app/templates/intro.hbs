@@ -25,17 +25,22 @@
             value=(get changeset "data_url")
             changeset=changeset
             placeholder="URL for hosted data"
+            key-press="clearUploadFile"
           }}
         </div>
         <div class="ui horizontal divider">
           Or
         </div>
         <div>
-          <label for="uploadfile" class="ui upload icon link small button">
-            <i class="file icon"></i>
-            Choose file to upload
-          </label>
-          <input type="file" id="uploadfile" style="display:none" onChange={{action "uploadFile"}}>{{fileName}}
+          {{#if dataFile}}
+            <div>{{fileName}} <i class="times circle icon" onClick={{action "clearUploadFile"}}></i></div>
+          {{else}}
+            <label for="uploadfile" class="ui upload icon link small button">
+              <i class="file icon"></i>
+              Choose file to upload
+            </label>
+            <input type="file" id="uploadfile" style="display:none" onChange={{action "uploadFile" changeset}}>
+          {{/if}}
         </div>
       </div>
       {{#if showErrorState}}

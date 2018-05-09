@@ -234,6 +234,10 @@ nav ul li.active {
   color: #0564ba;
 }
 
+.times {
+  cursor: pointer;
+}
+
 /* styling for more-info page */
 .ui.dropdown .text {
   text-overflow: ellipsis;
