@@ -8,6 +8,7 @@ export default Ember.Controller.extend(sharedActions, {
   showErrorState: false,
   errorMessages: [],
   dataFile: null,
+  loading: false,
   fileName: Ember.computed('dataFile', function(){
     if (this.get('dataFile')){
       return this.get('dataFile').name
@@ -44,9 +45,14 @@ export default Ember.Controller.extend(sharedActions, {
     // If there is nothing, throw an error
     } else return new Promise((resolve) => resolve(['Provide a file or a url to proceed']));
   },
-  resetErrorState: function () {
-    Ember.set(this, 'showErrorState', false);
-    Ember.set(this, 'errorMessages', []);
+  resetErrorState: function (response) {
+    if (response[0] === "error"){
+      Ember.set(this, 'showErrorState', true);
+      Ember.set(this, 'errorMessages', [response[1]]);
+    } else {
+      Ember.set(this, 'showErrorState', false);
+      Ember.set(this, 'errorMessages', []);
+    }
   },
   actions: {
     uploadFile: function(changeset){
@@ -59,6 +65,7 @@ export default Ember.Controller.extend(sharedActions, {
       this.set('dataFile', null);
     },
     changeRoute: function(route, changeset){
+      this.set('loading', true);
       this.checkErrors(changeset).then((errorMsgs) => {
         // When there is any error, show it and do not proceed
         if (errorMsgs.length) {
@@ -69,9 +76,6 @@ export default Ember.Controller.extend(sharedActions, {
           var url = 'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/sample?source=' + changeset.get('data_url');
           var request = Ember.$.ajax({ url });
 
-          // test URL:
-          // http://gis2.co.dakota.mn.us/arcgis/rest/services/DCGIS_OL_PropertyInformation/MapServer/3
-
           request.then(response => {
             return this.get('store').createRecord('webServiceResponse', {
               data_url: response.data,
@@ -79,13 +83,13 @@ export default Ember.Controller.extend(sharedActions, {
               conform: {type:response.conform.type}
             })
           }, response => {
-            // TODO: set up UI for error messages
-            /*eslint-disable */
-            console.log(response.responseText)
-            /*eslint-enable */
-          }).then(()=> {
-            this.resetErrorState();
-            this.transitionToRoute(route)
+            return [response.statusText, response.responseText]
+          }).then(response  => {
+            this.set('loading', false);
+            this.resetErrorState(response);
+            if (response[0] !== "error"){
+              this.transitionToRoute(route)
+            }
           })
         }
       })
