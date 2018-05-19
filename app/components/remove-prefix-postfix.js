@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   extractionFunction: Ember.computed('properties.fields.[]', function(){
     var extractionFunction = this.model.submission.get('oaFields')[this.get('field')].function;
     if (extractionFunction === "removePrefixOrPostfix"){
-      return "row_fxn_remove_prefix";
+      return "remove_prefix";
     } else {
       return extractionFunction;
     }
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
     setPrefixPostfixFieldFromDropdown: function(heading, column){
       var prefixOrPostfix = null;
       if (this.model.submission.get('oaFields')[heading].function === "removePrefixOrPostfix"){
-        prefixOrPostfix = "row_fxn_remove_prefix";
+        prefixOrPostfix = "remove_prefix";
       } else {
         prefixOrPostfix = this.model.submission.get('oaFields')[heading].function;
       }
@@ -60,7 +60,7 @@ export default Ember.Component.extend({
         var fieldValue =  this.model.webServiceResponse.get('source_data').results[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
         var fieldValueToRemove = this.model.webServiceResponse.get('source_data').results[i][field_to_remove].toString();
         var valueAfterFunction;
-        if (prefixOrPostfix === "row_fxn_remove_prefix"){
+        if (prefixOrPostfix === "remove_prefix"){
           if (field_to_remove !== "" && fieldValue.startsWith(fieldValueToRemove)){
             valueAfterFunction = fieldValue.slice(fieldValueToRemove.length, fieldValue.length).trim();
             this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
@@ -85,7 +85,7 @@ export default Ember.Component.extend({
         var fieldValue =  this.model.webServiceResponse.get('source_data').results[i][this.model.submission.get('oaFields')[heading].fields[0]].toString();
         var fieldValueToRemove = this.model.webServiceResponse.get('source_data').results[i][field_to_remove].toString();
         var valueAfterFunction;
-        if (input === "row_fxn_remove_prefix"){
+        if (input === "remove_prefix"){
           if (field_to_remove !== "" && fieldValue.startsWith(fieldValueToRemove)){
             valueAfterFunction = fieldValue.slice(fieldValueToRemove.length, fieldValue.length).trim();
             this.model.submission.get('exampleRows')[i][heading].replace(0, 1, valueAfterFunction);
