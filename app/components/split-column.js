@@ -11,7 +11,7 @@ export default Ember.Component.extend({
             oa_extraction_regExp = new RegExp('^(?:\\s*(?:[0-9]+(?:[ -]/[0-9]/[0-9])?|[0-9]+-[0-9]+|[0-9]+-?[A-Z])\\s+)?(.*)', 'i');
           } else if (extraction_function === "prefixed_number"){
             oa_extraction_regExp = new RegExp('^\\s*(\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+', 'i');
-          } else if (extraction_function === "postfixed_unit_pattern"){
+          } else if (extraction_function === "postfixed_unit"){
             oa_extraction_regExp = new RegExp('\\s((?:(?:UNIT|APARTMENT|APT\\.?|SUITE|STE\\.?|BUILDING|BLDG\\.?|LOT)\\s+|#).+)$', 'i');
           } else if (extraction_function === "postfixed_street_with_units_pattern"){
             oa_extraction_regExp = new RegExp('^(?:\\s*(?:\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+)?(.+?)(?:\\s+(?:(?:UNIT|APARTMENT|APT\\.?|SUITE|STE\\.?|BUILDING|BLDG\\.?|LOT)\\s+|#).+)?$', 'i');
@@ -19,7 +19,7 @@ export default Ember.Component.extend({
           var valueAfterFunction = oa_extraction_regExp.exec(fieldValue);
           if (valueAfterFunction !== null){
             this.model.submission.get('exampleRows')[i][field].replace(0, 1, valueAfterFunction[1]);
-          } else if (extraction_function === "postfixed_unit_pattern"){
+          } else if (extraction_function === "postfixed_unit"){
             this.model.submission.get('exampleRows')[i][field].replace(0, 1, "");
           }
         }

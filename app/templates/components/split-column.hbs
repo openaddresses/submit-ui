@@ -11,7 +11,7 @@
 {{/if}}
 
 {{#if (eq field "unit")}}
-<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Use postfix unit</button>
+<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit" field}}>Use postfix unit</button>
 {{/if}}
 
 <button class="ui small button basic green" onClick={{action "extractionFunction" "removePrefixOrPostfix" field}}>Trim column</button>
