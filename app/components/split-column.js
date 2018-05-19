@@ -9,7 +9,7 @@ export default Ember.Component.extend({
           var oa_extraction_regExp;
           if (extraction_function === "postfixed_street_pattern"){
             oa_extraction_regExp = new RegExp('^(?:\\s*(?:[0-9]+(?:[ -]/[0-9]/[0-9])?|[0-9]+-[0-9]+|[0-9]+-?[A-Z])\\s+)?(.*)', 'i');
-          } else if (extraction_function === "prefixed_number_pattern"){
+          } else if (extraction_function === "prefixed_number"){
             oa_extraction_regExp = new RegExp('^\\s*(\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+', 'i');
           } else if (extraction_function === "postfixed_unit_pattern"){
             oa_extraction_regExp = new RegExp('\\s((?:(?:UNIT|APARTMENT|APT\\.?|SUITE|STE\\.?|BUILDING|BLDG\\.?|LOT)\\s+|#).+)$', 'i');
