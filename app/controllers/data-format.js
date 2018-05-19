@@ -47,11 +47,17 @@ export default Ember.Controller.extend(sharedActions, {
     return nextFields[this.get('currentField')];
   }),
   showErrorState: false,
+  showRequiredFieldsErrorState: false,
   showMore: false,
   errorMessages: [],
+  requiredFieldsErrorMessages: [],
   resetErrorState: function () {
     Ember.set(this, 'showErrorState', false);
     Ember.set(this, 'errorMessages', []);
+  },
+  resetRequiredFieldsErrorState: function () {
+    Ember.set(this, 'showRequiredFieldsErrorState', false);
+    Ember.set(this, 'requiredFieldsErrorMessages', []);
   },
   checkFunctionRequired: function(){
     if (this.model.submission.get('oaFields')[this.get('currentField')].function === 'join' && this.model.submission.get('oaFields')[this.get('currentField')].fields.length < 2 || this.model.submission.get('oaFields')[this.get('currentField')].function === 'split'){
@@ -116,8 +122,20 @@ export default Ember.Controller.extend(sharedActions, {
       }
     },
     changeRoute: function(route){
-      this.checkFunctionRequired();
-      this.transitionToRoute(route);
+      if (this.model.submission.get('oaFields').number.fields.length < 1 || this.model.submission.get('oaFields').street.fields.length < 1) {
+        this.set('showRequiredFieldsErrorState', true);
+        if (this.model.submission.get('oaFields').number.fields.length < 1 && this.model.submission.get('oaFields').street.fields.length < 1) {
+          this.set('requiredFieldsErrorMessages', ["Number is required to proceed.", "Street is required to proceed."]);
+        } else if (this.model.submission.get('oaFields').number.fields.length < 1) {
+          this.set('requiredFieldsErrorMessages', ["Number is required to proceed."]);
+        } else if (this.model.submission.get('oaFields').street.fields.length < 1) {
+          this.set('requiredFieldsErrorMessages', ["Street is required to proceed."]);
+        }
+      } else {
+        this.resetRequiredFieldsErrorState();
+        this.checkFunctionRequired();
+        this.transitionToRoute(route);
+      }
     }
   }
 });

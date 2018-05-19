@@ -150,5 +150,15 @@
       </form>
     {{/if}}
   {{/each-in}}
+  {{#if showRequiredFieldsErrorState}}
+    <div class="ui hidden divider"></div>
+    <div class="ui tiny error message">
+      <ul class="list">
+        {{#each requiredFieldsErrorMessages as |errorMessage|}}
+          <li>{{errorMessage}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
   {{nav-buttons sendChangeRoute="changeRoute" sendPreviousRoute="previousRoute" back="more-info" next="contact"}}
 </div>
