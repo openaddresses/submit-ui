@@ -7,7 +7,7 @@ export default Ember.Component.extend({
         for (var i = 0; i < this.get('numberOfExamples'); i++){
           var fieldValue =  this.model.webServiceResponse.get('source_data').results[i][this.model.submission.get('oaFields')[field].fields[0]];
           var oa_extraction_regExp;
-          if (extraction_function === "postfixed_street_pattern"){
+          if (extraction_function === "postfixed_street"){
             oa_extraction_regExp = new RegExp('^(?:\\s*(?:[0-9]+(?:[ -]/[0-9]/[0-9])?|[0-9]+-[0-9]+|[0-9]+-?[A-Z])\\s+)?(.*)', 'i');
           } else if (extraction_function === "prefixed_number"){
             oa_extraction_regExp = new RegExp('^\\s*(\\d+(?:[ -]\\d/\\d)?|\\d+-\\d+|\\d+-?[A-Z])\\s+', 'i');
