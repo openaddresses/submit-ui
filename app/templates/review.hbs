@@ -166,6 +166,16 @@
         {{/if}}
       </div>
     </div>
+    {{#if showErrorState}}
+      <div class="ui hidden divider"></div>
+      <div class="ui tiny error message">
+        <ul class="list">
+          {{#each errorMessages as |errorMessage|}}
+            <li>{{errorMessage}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
     <div class="ui hidden divider"></div>
     <div class="review-nav">
       <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>

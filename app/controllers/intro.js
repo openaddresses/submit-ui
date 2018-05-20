@@ -79,6 +79,7 @@ export default Ember.Controller.extend(sharedActions, {
           request.then(response => {
             return this.get('store').createRecord('webServiceResponse', {
               data_url: response.data,
+              type: response.type,
               source_data: response.source_data,
               conform: {type:response.conform.type}
             })
