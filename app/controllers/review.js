@@ -29,7 +29,7 @@ export default Ember.Controller.extend(sharedActions, {
       },
       "contact": {
         "name": this.model.get('maintainer_name'),
-         "email": this.model.get('maintainer_email')
+        "email": this.model.get('maintainer_email')
       },
       "note": {
         "update frequency": this.model.get('update_frequency')
@@ -43,7 +43,7 @@ export default Ember.Controller.extend(sharedActions, {
         "street": {
           "function": this.model.get('oaFields').street.function,
           "fields": this.model.get('oaFields').street.fields,
-           "may_contain_units": null
+          "may_contain_units": null
         },
         "unit": {
           "function": this.model.get('oaFields').unit.function,
