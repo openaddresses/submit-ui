@@ -125,9 +125,9 @@ export default Ember.Controller.extend(sharedActions, {
       if (this.model.submission.get('oaFields').number.fields.length < 1 || this.model.submission.get('oaFields').street.fields.length < 1) {
         this.set('showRequiredFieldsErrorState', true);
         if (this.model.submission.get('oaFields').number.fields.length < 1 && this.model.submission.get('oaFields').street.fields.length < 1) {
-          this.set('requiredFieldsErrorMessages', ["Number is required to proceed.", "Street is required to proceed."]);
+          this.set('requiredFieldsErrorMessages', ["House number is required to proceed.", "Street is required to proceed."]);
         } else if (this.model.submission.get('oaFields').number.fields.length < 1) {
-          this.set('requiredFieldsErrorMessages', ["Number is required to proceed."]);
+          this.set('requiredFieldsErrorMessages', ["House number is required to proceed."]);
         } else if (this.model.submission.get('oaFields').street.fields.length < 1) {
           this.set('requiredFieldsErrorMessages', ["Street is required to proceed."]);
         }
