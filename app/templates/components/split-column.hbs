@@ -2,16 +2,16 @@
   <i class="remove icon"></i> Cancel split
 </div>
 {{#if (eq field "street")}}
-  <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_pattern" field}}>Remove prefix number</button>
+  <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street" field}}>Remove prefix number</button>
   <button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_street_with_units_pattern" field}}>Remove postfix unit</button>
 {{/if}}
 
 {{#if (eq field "number")}}
-<button class="ui small button basic green" onClick={{action "extractionFunction" "prefixed_number_pattern" field}}>Remove postfix street</button>
+<button class="ui small button basic green" onClick={{action "extractionFunction" "prefixed_number" field}}>Remove postfix street</button>
 {{/if}}
 
 {{#if (eq field "unit")}}
-<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit_pattern" field}}>Use postfix unit</button>
+<button class="ui small button basic green" onClick={{action "extractionFunction" "postfixed_unit" field}}>Use postfix unit</button>
 {{/if}}
 
 <button class="ui small button basic green" onClick={{action "extractionFunction" "removePrefixOrPostfix" field}}>Trim column</button>

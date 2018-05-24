@@ -8,5 +8,5 @@
 	{{else}}
 		<div class="eight wide column left aligned"></div>
 	{{/if}}
-	<div class="eight wide column right aligned"><button class="ui small button nav-button olive {{if (eq proceed false) "disabled"}}" id="next" onClick={{action "sendChangeRoute" next changeset}}>{{forwardButtonText}}</button></div>
+	<div class="eight wide column right aligned"><button class="ui small {{if (eq loading true) "loading"}} button nav-button olive {{if (eq proceed false) "disabled"}}" id="next" onClick={{action "sendChangeRoute" next changeset}}>{{forwardButtonText}}</button></div>
 </div>

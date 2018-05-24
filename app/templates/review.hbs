@@ -166,10 +166,20 @@
         {{/if}}
       </div>
     </div>
+    {{#if showErrorState}}
+      <div class="ui hidden divider"></div>
+      <div class="ui tiny error message">
+        <ul class="list">
+          {{#each errorMessages as |errorMessage|}}
+            <li>{{errorMessage}}</li>
+          {{/each}}
+        </ul>
+      </div>
+    {{/if}}
     <div class="ui hidden divider"></div>
     <div class="review-nav">
       <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
-      <button class="ui button green right floated" onClick={{action "submit"}}>Submit</button>
+      <button class="ui button green right floated {{if (eq loading true) "loading"}}" onClick={{action "submit"}}>Submit</button>
     </div>
     {{#ui-modal name="review-cancel" class="review-cancel" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
       <i class="close icon"></i>
