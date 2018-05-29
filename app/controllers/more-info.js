@@ -53,11 +53,11 @@ export default Ember.Controller.extend(sharedActions, {
         if (this.model.get('license_url')) return new Promise(resolve => resolve([]))
         else return new Promise (resolve => resolve(['Please choose a license to proceed']));
       default:
-        return new Promise (resolve => resolve(['License Error 1']));
+        return new Promise (resolve => resolve(['Please choose a license to proceed']));
       }
     } else {
       // User didn't interact with license selection at all
-      if (!this.licenseSelected) return new Promise (resolve => resolve(['License Error 2']));
+      if (!this.licenseSelected) return new Promise (resolve => resolve(['Mark whether the data has a license to proceed.']));
       // This data doesn't have license
       else return new Promise (resolve => resolve([]));
     }
@@ -66,14 +66,14 @@ export default Ember.Controller.extend(sharedActions, {
     if (this.model.get('attribution') === true) {
       return this.checkFormErrors(changeset, 'attribution_text')
     } else {
-      if (!this.attributionSelected) return new Promise (resolve => resolve(['Attribution Error 1']));
+      if (!this.attributionSelected) return new Promise (resolve => resolve(['Mark whether the data requires attribution to proceed.']));
       else return new Promise (resolve => resolve([]));
     }
   },
   checkFrequencyError: function () {
     return new Promise (resolve => {
       if (this.model.get('update_frequency')) resolve([]);
-      else resolve(['Frequency Error 1']);
+      else resolve(['Choose an option for data update frequency to proceed.']);
     })
   },
   checkErrors: function (changeset) {

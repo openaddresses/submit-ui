@@ -1,5 +1,8 @@
 <div class="ui text container">
   <h3 class="first headroom">Contact{{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
+  <div class="ui tiny message">
+    <p> <span class="required"> * </span> indicates field is <b> required </b> to proceed </p>
+  </div>
   <div class="form-content">
     {{#with (changeset model MaintainerValidator) as |changeset|}}
       <div class="ui grid">
