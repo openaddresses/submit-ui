@@ -88,6 +88,7 @@ export default Ember.Controller.extend(sharedActions, {
       $('.ui.modal').modal('toggle', element, component);
       /*eslint-enable */
       this.get('store').unloadAll('submission');
+      this.get('store').unloadAll('web-service-response');
       this.transitionToRoute('intro');
     },
     denyModal: function() {
@@ -100,7 +101,6 @@ export default Ember.Controller.extend(sharedActions, {
       this.transitionToRoute(route);
     },
     submit: function(){
-      // communicate with backend here
       this.set('loading', true);
 
       var request = Ember.$.ajax({
@@ -113,7 +113,9 @@ export default Ember.Controller.extend(sharedActions, {
       request.then(response => {
         this.set('loading', false);
         this.resetErrorState(response);
-        this.model.set('pull_request_url', response.response.url)
+        this.model.set('pull_request_url', response.response.url);
+        this.get('store').unloadAll('submission');
+        this.get('store').unloadAll('web-service-response');
         this.transitionToRoute("success")
       }, response => {
         this.set('loading', false);
