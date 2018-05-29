@@ -11,6 +11,10 @@ input:placeholder-shown {
   color: #bfbfbf;
 }
 
+.ten.wide.column {
+  overflow-x: auto;
+}
+
 .ui.negative.message.mobile {
   display: none;
 }

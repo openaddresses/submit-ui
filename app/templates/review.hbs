@@ -6,9 +6,9 @@
       <h3 class="ui header">Data Source</h3>
     </div>
     <div class="ui segment attached">
-      <div class="ui five column grid">
+      <div class="ui sixteen column grid">
         <div class="row">
-          <div class="four wide column">
+          <div class="six wide column">
             {{#if model.data_url}}
               <div class="field label">URL</div>
             {{/if}}
@@ -16,7 +16,7 @@
               <div class="field label">Data upload file name</div>
             {{/if}}
           </div>
-          <div class="fluid column">
+          <div class="ten wide column">
             {{#if model.data_url}}{{model.data_url}}{{/if}}
             {{#if model.data_file}}{{model.data_file.name}}{{/if}}
           </div>
@@ -32,10 +32,10 @@
       <div class="ui sixteen column grid">
         {{#if model.update_frequency}}
           <div class="row">
-            <div class="seven wide wide column">
+            <div class="six wide wide column">
               <div class="field label">Update Frequency</div>
             </div>
-            <div class="nine wide column">
+            <div class="ten wide column">
               {{model.update_frequency}}
             </div>
           </div>
@@ -44,21 +44,21 @@
         {{#if model.license_exists}}
           {{#if model.license}}
             <div class="row">
-              <div class="seven wide column">
+              <div class="six wide column">
                 <div class="field label">License Name</div>
                 <div class="info value">{{model.license}}</div>
               </div>
-              <div class="nine wide column">
+              <div class="ten wide column">
                 <div class="field label">License URL</div>
                 <div class="info value">{{model.license_url}}</div>
               </div>
             </div>
           {{else}}
             <div class="row">
-              <div class="seven wide wide column">
+              <div class="six wide wide column">
                 <div class="field label">License URL</div>
               </div>
-              <div class="nine wide column">
+              <div class="ten wide column">
                 {{model.user_submitted_url}}
               </div>
             </div>
@@ -67,11 +67,11 @@
         {{/if}}
         {{#if model.attribution}}
           <div class="row">
-            <div class="seven wide column">
+            <div class="six wide column">
               <div class="field label">Attribution</div>
               <div class="info attribution value">{{model.attribution}}</div>
             </div>
-            <div class="nine wide column">
+            <div class="ten wide column">
               <div class="field label">Attribution Text</div>
               <div class="info value">{{model.attribution_text}}</div>
             </div>
@@ -80,10 +80,10 @@
         {{/if}}
         {{#if model.source}}
           <div class="row">
-            <div class="seven wide column">
+            <div class="six wide column">
               <div class="field label">Source</div>
             </div>
-            <div class="nine wide column">
+            <div class="ten wide column">
               {{model.source}}
             </div>
           </div>
@@ -142,24 +142,24 @@
       <h3 class="ui header">Contact</h3>
     </div>
     <div class="ui segment attached">
-      <div class="ui five column grid">
+      <div class="ui sixteen column grid">
         {{#if model.maintainer_name}}
           <div class="ui fitted divider"></div>
           <div class="row">
-            <div class="four wide column">
+            <div class="six wide column">
               <div class="field label">Name</div>
             </div>
-            <div class="fluid column">
+            <div class="ten wide column">
               {{model.maintainer_name}}
             </div>
           </div>
         {{/if}}
         {{#if model.maintainer_email}}
           <div class="row">
-            <div class="four wide column">
+            <div class="six wide column">
               <div class="field label">Email</div>
             </div>
-            <div class="fluid column">
+            <div class="ten wide column">
               {{model.maintainer_email}}
             </div>
           </div>
