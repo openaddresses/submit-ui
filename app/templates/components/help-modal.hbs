@@ -10,45 +10,60 @@
     <div class="content">
       <div class="description" style="font-weight: normal !important;">
         <p>Having trouble contributing or editing a source? Please fill out this form so that we can help. </p>
-        <form class="ui form">
-          <div class="eight wide required field">
-            <label> Contact Email </label>
-            <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
-          </div>
-
-          {{#unless (or model.data_url model.data_file)}}
-            <div class="required field">
-              <label> Data Source </label>
-              <div class="inline sixteen wide fields">
-                <div class="six wide field">
-                  <div class="ui small labeled input">
-                    <div class="ui label">URL</div>
-                    <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
+          <form class="ui form">
+            <div class="eight wide required field">
+              <label> Contact Email </label>
+              <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
+            </div>
+            <div class="eight wide required field">
+              <label> Location </label>
+              <input type="text" name="location" placeholder="Geographical area that the data represents" onChange={{action "setLocation"}}>
+            </div>
+            {{#unless (or model.data_url model.data_file)}}
+              <div class="required field">
+                <label> Data Source </label>
+                <div class="inline sixteen wide fields">
+                  <div class="six wide field">
+                    <div class="ui small labeled input">
+                      <div class="ui label">URL</div>
+                      <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
+                    </div>
+                  </div>
+                  <div class="or"> OR </div>
+                  <div class="fluid field">
+                    <label for="uploadSource" class="ui icon button">
+                      <i class="file icon"></i>
+                      Choose file to upload
+                    </label>
+                    <input type="file" id="uploadSource" onChange={{action "uploadFile"}} style="display:none">{{fileName}}
                   </div>
                 </div>
-                <div class="or"> OR </div>
-                <div class="fluid field">
-                  <label for="uploadSource" class="ui icon button">
-                    <i class="file icon"></i>
-                    Choose file to upload
-                  </label>
-                  <input type="file" id="uploadSource" onChange={{action "uploadFile"}} style="display:none">{{fileName}}
-                </div>
               </div>
+            {{/unless}}
+            <div class="required field">
+              <label>Provide explanation of the problem </label>
+              <textarea rows="3" onChange={{action "setText"}}></textarea>
             </div>
-          {{/unless}}
-          <div class="required field">
-            <label>Provide explanation of the problem </label>
-            <textarea rows="3" onChange={{action "setText"}}></textarea>
-          </div>
-        </form>
+          </form>
       </div>
+      {{#if showErrorState}}
+        <div class="ui hidden divider"></div>
+        <div class="ui tiny error message">
+          There was a problem submitting your data:
+          <ul class="list">
+            {{#each errorMessages as |errorMessage|}}
+              <li>{{errorMessage}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
     </div>
     <div class="actions">
       <div class="ui black deny button" onclick={{action "cancelModal" "help-modal"}}>
         Cancel
       </div>
-      <div class="ui positive right button" onclick={{action "submitModal" "help-modal"}}>
+      <div class="ui green right button {{if (eq loading true) "loading"}}" onclick={{action "submitModal" "help-modal"}}>
+      <!-- <div class="ui green right button" onclick={{action "submitHelp" "help-modal"}}> -->
         Submit
       </div>
     </div>
