@@ -84,7 +84,7 @@ export default Ember.Controller.extend(sharedActions, {
               conform: {type:response.conform.type}
             })
           }, response => {
-            return [response.statusText, response.responseText]
+            return [response.statusText, response.responseJSON.error.message]
           }).then(response  => {
             this.set('loading', false);
             this.resetErrorState(response);
