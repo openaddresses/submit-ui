@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import HelpModalValidator from '../validator/help-modal'
 
 export default Ember.Component.extend({
   dataURL: null,
@@ -17,6 +18,8 @@ export default Ember.Component.extend({
   checkFormError: function (changeset) {
     return new Promise((resolve, reject) =>
       changeset.validate().then(()=> {
+        // NOTE: it is resolving here even with invalid email format
+        // NOTE: changeset.get('errors') === []
         if (changeset.get('isValid')) resolve([]);
         else resolve(changeset.get('errors')
           .reduce((errorMessages, error) => {
@@ -26,10 +29,13 @@ export default Ember.Component.extend({
             return errorMessages;
           }, []));
       })
-      .catch((err) => {reject(err)})
+      .catch((err) => {
+        reject(err)
+      })
     )
   },
   resetErrorState: function (response) {
+    console.log("resetErrorState")
     if (response.statusText === "error"){
       Ember.set(this, 'showErrorState', true);
       Ember.set(this, 'errorMessages', [response.responseText]);
@@ -41,7 +47,6 @@ export default Ember.Component.extend({
   checkErrors: function (changeset) {
     if (changeset.get('contact_email')) {
       // this.model.set('maintainer_name', changeset.get('maintainer_name'));
-      this.model.set('contact_email',  changeset.get('contact_email'));
       return this.checkFormError(changeset);
     } else return new Promise((resolve) => resolve(['Provide an e-mail address to proceed']));
   },
@@ -52,60 +57,61 @@ export default Ember.Component.extend({
       /*eslint-enable */
     },
 
-    submitModal: function(element, component) {
-      this.set('loading', true);
-      var helpFormData = {
-          "location": this.get('location'),
-          "emailAddress": this.get('email'),
-          "dataUrl": this.get('dataURL'),
-          "comments": this.get('text'),
-        }
+    // submitModal: function(element, component) {
+    //   this.set('loading', true);
+    //   var helpFormData = {
+    //       "location": this.get('location'),
+    //       "emailAddress": this.get('email'),
+    //       "dataUrl": this.get('dataURL'),
+    //       "comments": this.get('text'),
+    //     }
 
-      var request = Ember.$.ajax({
-        type: "POST",
-        url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
-        data: JSON.stringify(helpFormData),
-        contentType: 'application/json'
-      });
+    //   var request = Ember.$.ajax({
+    //     type: "POST",
+    //     url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
+    //     data: JSON.stringify(helpFormData),
+    //     contentType: 'application/json'
+    //   });
 
-      if (this.get('location') && this.get('email') && this.get('dataURL') && this.get('text')) {
-        request.then(response => {
-          this.set('loading', false);
-          this.resetErrorState(response);
-          this.model.set('pull_request_url', response.response.url);
-          $('.ui.modal').modal('toggle', element, component);
-          this.routeToSuccessPage();
-        }, response => {
-          this.set('loading', false);
-          this.resetErrorState(response);
-        })
-      } else {
-        var response = {
-          statusText: "error",
-          responseText: "missing field"
-        }
-        this.set('loading', false);
-        this.resetErrorState(response)
-      }
+    //   if (this.get('location') && this.get('email') && this.get('dataURL') && this.get('text')) {
+    //     request.then(response => {
+    //       this.set('loading', false);
+    //       this.resetErrorState(response);
+    //       this.model.set('pull_request_url', response.response.url);
+    //       $('.ui.modal').modal('toggle', element, component);
+    //       this.routeToSuccessPage();
+    //     }, response => {
+    //       this.set('loading', false);
+    //       this.resetErrorState(response);
+    //     })
+    //   } else {
+    //     var response = {
+    //       statusText: "error",
+    //       responseText: "missing field"
+    //     }
+    //     this.set('loading', false);
+    //     this.resetErrorState(response)
+    //   }
 
-    },
+    // },
     submitHelp: function(changeset){
-      // debugger;
-      this.checkErrors(changeset)
-        .then((errorMsgs) => {
-          if (errorMsgs.length) {
-            Ember.set(this, 'showErrorState', true);
-            Ember.set(this, 'errorMessages', errorMsgs);
-          } else {
-            this.resetErrorState();
-            // this.transitionToRoute(route);
-          }
-        })
-        .catch((err) => {
-          const errorMsgs = [err]; // We can replace this error message to something vague
+      this.checkErrors(changeset).then((errorMsgs) => {
+        // NOTE: errorMsgs.length === 0
+        console.log(errorMsgs.length)
+        if (errorMsgs.length) {
           Ember.set(this, 'showErrorState', true);
           Ember.set(this, 'errorMessages', errorMsgs);
-        })
+        } else {
+          this.resetErrorState(errorMsgs);
+          // this.transitionToRoute(route);
+        }
+
+      })
+      .catch((err) => {
+        const errorMsgs = [err]; // We can replace this error message to something vague
+        Ember.set(this, 'showErrorState', true);
+        Ember.set(this, 'errorMessages', errorMsgs);
+      })
     },
     cancelModal: function(name) {
       /*eslint-disable */

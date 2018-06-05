@@ -2,6 +2,7 @@ import Ember from 'ember';
 import sharedActions from '../mixins/shared-actions';
 
 import DataURLValidator from '../validator/data'
+import HelpModalValidator from '../validator/help-modal'
 
 export default Ember.Controller.extend(sharedActions, {
   DataURLValidator,

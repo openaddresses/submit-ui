@@ -7,13 +7,22 @@
     <div class="header">
       How can we help?
     </div>
-    <div class="content">
+    <div class="form content">
       <div class="description" style="font-weight: normal !important;">
         <p>Having trouble contributing or editing a source? Please fill out this form so that we can help. </p>
           <form class="ui form">
-            <div class="eight wide required field">
+           <!--  <div class="eight wide required field">
               <label> Contact Email </label>
               <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
+            </div> -->
+            <div class="required field ">
+              <label>Email address</label>
+              {{input
+                type="text"
+                value=(get changeset "contact_email")
+                changeset=changeset
+                placeholder="you@example.com"
+              }}
             </div>
             <div class="eight wide required field">
               <label> Location </label>
@@ -62,8 +71,8 @@
       <div class="ui black deny button" onclick={{action "cancelModal" "help-modal"}}>
         Cancel
       </div>
-      <div class="ui green right button {{if (eq loading true) "loading"}}" onclick={{action "submitModal" "help-modal"}}>
-      <!-- <div class="ui green right button" onclick={{action "submitHelp" "help-modal"}}> -->
+      <!-- <div class="ui green right button {{if (eq loading true) "loading"}}" onclick={{action "submitModal" "help-modal"}}> -->
+      <div class="ui green right button" onclick={{action "submitHelp" changeset}}>
         Submit
       </div>
     </div>
