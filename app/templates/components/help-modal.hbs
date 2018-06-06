@@ -1,4 +1,5 @@
 <div class="help">
+  {{#with (changeset model HelpModalValidator) as |changeset|}}
   <div class="help-button" onClick={{action "openModal" "help-modal"}}>
     <i class="question circle icon"></i> Help
   </div>
@@ -77,4 +78,5 @@
       </div>
     </div>
   {{/ui-modal}}
+  {{/with}}
 </div>
