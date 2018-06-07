@@ -2,6 +2,7 @@ import Ember from 'ember';
 import HelpModalValidator from '../validator/help-modal'
 
 export default Ember.Component.extend({
+  HelpModalValidator,
   dataURL: null,
   dataFile: null,
   fileName: Ember.computed('dataFile', function(){

@@ -7,9 +7,7 @@
     </div>
   </div>
   <div class="intro">
-    {{#with (changeset model HelpModalValidator) as |changeset|}}
-      <h3 class="first headroom">Welcome! {{help-modal model=model changeset=changeset}}</h3>
-    {{/with}}
+    <h3 class="first headroom">Welcome! {{help-modal model=model changeset=changeset}}</h3>
     {{#with (changeset model DataURLValidator) as |changeset|}}
       <p>
         Provide link to data or upload data.
