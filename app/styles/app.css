@@ -28,6 +28,17 @@ input:placeholder-shown {
  top: 15%;
 }
 
+.ui.help-modal.modal {
+ position: fixed;
+ top: 15%;
+}
+
+.scrolling.undetached.dimmable .ui.scrolling.modal {
+ position: fixed;
+ left: inherit;
+ margin-top: inherit;
+}
+
 .openaddress.logo {
   background: url('/assets/images/openaddress-logo.png') no-repeat 0 0;
   background-size: contain;
