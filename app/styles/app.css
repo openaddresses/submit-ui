@@ -24,27 +24,27 @@ input:placeholder-shown {
 }
 
 .ui.modal {
- position: fixed;
- top: 15%;
+  position: fixed;
+  top: 15%;
 }
 
 .ui.help-modal.modal {
- position: fixed;
- top: 15%;
+  position: fixed;
+  top: 15%;
 }
 
 .scrolling.undetached.dimmable .ui.scrolling.modal {
- position: fixed;
- left: inherit;
- margin-top: inherit;
+  left: inherit;
+  top: 5%;
+  position: fixed;
 }
 
 .openaddress.logo {
   background: url('/assets/images/openaddress-logo.png') no-repeat 0 0;
-  background-size: contain;
   background-position: center;
-  width: 100%;
+  background-size: contain;
   height: 12vh;
+  width: 100%;
 }
 
 .ui.inverted.header {
@@ -54,9 +54,9 @@ input:placeholder-shown {
 
 .ui.inverted.vertical.masthead.center.aligned.segment {
   background: url('/assets/images/skyline.jpg') no-repeat 0 0;
-  padding-bottom: 0px;
-  margin-bottom: 30px;
   background-size: cover;
+  margin-bottom: 30px;
+  padding-bottom: 0px;
 }
 
 .ui.header {
