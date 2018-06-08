@@ -118,8 +118,6 @@ export default Ember.Controller.extend(sharedActions, {
         this.set('loading', false);
         this.resetErrorState(response);
         this.model.set('pull_request_url', response.response.url);
-        this.get('store').unloadAll('submission');
-        this.get('store').unloadAll('web-service-response');
         this.transitionToRoute("success")
       }, response => {
         this.set('loading', false);

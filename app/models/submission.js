@@ -18,4 +18,6 @@ export default DS.Model.extend({
   exampleRows:DS.attr(),
   pull_request_url: DS.attr('string'),
   contact_email: DS.attr('string'),
+  help_location: DS.attr('string'),
+  help_explanation: DS.attr('string')
 });

@@ -16,13 +16,13 @@ export default Ember.Component.extend({
   loading: false,
   showErrorState: false,
   errorMessages: [],
-  checkFormError: function (changeset) {
-    return new Promise((resolve, reject) =>
+  checkFormError: function (changeset, keyName) {
+    const val = (this.model.get(keyName))? this.model.get(keyName): '';
+    changeset.set(keyName, val);
+    return new Promise((resolve, reject) => {
       changeset.validate().then(()=> {
-        // NOTE: it is resolving here even with invalid email format
-        // NOTE: changeset.get('errors') === []
-        if (changeset.get('isValid')) resolve([]);
-        else resolve(changeset.get('errors')
+        resolve(changeset.get('errors')
+          .filter ((e) => e.key === keyName)
           .reduce((errorMessages, error) => {
             error.validation.map((validationMessage) => {
               errorMessages.push(validationMessage)
@@ -30,13 +30,10 @@ export default Ember.Component.extend({
             return errorMessages;
           }, []));
       })
-      .catch((err) => {
-        reject(err)
-      })
-    )
+    .catch((err) => {reject(err)})
+    })
   },
   resetErrorState: function (response) {
-    console.log("resetErrorState")
     if (response.statusText === "error"){
       Ember.set(this, 'showErrorState', true);
       Ember.set(this, 'errorMessages', [response.responseText]);
@@ -45,11 +42,43 @@ export default Ember.Component.extend({
       Ember.set(this, 'errorMessages', []);
     }
   },
-  checkErrors: function (changeset) {
+  checkEmailError: function(changeset){
     if (changeset.get('contact_email')) {
-      // this.model.set('maintainer_name', changeset.get('maintainer_name'));
-      return this.checkFormError(changeset);
+      this.model.set('contact_email', changeset.get('contact_email'));
+      return this.checkFormError(changeset, 'contact_email');
     } else return new Promise((resolve) => resolve(['Provide an e-mail address to proceed']));
+  },
+  checkLocationError: function(changeset){
+    if (changeset.get('help_location')) {
+      this.model.set('help_location', changeset.get('help_location'));
+      return this.checkFormError(changeset, 'help_location');
+    } else return new Promise((resolve) => resolve(['Provide a location to proceed']));
+  },
+  checkDataSourceError: function(changeset){
+    if (changeset.get('data_url')) {
+      this.model.set('data_url', changeset.get('data_url'));
+      return this.checkFormError(changeset, 'data_url');
+    } else return new Promise((resolve) => resolve(['Provide a data source to proceed']));
+  },
+  checkExplanationError: function(changeset){
+    if (changeset.get('help_explanation')) {
+      this.model.set('help_explanation', changeset.get('help_explanation'));
+      return this.checkFormError(changeset, 'help_explanation');
+    } else return new Promise((resolve) => resolve(['Provide an explanation of the problem to proceed']));
+  },
+  checkErrors: function (changeset) {
+    let totalErrorMessages = [];
+    return this.checkEmailError(changeset)
+      .then((emailErrorMessages) => emailErrorMessages.map((errorMessage) => totalErrorMessages.push(errorMessage)))
+      .then(() => this.checkLocationError(changeset))
+      .then((locationErrorMessages) => locationErrorMessages.map((errorMessage) => totalErrorMessages.push(errorMessage)))
+      .then(() => this.checkDataSourceError(changeset))
+      .then((dataSourceErrorMessages) => dataSourceErrorMessages.map((errorMessage) => totalErrorMessages.push(errorMessage)))
+      .then(() => this.checkExplanationError(changeset))
+      .then((explanationErrorMessages) => {
+        explanationErrorMessages.map((errorMessage) => totalErrorMessages.push(errorMessage));
+        return totalErrorMessages
+      })
   },
   actions: {
     openModal: function(name) {
@@ -57,93 +86,55 @@ export default Ember.Component.extend({
       $('.ui.' + name + '.modal').modal('show');
       /*eslint-enable */
     },
-
-    // submitModal: function(element, component) {
-    //   this.set('loading', true);
-    //   var helpFormData = {
-    //       "location": this.get('location'),
-    //       "emailAddress": this.get('email'),
-    //       "dataUrl": this.get('dataURL'),
-    //       "comments": this.get('text'),
-    //     }
-
-    //   var request = Ember.$.ajax({
-    //     type: "POST",
-    //     url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
-    //     data: JSON.stringify(helpFormData),
-    //     contentType: 'application/json'
-    //   });
-
-    //   if (this.get('location') && this.get('email') && this.get('dataURL') && this.get('text')) {
-    //     request.then(response => {
-    //       this.set('loading', false);
-    //       this.resetErrorState(response);
-    //       this.model.set('pull_request_url', response.response.url);
-    //       $('.ui.modal').modal('toggle', element, component);
-    //       this.routeToSuccessPage();
-    //     }, response => {
-    //       this.set('loading', false);
-    //       this.resetErrorState(response);
-    //     })
-    //   } else {
-    //     var response = {
-    //       statusText: "error",
-    //       responseText: "missing field"
-    //     }
-    //     this.set('loading', false);
-    //     this.resetErrorState(response)
-    //   }
-
-    // },
-    submitHelp: function(changeset){
-      this.checkErrors(changeset).then((errorMsgs) => {
-        // NOTE: errorMsgs.length === 0
-        console.log(errorMsgs.length)
-        if (errorMsgs.length) {
-          Ember.set(this, 'showErrorState', true);
-          Ember.set(this, 'errorMessages', errorMsgs);
-        } else {
-          this.resetErrorState(errorMsgs);
-          // this.transitionToRoute(route);
-        }
-
-      })
-      .catch((err) => {
-        const errorMsgs = [err]; // We can replace this error message to something vague
-        Ember.set(this, 'showErrorState', true);
-        Ember.set(this, 'errorMessages', errorMsgs);
-      })
-    },
     cancelModal: function(name) {
       /*eslint-disable */
       $('.ui.' + name + '.modal').modal('hide');
       return true;
       /*eslint-enable */
     },
-    setEmail: function(input) {
-      this.set('email', null);
-      var email = input.currentTarget.value;
-      this.set('email', email);
-    },
-    setLocation: function(input) {
-      this.set('location', null);
-      var location = input.currentTarget.value;
-      this.set('location', location);
-    },
-    setText: function(input) {
-      this.set('text', null);
-      var text = input.currentTarget.value;
-      this.set('text', text);
-    },
     uploadFile: function(){
       this.set('dataURL', null);
       var file = document.getElementById('uploadSource').files[0];
       this.set('dataFile', file);
     },
-    setURL: function(input){
-      this.set('dataFile', null);
-      var url = input.currentTarget.value;
-      this.set('dataURL', url);
+    submitHelp: function(changeset){
+      this.set('loading', true);
+      this.checkErrors(changeset).then( errorMsgs => {
+        if (errorMsgs.length) {
+          Ember.set(this, 'showErrorState', true);
+          Ember.set(this, 'errorMessages', errorMsgs);
+        } else {
+          var helpFormData = {
+            "location": changeset.get('help_location'),
+            "emailAddress": changeset.get('contact_email'),
+            "dataUrl": changeset.get('data_url'),
+            "comments": changeset.get('help_explanation'),
+          };
+          var request = Ember.$.ajax({
+            type: "POST",
+            url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
+            data: JSON.stringify(helpFormData),
+            contentType: 'application/json'
+          });
+          
+          request.then(response => {
+            this.set('loading', false);
+            this.resetErrorState(response);
+            this.model.set('pull_request_url', response.response.url);
+            $('.ui.help-modal.modal').modal('hide');
+            this.routeToSuccessPage();
+          }, response => {
+            this.set('loading', false);
+            this.resetErrorState(response);
+          })
+        }
+      })
+      .catch((err) => {
+        const errorMsgs = [err]; // We can replace this error message to something vague
+        this.set('loading', false);
+        Ember.set(this, 'showErrorState', true);
+        Ember.set(this, 'errorMessages', errorMsgs);
+      })
     }
   }
 });

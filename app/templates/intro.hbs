@@ -7,7 +7,7 @@
     </div>
   </div>
   <div class="intro">
-    <h3 class="first headroom">Welcome! {{help-modal model=model changeset=changeset}}</h3>
+    <h3 class="first headroom">Welcome! {{help-modal model=model changeset=changeset routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
     {{#with (changeset model DataURLValidator) as |changeset|}}
       <p>
         Provide link to data or upload data.
