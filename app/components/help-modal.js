@@ -121,7 +121,9 @@ export default Ember.Component.extend({
             this.set('loading', false);
             this.resetErrorState(response);
             this.model.set('pull_request_url', response.response.url);
+            /*eslint-disable */
             $('.ui.help-modal.modal').modal('hide');
+            /*eslint-enable */
             this.routeToSuccessPage();
           }, response => {
             this.set('loading', false);
