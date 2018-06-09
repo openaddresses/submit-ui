@@ -13,7 +13,7 @@ export default Ember.Controller.extend(sharedActions, {
   resetErrorState: function (response) {
     if (response.statusText === "error"){
       Ember.set(this, 'showErrorState', true);
-      Ember.set(this, 'errorMessages', [response.responseText]);
+      Ember.set(this, 'errorMessages', [response.responseJSON.error.message]);
     } else {
       Ember.set(this, 'showErrorState', false);
       Ember.set(this, 'errorMessages', []);
@@ -110,7 +110,7 @@ export default Ember.Controller.extend(sharedActions, {
       var request = Ember.$.ajax({
         type: "POST",
         url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
-        data: this.getSubmission(),
+        // data: this.getSubmission(),
         contentType: 'application/json'
       });
 
