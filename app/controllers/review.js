@@ -1,12 +1,7 @@
 import Ember from 'ember';
 import sharedActions from '../mixins/shared-actions';
 
-import HelpValidator from '../validator/help-modal';
-
-
-
 export default Ember.Controller.extend(sharedActions, {
-  HelpValidator,
   showErrorState: false,
   errorMessages: [],
   loading: false,
