@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model: function(){
     this.store.unloadAll('submission');
+    this.store.unloadAll('web-service-response');
     var submission = this.store.createRecord('submission',{
       share_alike: false,
       oaFields:{

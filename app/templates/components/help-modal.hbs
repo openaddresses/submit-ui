@@ -1,4 +1,5 @@
 <div class="help">
+  {{#with (changeset model HelpModalValidator) as |changeset|}}
   <div class="help-button" onClick={{action "openModal" "help-modal"}}>
     <i class="question circle icon"></i> Help
   </div>
@@ -7,23 +8,40 @@
     <div class="header">
       How can we help?
     </div>
-    <div class="content">
+    <div class="form scrolling content">
       <div class="description" style="font-weight: normal !important;">
-        <p>Having trouble contributing or editing a source? Please fill out this form so that we can help. </p>
-        <form class="ui form">
-          <div class="eight wide required field">
-            <label> Contact Email </label>
-            <input type="text" name="email" placeholder="Email Address" onChange={{action "setEmail"}}>
-          </div>
-
-          {{#unless (or model.data_url model.data_file)}}
+        <p>Having trouble contributing a source? Please fill out this form so that we can help. </p>
+          <form class="ui form">
+            <div class="required field ">
+              <label>Email address</label>
+              {{input
+                type="text"
+                value=(get changeset "contact_email")
+                changeset=changeset
+                placeholder="you@example.com"
+              }}
+            </div>
+            <div class="eight wide required field">
+              <label> Location </label>
+              {{input
+                type="text"
+                value=(get changeset "help_location")
+                changeset=changeset
+                placeholder="Portland, Oregon"
+              }}
+            </div>
             <div class="required field">
               <label> Data Source </label>
               <div class="inline sixteen wide fields">
                 <div class="six wide field">
                   <div class="ui small labeled input">
                     <div class="ui label">URL</div>
-                    <input type="text" placeholder="URL for hosted data" onChange={{action "setURL"}}>
+                    {{input
+                      type="text"
+                      value=(get changeset "data_url")
+                      changeset=changeset
+                      placeholder="URL for hosted data"
+                    }}
                   </div>
                 </div>
                 <div class="or"> OR </div>
@@ -36,21 +54,32 @@
                 </div>
               </div>
             </div>
-          {{/unless}}
-          <div class="required field">
-            <label>Provide explanation of the problem </label>
-            <textarea rows="3" onChange={{action "setText"}}></textarea>
-          </div>
-        </form>
+            <div class="required field">
+              <label>Provide explanation of the problem </label>
+              {{textarea value=(get changeset "help_explanation") changeset=changeset rows="3"}}
+            </div>
+          </form>
       </div>
+      {{#if showErrorState}}
+        <div class="ui hidden divider"></div>
+        <div class="ui tiny error message">
+          There was a problem submitting your data:
+          <ul class="list">
+            {{#each errorMessages as |errorMessage|}}
+              <li>{{errorMessage}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
     </div>
     <div class="actions">
       <div class="ui black deny button" onclick={{action "cancelModal" "help-modal"}}>
         Cancel
       </div>
-      <div class="ui positive right button" onclick={{action "submitModal" "help-modal"}}>
+      <div class="ui green right button" onclick={{action "submitHelp" changeset}}>
         Submit
       </div>
     </div>
   {{/ui-modal}}
+  {{/with}}
 </div>

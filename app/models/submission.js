@@ -16,5 +16,8 @@ export default DS.Model.extend({
   maintainer_email: DS.attr('string'),
   oaFields: DS.attr(),
   exampleRows:DS.attr(),
-  pull_request_url: DS.attr('string')
+  pull_request_url: DS.attr('string'),
+  contact_email: DS.attr('string'),
+  help_location: DS.attr('string'),
+  help_explanation: DS.attr('string')
 });
