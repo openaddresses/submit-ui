@@ -68,12 +68,13 @@ export default Ember.Controller.extend(sharedActions, {
     },
     clearUploadFile: function(){
       this.set('dataFile', null);
+      this.model.set('data_file', null);
     },
     changeRoute: function(route, changeset){
       this.set('loading', true);
 
       if (this.get('dataFile')){
-        const albumBucketName = 'submit-ui-data.openaddresses.io';
+        const albumBucketName = 'data.openaddresses.io';
         const bucketRegion = 'us-east-1';
         const IdentityPoolId = 'us-east-1:' + this.get('key');
 
@@ -100,15 +101,17 @@ export default Ember.Controller.extend(sharedActions, {
         var uploadToBucket = new Ember.RSVP.Promise(function(resolve, reject){
           s3.putObject(params, function (err, data) {
             if (err) {
-              reject(error);
-            } else {
+              reject(err);
+            } else if (data) {
               resolve();
             }
           });
         });   
 
+        this.model.set('data_file', file.name);
+
         uploadToBucket.then(
-          function(res) {
+          function() {
             var data_url = 'https://s3.amazonaws.com/submit-ui-data.openaddresses.io/uploads/' + file.name;
             var url = 'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/sample?source=' + data_url;
             var request = Ember.$.ajax({ url });
@@ -155,7 +158,7 @@ export default Ember.Controller.extend(sharedActions, {
                 conform: {type:response.conform.type}
               })
             }, response => {
-              return [response.statusText, response.responseJSON.error.message]
+              return [response.statusText, response.responseJSON.message]
             }).then(response  => {
               this.set('loading', false);
               this.resetErrorState(response);

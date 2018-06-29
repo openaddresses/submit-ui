@@ -7,6 +7,7 @@ module.exports = function(environment) {
     environment,
     rootURL: '/',
     locationType: 'hash',
+    myApiKey: process.env.apiKey,
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -25,7 +26,6 @@ module.exports = function(environment) {
   };
 
   if (environment === 'development') {
-    ENV.myApiKey = process.env.apiKey;
     // ENV.APP.LOG_RESOLVER = true;
     // ENV.APP.LOG_ACTIVE_GENERATION = true;
     // ENV.APP.LOG_TRANSITIONS = true;
@@ -45,7 +45,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
   }
 
   return ENV;

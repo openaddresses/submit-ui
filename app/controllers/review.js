@@ -17,7 +17,7 @@ export default Ember.Controller.extend(sharedActions, {
   getSubmission: function(){
     var submission = {
       "type": this.get('store').peekAll('webServiceResponse').get('firstObject').get('type'),
-      "data": this.model.get('data_url'),
+      "data": this.model.get('data_url') ? this.model.get('data_url') : this.get('store').peekAll('webServiceResponse').get('firstObject').get('data_url'),
       "website": {},
       "test": this.get('loading') ? true : false,
       "license": {
@@ -101,11 +101,10 @@ export default Ember.Controller.extend(sharedActions, {
     },
     submit: function(){
       this.set('loading', true);
-
       var request = Ember.$.ajax({
         type: "POST",
         url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
-        // data: this.getSubmission(),
+        data: this.getSubmission(),
         contentType: 'application/json'
       });
 
