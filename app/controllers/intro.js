@@ -74,7 +74,7 @@ export default Ember.Controller.extend(sharedActions, {
       this.set('loading', true);
 
       if (this.get('dataFile')){
-        const albumBucketName = 'data.openaddresses.io';
+        const albumBucketName = 'submit-ui-data.openaddresses.io';
         const bucketRegion = 'us-east-1';
         const IdentityPoolId = 'us-east-1:' + this.get('key');
 

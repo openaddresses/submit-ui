@@ -124,7 +124,7 @@ export default Ember.Component.extend({
           Ember.set(this, 'errorMessages', errorMsgs);
           this.set('loading', false);
         } else {
-          const albumBucketName = 'data.openaddresses.io';
+          const albumBucketName = 'submit-ui-data.openaddresses.io';
           const bucketRegion = 'us-east-1';
           const IdentityPoolId = 'us-east-1:' + this.get('key');
           AWS.config.update({
