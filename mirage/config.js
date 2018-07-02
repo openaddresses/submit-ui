@@ -1,5 +1,4 @@
 export default function() {
-
   // These comments are here to help you get started. Feel free to delete them.
 
   /*
@@ -25,7 +24,10 @@ export default function() {
   */
   // passthough whitelists this domain to avoid Mirage error
   this.passthrough('https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/**');
-  
+  this.passthrough('https://cognito-identity.us-east-1.amazonaws.com/');
+  this.passthrough('https://s3.amazonaws.com/**');
+
+ 
   // sample data for development:
   // 
   // this.get('/responses', () => {

@@ -1,10 +1,13 @@
 import Ember from 'ember';
-import HelpModalValidator from '../validator/help-modal'
+import HelpModalValidator from '../validator/help-modal';
+import config from '../config/environment';
+import AWS from 'npm:aws-sdk';
 
 export default Ember.Component.extend({
   HelpModalValidator,
   dataURL: null,
   dataFile: null,
+  key: config.myApiKey,
   fileName: Ember.computed('dataFile', function(){
     if (this.get('dataFile')){
       return this.get('dataFile').name
@@ -16,6 +19,7 @@ export default Ember.Component.extend({
   loading: false,
   showErrorState: false,
   errorMessages: [],
+  changeset: null,
   checkFormError: function (changeset, keyName) {
     const val = (this.model.get(keyName))? this.model.get(keyName): '';
     changeset.set(keyName, val);
@@ -66,7 +70,7 @@ export default Ember.Component.extend({
       return this.checkFormError(changeset, 'help_explanation');
     } else return new Promise((resolve) => resolve(['Provide an explanation of the problem to proceed']));
   },
-  checkErrors: function (changeset) {
+  checkErrors: function(changeset){
     let totalErrorMessages = [];
     return this.checkEmailError(changeset)
       .then((emailErrorMessages) => emailErrorMessages.map((errorMessage) => totalErrorMessages.push(errorMessage)))
@@ -92,43 +96,100 @@ export default Ember.Component.extend({
       return true;
       /*eslint-enable */
     },
-    uploadFile: function(){
+    setDataUrl: function(changeset, value){
+      if (this.get('dataFile')){
+        this.set('dataFile', null);
+      }
+      this.set('dataURL', value.target.value)
+    },
+    updateChangeset: function(changeset){
+      changeset.set('data_url', this.get('dataURL'))
+    },
+    uploadFile: function(changeset){
       this.set('dataURL', null);
       var file = document.getElementById('uploadSource').files[0];
       this.set('dataFile', file);
+      changeset.set('data_url', 'https://s3.amazonaws.com/submit-ui-data.openaddresses.io/uploads/' + file.name);
+      changeset.set('file', file);
+    },
+    clearUploadFile: function(changeset){
+      this.set('dataFile', null);
+      changeset.set('data_url', null);
     },
     submitHelp: function(changeset){
       this.set('loading', true);
-      this.checkErrors(changeset).then( errorMsgs => {
+      this.checkErrors(changeset).then(errorMsgs => {
         if (errorMsgs.length) {
           Ember.set(this, 'showErrorState', true);
           Ember.set(this, 'errorMessages', errorMsgs);
+          this.set('loading', false);
         } else {
-          var helpFormData = {
-            "location": changeset.get('help_location'),
-            "emailAddress": changeset.get('contact_email'),
-            "dataUrl": changeset.get('data_url'),
-            "comments": changeset.get('help_explanation'),
-          };
-          var request = Ember.$.ajax({
-            type: "POST",
-            url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
-            data: JSON.stringify(helpFormData),
-            contentType: 'application/json'
+          const albumBucketName = 'submit-ui-data.openaddresses.io';
+          const bucketRegion = 'us-east-1';
+          const IdentityPoolId = 'us-east-1:' + this.get('key');
+          AWS.config.update({
+            region: bucketRegion,
+            credentials: new AWS.CognitoIdentityCredentials({
+              IdentityPoolId: IdentityPoolId
+            })
           });
+          const s3 = new AWS.S3({
+            apiVersion: '2006-03-01',
+            params: { Bucket: albumBucketName }
+          });
+          var file = changeset.get('file');
+          var objKey = 'uploads/' + file.name;
+          var params = {
+            Key: objKey,
+            Bucket: albumBucketName,
+            ContentType: file.type,
+            Body: file,
+            ACL: 'public-read'
+          };
           
-          request.then(response => {
-            this.set('loading', false);
-            this.resetErrorState(response);
-            this.model.set('pull_request_url', response.response.url);
-            /*eslint-disable */
-            $('.ui.help-modal.modal').modal('hide');
-            /*eslint-enable */
-            this.routeToSuccessPage();
-          }, response => {
-            this.set('loading', false);
-            this.resetErrorState(response);
-          })
+          var uploadToBucket = new Ember.RSVP.Promise(function(resolve, reject){
+            s3.putObject(params, function (err, data) {
+              if (err) {
+                reject(err);
+              } else if (data) {
+                resolve();
+              }
+            });
+          });   
+
+          uploadToBucket.then(
+            function() {
+              var helpFormData = {
+                "location": changeset.get('help_location'),
+                "emailAddress": changeset.get('contact_email'),
+                "dataUrl": changeset.get('data_url'),
+                "comments": changeset.get('help_explanation'),
+              };
+              var request = Ember.$.ajax({
+                type: "POST",
+                url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
+                data: JSON.stringify(helpFormData),
+                contentType: 'application/json'
+              });
+              request.then(response => {
+                this.set('loading', false);
+                this.resetErrorState(response);
+                this.model.set('pull_request_url', response.response.url);
+                /*eslint-disable */
+                $('.ui.help-modal.modal').modal('hide');
+                /*eslint-enable */
+                this.routeToSuccessPage();
+              }, response => {
+                this.set('loading', false);
+                this.resetErrorState(response);
+              })
+            }.bind(this),
+            function(err) {
+              const errorMsgs = [err];
+              Ember.set(this, 'showErrorState', true);
+              Ember.set(this, 'errorMessages', errorMsgs);
+            }.bind(this)
+          )
         }
       })
       .catch((err) => {
