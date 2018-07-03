@@ -139,12 +139,13 @@ export default Ember.Controller.extend(sharedActions, {
             Ember.set(this, 'errorMessages', errorMsgs);
           }.bind(this)
         );
-      } else if (changeset.get('data_url')){
+      } else {
         this.checkErrors(changeset).then((errorMsgs) => {
           // When there is any error, show it and do not proceed
           if (errorMsgs.length) {
             Ember.set(this, 'showErrorState', true);
             Ember.set(this, 'errorMessages', errorMsgs);
+            this.set('loading', false);
           // When there is no error message, proceed
           } else {
             var url = 'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/sample?source=' + changeset.get('data_url');
@@ -158,7 +159,7 @@ export default Ember.Controller.extend(sharedActions, {
                 conform: {type:response.conform.type}
               })
             }, response => {
-              return [response.statusText, response.responseJSON.message]
+              return [response.statusText, response.responseJSON.error.message]
             }).then(response  => {
               this.set('loading', false);
               this.resetErrorState(response);

@@ -124,76 +124,104 @@ export default Ember.Component.extend({
           Ember.set(this, 'errorMessages', errorMsgs);
           this.set('loading', false);
         } else {
-          const albumBucketName = 'submit-ui-data.openaddresses.io';
-          const bucketRegion = 'us-east-1';
-          const IdentityPoolId = 'us-east-1:' + this.get('key');
-          AWS.config.update({
-            region: bucketRegion,
-            credentials: new AWS.CognitoIdentityCredentials({
-              IdentityPoolId: IdentityPoolId
-            })
-          });
-          const s3 = new AWS.S3({
-            apiVersion: '2006-03-01',
-            params: { Bucket: albumBucketName }
-          });
-          var file = changeset.get('file');
-          var objKey = 'uploads/' + file.name;
-          var params = {
-            Key: objKey,
-            Bucket: albumBucketName,
-            ContentType: file.type,
-            Body: file,
-            ACL: 'public-read'
-          };
-          
-          var uploadToBucket = new Ember.RSVP.Promise(function(resolve, reject){
-            s3.putObject(params, function (err, data) {
-              if (err) {
-                reject(err);
-              } else if (data) {
-                resolve();
-              }
-            });
-          });   
-
-          uploadToBucket.then(
-            function() {
-              var helpFormData = {
-                "location": changeset.get('help_location'),
-                "emailAddress": changeset.get('contact_email'),
-                "dataUrl": changeset.get('data_url'),
-                "comments": changeset.get('help_explanation'),
-              };
-              var request = Ember.$.ajax({
-                type: "POST",
-                url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
-                data: JSON.stringify(helpFormData),
-                contentType: 'application/json'
-              });
-              request.then(response => {
-                this.set('loading', false);
-                this.resetErrorState(response);
-                this.model.set('pull_request_url', response.response.url);
-                /*eslint-disable */
-                $('.ui.help-modal.modal').modal('hide');
-                /*eslint-enable */
-                this.routeToSuccessPage();
-              }, response => {
-                this.set('loading', false);
-                this.resetErrorState(response);
+          if (this.get('dataFile')) {
+            const albumBucketName = 'submit-ui-data.openaddresses.io';
+            const bucketRegion = 'us-east-1';
+            const IdentityPoolId = 'us-east-1:' + this.get('key');
+            AWS.config.update({
+              region: bucketRegion,
+              credentials: new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: IdentityPoolId
               })
-            }.bind(this),
-            function(err) {
-              const errorMsgs = [err];
-              Ember.set(this, 'showErrorState', true);
-              Ember.set(this, 'errorMessages', errorMsgs);
-            }.bind(this)
-          )
+            });
+            const s3 = new AWS.S3({
+              apiVersion: '2006-03-01',
+              params: { Bucket: albumBucketName }
+            });
+            var file = changeset.get('file');
+            var objKey = 'uploads/' + file.name;
+            var params = {
+              Key: objKey,
+              Bucket: albumBucketName,
+              ContentType: file.type,
+              Body: file,
+              ACL: 'public-read'
+            };
+            
+            var uploadToBucket = new Ember.RSVP.Promise(function(resolve, reject){
+              s3.putObject(params, function (err, data) {
+                if (err) {
+                  reject(err);
+                } else if (data) {
+                  resolve();
+                }
+              });
+            });   
+
+            uploadToBucket.then(
+              function() {
+                var helpFormData = {
+                  "location": changeset.get('help_location'),
+                  "emailAddress": changeset.get('contact_email'),
+                  "dataUrl": changeset.get('data_url'),
+                  "comments": changeset.get('help_explanation'),
+                };
+                var request = Ember.$.ajax({
+                  type: "POST",
+                  url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
+                  data: JSON.stringify(helpFormData),
+                  contentType: 'application/json'
+                });
+                request.then(response => {
+                  this.set('loading', false);
+                  this.resetErrorState(response);
+                  this.model.set('pull_request_url', response.response.url);
+                  /*eslint-disable */
+                  $('.ui.help-modal.modal').modal('hide');
+                  /*eslint-enable */
+                  this.routeToSuccessPage();
+                }, response => {
+                  this.set('loading', false);
+                  this.resetErrorState(response);
+                })
+              }.bind(this),
+              function(err) {
+                const errorMsgs = [err];
+                Ember.set(this, 'showErrorState', true);
+                Ember.set(this, 'errorMessages', errorMsgs);
+              }.bind(this)
+            )
+          } else {
+            var helpFormData = {
+              "location": changeset.get('help_location'),
+              "emailAddress": changeset.get('contact_email'),
+              "dataUrl": changeset.get('data_url'),
+              "comments": changeset.get('help_explanation'),
+            };
+            var request = Ember.$.ajax({
+              type: "POST",
+              url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/createIssue',
+              data: JSON.stringify(helpFormData),
+              contentType: 'application/json'
+            });
+            
+            request.then(response => {
+              this.set('loading', false);
+              this.resetErrorState(response);
+              this.model.set('pull_request_url', response.response.url);
+              /*eslint-disable */
+              $('.ui.help-modal.modal').modal('hide');
+              /*eslint-enable */
+              this.routeToSuccessPage();
+            }, response => {
+              this.set('loading', false);
+              this.resetErrorState(response);
+            })
+          }
         }
       })
       .catch((err) => {
-        const errorMsgs = [err]; // We can replace this error message to something vague
+        const errorMsgs = [err];
         this.set('loading', false);
         Ember.set(this, 'showErrorState', true);
         Ember.set(this, 'errorMessages', errorMsgs);
