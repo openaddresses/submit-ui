@@ -1,6 +1,6 @@
 <div class="ui text container">
   <h3 class="first headroom">Data format {{help-modal model=model.submission routeToSuccessPage=(action "routeToSuccessPage")}} </h3>
-  <p> This is a small sample of the data for preview </p>
+  <p>Match the columns in the data you are submitting (in the drop-down menu) with the columns used by OpenAddresses (in the table). Some datasets won't have a match for every column, but match as many as possible.</p>
   <div class="ui tiny message">
     <p> <span class="required"> * </span> indicates field is <b> required </b> to proceed </p>
   </div>
@@ -78,7 +78,7 @@
             {{#unless (eq field "lon")}}
               {{#unless (eq field "lat")}}
                 <div class="function link-text" onClick={{action "addFunction" field "join"}}>
-                  + Join columns
+                  + Join columns {{ui-popup tagName="i" class="info circle icon" content="Join two or more columns in your dataset together to form one column in OpenAddresses"}}
                 </div>
               {{/unless}}
             {{/unless}}
@@ -89,7 +89,7 @@
                     {{#unless (eq field "lon")}}
                       {{#unless (eq field "lat")}}
                         <div class="function link-text" onClick={{action "addFunction" field "split"}}>
-                          - Split column
+                          - Split column {{ui-popup tagName="i" class="info circle icon" content="Use only a part of a column in your dataset"}}
                         </div>
                       {{/unless}}
                     {{/unless}}
