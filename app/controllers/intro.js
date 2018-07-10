@@ -10,10 +10,18 @@ export default Ember.Controller.extend(sharedActions, {
   showErrorState: false,
   errorMessages: [],
   dataFile: null,
+  dataURL: null,
   loading: false,
   fileName: Ember.computed('dataFile', function(){
     if (this.get('dataFile')){
       return this.get('dataFile').name
+    }
+  }),
+  proceed: Ember.computed('dataFile', 'dataURL', function(){
+    if (this.get('dataFile') || this.get('dataURL')){
+      return true;
+    } else {
+      return false;
     }
   }),
   checkDataFile: function () {
@@ -65,6 +73,11 @@ export default Ember.Controller.extend(sharedActions, {
       this.set('dataURL', null);
       var file = document.getElementById('uploadfile').files[0];
       this.set('dataFile', file);
+    },
+    setDataUrl: function(input){
+      this.set('dataURL', input)
+      this.set('dataFile', null);
+      this.model.set('data_file', null);
     },
     clearUploadFile: function(){
       this.set('dataFile', null);
