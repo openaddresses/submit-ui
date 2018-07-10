@@ -6,7 +6,7 @@ module.exports = function(environment) {
     modulePrefix: 'mobility-on-demand-sandbox-contributions',
     environment,
     rootURL: '/',
-    locationType: 'hash',
+    locationType: 'history',
     myApiKey: process.env.apiKey,
     EmberENV: {
       FEATURES: {
