@@ -62,7 +62,7 @@
           </form>
           <div class="field">
             <div class="inline sharealike field">
-             {{ui-checkbox label="License is share-alike" checked=(if model.share_alike "checked" "") onChange=(action "setShareAlike")}}
+             {{ui-checkbox label="License is share-alike" checked=(if model.share_alike "checked" "") onChange=(action "setShareAlike")}} {{ui-popup tagName="i" class="info circle icon" content="Share-alike licenses require copies or adaptations of the work to be released under the same or similar licence as the original."}}
             </div>
           </div>
         {{/if}}
