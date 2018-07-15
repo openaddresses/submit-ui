@@ -23,6 +23,10 @@
               <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
                 {{#if (eq field "number")}}
                   house <br/> number
+                {{else if (eq field "district")}}
+                  {{field}}  {{ui-popup tagName="i" class="small info circle icon" content="District/County/Sub-Region in which the address falls"}}
+                {{else if (eq field "region")}}
+                  {{field}}  {{ui-popup tagName="i" class="small info circle icon" content="State/Region/Province in which the address falls"}}
                 {{else}}
                   {{field}}
                 {{/if}}
