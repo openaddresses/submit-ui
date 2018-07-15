@@ -20,7 +20,7 @@ You will need the following things properly installed on your computer.
 * `bower install`
 
 ## Set up .env file
-* create a .env file  with `export apiKey=` + the aws key.
+* Create a .env file  with `export apiKey=` + the aws key for uploads
 * Run `source .env` before serving the app
 
 ## Running / Development
