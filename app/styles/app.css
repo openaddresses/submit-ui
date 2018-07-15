@@ -1,0 +1,392 @@
+/* general styling */
+* {
+  font-family: 'Open Sans', sans-serif;
+}
+
+body, p {
+  color: #444;
+}
+
+input:placeholder-shown {
+  color: #bfbfbf;
+}
+
+.ten.wide.column {
+  overflow-x: auto;
+}
+
+.ui.negative.message.mobile {
+  display: none;
+}
+
+.ui.button {
+  margin-top: 10px;
+}
+
+.ui.modal {
+  position: fixed;
+  top: 15%;
+}
+
+.ui.help-modal.modal {
+  position: fixed;
+  top: 15%;
+}
+
+.scrolling.undetached.dimmable .ui.scrolling.modal {
+  left: inherit;
+  top: 5%;
+  position: fixed;
+}
+
+.openaddress.logo {
+  background: url('/assets/images/openaddress-logo.png') no-repeat 0 0;
+  background-position: center;
+  background-size: contain;
+  height: 12vh;
+  width: 100%;
+}
+
+.ui.inverted.header {
+  margin: 15px;
+  margin-bottom: 20px;
+}
+
+.ui.inverted.vertical.masthead.center.aligned.segment {
+  background: url('/assets/images/skyline.jpg') no-repeat 0 0;
+  background-size: cover;
+  margin-bottom: 30px;
+  padding-bottom: 0px;
+}
+
+.ui.header {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-size: 48px !important;
+}
+
+h2 {
+  font-size: 36px !important;
+}
+
+h3 {
+  font-size: 24px !important;
+}
+
+h4 {
+  font-size: 20px !important;
+}
+
+h5 {
+  font-size: 16px !important;
+}
+
+:root {
+  --error: #e50b17;
+  --error-hover: #94070f;
+  --success: #69cb01;
+  --success-hover: #468701;
+  --link: #1b90f9;
+  --link-hover: #0564ba;
+  --button-next: #00b5ad;
+  --button-next-hover: #00938d;
+  --button-back: #777777;
+  --button-back-hover: #444444;
+
+  --openaddress-green: #50ad2d;
+  --openaddress-gray: #eee;
+  --openaddress-green-hover: #7ecc64;
+}
+
+.ui.warning.message {
+  display: none;
+}
+
+.ui.text.container {
+  margin-bottom: 75px;
+}
+
+.form-content {
+  margin-top: 2em;
+}
+
+.nav-button {
+  margin-top: 2em !important;
+}
+
+#back {
+  background: var(--button-back);
+}
+
+#back:hover {
+  background: var(--button-back-hover);
+}
+
+#next {
+  background: var(--openaddress-green);
+}
+
+#next:hover {
+  background: var(--openaddress-green-hover);
+}
+
+.ui.link.button {
+  background: var(--link);
+}
+
+.ui.link.button:hover {
+  background: var(--link-hover);
+}
+
+span.required {
+  color: #da2929;
+}
+
+/* add feed progress tabs styling */
+nav {
+  padding: 0px;
+  margin: 0px;
+  background-color: rgba(0,0,0,0.5);
+}
+
+nav ul {
+  display: inline-flex;
+  justify-content: center;
+  align-items: flex-end;
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+nav ul li {
+  padding: 12px 10px 5px 10px;
+  margin: 0px 15px;
+  color: var(--openaddress-gray);
+  letter-spacing: 1px;
+  border-bottom: solid 3px var(--openaddress-gray);
+}
+
+nav ul li.active {
+  color: white;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-bottom: solid 4px white;
+}
+
+@media only screen and (max-width: 510px) {
+    nav ul li {
+      display: none;
+    }
+    nav ul li.active {
+      display: block;
+    }
+    nav ul li.active + li {
+      display: block;
+    }
+    .ui.negative.message.mobile {
+      display: block;
+    }
+    .intro {
+      display: none;
+    }
+}
+
+.link {
+  background: var(--link) !important;
+  color: white !important;
+}
+
+.link:hover {
+  background: var(--link-hover) !important;
+}
+
+.link-text {
+  color: var(--link) !important;
+}
+
+.link-text:hover {
+  color: var(--link-hover) !important;
+}
+
+.or {
+  text-align: center;
+  padding-left: 1em;
+  padding-right: 2em;
+  font-weight: bold;
+}
+
+/* styling for data source page */
+.ui.url.input {
+  width: 80%;
+}
+
+.ui.horizontal.divider {
+  width: 80%;
+  margin: 25px auto;
+  margin-bottom: 15px;
+}
+
+.ui.upload.button {
+  width: 45%;
+}
+
+.first.headroom {
+  position: relative;
+}
+
+.help-button {
+  color: #1b90f9;
+  cursor: pointer;
+  font-size: medium;
+  position: absolute;
+  right: 10px;
+  top: 0px;
+}
+
+.help-button:hover {
+  color: #0564ba;
+}
+
+.times {
+  cursor: pointer;
+}
+
+/* styling for more-info page */
+.ui.dropdown .text {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.ui.form .inline.sharealike.field {
+  margin-top: 1em;
+}
+
+.field .ui.button.active {
+  background: var(--link);
+  color: white;
+}
+
+.field .ui.button.none.active {
+  background: gray;
+  color: white;
+}
+
+.ui.selection.frequency {
+  margin-top: 5px;
+}
+
+.ui.radio.checkbox.checked {
+  opacity: 1;
+}
+
+/* styling for data format page */
+span.see-more {
+  float: right;
+  padding: 0px 10px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.ui.table.data-format {
+  margin-bottom: 5px;
+}
+
+.data-functions {
+  cursor: pointer;
+  position: absolute;
+  right: 20px;
+  font-weight: 500;
+  font-size: small;
+}
+
+.data-functions.remove {
+  color: var(--error);
+  font-size: small;
+  top: 15px;
+}
+
+.data-functions.remove:hover {
+  color: var(--error-hover);
+}
+
+.ui.selection.fluid.data-format {
+  margin-top: 10px;
+}
+
+.data-functions .function {
+  display: inline-block;
+  margin: 0px 10px;
+}
+
+.inactiveField {
+  cursor: pointer;
+}
+
+.add-join {
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.field .nav-buttons,
+.ui.hidden.clearing.divider {
+  margin: 0px;
+  margin-top: 5px !important;
+}
+
+.ui.unit.checkbox {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ui.button.clear-field {
+  margin-top: 15px;
+}
+/*probably not ideal way to handle this*/
+.hidden {
+  visibility: hidden;
+}
+
+/* styling for review page */
+.review-nav .ui.button {
+  margin-top: 4em !important;
+  margin-bottom: 20px;
+}
+
+.field.label {
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.info.value {
+  padding: 10px 0px;
+}
+
+.info.attribution.value {
+  text-transform: capitalize;
+}
+
+.ui.fitted.divider {
+  margin: 0px !important;
+}
+
+.ui.fitted.divider:last-child {
+  display: none;
+}
+
+.review.edit {
+  color: var(--link);
+  position: absolute;
+  right: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 1em;
+}
+
+.review.edit:hover {
+  color: var(--link-hover);
+}

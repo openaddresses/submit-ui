@@ -1,0 +1,28 @@
+<div class="field">
+  <div class="fields">
+    <div class="sixteen wide field">
+      {{#ui-dropdown class="selection fluid data-format" selected=properties.fields.firstObject onChange=(action "sendChooseField" field) as |execute mapper|}}
+        <div class="default text">
+          Choose column
+        </div>
+        <i class="dropdown icon"></i>
+        <div class="menu">
+          {{#each columnHeadings as |heading|}}
+            <div class="item" data-value="{{map-value mapper heading}}">
+              {{heading}} (sample value: {{sample-data user_data=user_data heading=heading}})
+            </div>
+          {{/each}}
+        </div>
+      {{/ui-dropdown}}
+    </div>
+    {{#if properties.fields.firstObject}}
+      {{#unless (eq properties.function "removePrefixOrPostfix")}}
+        <div class="one wide field">
+          <button class="ui icon tiny compact button basic red clear-field" style="margin-top: 15px" onClick={{action "removeField" field}}>
+            <i class="minus icon"></i>
+          </button>
+        </div>
+      {{/unless}}
+    {{/if}}
+  </div>
+</div>

@@ -1,0 +1,168 @@
+<div class="ui text container">
+  <h3 class="first headroom">Data format {{help-modal model=model.submission routeToSuccessPage=(action "routeToSuccessPage")}} </h3>
+  <p>Match the columns in the data you are submitting (in the drop-down menu) with the columns used by OpenAddresses (in the table). Some datasets won't have a match for every column, but match as many as possible.</p>
+  <div class="ui tiny message">
+    <p> <span class="required"> * </span> indicates field is <b> required </b> to proceed </p>
+  </div>
+  <table class="ui celled table data-format">
+    <thead>
+      <tr>
+        {{#each-in model.submission.oaFields as |field properties|}}
+          {{#if (eq field "lon")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/if}}
+          {{/if}}
+          {{#if (eq field "lat")}}
+            {{#if (eq model.webServiceResponse.conform.type "csv")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+            {{/if}}
+          {{/if}}
+          {{#unless (eq field "lon")}}
+            {{#unless (eq field "lat")}}
+              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
+                {{#if (eq field "number")}}
+                  house <br/> number
+                {{else if (eq field "district")}}
+                  {{field}}  {{ui-popup tagName="i" class="small info circle icon" content="District/County/Sub-Region in which the address falls"}}
+                {{else if (eq field "region")}}
+                  {{field}}  {{ui-popup tagName="i" class="small info circle icon" content="State/Region/Province in which the address falls"}}
+                {{else}}
+                  {{field}}
+                {{/if}}
+                {{#if (or (eq field "number") (eq field "street"))}}
+                  <span class="required"> * </span>
+                {{/if}}
+              </a></th>
+            {{/unless}}
+          {{/unless}}
+        {{/each-in}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each-in model.submission.exampleRows as |rows fields|}}
+        {{#unless (and (eq showMore false) (gt rows 1))}}
+        <tr>
+          {{#each-in fields as |field label|}}
+            {{#unless (eq field "lon")}}
+              {{#unless (eq field "lat")}}
+                <td class={{if (eq field currentField) "active"}}>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/unless}}
+            {{/unless}}
+            {{#if (eq field "lon")}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                <td class={{if (eq field currentField) "active"}}>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/if}}
+            {{/if}}
+            {{#if (eq field "lat")}}
+              {{#if (eq model.webServiceResponse.conform.type "csv")}}
+                <td class={{if (eq field currentField) "active"}}>{{#each label as |value|}}{{value}} {{/each}}</td>
+              {{/if}}
+            {{/if}}
+          {{/each-in}}
+        </tr>
+        {{/unless}}
+      {{/each-in}}
+    </tbody>
+  </table>
+  <span class="see-more link-text" onclick={{action "toggleShowMore"}}>
+    <i class="ellipsis horizontal icon"></i>
+    {{#if (eq showMore false)}}
+      See More
+    {{else}}
+      See Less
+    {{/if}}
+  </span>
+  <div class="ui hidden clearing divider"></div>
+  {{#each-in model.submission.oaFields as |field properties|}}
+    {{#if (eq field currentField)}}
+      <form class="ui form segment">
+        {{#if (eq properties.function null)}}
+          <div class="data-functions">
+            {{#unless (eq field "lon")}}
+              {{#unless (eq field "lat")}}
+                <div class="function link-text" onClick={{action "addFunction" field "join"}}>
+                  + Join columns {{ui-popup tagName="i" class="info circle icon" content="Join two or more columns in your dataset together to form one column in OpenAddresses"}}
+                </div>
+              {{/unless}}
+            {{/unless}}
+            {{#unless (eq field "city")}}
+              {{#unless (eq field "region")}}
+                {{#unless (eq field "district")}}
+                  {{#unless (eq field "postcode")}}
+                    {{#unless (eq field "lon")}}
+                      {{#unless (eq field "lat")}}
+                        <div class="function link-text" onClick={{action "addFunction" field "split"}}>
+                          - Split column {{ui-popup tagName="i" class="info circle icon" content="Use only a part of a column in your dataset"}}
+                        </div>
+                      {{/unless}}
+                    {{/unless}}
+                  {{/unless}}
+                {{/unless}}
+              {{/unless}}
+            {{/unless}}
+          </div>
+        {{else if (and (not-eq properties.function "join") (not-eq properties.function "split"))}}
+          <div class="data-functions remove" onClick={{action "removeFunction" field}}>
+            <i class="remove icon"></i> Remove extraction
+          </div>
+        {{/if}}
+        <div class="field">
+          <label>
+            {{#if (eq field "number")}}
+              house number
+            {{else}}
+              {{field}}
+            {{/if}}
+            {{#if (or (eq field "number") (eq field "street"))}}
+              <span class="required"> * </span>
+            {{/if}}
+          </label>
+          {{#if showErrorState}}
+            <div class="ui tiny negative message">
+              <ul class="list">
+                {{#each errorMessages as |errorMessage|}}
+                  <li>{{errorMessage}}</li>
+                {{/each}}
+              </ul>
+            </div>
+          {{/if}}
+          {{#unless (eq properties.function "join")}}
+            {{select-column field=field properties=properties columnHeadings=columnHeadings model=model numberOfExamples=numberOfExamples sendChooseField="chooseField"}}
+          {{/unless}}
+          {{#if (eq properties.function "join")}}
+            {{join-column field=field properties=properties showAdditionalJoinDropdown=showAdditionalJoinDropdown model=model numberOfExamples=numberOfExamples}}
+          {{else if (eq properties.function "split")}}
+            {{split-column field=field properties=properties columnHeadings=columnHeadings model=model numberOfExamples=numberOfExamples}}
+          {{else if (eq properties.function "removePrefixOrPostfix")}}
+            {{remove-prefix-postfix field=field properties=properties model=model numberOfExamples=numberOfExamples}}
+          {{else if (eq properties.function "remove_prefix")}}
+            {{remove-prefix-postfix field=field properties=properties model=model numberOfExamples=numberOfExamples}}
+          {{else if (eq properties.function "remove_postfix")}}
+            {{remove-prefix-postfix field=field properties=properties model=model numberOfExamples=numberOfExamples}}
+          {{/if}}
+          <div class="field nav-buttons">
+            {{#unless (or (eq currentField "lat") (eq currentField "number"))}}
+              <button class="ui blue compact left floated button link" onClick={{action "prevField" field}}><i class="left arrow icon"></i>{{prevField}}</button>
+            {{/unless}}
+            {{#unless (eq currentField "postcode")}}
+              <button class="ui blue compact right floated button link"  onClick={{action "nextField" field}}>{{nextField}} <i class="right arrow icon"></i></button>
+            {{/unless}}
+            <div class="ui hidden clearing divider"></div>
+          </div>
+        </div>
+      </form>
+    {{/if}}
+  {{/each-in}}
+  {{#if showRequiredFieldsErrorState}}
+    <div class="ui hidden divider"></div>
+    <div class="ui tiny error message">
+      <ul class="list">
+        {{#each requiredFieldsErrorMessages as |errorMessage|}}
+          <li>{{errorMessage}}</li>
+        {{/each}}
+      </ul>
+    </div>
+  {{/if}}
+  {{nav-buttons sendChangeRoute="changeRoute" sendPreviousRoute="previousRoute" back="more-info" next="contact"}}
+</div>

@@ -1,0 +1,63 @@
+<div class="data-functions remove" onClick={{action "removeFunction" field}}>
+  <i class="remove icon"></i> Cancel join
+</div>
+{{#each properties.fields as |column index|}}
+  {{#if (gte index 1)}}
+    <a class="item link-text">
+      <i class="plus icon"></i>
+    </a>
+  {{/if}}
+  <div class="field">
+    <div class="fields">
+      <div class="fifteen wide field">
+        {{#ui-dropdown class="selection fluid data-format" selected=column onChange=(action "editField" field index) as |execute mapper|}}
+          <div>
+            {{column}} (example value: {{sample-data user_data=user_data heading=column}}
+          </div>
+          <i class="dropdown icon"></i>
+          <div class="menu">
+            {{#each remainingColumnHeadings as |heading|}}
+              <div class="item" data-value="{{map-value mapper heading}}">
+                {{heading}} (sample value: {{sample-data user_data=user_data heading=heading}})
+              </div>
+            {{/each}}
+          </div>
+        {{/ui-dropdown}}
+      </div>
+      {{#if (gte index 1)}}
+        <div class="one wide field">
+          <button class="ui icon tiny compact button basic red clear-field" onClick={{action "removeField" field column}}>
+            <i class="minus icon"></i>
+          </button>
+        </div>
+      {{/if}}
+    </div>
+  </div>
+{{/each}}
+{{#if showAdditionalJoinDropdown}}
+  <a class="item link-text">
+    <i class="plus icon"></i>
+  </a>
+  <div class="fifteen wide field">
+    {{#ui-dropdown class="selection fluid data-format" onChange=(action "addField" field) as |execute mapper|}}
+      <div class="default text">
+        Choose column
+      </div>
+      <i class="dropdown icon"></i>
+      <div class="menu">
+        {{#each remainingColumnHeadings as |heading|}}
+          <div class="item" data-value="{{map-value mapper heading}}">
+            {{heading}} (sample value: {{sample-data user_data=user_data heading=heading}})
+          </div>
+        {{/each}}
+      </div>
+    {{/ui-dropdown}}
+  </div>
+{{/if}}
+<div>
+  {{#if showAdditionalJoinButton}}
+    <div class="add-join link-text" onClick={{action "addJoin" field}}>
+      <i class="plus icon"></i> Add column
+    </div>
+  {{/if}}
+</div>

@@ -6,7 +6,8 @@ module.exports = function(environment) {
     modulePrefix: 'mobility-on-demand-sandbox-contributions',
     environment,
     rootURL: '/',
-    locationType: 'hash',
+    locationType: 'history',
+    myApiKey: process.env.apiKey,
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -44,7 +45,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
   }
 
   return ENV;

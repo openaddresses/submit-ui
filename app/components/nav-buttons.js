@@ -1,11 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	next: null,
-	back: null,
-	actions: {
-		sendChangeRoute: function(route){
-			this.sendAction('sendChangeRoute', route);
-		}
-	}
+  next: null,
+  back: null,
+  forwardButtonText: "Next",
+  backwardsButtonText: "Back",
+  actions: {
+    sendChangeRoute: function(route, changeset){
+      this.sendAction('sendChangeRoute', route, changeset);
+    },
+    sendPreviousRoute: function(route){
+      this.sendAction('sendPreviousRoute', route)
+    }
+  }
 });

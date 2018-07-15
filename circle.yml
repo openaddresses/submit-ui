@@ -28,9 +28,9 @@ deployment:
     branch: master
     commands:
       - ember build --environment=staging
-      - aws s3 sync ./dist s3://trimet-mod-sandbox-dev/
+      - aws s3 sync ./dist s3://submit-ui-dev.openaddresses.io/ --acl=public-read
   production:
     branch: production
     commands:
       - ember build --environment=production
-      - aws s3 sync ./dist s3://trimet-mod-sandbox/
+      - aws s3 sync ./dist s3://submit-ui.openaddresses.io/ --acl=public-read
