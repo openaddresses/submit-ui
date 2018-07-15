@@ -1,7 +1,6 @@
 # mobility-on-demand-sandbox-contributions
 
 This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
 
 ## Prerequisites
 
@@ -19,6 +18,10 @@ You will need the following things properly installed on your computer.
 * change into the new directory
 * `npm install`
 * `bower install`
+
+## Set up .env file
+* create a .env file  with `export apiKey=` + the aws key.
+* Run `source .env` before serving the app
 
 ## Running / Development
 
