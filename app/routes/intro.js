@@ -25,7 +25,8 @@ export default Ember.Route.extend({
         street:{
           fields: [],
           function: null,
-          separator: " "
+          separator: " ",
+          may_contain_units: null
         },
         unit:{
           fields: [],

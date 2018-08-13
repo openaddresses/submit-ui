@@ -18,8 +18,6 @@ export default Ember.Controller.extend(sharedActions, {
     var submission = {
       "type": this.get('store').peekAll('webServiceResponse').get('firstObject').get('type'),
       "data": this.model.get('data_url') ? this.model.get('data_url') : this.get('store').peekAll('webServiceResponse').get('firstObject').get('data_url'),
-      "website": {},
-      "test": this.get('loading') ? true : false,
       "license": {
         "url": this.model.get('license_url') ? this.model.get('license_url') : null,
         "attribution": this.model.get('attribution') ? this.model.get('attribution') : null,
@@ -42,7 +40,7 @@ export default Ember.Controller.extend(sharedActions, {
         "street": {
           "function": this.model.get('oaFields').street.function,
           "fields": this.model.get('oaFields').street.fields,
-          "may_contain_units": null
+          "may_contain_units": this.model.get('oaFields').street.may_contain_units
         },
         "unit": {
           "function": this.model.get('oaFields').unit.function,
@@ -63,16 +61,14 @@ export default Ember.Controller.extend(sharedActions, {
         "postcode": {
           "function": this.model.get('oaFields').postcode.function,
           "fields": this.model.get('oaFields').postcode.fields.length > 0 ? this.model.get('oaFields').postcode.fields : null
-        },
-        "lon": {
-          "function": this.model.get('oaFields').lon.function,
-          "fields": this.model.get('oaFields').lon.fields.length > 0 ? this.model.get('oaFields').lon.fields : null
-        },
-        "lat": {
-          "function": this.model.get('oaFields').lat.function,
-          "fields": this.model.get('oaFields').lat.fields.length > 0 ? this.model.get('oaFields').lat.fields : null
         }
       }
+    };
+    if (submission.conform.type === "csv"){
+      submission.conform.lon = {};
+      submission.conform.lat = {};
+      submission.conform.lon.fields = this.model.get('oaFields').lon.fields[0];
+      submission.conform.lat.fields = this.model.get('oaFields').lat.fields[0];
     }
     return JSON.stringify(submission);
   },
@@ -108,15 +104,15 @@ export default Ember.Controller.extend(sharedActions, {
         contentType: 'application/json'
       });
 
-      request.then(response => {
-        this.set('loading', false);
-        this.resetErrorState(response);
-        this.model.set('pull_request_url', response.response.url);
-        this.transitionToRoute("success")
-      }, response => {
-        this.set('loading', false);
-        this.resetErrorState(response);
-      })
+      // request.then(response => {
+      //   this.set('loading', false);
+      //   this.resetErrorState(response);
+      //   this.model.set('pull_request_url', response.response.url);
+      //   this.transitionToRoute("success")
+      // }, response => {
+      //   this.set('loading', false);
+      //   this.resetErrorState(response);
+      // })
     }
   }
 });
