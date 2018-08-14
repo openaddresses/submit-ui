@@ -76,23 +76,19 @@ export default Ember.Controller.extend(sharedActions, {
 
     for (var i = 0; i < conformFields.length; i++){
       if (conformFields[i] !== "type"){
-        // var field = this.model.get('oaFields')[conformFields[i]]
         var field = conformFields[i];
         var fieldProperties = Object.keys(this.model.get('oaFields')[field])
         for (var j = 0; j < fieldProperties.length; j++) {
           var property = fieldProperties[j];
           var value = this.model.get('oaFields')[field][property]
           if (property === "fields" && value.length > 0){
-            console.log(property, value)
             submission.conform[field][property] = value;
           } else if (property !== "fields" && property !== "separator" && value !== null){
-            console.log(property, value)
             submission.conform[field][property] = value;
           }
         }
       }
     }
-    debugger;
     return JSON.stringify(submission);
   },
   actions: {
@@ -121,22 +117,22 @@ export default Ember.Controller.extend(sharedActions, {
     submit: function(){
       this.set('loading', true);
       this.getSubmission();
-      // var request = Ember.$.ajax({
-      //   type: "POST",
-      //   url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
-      //   data: this.getSubmission(),
-      //   contentType: 'application/json'
-      // });
+      var request = Ember.$.ajax({
+        type: "POST",
+        url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
+        data: this.getSubmission(),
+        contentType: 'application/json'
+      });
 
-      // request.then(response => {
-      //   this.set('loading', false);
-      //   this.resetErrorState(response);
-      //   this.model.set('pull_request_url', response.response.url);
-      //   this.transitionToRoute("success")
-      // }, response => {
-      //   this.set('loading', false);
-      //   this.resetErrorState(response);
-      // })
+      request.then(response => {
+        this.set('loading', false);
+        this.resetErrorState(response);
+        this.model.set('pull_request_url', response.response.url);
+        this.transitionToRoute("success")
+      }, response => {
+        this.set('loading', false);
+        this.resetErrorState(response);
+      })
     }
   }
 });
