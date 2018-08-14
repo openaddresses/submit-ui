@@ -34,42 +34,65 @@ export default Ember.Controller.extend(sharedActions, {
       "conform": {
         "type": this.get('store').peekAll('webServiceResponse').get('firstObject').get('conform').type,
         "number": {
-          "fields": this.model.get('oaFields').number.fields,
-          "function": this.model.get('oaFields').number.function
+          // "fields": this.model.get('oaFields').number.fields,
+          // "function": this.model.get('oaFields').number.function
         },
         "street": {
-          "function": this.model.get('oaFields').street.function,
-          "fields": this.model.get('oaFields').street.fields,
-          "may_contain_units": this.model.get('oaFields').street.may_contain_units
+          // "function": this.model.get('oaFields').street.function,
+          // "fields": this.model.get('oaFields').street.fields,
+          // "may_contain_units": this.model.get('oaFields').street.may_contain_units
         },
         "unit": {
-          "function": this.model.get('oaFields').unit.function,
-          "fields": this.model.get('oaFields').unit.fields.length > 0 ? this.model.get('oaFields').unit.fields : null
+          // "function": this.model.get('oaFields').unit.function,
+          // "fields": this.model.get('oaFields').unit.fields.length > 0 ? this.model.get('oaFields').unit.fields : null
         },
         "city": {
-          "function": this.model.get('oaFields').city.function,
-          "fields": this.model.get('oaFields').city.fields.length > 0 ? this.model.get('oaFields').city.fields : null
+          // "function": this.model.get('oaFields').city.function,
+          // "fields": this.model.get('oaFields').city.fields.length > 0 ? this.model.get('oaFields').city.fields : null
         },
         "district": {
-          "function": this.model.get('oaFields').district.function,
-          "fields": this.model.get('oaFields').district.fields.length > 0 ? this.model.get('oaFields').district.fields : null
+          // "function": this.model.get('oaFields').district.function,
+          // "fields": this.model.get('oaFields').district.fields.length > 0 ? this.model.get('oaFields').district.fields : null
         },
         "region": {
-          "function": this.model.get('oaFields').region.function,
-          "fields": this.model.get('oaFields').region.fields.length > 0 ? this.model.get('oaFields').region.fields : null
+          // "function": this.model.get('oaFields').region.function,
+          // "fields": this.model.get('oaFields').region.fields.length > 0 ? this.model.get('oaFields').region.fields : null
         },
         "postcode": {
-          "function": this.model.get('oaFields').postcode.function,
-          "fields": this.model.get('oaFields').postcode.fields.length > 0 ? this.model.get('oaFields').postcode.fields : null
+          // "function": this.model.get('oaFields').postcode.function,
+          // "fields": this.model.get('oaFields').postcode.fields.length > 0 ? this.model.get('oaFields').postcode.fields : null
         }
       }
     };
+   
     if (submission.conform.type === "csv"){
       submission.conform.lon = {};
       submission.conform.lat = {};
       submission.conform.lon.fields = this.model.get('oaFields').lon.fields[0];
       submission.conform.lat.fields = this.model.get('oaFields').lat.fields[0];
     }
+
+    var conformFields = Object.keys(submission.conform);
+
+    for (var i = 0; i < conformFields.length; i++){
+      if (conformFields[i] !== "type"){
+        // var field = this.model.get('oaFields')[conformFields[i]]
+        var field = conformFields[i];
+        var fieldProperties = Object.keys(this.model.get('oaFields')[field])
+        for (var j = 0; j < fieldProperties.length; j++) {
+          var property = fieldProperties[j];
+          var value = this.model.get('oaFields')[field][property]
+          if (property === "fields" && value.length > 0){
+            console.log(property, value)
+            submission.conform[field][property] = value;
+          } else if (property !== "fields" && property !== "separator" && value !== null){
+            console.log(property, value)
+            submission.conform[field][property] = value;
+          }
+        }
+      }
+    }
+    debugger;
     return JSON.stringify(submission);
   },
   actions: {
@@ -97,12 +120,13 @@ export default Ember.Controller.extend(sharedActions, {
     },
     submit: function(){
       this.set('loading', true);
-      var request = Ember.$.ajax({
-        type: "POST",
-        url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
-        data: this.getSubmission(),
-        contentType: 'application/json'
-      });
+      this.getSubmission();
+      // var request = Ember.$.ajax({
+      //   type: "POST",
+      //   url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
+      //   data: this.getSubmission(),
+      //   contentType: 'application/json'
+      // });
 
       // request.then(response => {
       //   this.set('loading', false);
