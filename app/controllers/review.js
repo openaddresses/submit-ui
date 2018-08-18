@@ -18,6 +18,9 @@ export default Ember.Controller.extend(sharedActions, {
     var submission = {
       "type": this.get('store').peekAll('webServiceResponse').get('firstObject').get('type'),
       "data": this.model.get('data_url') ? this.model.get('data_url') : this.get('store').peekAll('webServiceResponse').get('firstObject').get('data_url'),
+      "note": {
+        "update frequency": this.model.get('update_frequency')
+      },
       "license": {
         "url": this.model.get('license_url') ? this.model.get('license_url') : null,
         "attribution": this.model.get('attribution') ? this.model.get('attribution') : null,
@@ -28,67 +31,122 @@ export default Ember.Controller.extend(sharedActions, {
         "name": this.model.get('maintainer_name'),
         "email": this.model.get('maintainer_email')
       },
-      "note": {
-        "update frequency": this.model.get('update_frequency')
-      },
+      
       "conform": {
         "type": this.get('store').peekAll('webServiceResponse').get('firstObject').get('conform').type,
-        "number": {
-          // "fields": this.model.get('oaFields').number.fields,
-          // "function": this.model.get('oaFields').number.function
-        },
-        "street": {
-          // "function": this.model.get('oaFields').street.function,
-          // "fields": this.model.get('oaFields').street.fields,
-          // "may_contain_units": this.model.get('oaFields').street.may_contain_units
-        },
-        "unit": {
-          // "function": this.model.get('oaFields').unit.function,
-          // "fields": this.model.get('oaFields').unit.fields.length > 0 ? this.model.get('oaFields').unit.fields : null
-        },
-        "city": {
-          // "function": this.model.get('oaFields').city.function,
-          // "fields": this.model.get('oaFields').city.fields.length > 0 ? this.model.get('oaFields').city.fields : null
-        },
-        "district": {
-          // "function": this.model.get('oaFields').district.function,
-          // "fields": this.model.get('oaFields').district.fields.length > 0 ? this.model.get('oaFields').district.fields : null
-        },
-        "region": {
-          // "function": this.model.get('oaFields').region.function,
-          // "fields": this.model.get('oaFields').region.fields.length > 0 ? this.model.get('oaFields').region.fields : null
-        },
-        "postcode": {
-          // "function": this.model.get('oaFields').postcode.function,
-          // "fields": this.model.get('oaFields').postcode.fields.length > 0 ? this.model.get('oaFields').postcode.fields : null
-        }
+        
       }
     };
-   
+
+    // lat and lon is only needed for csv, and it is a required field
     if (submission.conform.type === "csv"){
-      submission.conform.lon = {};
-      submission.conform.lat = {};
-      submission.conform.lon.fields = this.model.get('oaFields').lon.fields[0];
-      submission.conform.lat.fields = this.model.get('oaFields').lat.fields[0];
+      submission.conform.lon = this.model.get('oaFields').lon.fields[0];
+      submission.conform.lat = this.model.get('oaFields').lat.fields[0];
     }
 
-    var conformFields = Object.keys(submission.conform);
-
-    for (var i = 0; i < conformFields.length; i++){
-      if (conformFields[i] !== "type"){
-        var field = conformFields[i];
-        var fieldProperties = Object.keys(this.model.get('oaFields')[field])
-        for (var j = 0; j < fieldProperties.length; j++) {
-          var property = fieldProperties[j];
-          var value = this.model.get('oaFields')[field][property]
-          if (property === "fields" && value.length > 0){
-            submission.conform[field][property] = value;
-          } else if (property !== "fields" && property !== "separator" && value !== null){
-            submission.conform[field][property] = value;
-          }
-        }
+    // add number information to submission
+    // the functions available for number are: join, prefixed_number, remove_prefix, remove_postfix
+    if (this.model.get('oaFields').number.function){
+      submission.conform.number = {
+        "function": this.model.get('oaFields').number.function,
+      };
+      if (this.model.get('oaFields').number.function === "join" || this.model.get('oaFields').number.function === "format"){
+        submission.conform.number.fields = this.model.get('oaFields').number.fields;
+      } else {
+        submission.conform.number.field = this.model.get('oaFields').number.fields[0];
       }
+      if (this.model.get('oaFields').number.prefix_or_postfix){
+        submission.conform.number.field_to_remove = this.model.get('oaFields').number.prefix_or_postfix;
+      }
+    } else if (this.model.get('oaFields').number.function === null && this.model.get('oaFields').number.fields.length > 0){
+      submission.conform.number = this.model.get('oaFields').number.fields[0];
     }
+
+    // the functions available for street are: join, postfixed_street, remove_prefix, remove_postfix
+    // may_contain_units is optional for street only
+    if (this.model.get('oaFields').street.function){
+      submission.conform.street = {
+        "function": this.model.get('oaFields').street.function,
+      };
+      if (this.model.get('oaFields').street.function === "join" || this.model.get('oaFields').street.function === "format"){
+        submission.conform.street.fields = this.model.get('oaFields').street.fields;
+      } else {
+        submission.conform.street.field = this.model.get('oaFields').street.fields[0];
+      }
+      if (this.model.get('oaFields').street.prefix_or_postfix){
+        submission.conform.street.field_to_remove = this.model.get('oaFields').street.prefix_or_postfix;
+      }
+      if (this.model.get('oaFields').street.may_contain_units){
+        submission.conform.street.may_contain_units = this.model.get('oaFields').street.may_contain_units;
+      }
+    } else if (this.model.get('oaFields').street.function === null && this.model.get('oaFields').street.fields.length > 0){
+      submission.conform.street = this.model.get('oaFields').street.fields[0];
+    }
+
+    // add unit information to submission
+    // the functions available for unit are: join, postfixed_unit, remove_prefix, remove_postfix
+    if (this.model.get('oaFields').unit.function){
+      submission.conform.unit = {
+        "function": this.model.get('oaFields').unit.function,
+      };
+      if (this.model.get('oaFields').unit.function === "join" || this.model.get('oaFields').unit.function === "format"){
+        submission.conform.unit.fields = this.model.get('oaFields').unit.fields;
+      } else {
+        submission.conform.unit.field = this.model.get('oaFields').unit.fields[0];
+      }
+      if (this.model.get('oaFields').unit.prefix_or_postfix){
+        submission.conform.unit.field_to_remove = this.model.get('oaFields').unit.prefix_or_postfix;
+      }
+    } else if (this.model.get('oaFields').unit.function === null && this.model.get('oaFields').unit.fields.length > 0){
+      submission.conform.unit = this.model.get('oaFields').unit.fields[0];
+    }
+
+    // add city information to submission
+    // the only function available for city is join
+    if (this.model.get('oaFields').city.function){
+      submission.conform.city = {
+        "function": this.model.get('oaFields').city.function,
+        "fields": this.model.get('oaFields').city.fields
+      };
+    } else if (this.model.get('oaFields').city.function === null && this.model.get('oaFields').city.fields.length > 0){
+      submission.conform.city = this.model.get('oaFields').city.fields[0];
+    }
+
+    // add district information to submission
+    // the only function available for distict is join
+    if (this.model.get('oaFields').district.function){
+      submission.conform.district = {
+        "function": this.model.get('oaFields').district.function,
+        "fields": this.model.get('oaFields').district.fields
+      };
+    } else if (this.model.get('oaFields').district.function === null && this.model.get('oaFields').district.fields.length > 0){
+      submission.conform.district = this.model.get('oaFields').district.fields[0];
+    }
+
+    // add region information to submission
+    // the only function available for region is join
+    if (this.model.get('oaFields').region.function){
+      submission.conform.region = {
+        "function": this.model.get('oaFields').region.function,
+        "fields": this.model.get('oaFields').region.fields
+      };
+    } else if (this.model.get('oaFields').region.function === null && this.model.get('oaFields').region.fields.length > 0){
+      submission.conform.region = this.model.get('oaFields').region.fields[0];
+    }
+
+    // add postcode information to submission
+    // the only function available for postcode is join
+    if (this.model.get('oaFields').postcode.function){
+      submission.conform.postcode = {
+        "function": this.model.get('oaFields').postcode.function,
+        "fields": this.model.get('oaFields').postcode.fields
+      };
+    } else if (this.model.get('oaFields').postcode.function === null && this.model.get('oaFields').postcode.fields.length > 0){
+      submission.conform.postcode = this.model.get('oaFields').postcode.fields[0];
+    }
+
+    // debugger;
+   
     return JSON.stringify(submission);
   },
   actions: {
@@ -116,7 +174,7 @@ export default Ember.Controller.extend(sharedActions, {
     },
     submit: function(){
       this.set('loading', true);
-      this.getSubmission();
+
       var request = Ember.$.ajax({
         type: "POST",
         url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
@@ -128,11 +186,11 @@ export default Ember.Controller.extend(sharedActions, {
         this.set('loading', false);
         this.resetErrorState(response);
         this.model.set('pull_request_url', response.response.url);
-        this.transitionToRoute("success")
+        this.transitionToRoute("success");
       }, response => {
         this.set('loading', false);
         this.resetErrorState(response);
-      })
+      });
     }
   }
 });
