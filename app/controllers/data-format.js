@@ -116,7 +116,7 @@ export default Ember.Controller.extend(sharedActions, {
         Ember.set(this.model.submission.get('oaFields')[field], "function", null);
       }
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
+        var originalColumn = this.model.submission.get('oaFields')[field].fields[0];
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.get(
           'source_data').results[i][originalColumn]]);
       }
@@ -128,17 +128,17 @@ export default Ember.Controller.extend(sharedActions, {
         if (this.get('store').peekAll('webServiceResponse').get('firstObject').get('conform').type === "csv"){
           if (this.model.submission.get('oaFields').lon.fields.length < 1){
             this.get('requiredFieldsErrorMessages').push("Lon is required to proceed.");
-          };
+          }
           if (this.model.submission.get('oaFields').lat.fields.length < 1){
             this.get('requiredFieldsErrorMessages').push("Lat is required to proceed.");
-          };
+          }
         }
         if (this.model.submission.get('oaFields').number.fields.length < 1){
           this.get('requiredFieldsErrorMessages').push("Number is required to proceed.");
-        };
+        }
         if (this.model.submission.get('oaFields').street.fields.length < 1){
           this.get('requiredFieldsErrorMessages').push("Street is required to proceed.");
-        };
+        }
       } else {
         this.resetRequiredFieldsErrorState();
         this.checkFunctionRequired();
