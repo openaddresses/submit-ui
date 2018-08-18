@@ -10,28 +10,32 @@
         {{#each-in model.submission.oaFields as |field properties|}}
           {{#if (eq field "lon")}}
             {{#if (eq model.webServiceResponse.conform.type "csv")}}
-              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+              <th>
+                <a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}<span class="required">*</span>
+                </a>
+              </th>
             {{/if}}
           {{/if}}
           {{#if (eq field "lat")}}
             {{#if (eq model.webServiceResponse.conform.type "csv")}}
-              <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}</a></th>
+              <th>
+                <a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>{{field}}<span class="required">*</span></a>
+              </th>
             {{/if}}
           {{/if}}
           {{#unless (eq field "lon")}}
             {{#unless (eq field "lat")}}
               <th><a onClick={{action "goToField" field}} class={{if (not-eq currentField field) "inactiveField"}}>
                 {{#if (eq field "number")}}
-                  house <br/> number
+                  house <br/> number<span class="required">*</span>
+                {{else if (eq field "street")}}
+                  street<span class="required">*</span>
                 {{else if (eq field "district")}}
                   {{field}}  {{ui-popup tagName="i" class="small info circle icon" content="District/County/Sub-Region in which the address falls"}}
                 {{else if (eq field "region")}}
                   {{field}}  {{ui-popup tagName="i" class="small info circle icon" content="State/Region/Province in which the address falls"}}
                 {{else}}
                   {{field}}
-                {{/if}}
-                {{#if (or (eq field "number") (eq field "street"))}}
-                  <span class="required"> * </span>
                 {{/if}}
               </a></th>
             {{/unless}}
