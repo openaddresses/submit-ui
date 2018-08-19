@@ -24,7 +24,12 @@ export default Ember.Component.extend({
           }
         }
       }
-      Ember.set(this.model.submission.get('oaFields')[field], "function", extraction_function);
+      if (extraction_function === "removePrefixOrPostfix"){
+        // set remove_prefix as default because it is the default selection for the radio buttons
+        Ember.set(this.model.submission.get('oaFields')[field], "function", 'remove_prefix');
+      } else {
+        Ember.set(this.model.submission.get('oaFields')[field], "function", extraction_function);
+      }
     },
     removeFunction: function(field){
       if (this.model.submission.get('oaFields')[field].function === "join" && this.model.submission.get('oaFields')[field].fields.length > 1){
