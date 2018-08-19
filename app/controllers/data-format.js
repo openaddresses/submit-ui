@@ -63,6 +63,14 @@ export default Ember.Controller.extend(sharedActions, {
     if (this.model.submission.get('oaFields')[this.get('currentField')].function === 'join' && this.model.submission.get('oaFields')[this.get('currentField')].fields.length < 2 || this.model.submission.get('oaFields')[this.get('currentField')].function === 'split'){
       Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "function", null);
     }
+    if (this.model.submission.get('oaFields')[this.get('currentField')].function === "remove_prefix" || this.model.submission.get('oaFields')[this.get('currentField')].function === "remove_postfix"){
+      if (!this.model.submission.get('oaFields')[this.get('currentField')].prefix_or_postfix){
+        Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "function", null);
+        if (this.get('currentField') === 'street'){
+          Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "may_contain_units", false);
+        }
+      }
+    }
   },
   actions: {
     toggleShowMore: function() {

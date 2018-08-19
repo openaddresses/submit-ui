@@ -32,7 +32,7 @@ export default Ember.Component.extend({
       }
     },
     setMayContainUnits: function(){
-      if (this.model.submission.get('oaFields').street.may_contain_units === false){
+      if (this.model.submission.get('oaFields').street.may_contain_units === false || !this.model.submission.get('oaFields').street.may_contain_units){
         Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", true);
       } else {
         Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", false);
