@@ -7,14 +7,14 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('intro', { path: '/' });
+  // this.route('intro', { path: '/' });
   this.route('intro');
   this.route('more-info');
   this.route('data-format');
   this.route('contact');
   this.route('review');
   this.route('success');
-  this.route('not-found', { path: '/*' });
+  // this.route('not-found', { path: '/*' });
 });
 
 export default Router;
