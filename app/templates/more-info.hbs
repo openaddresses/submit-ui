@@ -1,95 +1,99 @@
-<div class="ui text container">
-  <h3 class="first headroom">Data information {{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}} </h3>
-  <p>
-    Clear licensing information and data update frequency allows for the greatest number of people to use a dataset, so please provide as much detail as possible.
-  </p>
-  {{#with (changeset model InfoValidator) as |changeset|}}
-    <div class="form-content">
-      <div class="ui tiny message">
-        <p> <span class="required"> * </span>
-          indicates field is <b> required </b> to proceed </p>
-      </div>
-      <div class="ui form segment">
-        <div class="required field">
-          <label>Frequency of update</label>
-          {{#ui-dropdown class="selection frequency" selected=model.update_frequency onChange=(action "setFrequency") as | execute mapper|}}
-            <div class="default text">Frequency</div>
-            <i class="dropdown icon"></i>
-            <div class="menu">
-              {{#each frequencies as | frequency |}}
-                <div class="item" data-value={{map-value mapper frequency}}>
-                  {{frequency}}
-                </div>
-              {{/each}}
-            </div>
-          {{/ui-dropdown}}
+{{#if model}}
+  <div class="ui text container">
+    <h3 class="first headroom">Data information {{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}} </h3>
+    <p>
+      Clear licensing information and data update frequency allows for the greatest number of people to use a dataset, so please provide as much detail as possible.
+    </p>
+    {{#with (changeset model InfoValidator) as |changeset|}}
+      <div class="form-content">
+        <div class="ui tiny message">
+          <p> <span class="required"> * </span>
+            indicates field is <b> required </b> to proceed </p>
         </div>
-        <div class="required field">
-          <label>Does the data have a license?</label>
-          <button class="ui compact button {{if (eq model.license_exists true) "active"}}" {{action "licenseExists" true}}>Yes</button>
-          <button class="ui compact button none {{if (eq model.license_exists false) "active"}}" {{action "licenseExists" false}}>No</button>
-          <button class="ui compact button none {{if (eq model.license_exists "unknown") "active"}}" {{action "licenseExists" "unknown"}}>I don't know</button>
-        </div>
-        {{#if (eq model.license_exists true)}}
-          <form class="ui form">
-            <div class="required grouped fields">
-              <label> Add a license </label>
-              <div class="fields">
-                <div class="eight wide field">
-                  {{ui-radio class="choose" label="Choose from license" value="choose" name="license" current=licenseType onChange=(action (mut licenseType))}}
-                  <div class="field">
-                    {{#ui-dropdown class="license selection" selected=model.license click=(action "setRadioButton" "choose") onChange=(action "selectLicense") as | execute mapper|}}
-                      <div class="default text">Licenses</div>
-                      <i class="dropdown icon"></i>
-                      <div class="menu">
-                        {{#each licenses as | license |}}
-                          <div class="item" data-value={{map-value mapper license}}>
-                            {{license.name}}
-                          </div>
-                        {{/each}}
-                      </div>
-                    {{/ui-dropdown}}
+        <div class="ui form segment">
+          <div class="required field">
+            <label>Frequency of update</label>
+            {{#ui-dropdown class="selection frequency" selected=model.update_frequency onChange=(action "setFrequency") as | execute mapper|}}
+              <div class="default text">Frequency</div>
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                {{#each frequencies as | frequency |}}
+                  <div class="item" data-value={{map-value mapper frequency}}>
+                    {{frequency}}
                   </div>
-                </div>
-                <div class="eight wide field">
-                  {{ui-radio class="provide" label="Provide link to license" value="provide" name="license" current=licenseType onChange=(action (mut licenseType))}}
-                  <div class="field">
-                    <input type="text" class="user-submitted" placeholder="www.sample.com..." value={{model.user_submitted_url}} onclick={{action "setRadioButton" "provide"}} onInput={{action "userSubmittedLicense"}}>
+                {{/each}}
+              </div>
+            {{/ui-dropdown}}
+          </div>
+          <div class="required field">
+            <label>Does the data have a license?</label>
+            <button class="ui compact button {{if (eq model.license_exists true) "active"}}" {{action "licenseExists" true}}>Yes</button>
+            <button class="ui compact button none {{if (eq model.license_exists false) "active"}}" {{action "licenseExists" false}}>No</button>
+            <button class="ui compact button none {{if (eq model.license_exists "unknown") "active"}}" {{action "licenseExists" "unknown"}}>I don't know</button>
+          </div>
+          {{#if (eq model.license_exists true)}}
+            <form class="ui form">
+              <div class="required grouped fields">
+                <label> Add a license </label>
+                <div class="fields">
+                  <div class="eight wide field">
+                    {{ui-radio class="choose" label="Choose from license" value="choose" name="license" current=licenseType onChange=(action (mut licenseType))}}
+                    <div class="field">
+                      {{#ui-dropdown class="license selection" selected=model.license click=(action "setRadioButton" "choose") onChange=(action "selectLicense") as | execute mapper|}}
+                        <div class="default text">Licenses</div>
+                        <i class="dropdown icon"></i>
+                        <div class="menu">
+                          {{#each licenses as | license |}}
+                            <div class="item" data-value={{map-value mapper license}}>
+                              {{license.name}}
+                            </div>
+                          {{/each}}
+                        </div>
+                      {{/ui-dropdown}}
+                    </div>
+                  </div>
+                  <div class="eight wide field">
+                    {{ui-radio class="provide" label="Provide link to license" value="provide" name="license" current=licenseType onChange=(action (mut licenseType))}}
+                    <div class="field">
+                      <input type="text" class="user-submitted" placeholder="www.sample.com..." value={{model.user_submitted_url}} onclick={{action "setRadioButton" "provide"}} onInput={{action "userSubmittedLicense"}}>
+                    </div>
                   </div>
                 </div>
               </div>
+            </form>
+            <div class="field">
+              <div class="inline sharealike field">
+               {{ui-checkbox label="License is share-alike" checked=(if model.share_alike "checked" "") onChange=(action "setShareAlike")}} {{ui-popup tagName="i" class="info circle icon" on="click" html='Share-alike licenses require copies or adaptations of the work to be released under the same or similar licence as the original. <a href="https://en.wikipedia.org/wiki/Share-alike" target="_blank">Learn more...</a>'}}
+              </div>
             </div>
-          </form>
-          <div class="field">
-            <div class="inline sharealike field">
-             {{ui-checkbox label="License is share-alike" checked=(if model.share_alike "checked" "") onChange=(action "setShareAlike")}} {{ui-popup tagName="i" class="info circle icon" on="click" html='Share-alike licenses require copies or adaptations of the work to be released under the same or similar licence as the original. <a href="https://en.wikipedia.org/wiki/Share-alike" target="_blank">Learn more...</a>'}}
-            </div>
-          </div>
-        {{/if}}
-        <div class="required field">
-          <label>Does the license require attribution?</label>
-          <button class="ui compact button {{if (eq model.attribution true) "active"}}" {{action "setAttribution" true}}>Yes</button>
-          <button class="ui compact button none {{if (eq model.attribution false) "active"}}" {{action "setAttribution" false}}>No</button>
-          <button class="ui compact button none {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
-        </div>
-        {{#if (eq model.attribution true)}}
+          {{/if}}
           <div class="required field">
-            <label>Enter text for attribution</label>
-            <input type="text" value="{{model.attribution_text}}" onInput={{action "setAttributionText"}}>
+            <label>Does the license require attribution?</label>
+            <button class="ui compact button {{if (eq model.attribution true) "active"}}" {{action "setAttribution" true}}>Yes</button>
+            <button class="ui compact button none {{if (eq model.attribution false) "active"}}" {{action "setAttribution" false}}>No</button>
+            <button class="ui compact button none {{if (eq model.attribution "unknown") "active"}}" {{action "setAttribution" "unknown"}}>I don't know</button>
           </div>
-        {{/if}}
+          {{#if (eq model.attribution true)}}
+            <div class="required field">
+              <label>Enter text for attribution</label>
+              <input type="text" value="{{model.attribution_text}}" onInput={{action "setAttributionText"}}>
+            </div>
+          {{/if}}
+        </div>
       </div>
-    </div>
-    {{#if showErrorState}}
-      <div class="ui hidden divider"></div>
-      <div class="ui tiny error message">
-        <ul class="list">
-          {{#each errorMessages as |errorMessage|}}
-            <li>{{errorMessage}}</li>
-          {{/each}}
-        </ul>
-      </div>
-    {{/if}}
-    {{nav-buttons back="intro" sendChangeRoute="changeRoute" sendPreviousRoute="previousRoute" next="data-format" changeset=changeset}}
-  {{/with}}
-</div>
+      {{#if showErrorState}}
+        <div class="ui hidden divider"></div>
+        <div class="ui tiny error message">
+          <ul class="list">
+            {{#each errorMessages as |errorMessage|}}
+              <li>{{errorMessage}}</li>
+            {{/each}}
+          </ul>
+        </div>
+      {{/if}}
+      {{nav-buttons back="intro" sendChangeRoute="changeRoute" sendPreviousRoute="previousRoute" next="data-format" changeset=changeset}}
+    {{/with}}
+  </div>
+{{else}}
+  {{no-model}}
+{{/if}}

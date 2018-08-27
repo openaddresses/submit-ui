@@ -13,7 +13,6 @@ Router.map(function() {
   this.route('contact');
   this.route('review');
   this.route('success');
-  
 });
 
 export default Router;

@@ -1,13 +1,17 @@
-<div class="ui text container">
-  <h4>Thank you for submitting data to OpenAddresses!</h4>
-  <p>Next, the OpenAddresses team will review your submission and then import it into the OpenAddresses database.</p>
+{{#if model}}
+  <div class="ui text container">
+    <h4>Thank you for submitting data to OpenAddresses!</h4>
+    <p>Next, the OpenAddresses team will review your submission and then import it into the OpenAddresses database.</p>
 
-  <p>You can track the progress of your submission at this url: 
-    {{#if model.pull_request_url}}
-      <a href={{model.pull_request_url}} target="_blank" style="cursor: pointer;">{{model.pull_request_url}}</a>.
-    {{else}}
-      <i>URL is not available</i>
-    {{/if}}
-  </p>
-  <p>You will be notified at the email address you provided when the import process is complete.</p>
-</div>
+    <p>You can track the progress of your submission at this url: 
+      {{#if model.pull_request_url}}
+        <a href={{model.pull_request_url}} target="_blank" style="cursor: pointer;">{{model.pull_request_url}}</a>.
+      {{else}}
+        <i>URL is not available</i>
+      {{/if}}
+    </p>
+    <p>You will be notified at the email address you provided when the import process is complete.</p>
+  </div>
+{{else}}
+  {{no-model}}
+{{/if}}
