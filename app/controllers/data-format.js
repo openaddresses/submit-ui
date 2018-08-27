@@ -63,6 +63,14 @@ export default Ember.Controller.extend(sharedActions, {
     if (this.model.submission.get('oaFields')[this.get('currentField')].function === 'join' && this.model.submission.get('oaFields')[this.get('currentField')].fields.length < 2 || this.model.submission.get('oaFields')[this.get('currentField')].function === 'split'){
       Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "function", null);
     }
+    if (this.model.submission.get('oaFields')[this.get('currentField')].function === "remove_prefix" || this.model.submission.get('oaFields')[this.get('currentField')].function === "remove_postfix"){
+      if (!this.model.submission.get('oaFields')[this.get('currentField')].prefix_or_postfix){
+        Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "function", null);
+        if (this.get('currentField') === 'street'){
+          Ember.set(this.model.submission.get('oaFields')[this.get('currentField')], "may_contain_units", false);
+        }
+      }
+    }
   },
   actions: {
     toggleShowMore: function() {
@@ -116,20 +124,28 @@ export default Ember.Controller.extend(sharedActions, {
         Ember.set(this.model.submission.get('oaFields')[field], "function", null);
       }
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
+        var originalColumn = this.model.submission.get('oaFields')[field].fields[0];
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.get(
           'source_data').results[i][originalColumn]]);
       }
     },
     changeRoute: function(route){
-      if (this.model.submission.get('oaFields').number.fields.length < 1 || this.model.submission.get('oaFields').street.fields.length < 1) {
+      if (this.model.submission.get('oaFields').number.fields.length < 1 || this.model.submission.get('oaFields').street.fields.length < 1 || (this.get('store').peekAll('webServiceResponse').get('firstObject').get('conform').type === "csv" && (this.model.submission.get('oaFields').lat.fields.length < 1 || this.model.submission.get('oaFields').lon.fields.length < 1))){
         this.set('showRequiredFieldsErrorState', true);
-        if (this.model.submission.get('oaFields').number.fields.length < 1 && this.model.submission.get('oaFields').street.fields.length < 1) {
-          this.set('requiredFieldsErrorMessages', ["House number is required to proceed.", "Street is required to proceed."]);
-        } else if (this.model.submission.get('oaFields').number.fields.length < 1) {
-          this.set('requiredFieldsErrorMessages', ["House number is required to proceed."]);
-        } else if (this.model.submission.get('oaFields').street.fields.length < 1) {
-          this.set('requiredFieldsErrorMessages', ["Street is required to proceed."]);
+        this.set('requiredFieldsErrorMessages', []);
+        if (this.get('store').peekAll('webServiceResponse').get('firstObject').get('conform').type === "csv"){
+          if (this.model.submission.get('oaFields').lon.fields.length < 1){
+            this.get('requiredFieldsErrorMessages').push("Lon is required to proceed.");
+          }
+          if (this.model.submission.get('oaFields').lat.fields.length < 1){
+            this.get('requiredFieldsErrorMessages').push("Lat is required to proceed.");
+          }
+        }
+        if (this.model.submission.get('oaFields').number.fields.length < 1){
+          this.get('requiredFieldsErrorMessages').push("Number is required to proceed.");
+        }
+        if (this.model.submission.get('oaFields').street.fields.length < 1){
+          this.get('requiredFieldsErrorMessages').push("Street is required to proceed.");
         }
       } else {
         this.resetRequiredFieldsErrorState();

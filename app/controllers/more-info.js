@@ -94,15 +94,12 @@ export default Ember.Controller.extend(sharedActions, {
   },
   actions: {
     licenseExists: function(input) {
-      // Check user interacted with attribution at all
       this.licenseSelected = true;
       this.model.set('license_exists', input)
       this.model.set('license', null);
       this.model.set('license_url', null);
       this.model.set('user_submitted_url', null);
-      // Confirm this part
-      // this.model.set('attribution', null);
-      // this.model.set('attribution_text', null);
+      this.model.set('share_alike', null);
     },
     selectLicense: function(license){
       this.model.set('license', null)
