@@ -23,9 +23,8 @@ export default Ember.Controller.extend(sharedActions, {
       },
       "license": {
         "url": this.model.get('license_url') ? this.model.get('license_url') : null,
-        "attribution": this.model.get('attribution') ? this.model.get('attribution') : null,
-        "attribution name": this.model.get('attribution_text') ? this.model.get('attribution_text') : null,
         "share-alike": this.model.get('share_alike') ? this.model.get('share_alike') : null,
+        "attribution": this.model.get('attribution') ? true : false,
       },
       "contact": {
         "name": this.model.get('maintainer_name'),
@@ -43,6 +42,17 @@ export default Ember.Controller.extend(sharedActions, {
       submission.conform.lon = this.model.get('oaFields').lon.fields[0];
       submission.conform.lat = this.model.get('oaFields').lat.fields[0];
     }
+
+    // add attribution_text information to submission
+    // since we allow three answers (yes, no, I don't know), if they select “i don’t know”, 
+    // we populate those two fields with attribution = true and attribution_text = “unknown”,
+    if (submission.license.attribution === true) {
+      if (this.model.get('attribution') === true){
+        submission.license.attribution_text = this.model.get('attribution_text');
+      } else if (this.model.get('attribution')  === 'unknown'){
+        submission.license.attribution_text = 'unknown';
+      }
+    } 
 
     // add number information to submission
     // the functions available for number are: join, prefixed_number, remove_prefix, remove_postfix
