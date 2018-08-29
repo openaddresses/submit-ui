@@ -78,7 +78,9 @@ export default Ember.Controller.extend(sharedActions, {
       // check if function postfixed_street_with_units_pattern, which is name of backend regex function used client side to render example rows.
       // if it is, reset to remove_postfix and may_contain_units = true.
       if (this.model.get('oaFields').street.function === "postfixed_street_with_units_pattern"){
-        submission.conform.street.function = 'remove_postfix';
+        submission.conform.street = {
+          "function": 'remove_postfix'
+        }
         submission.conform.street.may_contain_units = true;
       } else {
         submission.conform.street = {
@@ -191,23 +193,23 @@ export default Ember.Controller.extend(sharedActions, {
     },
     submit: function(){
       this.set('loading', true);
-      console.log(this.getSubmission());
-      // var request = Ember.$.ajax({
-      //   type: "POST",
-      //   url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
-      //   data: this.getSubmission(),
-      //   contentType: 'application/json'
-      // });
+      // console.log(this.getSubmission());
+      var request = Ember.$.ajax({
+        type: "POST",
+        url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
+        data: this.getSubmission(),
+        contentType: 'application/json'
+      });
 
-      // request.then(response => {
-      //   this.set('loading', false);
-      //   this.resetErrorState(response);
-      //   this.model.set('pull_request_url', response.response.url);
-      //   this.transitionToRoute("success");
-      // }, response => {
-      //   this.set('loading', false);
-      //   this.resetErrorState(response);
-      // });
+      request.then(response => {
+        this.set('loading', false);
+        this.resetErrorState(response);
+        this.model.set('pull_request_url', response.response.url);
+        this.transitionToRoute("success");
+      }, response => {
+        this.set('loading', false);
+        this.resetErrorState(response);
+      });
     }
   }
 });
