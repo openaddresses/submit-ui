@@ -1,47 +1,51 @@
-<div class="ui text container">
-  <h3 class="first headroom">Contact{{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
-  <div class="ui tiny message">
-    <p> <span class="required"> * </span> indicates field is <b> required </b> to proceed </p>
-  </div>
-  <div class="form-content">
-    {{#with (changeset model MaintainerValidator) as |changeset|}}
-      <div class="ui grid">
-        <div class="eight wide column ui form">
-          <div class="field ">
-            <label>What should we call you?</label>
+{{#if model}}
+  <div class="ui text container">
+    <h3 class="first headroom">Contact{{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
+    <div class="ui tiny message">
+      <p> <span class="required"> * </span> indicates field is <b> required </b> to proceed </p>
+    </div>
+    <div class="form-content">
+      {{#with (changeset model MaintainerValidator) as |changeset|}}
+        <div class="ui grid">
+          <div class="eight wide column ui form">
+            <div class="field ">
+              <label>What should we call you?</label>
+              {{input
+                type="text"
+                value=(get changeset "maintainer_name")
+                changeset=changeset
+                placeholder="name"
+                showErrorState=showFormErrorState
+              }}
+            </div>
+          </div>
+          <div class="eight wide column ui form">
+          <div class="required field ">
+            <label>Email address</label>
             {{input
               type="text"
-              value=(get changeset "maintainer_name")
+              value=(get changeset "maintainer_email")
               changeset=changeset
-              placeholder="name"
+              placeholder="you@example.com"
               showErrorState=showFormErrorState
             }}
+            </div>
           </div>
         </div>
-        <div class="eight wide column ui form">
-        <div class="required field ">
-          <label>Email address</label>
-          {{input
-            type="text"
-            value=(get changeset "maintainer_email")
-            changeset=changeset
-            placeholder="you@example.com"
-            showErrorState=showFormErrorState
-          }}
+        {{#if showErrorState}}
+          <div class="ui hidden divider"></div>
+          <div class="ui tiny error message">
+            <ul class="list">
+              {{#each errorMessages as |errorMessage|}}
+                <li>{{errorMessage}}</li>
+              {{/each}}
+            </ul>
           </div>
-        </div>
-      </div>
-      {{#if showErrorState}}
-        <div class="ui hidden divider"></div>
-        <div class="ui tiny error message">
-          <ul class="list">
-            {{#each errorMessages as |errorMessage|}}
-              <li>{{errorMessage}}</li>
-            {{/each}}
-          </ul>
-        </div>
-      {{/if}}
-      {{nav-buttons showError="showError" sendChangeRoute="changeRoute" sendPreviousRoute="previousRoute" back="data-format" next="review" forwardButtonText="Review" changeset=changeset}}
-    {{/with}}
+        {{/if}}
+        {{nav-buttons showError="showError" sendChangeRoute="changeRoute" sendPreviousRoute="previousRoute" back="data-format" next="review" forwardButtonText="Review" changeset=changeset}}
+      {{/with}}
+    </div>
   </div>
-</div>
+{{else}}
+  {{no-model}}
+{{/if}}

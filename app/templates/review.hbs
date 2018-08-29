@@ -1,215 +1,219 @@
-<div class="ui text container">  
-  <h3 class="first headroom"> Review {{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
-  <p>Submitting this form will create a pull request on GitHub to the <a href="https://github.com/openaddresses/submit-service"> OpenAddresses repository</a>.</p>
-  <div class="form-content">
-    <div class="ui attached message">
-      <h3 class="ui header">Data Source</h3>
-    </div>
-    <div class="ui segment attached">
-      <div class="ui sixteen column grid">
-        <div class="row">
-          <div class="six wide column">
-            {{#if model.data_url}}
-              <div class="field label">URL</div>
-            {{/if}}
-            {{#if model.data_file}}
-              <div class="field label">Data upload file name</div>
-            {{/if}}
-          </div>
-          <div class="ten wide column">
-            {{#if model.data_url}}{{model.data_url}}{{/if}}
-            {{#if model.data_file}}{{model.data_file}}{{/if}}
+{{#if model}}
+  <div class="ui text container">  
+    <h3 class="first headroom"> Review {{help-modal model=model routeToSuccessPage=(action "routeToSuccessPage")}}</h3>
+    <p>Submitting this form will create a pull request on GitHub to the <a href="https://github.com/openaddresses/submit-service"> OpenAddresses repository</a>.</p>
+    <div class="form-content">
+      <div class="ui attached message">
+        <h3 class="ui header">Data Source</h3>
+      </div>
+      <div class="ui segment attached">
+        <div class="ui sixteen column grid">
+          <div class="row">
+            <div class="six wide column">
+              {{#if model.data_url}}
+                <div class="field label">URL</div>
+              {{/if}}
+              {{#if model.data_file}}
+                <div class="field label">Data upload file name</div>
+              {{/if}}
+            </div>
+            <div class="ten wide column">
+              {{#if model.data_url}}{{model.data_url}}{{/if}}
+              {{#if model.data_file}}{{model.data_file}}{{/if}}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="ui hidden divider"></div>
-    <div class="ui attached message">
-      <span class="review edit link-text" onClick={{action "editField" "more-info"}}> <i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">Data Information</h3>
-    </div>
-    <div class="ui segment attached">
-      <div class="ui sixteen column grid">
-        {{#if model.update_frequency}}
-          <div class="row">
-            <div class="six wide wide column">
-              <div class="field label">Update Frequency</div>
-            </div>
-            <div class="ten wide column">
-              {{model.update_frequency}}
-            </div>
-          </div>
-          <div class="ui fitted divider"></div>
-        {{/if}}
-        {{#if model.license_exists}}
-          {{#if model.license}}
-            <div class="row">
-              <div class="six wide column">
-                <div class="field label">License Name</div>
-                <div class="info value">{{model.license}}</div>
-              </div>
-              <div class="ten wide column">
-                <div class="field label">License URL</div>
-                <div class="info value">{{model.license_url}}</div>
-              </div>
-            </div>
-          {{else}}
+      <div class="ui hidden divider"></div>
+      <div class="ui attached message">
+        <span class="review edit link-text" onClick={{action "editField" "more-info"}}> <i class="icon edit"></i>Edit</span>
+        <h3 class="ui header">Data Information</h3>
+      </div>
+      <div class="ui segment attached">
+        <div class="ui sixteen column grid">
+          {{#if model.update_frequency}}
             <div class="row">
               <div class="six wide wide column">
-                <div class="field label">License URL</div>
+                <div class="field label">Update Frequency</div>
               </div>
               <div class="ten wide column">
-                {{model.user_submitted_url}}
+                {{model.update_frequency}}
+              </div>
+            </div>
+            <div class="ui fitted divider"></div>
+          {{/if}}
+          {{#if model.license_exists}}
+            {{#if model.license}}
+              <div class="row">
+                <div class="six wide column">
+                  <div class="field label">License Name</div>
+                  <div class="info value">{{model.license}}</div>
+                </div>
+                <div class="ten wide column">
+                  <div class="field label">License URL</div>
+                  <div class="info value">{{model.license_url}}</div>
+                </div>
+              </div>
+            {{else}}
+              <div class="row">
+                <div class="six wide wide column">
+                  <div class="field label">License URL</div>
+                </div>
+                <div class="ten wide column">
+                  {{model.user_submitted_url}}
+                </div>
+              </div>
+            {{/if}}
+            <div class="ui fitted divider"></div>
+          {{/if}}
+          {{#if model.attribution}}
+            <div class="row">
+              <div class="six wide column">
+                <div class="field label">Attribution</div>
+                <div class="info attribution value">{{model.attribution}}</div>
+              </div>
+              <div class="ten wide column">
+                <div class="field label">Attribution Text</div>
+                <div class="info value">{{model.attribution_text}}</div>
+              </div>
+            </div>
+            <div class="ui fitted divider"></div>
+          {{/if}}
+          {{#if model.source}}
+            <div class="row">
+              <div class="six wide column">
+                <div class="field label">Source</div>
+              </div>
+              <div class="ten wide column">
+                {{model.source}}
+              </div>
+            </div>
+            <div class="ui fitted divider"></div>
+          {{/if}}
+        </div>
+      </div>
+      <div class="ui hidden divider"></div>
+      <div class="ui attached message">
+        <span class="review edit" onClick={{action "editField" "data-format"}}><i class="icon edit"></i>Edit</span>
+        <h3 class="ui header">Data Format</h3>
+      </div>
+      <div class="ui segment attached">
+        {{#each-in model.oaFields as |field properties|}}
+          {{#if properties.fields}}
+            <table class="ui definition table">
+              <tbody>
+                <tr>
+                  <td class="two wide column">OpenAddresses column</td>
+                  <td>
+                    {{#if (eq field "number")}}
+                      house number
+                    {{else}}
+                      {{field}}
+                    {{/if}}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Matched column(s)</td>
+                  <td>{{properties.fields}}</td>
+                </tr>
+                {{#if properties.function}}
+                  <tr>
+                    <td>Function</td>
+                    <td>
+                      {{properties.function}}
+                    </td>
+                  </tr>
+                {{/if}}
+                {{#if properties.prefix_or_postfix}}
+                  <tr>
+                    <td>Field to remove</td>
+                    <td>
+                      {{properties.prefix_or_postfix}}
+                    </td>
+                  </tr>
+                {{/if}}
+                {{#if properties.may_contain_units}}
+                  <tr>
+                    <td>May contain units</td>
+                    <td>
+                      {{properties.may_contain_units}}
+                    </td>
+                  </tr>
+                {{/if}}
+              </tbody>
+            </table>
+          {{/if}}
+        {{/each-in}}
+      </div>
+      <div class="ui hidden divider"></div>
+      <div class="ui attached message">
+        <span class="review edit" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</span>
+        <h3 class="ui header">Contact</h3>
+      </div>
+      <div class="ui segment attached">
+        <div class="ui sixteen column grid">
+          {{#if model.maintainer_name}}
+            <div class="ui fitted divider"></div>
+            <div class="row">
+              <div class="six wide column">
+                <div class="field label">Name</div>
+              </div>
+              <div class="ten wide column">
+                {{model.maintainer_name}}
               </div>
             </div>
           {{/if}}
-          <div class="ui fitted divider"></div>
-        {{/if}}
-        {{#if model.attribution}}
-          <div class="row">
-            <div class="six wide column">
-              <div class="field label">Attribution</div>
-              <div class="info attribution value">{{model.attribution}}</div>
+          {{#if model.maintainer_email}}
+            <div class="row">
+              <div class="six wide column">
+                <div class="field label">Email</div>
+              </div>
+              <div class="ten wide column">
+                {{model.maintainer_email}}
+              </div>
             </div>
-            <div class="ten wide column">
-              <div class="field label">Attribution Text</div>
-              <div class="info value">{{model.attribution_text}}</div>
-            </div>
-          </div>
-          <div class="ui fitted divider"></div>
-        {{/if}}
-        {{#if model.source}}
-          <div class="row">
-            <div class="six wide column">
-              <div class="field label">Source</div>
-            </div>
-            <div class="ten wide column">
-              {{model.source}}
-            </div>
-          </div>
-          <div class="ui fitted divider"></div>
-        {{/if}}
+          {{/if}}
+        </div>
       </div>
-    </div>
-    <div class="ui hidden divider"></div>
-    <div class="ui attached message">
-      <span class="review edit" onClick={{action "editField" "data-format"}}><i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">Data Format</h3>
-    </div>
-    <div class="ui segment attached">
-      {{#each-in model.oaFields as |field properties|}}
-        {{#if properties.fields}}
-          <table class="ui definition table">
-            <tbody>
-              <tr>
-                <td class="two wide column">OpenAddresses column</td>
-                <td>
-                  {{#if (eq field "number")}}
-                    house number
-                  {{else}}
-                    {{field}}
-                  {{/if}}
-                </td>
-              </tr>
-              <tr>
-                <td>Matched column(s)</td>
-                <td>{{properties.fields}}</td>
-              </tr>
-              {{#if properties.function}}
-                <tr>
-                  <td>Function</td>
-                  <td>
-                    {{properties.function}}
-                  </td>
-                </tr>
-              {{/if}}
-              {{#if properties.prefix_or_postfix}}
-                <tr>
-                  <td>Field to remove</td>
-                  <td>
-                    {{properties.prefix_or_postfix}}
-                  </td>
-                </tr>
-              {{/if}}
-              {{#if properties.may_contain_units}}
-                <tr>
-                  <td>May contain units</td>
-                  <td>
-                    {{properties.may_contain_units}}
-                  </td>
-                </tr>
-              {{/if}}
-            </tbody>
-          </table>
-        {{/if}}
-      {{/each-in}}
-    </div>
-    <div class="ui hidden divider"></div>
-    <div class="ui attached message">
-      <span class="review edit" onClick={{action "editField" "contact"}}><i class="icon edit"></i>Edit</span>
-      <h3 class="ui header">Contact</h3>
-    </div>
-    <div class="ui segment attached">
-      <div class="ui sixteen column grid">
-        {{#if model.maintainer_name}}
-          <div class="ui fitted divider"></div>
-          <div class="row">
-            <div class="six wide column">
-              <div class="field label">Name</div>
-            </div>
-            <div class="ten wide column">
-              {{model.maintainer_name}}
-            </div>
-          </div>
-        {{/if}}
-        {{#if model.maintainer_email}}
-          <div class="row">
-            <div class="six wide column">
-              <div class="field label">Email</div>
-            </div>
-            <div class="ten wide column">
-              {{model.maintainer_email}}
-            </div>
-          </div>
-        {{/if}}
-      </div>
-    </div>
-    {{#if showErrorState}}
+      {{#if showErrorState}}
+        <div class="ui hidden divider"></div>
+        <div class="ui tiny error message">
+          There was a problem submitting your data:
+          <ul class="list">
+            {{#each errorMessages as |errorMessage|}}
+              <li>{{errorMessage}}</li>
+            {{/each}}
+          </ul>
+          For help submitting your data, please click on "Help" above.
+        </div>
+      {{/if}}
       <div class="ui hidden divider"></div>
-      <div class="ui tiny error message">
-        There was a problem submitting your data:
-        <ul class="list">
-          {{#each errorMessages as |errorMessage|}}
-            <li>{{errorMessage}}</li>
-          {{/each}}
-        </ul>
-        For help submitting your data, please click on "Help" above.
+      <div class="review-nav">
+        <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
+        <button class="ui button green right floated {{if (eq loading true) "loading"}}" onClick={{action "submit"}}>Submit</button>
       </div>
-    {{/if}}
-    <div class="ui hidden divider"></div>
-    <div class="review-nav">
-      <button class="ui button red left floated" onClick={{action "openModal" "review-cancel"}}>Cancel</button>
-      <button class="ui button green right floated {{if (eq loading true) "loading"}}" onClick={{action "submit"}}>Submit</button>
+      {{#ui-modal name="review-cancel" class="review-cancel" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
+        <i class="close icon"></i>
+        <div class="header">
+          Are you sure you want to cancel?
+        </div>
+        <div class="content">
+          <div class="description">
+            <p>All changes made will be erased.</p>
+          </div>
+        </div>
+        <div class="actions">
+          <div class="ui black deny compact button">
+            No
+          </div>
+          <div class="ui positive right labeled icon compact button">
+            Yes
+            <i class="checkmark icon"></i>
+          </div>
+        </div>
+      {{/ui-modal}}
     </div>
-    {{#ui-modal name="review-cancel" class="review-cancel" onApprove=(action 'approveModal') onDeny=(action 'denyModal')}}
-      <i class="close icon"></i>
-      <div class="header">
-        Are you sure you want to cancel?
-      </div>
-      <div class="content">
-        <div class="description">
-          <p>All changes made will be erased.</p>
-        </div>
-      </div>
-      <div class="actions">
-        <div class="ui black deny compact button">
-          No
-        </div>
-        <div class="ui positive right labeled icon compact button">
-          Yes
-          <i class="checkmark icon"></i>
-        </div>
-      </div>
-    {{/ui-modal}}
   </div>
-</div>
+{{else}}
+  {{no-model}}
+{{/if}}
