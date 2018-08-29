@@ -193,7 +193,6 @@ export default Ember.Controller.extend(sharedActions, {
     },
     submit: function(){
       this.set('loading', true);
-      // console.log(this.getSubmission());
       var request = Ember.$.ajax({
         type: "POST",
         url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
