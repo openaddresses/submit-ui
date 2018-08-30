@@ -28,20 +28,13 @@ export default Ember.Component.extend({
     editField: function(heading, index, column){
       this.model.submission.get('oaFields')[heading].fields.replace(index, 1, column);
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.get('source_data').results[i][column])
-      }
-    },
-    setMayContainUnits: function(){
-      if (this.model.submission.get('oaFields').street.may_contain_units === false || !this.model.submission.get('oaFields').street.may_contain_units){
-        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", true);
-      } else {
-        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", false);
+        this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.get('source_data').results[i][column]);
       }
     },
     removeFunction: function(field){
       Ember.set(this.model.submission.get('oaFields')[field], "function", "split");
       for (var i = 0; i < this.get('numberOfExamples'); i++){
-        var originalColumn = this.model.submission.get('oaFields')[field].fields[0]
+        var originalColumn = this.model.submission.get('oaFields')[field].fields[0];
         Ember.set(this.model.submission.get('exampleRows')[i], field, [this.model.webServiceResponse.get('source_data').results[i][originalColumn]]);
       }
     },

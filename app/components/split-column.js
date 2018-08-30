@@ -27,6 +27,9 @@ export default Ember.Component.extend({
       if (extraction_function === "removePrefixOrPostfix"){
         // set remove_prefix as default because it is the default selection for the radio buttons
         Ember.set(this.model.submission.get('oaFields')[field], "function", 'remove_prefix');
+      } else if (extraction_function === "postfixed_street_with_units_pattern") {
+        Ember.set(this.model.submission.get('oaFields').street, "function", 'postfixed_street');
+        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", true);
       } else {
         Ember.set(this.model.submission.get('oaFields')[field], "function", extraction_function);
       }

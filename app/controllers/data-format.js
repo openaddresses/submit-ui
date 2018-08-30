@@ -119,7 +119,10 @@ export default Ember.Controller.extend(sharedActions, {
         Ember.set(this.model.submission.get('oaFields')[field], "function", "split");
         if (this.model.submission.get('oaFields')[field].prefix_or_postfix){
           Ember.set(this.model.submission.get('oaFields')[field], "prefix_or_postfix", null);
+        } else if (field === "street" && this.model.submission.get('oaFields').street.may_contain_units === true){
+          Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", null);
         }
+
       } else {
         Ember.set(this.model.submission.get('oaFields')[field], "function", null);
       }
