@@ -31,13 +31,6 @@ export default Ember.Component.extend({
         this.model.submission.exampleRows[i][heading].replace(index, 1, this.model.webServiceResponse.get('source_data').results[i][column]);
       }
     },
-    setMayContainUnits: function(){
-      if (this.model.submission.get('oaFields').street.may_contain_units === null){
-        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", true);
-      } else {
-        Ember.set(this.model.submission.get('oaFields').street, "may_contain_units", null);
-      }
-    },
     removeFunction: function(field){
       Ember.set(this.model.submission.get('oaFields')[field], "function", "split");
       for (var i = 0; i < this.get('numberOfExamples'); i++){
