@@ -75,7 +75,7 @@ export default Ember.Controller.extend(sharedActions, {
     // the functions available for street are: join, postfixed_street, remove_prefix, remove_postfix
     // may_contain_units is optional for street only
     if (this.model.get('oaFields').street.function){
-
+      
       submission.conform.street = {
         "function": this.model.get('oaFields').street.function,
       };
@@ -186,23 +186,22 @@ export default Ember.Controller.extend(sharedActions, {
     },
     submit: function(){
       this.set('loading', true);
-      console.log(this.getSubmission());
-      // var request = Ember.$.ajax({
-      //   type: "POST",
-      //   url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
-      //   data: this.getSubmission(),
-      //   contentType: 'application/json'
-      // });
+      var request = Ember.$.ajax({
+        type: "POST",
+        url:'https://68exp8ppy6.execute-api.us-east-1.amazonaws.com/latest/submit?source=',
+        data: this.getSubmission(),
+        contentType: 'application/json'
+      });
 
-      // request.then(response => {
-      //   this.set('loading', false);
-      //   this.resetErrorState(response);
-      //   this.model.set('pull_request_url', response.response.url);
-      //   this.transitionToRoute("success");
-      // }, response => {
-      //   this.set('loading', false);
-      //   this.resetErrorState(response);
-      // });
+      request.then(response => {
+        this.set('loading', false);
+        this.resetErrorState(response);
+        this.model.set('pull_request_url', response.response.url);
+        this.transitionToRoute("success");
+      }, response => {
+        this.set('loading', false);
+        this.resetErrorState(response);
+      });
     }
   }
 });
