@@ -44,7 +44,12 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-The Submit-UI app automatically deploys on [Netlify](https://app.netlify.com/sites/mod). The [production URL](https://mod.netlify.com) deploys from the `master` branch, but it is also possible to view a live site for other branches. The URL for non-master branches is https://<branch-name>--mod.netlify.com, where you would insert the name of the branch you'd like to view before `--mod.netlify.com`.
+The Submit-UI app automatically deploys on [Netlify](https://app.netlify.com/sites/mod). The [production URL](https://mod.netlify.com) deploys from the `master` branch, but it is also possible to view a live site for other branches. The URL for non-master branches is `https://` + branch-name + `--mod.netlify.com`, where you would insert the name of the branch you'd like to view before `--mod.netlify.com`.
+
+Netlify also handles redirects and environment variables for the app. The [.netlifyredirects](.netlifyredirects) file is integrated into the built app by the [ember-cli-netlify](https://github.com/shipshapecode/ember-cli-netlify) Ember addon. [Environment variables](https://app.netlify.com/sites/mod/settings/deploys#build-environment-variables) saved directly on Netlify provide keys for AWS that are necessary for file upload
+
+
+  
 
 ## Further Reading / Useful Links
 
