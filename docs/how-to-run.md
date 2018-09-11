@@ -1,4 +1,4 @@
-# mobility-on-demand-sandbox-contributions
+# OpenAddresses Submit-UI: How to Run
 
 This README outlines the details of collaborating on this Ember application.
 
@@ -44,7 +44,7 @@ Make use of the many generators for code, try `ember help generate` for more det
 
 ### Deploying
 
-Specify what it takes to deploy your app.
+The Submit-UI app automatically deploys on [Netlify](https://app.netlify.com/sites/mod). The [production URL](https://mod.netlify.com) deploys from the `master` branch, but it is also possible to view a live site for other branches. The URL for non-master branches is https://<branch-name>--mod.netlify.com, where you would insert the name of the branch you'd like to view before `--mod.netlify.com`.
 
 ## Further Reading / Useful Links
 
