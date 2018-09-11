@@ -1,6 +1,6 @@
 # OpenAddresses Submit-UI: How to Run
 
-This README outlines the details of collaborating on this Ember application.
+This document outlines the details of collaborating on this Ember application.
 
 ## Prerequisites
 
