@@ -10,6 +10,6 @@ The goal for the Submit-UI app is to make it easier for anyone to contribute dat
 ## Further information
 - [How to Contribute to Submit-UI](CONTRIBUTING.md)
 - [System Setup](docs/how-to-run.md)
-- [App structure and UI/UX flow](ui-ux-flow.md)
+- [App structure and UI/UX flow](docs/ui-ux-flow.md)
 
 
